@@ -1,0 +1,202 @@
+@charset "utf-8";
+/* CSS Document */
+@import url(http://fonts.googleapis.com/earlyaccess/notosanstc.css);
+@import url(http://fonts.googleapis.com/earlyaccess/cwtexfangsong.css);
+
+/* ------------------------ */
+
+html, body{
+	font-family: 'Noto Sans TC', sans-serif;
+	/*font-family: 'cwTeXFangSong', serif;*/
+	margin:0;
+	background:#fff;	
+}
+
+/* ------------------------ */
+div.header{
+	width:100%;
+	/* main-width:1060px; */
+	position:relative;
+	height:100px;
+	background:rgba(64,161,161,0.5);
+	z-index:10;
+}
+div.header p{
+	padding-top:20px;
+}
+
+
+/* ------------------------ */
+div.container{
+	position:relative;
+	top:0px;
+	width:1260px;
+	margin:0px;
+	margin-left:auto;
+	margin-right:auto;
+	text-align:justify;
+	z-index:5;
+}
+/* ------------------------ */
+div.content{
+	background:#fff;
+	padding:10px 50px 30px 50px;
+	line-height:25px;
+	font-weight:550;
+	/*border: 1px solid #2D2E34;*/
+}
+
+div.title{
+	/*border: 1px solid #2D2E34;*/
+	width:550px;
+	height: 150px;
+}
+
+div.searchInput{
+	/*border: 1px solid #2D2E34;*/
+	padding-left: 100px;
+	margin-left: 100px;
+	width:250px;
+	position: relative; top:-90px; left:500px;
+}
+div.stockSearch{
+	/*border: 1px solid #2D2E34;*/ 
+	padding-left: 100px;
+	margin-left: 100px;
+	width:150px;
+	font-size: 15px;
+	
+	position: relative; top:-90px; left:500px;
+}
+
+img.avatar{
+	border-radius:40px;
+	box-shadow:0px 3px 5px 0px #000;
+	margin-top:20px;
+}
+
+p.center{
+	text-align:center;
+	font-size:16px;
+	font-weight:400;
+	line-height:10px;
+	color: #003333;
+}
+/*
+p.left{
+	text-align:left;
+	font-weight:500;
+	font-size:12px;
+}*/
+h1.title{
+	position:relative;
+	display:inline;
+	font-size:30px;
+	font-weight:500;
+	top:-15px;
+	left:20px;
+}
+h2.title2{
+	font-size:22px;
+	font-weight:500;
+	text-align:center;
+	color:rgb(255,140,0);
+}
+
+div.clear{
+	clear:both;	
+}
+
+/*div.news{
+    font-weight:550;
+    width:220px;
+    height:380px;
+    box-sizing:border-box;
+    text-align:justify;
+    float:left;	
+    border: 1px solid #2D2E34;
+    overflow: hidden;
+    position:relative;
+}*/
+
+
+
+div.news h2{
+    font-size:21px;
+    padding-left:10px;
+    padding-right:10px;
+	font-weight:500;
+}
+
+div.news h3{
+    font-size:16px;
+    padding-left:10px;
+    padding-right:10px;
+	font-weight:400;
+}
+
+div.news p{
+    font-size:15px;
+    padding-left:10px;
+    padding-right:10px;
+}
+
+
+div.clear{
+    clear:both;
+}
+
+/*div.news1{
+    font-weight:550;
+    width:220px;
+    height:380px;
+    box-sizing:border-box;
+    text-align:justify;
+    float:left;	
+    border: 1px solid #2D2E34;
+    overflow: hidden;
+    position:relative;
+}*/
+
+
+div.news{
+	width:950px;
+	font-weight:450;
+	position:relative;
+	float:left;
+	height:370px;
+	margin-top:30px;
+	/*border: 1px solid #2D2E34;*/
+} 
+div.news:nth-child(1){
+	width:690px;
+	float: left;
+}
+div.news:nth-child(2){
+    width:230px;
+}
+div.news:nth-child(3){
+	padding-top: 40px;
+    width:230px;
+	float:right;
+	height: 330px;
+}
+div.news:nth-child(4){
+	width:620px;
+	height:40px;
+	margin-top:0px;
+	
+}
+
+/* ------------------------ */
+div.footer{
+	height:70px;
+	line-height:70px;
+	width:1160px;
+	margin-left:auto;
+	margin-right:auto;
+	text-align:center;
+	color:#fff;
+	background:#003333;
+	letter-spacing:1px;
+}

@@ -114,17 +114,9 @@ div.clear{
 	clear:both;	
 }
 
-/*div.news{
-    font-weight:550;
-    width:220px;
-    height:380px;
-    box-sizing:border-box;
-    text-align:justify;
-    float:left;	
-    border: 1px solid #2D2E34;
-    overflow: hidden;
-    position:relative;
-}*/
+div.newsbar{
+	height: 500px;
+}
 
 /*---------------------------*/
 /* 定義導覽列                 */
@@ -133,7 +125,8 @@ div.navbar{
 	
     width:1000px;
     height:40px;	
-    margin:40px auto 0px auto;	
+	margin:40px auto 0px auto;	
+	
 }
 
 div.navbar ul{
@@ -145,16 +138,17 @@ div.navbar ul{
 
 div.navbar ul li{
 	margin-top: -30px;
-    width:85px;
+	width:auto;
     height:40px;
     line-height:40px;	
     text-align:center;
-    float:left;
+	float:left;
+	padding-right:30px;
 }
 
 
 div.navbar ul li:nth-child(10){
-    margin-right:10px;
+    margin-right:1px;
 }
 
 

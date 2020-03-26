@@ -2,9 +2,9 @@
 <!doctype html>
 <html>
 <head>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
 <meta charset="utf-8">
 <title>專題-股票分析</title>
-<link href="css/main.css" rel="stylesheet">
 </head>
 
 
@@ -22,7 +22,7 @@
 
 <div class="content">
     <div class="title">
-        <img src="images/1.jpg" class="avatar">
+        <img src="{{ url_for('static',filename='images/1.jpg')}}" class="avatar">
         <h1 class="title">股票分析網站</h1>
     </div>
     <div class="searchInput" style="background: #fff;">
@@ -44,7 +44,7 @@
 
 
 <div class="title1">
-    <h2>2230台積電</h2>
+    <h2>2427三商電</h2>
 </div>
         
 
@@ -53,26 +53,22 @@
             <div class="navbar">
                 
                     <ul>
-                        <li>開盤:_____</li>
-                        <li>買進:_____</li>
-                        <li>賣出:_____</li>
-                        <li>成交:_____</li>
-                        <li>單量:_____</li>
-                        <li>最高:_____</li>
-                        <li>最低:_____</li>
-                        <li>漲跌:_____</li>
-                        <li>均價:_____</li>
-                        <li>金額:_____</li>
+                        <li>成交量:{{re[0]}}</li>
+                        <li>成交金額:{{re[1]}}</li>
+                        <li>成交筆數:{{re[2]}}</li>
+                        <li>最高:{{re[3]}}</li>
+                        <li>最低:{{re[4]}}</li>
+                        <li>漲跌:{{re[5]}}</li>
+                        <li>均價:{{re[6]}}</li>
                     </ul>
                 
             </div>
 
  			<div class="newsbar">
             	<div class="news">
-                    <h2>走勢圖</h2>
+                    <h2>近30日走勢圖</h2>
                     <canvas id="canvas">
                         <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.js"></script>
-                        <script src="{{ url_for('static', filename='auto/js/jquery-3.2.1.js') }}"></script>
                         <script type="text/javascript">
                         var datelist = {{datelist2|safe}};
                         var closelist= {{closelist2|safe}};
@@ -137,9 +133,6 @@
                     <h3>金額:</h3>
                 </div>
             -->
-                <div class="news">
-                    <p>資料時間:</p>                    	
-                </div>
              
             </div>    
                 

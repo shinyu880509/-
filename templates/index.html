@@ -1,0 +1,165 @@
+  
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>專題-股票分析</title>
+<link href="css/main.css" rel="stylesheet">
+</head>
+
+
+
+<body>
+
+
+
+
+<!---------------------------------------------->
+
+
+<div class="container">
+<!---------------------------------------------->
+
+<div class="content">
+    <div class="title">
+        <img src="images/1.jpg" class="avatar">
+        <h1 class="title">股票分析網站</h1>
+    </div>
+    <div class="searchInput" style="background: #fff;">
+        <img id="searchIcon" width="16px" src="https://s.yimg.com/cv/apiv2/twstock/icon-search.png" srcset="https://s.yimg.com/cv/apiv2/twstock/icon-search@2x.png 2x, https://s.yimg.com/cv/apiv2/twstock/icon-search@3x.png 3x"/>
+        <input id="stock_id" type="text" name="stock_id" placeholder="搜尋台股代號/名稱"/>
+        <img id="closeBtn" src="https://s.yimg.com/cv/apiv2/twstock/cancel.png" srcset="https://s.yimg.com/cv/apiv2/twstock/cancel@2x.png 2x, https://s.yimg.com/cv/apiv2/twstock/cancel@3x.png 3x" style="cursor: pointer; display: none"/>
+        <button class="btn btn-primary my-2 my-sm-0" type="submit">
+        搜尋
+        </button>
+    </div>
+
+</form>
+<div class="stockSearch">
+<a href="javascript:open_win('/h/kimosel.php','menu','stock_id','stock_name')">
+    <img src="https://s.yimg.com/cv/apiv2/twstock/stock-list_1543909743394.png" srcset="https://s.yimg.com/cv/apiv2/twstock/stock-list@2x_1543909743407.png 2x, https://s.yimg.com/cv/apiv2/twstock/stock-list@3x_1543909743401.png 3x"/>
+    <span>台股代號查詢</span>
+</a>
+</div>
+
+
+<div class="title1">
+    <h2>2230台積電</h2>
+</div>
+        
+
+
+
+            <div class="navbar">
+                
+                    <ul>
+                        <li>開盤:_____</li>
+                        <li>買進:_____</li>
+                        <li>賣出:_____</li>
+                        <li>成交:_____</li>
+                        <li>單量:_____</li>
+                        <li>最高:_____</li>
+                        <li>最低:_____</li>
+                        <li>漲跌:_____</li>
+                        <li>均價:_____</li>
+                        <li>金額:_____</li>
+                    </ul>
+                
+            </div>
+
+ 			<div class="newsbar">
+            	<div class="news">
+                    <h2>走勢圖</h2>
+                    <canvas id="canvas">
+                        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.js"></script>
+                        <script src="{{ url_for('static', filename='auto/js/jquery-3.2.1.js') }}"></script>
+                        <script type="text/javascript">
+                        var datelist = {{datelist2|safe}};
+                        var closelist= {{closelist2|safe}};
+                       
+                    
+                        var lineChartData = {
+                            labels: datelist, //顯示區間名稱
+                            datasets: [{
+                                label: '收盤價', // tootip 出現的名稱
+                                lineTension: 0, // 曲線的彎度，設0 表示直線
+                                backgroundColor: "#ea464d",
+                                borderColor: "#ea464d",
+                                borderWidth: 5,
+                                data: closelist, // 資料
+                                fill: false, // 是否填滿色彩
+                            },]
+                        };
+                        function drawLineCanvas(ctx,data) {
+                            window.myLine = new Chart(ctx, {  //先建立一個 chart
+                                type: 'line', // 型態
+                                data: data,
+                                options: {
+                                    responsive: true,
+                                    legend: { //是否要顯示圖示
+                                        display: true,
+                                    },
+                                    tooltips: { //是否要顯示 tooltip
+                                        enabled: true
+                                    },
+                                    scales: {  //是否要顯示 x、y 軸
+                                        xAxes: [{
+                                            display: true
+                                        }],
+                                        yAxes: [{
+                                            display: true
+                                        }]
+                                    },
+                                }
+                            });
+                        };
+                        window.onload = function () {
+                            var ctx = document.getElementById("canvas").getContext("2d");
+                            drawLineCanvas(ctx,lineChartData);
+                        };
+                        </script>
+                     </canvas>
+                </div>
+             <!--
+            	<div class="news">
+                    <h2>數據庫</h2>
+                    <h3>開盤:</h3>
+                    <h3>買進:</h3>
+                    <h3>賣出:</h3>
+                    <h3>成交:</h3>
+                    <h3>單量:</h3>
+                </div>
+                <div class="news">
+                    <h3>最高:</h3>
+                    <h3>最低:</h3>
+                    <h3>漲跌:</h3>
+                    <h3>均價:</h3>
+                    <h3>金額:</h3>
+                </div>
+            -->
+                <div class="news">
+                    <p>資料時間:</p>                    	
+                </div>
+             
+            </div>    
+                
+             
+            <div class="clear"></div> 
+		
+
+</div>
+<!---------------------------------------------->
+
+
+<div class="footer">
+取得更多資訊
+</div>
+
+
+</div>
+<!---------------------------------------------->
+<script src="scripts/main.js"></script>
+
+
+</body>
+</html>

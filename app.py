@@ -1,5 +1,4 @@
 from flask import Flask, request, render_template
-import twstock
 import pandas as pd
 import csv
 import numpy as np

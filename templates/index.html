@@ -72,11 +72,12 @@
                         <script type="text/javascript">
                         var datelist = {{datelist2|safe}};
                         var closelist= {{closelist2|safe}};
-                       
+                        var translist = {{translist2|safe}};
                     
                         var lineChartData = {
                             labels: datelist, //顯示區間名稱
                             datasets: [{
+                                type: 'line',
                                 label: '收盤價', // tootip 出現的名稱
                                 lineTension: 0, // 曲線的彎度，設0 表示直線
                                 backgroundColor: "#ea464d",
@@ -84,11 +85,19 @@
                                 borderWidth: 5,
                                 data: closelist, // 資料
                                 fill: false, // 是否填滿色彩
-                            },]
+                            },{
+                                type: 'bar',
+                                label: '交易量', // tootip 出現的名稱
+                                backgroundColor: "#055ffa",
+                                borderColor: "#055ffa",
+                                borderWidth: 2,
+                                data: translist, // 資料
+                                fill: false, // 是否填滿色彩
+                                yAxisID: 'y-axis-1',
+                            }]
                         };
                         function drawLineCanvas(ctx,data) {
                             window.myLine = new Chart(ctx, {  //先建立一個 chart
-                                type: 'line', // 型態
                                 data: data,
                                 options: {
                                     responsive: true,
@@ -101,8 +110,12 @@
                                     scales: {  //是否要顯示 x、y 軸
                                         xAxes: [{
                                             display: true
-                                        }],
+                                        },],
                                         yAxes: [{
+                                            display: true
+                                        },{
+                                            id: 'y-axis-1',
+                                            position: 'right',
                                             display: true
                                         }]
                                     },

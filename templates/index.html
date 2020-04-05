@@ -1,19 +1,15 @@
-  
 <!doctype html>
 <html>
 <head>
-<link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
 <meta charset="utf-8">
 <title>專題-股票分析</title>
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<link href="https://fonts.googleapis.com/css?family=Noto+Sans+TC" rel="stylesheet">
+<link href="{{ url_for('static', filename='css/main.css') }}" rel="stylesheet" type="text/css" />      
+
+
 </head>
-
-
-
 <body>
-
-
-
-
 <!---------------------------------------------->
 
 
@@ -36,10 +32,40 @@
 
 </form>
 <div class="stockSearch">
-<a href="javascript:open_win('/h/kimosel.php','menu','stock_id','stock_name')">
+
     <img src="https://s.yimg.com/cv/apiv2/twstock/stock-list_1543909743394.png" srcset="https://s.yimg.com/cv/apiv2/twstock/stock-list@2x_1543909743407.png 2x, https://s.yimg.com/cv/apiv2/twstock/stock-list@3x_1543909743401.png 3x"/>
-    <span>台股代號查詢</span>
-</a>
+    <span>資訊服務類股代號查詢</span>
+
+    <div class='allstock'>
+        <table class="comicGreen">
+            <tbody>
+            <tr>
+            <td>2427三商電</td>
+            <td>2453凌群</td>
+            <td>2468華經</td>
+            <td>2471資通</td>
+            <td>2480敦陽</td>
+            </tr>
+            <tr>
+            <td>3029零壹</td>
+            <td>3130一零四</td>
+            <td>4994傳奇</td>
+            <td>5203訊連</td>
+            <td>6112聚碩</td>
+            </tr>
+            <tr>
+            <td>6183關貿</td>
+            <td>6214精誠</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            </tr>
+            </tbody>
+            </table>
+
+    </div>
+
+
 </div>
 
 
@@ -50,104 +76,84 @@
 
 
 
-            <div class="navbar">
-                
-                    <ul>
-                        <li>成交量:{{re[0]}}</li>
-                        <li>成交金額:{{re[1]}}</li>
-                        <li>成交筆數:{{re[2]}}</li>
-                        <li>最高:{{re[3]}}</li>
-                        <li>最低:{{re[4]}}</li>
-                        <li>漲跌:{{re[5]}}</li>
-                        <li>均價:{{re[6]}}</li>
-                    </ul>
-                
-            </div>
+<div class="navbar">
+    <ul>
+        <li>成交量:{{re[0]}}</li>
+        <li>成交金額:{{re[1]}}</li>
+        <li>成交筆數:{{re[2]}}</li>
+        <li>最高:{{re[3]}}</li>
+        <li>最低:{{re[4]}}</li>
+        <li>漲跌:{{re[5]}}</li>
+        <li>均價:{{re[6]}}</li>
+    </ul>
+</div>
 
- 			<div class="newsbar">
-            	<div class="news">
-                    <h2>近30日走勢圖</h2>
-                    <canvas id="canvas">
-                        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.js"></script>
-                        <script type="text/javascript">
-                        var datelist = {{datelist2|safe}};
-                        var closelist= {{closelist2|safe}};
-                        var translist = {{translist2|safe}};
-                    
-                        var lineChartData = {
-                            labels: datelist, //顯示區間名稱
-                            datasets: [{
-                                type: 'line',
-                                label: '收盤價', // tootip 出現的名稱
-                                lineTension: 0, // 曲線的彎度，設0 表示直線
-                                backgroundColor: "#ea464d",
-                                borderColor: "#ea464d",
-                                borderWidth: 5,
-                                data: closelist, // 資料
-                                fill: false, // 是否填滿色彩
-                            },{
-                                type: 'bar',
-                                label: '交易量', // tootip 出現的名稱
-                                backgroundColor: "#055ffa",
-                                borderColor: "#055ffa",
-                                borderWidth: 2,
-                                data: translist, // 資料
-                                fill: false, // 是否填滿色彩
-                                yAxisID: 'y-axis-1',
-                            }]
-                        };
-                        function drawLineCanvas(ctx,data) {
-                            window.myLine = new Chart(ctx, {  //先建立一個 chart
-                                data: data,
-                                options: {
-                                    responsive: true,
-                                    legend: { //是否要顯示圖示
-                                        display: true,
-                                    },
-                                    tooltips: { //是否要顯示 tooltip
-                                        enabled: true
-                                    },
-                                    scales: {  //是否要顯示 x、y 軸
-                                        xAxes: [{
-                                            display: true
-                                        },],
-                                        yAxes: [{
-                                            display: true
-                                        },{
-                                            id: 'y-axis-1',
-                                            position: 'right',
-                                            display: true
-                                        }]
-                                    },
-                                }
-                            });
-                        };
-                        window.onload = function () {
-                            var ctx = document.getElementById("canvas").getContext("2d");
-                            drawLineCanvas(ctx,lineChartData);
-                        };
-                        </script>
-                     </canvas>
-                </div>
-             <!--
-            	<div class="news">
-                    <h2>數據庫</h2>
-                    <h3>開盤:</h3>
-                    <h3>買進:</h3>
-                    <h3>賣出:</h3>
-                    <h3>成交:</h3>
-                    <h3>單量:</h3>
-                </div>
-                <div class="news">
-                    <h3>最高:</h3>
-                    <h3>最低:</h3>
-                    <h3>漲跌:</h3>
-                    <h3>均價:</h3>
-                    <h3>金額:</h3>
-                </div>
-            -->
-             
-            </div>    
+<div class="newsbar">
+<div class="news">
+    <h2>近30日走勢圖</h2>
+    <canvas id="canvas">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.js"></script>
+        <script type="text/javascript">
+        var datelist = {{datelist2|safe}};
+        var closelist= {{closelist2|safe}};
+        var translist = {{translist2|safe}};
+                
+        var lineChartData = {
+            labels: datelist, //顯示區間名稱
+            datasets: [{
+                type: 'line',
+                label: '收盤價', // tootip 出現的名稱
+                lineTension: 0, // 曲線的彎度，設0 表示直線
+                backgroundColor: "#ea464d",
+                borderColor: "#ea464d",
+                borderWidth: 5,
+                data: closelist, // 資料
+                fill: false, // 是否填滿色彩
+            },{
+                type: 'bar',
+                label: '交易量', // tootip 出現的名稱
+                backgroundColor: "#055ffa",
+                borderColor: "#055ffa",
+                borderWidth: 2,
+                data: translist, // 資料
+                fill: false, // 是否填滿色彩
+                yAxisID: 'y-axis-1',
+            }]
+        };
+        function drawLineCanvas(ctx,data) {
+            window.myLine = new Chart(ctx, {  //先建立一個 chart
+                data: data,
+                options: {
+                    responsive: true,
+                    legend: { //是否要顯示圖示
+                        display: true,
+                    },
+                    tooltips: { //是否要顯示 tooltip
+                        enabled: true
+                    },
+                    scales: {  //是否要顯示 x、y 軸
+                        xAxes: [{
+                            display: true
+                        },],
+                        yAxes: [{
+                            display: true
+                        },{
+                            id: 'y-axis-1',
+                            position: 'right',
+                            display: true
+                        }]
+                    },
+                }
+            });
+        };
+        window.onload = function () {
+            var ctx = document.getElementById("canvas").getContext("2d");
+            drawLineCanvas(ctx,lineChartData);
+        };
+        </script>
+     </canvas>
+     
+</div>
                 
              
             <div class="clear"></div> 
@@ -164,8 +170,8 @@
 
 </div>
 <!---------------------------------------------->
-<script src="scripts/main.js"></script>
-
-
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>      
+<script src="{{ url_for('static', filename='scripts/main.js') }}"></script>    
 </body>
 </html>

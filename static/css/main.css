@@ -136,6 +136,10 @@ div.newsbar{
 	height: 500px;
 }
 
+div.newsbar2{
+	height: 500px;
+}
+
 div.clear{
 	clear:both;	
 }
@@ -195,6 +199,13 @@ div.news h2{
 	font-weight:500;
 }
 
+div.news2 h2{
+    font-size:21px;
+    padding-left:10px;
+    padding-right:10px;
+	font-weight:500;
+}
+
 div.news h3{
     font-size:16px;
     padding-left:10px;
@@ -202,7 +213,20 @@ div.news h3{
 	font-weight:400;
 }
 
+div.news2 h3{
+    font-size:16px;
+    padding-left:10px;
+    padding-right:10px;
+	font-weight:400;
+}
+
 div.news p{
+    font-size:15px;
+    padding-left:10px;
+    padding-right:10px;
+}
+
+div.news2 p{
     font-size:15px;
     padding-left:10px;
     padding-right:10px;
@@ -240,7 +264,25 @@ div.news{
 	height:340px;
 	/*border: 1px solid #2D2E34;*/
 } 
+
+div.news2{
+	margin-top: -30px;
+	margin-left: 50px;
+	width:950px;
+	padding-left: 50px;
+	font-weight:450;
+	position:relative;
+	float:left;
+	height:340px;
+	/*border: 1px solid #2D2E34;*/
+} 
+
 div.news:nth-child(1){
+	width:960px;
+	float: left;
+}
+
+div.news2:nth-child(1){
 	width:960px;
 	float: left;
 }
@@ -256,6 +298,13 @@ div.news:nth-child(3){
 }
 */
 div.news:nth-child(2){
+	width:200px;
+	height:40px;
+	margin-top:0px;
+	
+}
+
+div.news2:nth-child(2){
 	width:200px;
 	height:40px;
 	margin-top:0px;

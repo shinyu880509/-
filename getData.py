@@ -4,9 +4,11 @@ import numpy as np
 
 def getData(a):
     table = pd.read_csv("catStock/"+a+'.csv')
+   
 
     date = np.array(table.date)
     datelist = date.tolist()
+  
     close = np.array(table.close)
     closelist = close.tolist()
 
@@ -18,6 +20,8 @@ def getData(a):
     changelist = change.tolist()
     trans = np.array(table.Trading_turnover)
     translist = trans.tolist()
+
+  
 
     re = []
     mou = -30

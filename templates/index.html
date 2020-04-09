@@ -91,15 +91,15 @@
 </div>
 
 <div class="newsbar">
-<div class="news">
+    <div class="news">
     <h2>近30日走勢圖</h2>
-    <canvas id="canvas">
+    <canvas id="canvas2">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.js"></script>
         <script type="text/javascript">
         var datelist = {{datelist2|safe}};
         var closelist= {{closelist2|safe}};
         var translist = {{translist2|safe}};
-                
+               
         var lineChartData = {
             labels: datelist, //顯示區間名稱
             datasets: [{
@@ -149,18 +149,14 @@
             });
         };
         window.onload = function () {
-            var ctx = document.getElementById("canvas").getContext("2d");
+            var ctx = document.getElementById("canvas2").getContext("2d");
             drawLineCanvas(ctx,lineChartData);
         };
         </script>
-     </canvas>
+         </canvas>
+         
     </div>
-</div>
-                
-             
-            <div class="clear"></div> 
-		
-
+    <div class="clear"></div>     
 </div>
 <!---------------------------------------------->
 

@@ -2,6 +2,7 @@ from FinMind.Data import Load
 import csv
 import pandas as pd
 
+
 def catStock():
     dat = '2015-01-01'
     itStock = ['2427', '2453', '2468', '2471', '2480', '3029', '3130', '4994', '5203', '6112', '6183', '6214']
@@ -17,4 +18,16 @@ def catStock():
         stockDf = pd.DataFrame(data)
         stockDf.set_index('date', inplace = True)
         stockDf.to_csv('catStock/' + stockID + '.csv')
+    return
+
+def catStocktoday():
+    itStock = ['2427', '2453', '2468', '2471', '2480', '3029', '3130', '4994', '5203', '6112', '6183', '6214']
+    for i in range(len(itStock)):
+        stockID = itStock[i]
+        url =f"https://tw.stock.yahoo.com/q/ts?s={stockID}&t=50"
+        stocktoday = pd.read_html(url, encoding='big-5')[3]
+        columns = ['time','open','high','low','close','upanddown','transaction']
+        stocktoday.columns = columns
+        stocktoday = stocktoday.sort_index(ascending=False)
+        stocktoday.to_csv('catStock/' + stockID + 'today.csv', header = 0 , index = 0, encoding = 'utf_8_sig')
     return

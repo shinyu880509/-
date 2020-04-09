@@ -3,59 +3,30 @@ import pandas as pd
 import csv
 import numpy as np
 import twstock
+import getData, catStock, getID
 
 app = Flask(__name__)
 app.config["JSON_AS_ASCII"] = False
+stockID = '2427'
 
 @app.route("/")
 def home():
-    return render_template('index.html',datelist2 = datelist, closelist2 = closelist,translist2 = translist,re = re) 
-   
-itStock = ['2427']
-stockID = itStock[0]
+    name = getID.getName(stockID)
+    data = getData.getData(stockID)
+    return render_template('index.html',datelist2 = data[0], closelist2 = data[1],translist2 = data[2],re = data[3], name = name) 
 
-stock = twstock.Stock(stockID)
+@app.route("/",methods=['POST'])
+def search():
+    if request.method == 'POST':
+        ID = str(request.values['stock_id'])
+        if getID.check(ID) == 1:
+            stockID = ID
+    name = getID.getName(stockID)
+    data = getData.getData(stockID)
+    return render_template('index.html',datelist2 = data[0], closelist2 = data[1],translist2 = data[2],re = data[3], name = name) 
 
-stockFetch = stock.fetch_31()
-stockDf = pd.DataFrame(stockFetch)
-stockDf.set_index('date', inplace = True)
-stockDf.to_csv(stockID+'.csv')
 
-table = pd.read_csv(stockID+'.csv')
-
-date = np.array(table.date)
-datelist = date.tolist()
-close = np.array(table.close)
-closelist = close.tolist()
-
-capacity = np.array(table.capacity)
-capacitylist = capacity.tolist()
-turnover = np.array(table.turnover)
-turnoverlist = turnover.tolist()
-change = np.array(table.change)
-changelist = change.tolist()
-trans = np.array(table.transaction)
-translist = trans.tolist()
-
-re = []
-a = sum(capacitylist)
-re.append(str(a))
-a = sum(turnoverlist)
-re.append(str(a))
-a = sum(translist)
-re.append(str(a))
-a = max(closelist)
-re.append(str(a))
-a = min(closelist)
-re.append(str(a))
-b = round(sum(changelist),2)
-re.append(str(b))
-b = round(sum(closelist)/len(closelist),2)
-re.append(str(b))
-
+#catStock.catStock() 更新股票資料 會跑1分鐘
 
 if __name__ == "__main__":
     app.run()
-
-
-

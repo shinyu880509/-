@@ -9,7 +9,7 @@ html, body{
 	font-family: 'Noto Sans TC', sans-serif;
 	/*font-family: 'cwTeXFangSong', serif;*/
 	margin:0;
-	background:#fff;	
+	background:rgb(255, 255, 255);	
 }
 
 /* ------------------------ */
@@ -54,23 +54,47 @@ div.title{
 
 div.searchInput{
 	/*border: 1px solid #2D2E34;*/
-	padding-left: 100px;
-	margin-left: 100px;
+	margin-left: 205px;
 	width:250px;
 	position: relative; top:-90px; left:500px;
 }
 div.stockSearch{
-	/*border: 1px solid #2D2E34;*/
-	padding-left: 100px;
-	margin-left: 100px;
-	width:150px;
+	/*border: 1px solid #2D2E34; */
+	margin-left: 220px;
+	width:100%;
 	font-size: 15px;
-	
-	position: relative; top:-90px; left:500px;
+	text-align: left;
+	color: blue;
+	position: relative; top:-90px; left:480px;
 }
 
+div.allstock{
+	/*margin-left: 125px;*/
+	width:300px;
+	position: absolute ; top:30px; left:-100  ;
+	
+}
+table.comicGreen {
+	border: 1px solid #4F7849;
+	width: 400px;
+	text-align: center;
+	border-collapse: collapse;
+  }
+  table.comicGreen td, table.comicGreen th {
+	border: 1px solid #4F7849;
+	padding: 3px 2px;
+  }
+  table.comicGreen tbody td {
+	font-size: 13.5px;
+	font-weight: bold;
+	color: #4F7849;
+  }
+  table.comicGreen tr:nth-child(even) {
+	background: #CEE0CC;
+  }
+
 img.avatar{
-	/*border-radius:40px;*/
+	border-radius:40px;
 	box-shadow:0px 3px 5px 0px #000;
 	margin-top:20px;
 }
@@ -100,23 +124,33 @@ h1.title{
 div.title1 h2{
 	position:relative;
 	/*border: 1px solid #2D2E34;*/
-	margin-top: -50px;
+	margin-top: 3px;
 	width: 200px;
 	font-size: 25px;
-	padding-top: 10px;
+	padding-top: 20px;
 	height: 40px;
 	text-align: center;
-}
-
-
-
-div.clear{
-	clear:both;	
 }
 
 div.newsbar{
 	height: 500px;
 }
+
+div.clear{
+	clear:both;	
+}
+
+/*div.news{
+    font-weight:550;
+    width:220px;
+    height:380px;
+    box-sizing:border-box;
+    text-align:justify;
+    float:left;	
+    border: 1px solid #2D2E34;
+    overflow: hidden;
+    position:relative;
+}*/
 
 /*---------------------------*/
 /* 定義導覽列                 */

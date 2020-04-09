@@ -21,14 +21,16 @@
         <img src="{{ url_for('static',filename='images/1.jpg')}}" class="avatar">
         <h1 class="title">股票分析網站</h1>
     </div>
-    <div class="searchInput" style="background: #fff;">
-        <img id="searchIcon" width="16px" src="https://s.yimg.com/cv/apiv2/twstock/icon-search.png" srcset="https://s.yimg.com/cv/apiv2/twstock/icon-search@2x.png 2x, https://s.yimg.com/cv/apiv2/twstock/icon-search@3x.png 3x"/>
-        <input id="stock_id" type="text" name="stock_id" placeholder="搜尋台股代號/名稱"/>
-        <img id="closeBtn" src="https://s.yimg.com/cv/apiv2/twstock/cancel.png" srcset="https://s.yimg.com/cv/apiv2/twstock/cancel@2x.png 2x, https://s.yimg.com/cv/apiv2/twstock/cancel@3x.png 3x" style="cursor: pointer; display: none"/>
-        <button class="btn btn-primary my-2 my-sm-0" type="submit">
-        搜尋
-        </button>
-    </div>
+    <form action="/" method="post">
+        <div class="searchInput" style="background: #fff;">
+            <img id="searchIcon" width="16px" src="https://s.yimg.com/cv/apiv2/twstock/icon-search.png" srcset="https://s.yimg.com/cv/apiv2/twstock/icon-search@2x.png 2x, https://s.yimg.com/cv/apiv2/twstock/icon-search@3x.png 3x"/>
+            <input id="stock_id" type="text" name="stock_id" placeholder="搜尋台股代號/名稱"/>
+            <img id="closeBtn" src="https://s.yimg.com/cv/apiv2/twstock/cancel.png" srcset="https://s.yimg.com/cv/apiv2/twstock/cancel@2x.png 2x, https://s.yimg.com/cv/apiv2/twstock/cancel@3x.png 3x" style="cursor: pointer; display: none"/>
+            <button class="btn btn-primary my-2 my-sm-0" type="submit">
+            搜尋
+            </button>
+        </div>
+    </form>
 
 </form>
 <div class="stockSearch">
@@ -70,7 +72,7 @@
 
 
 <div class="title1">
-    <h2>2427三商電</h2>
+    <h2>{{name}}</h2>
 </div>
         
 
@@ -152,7 +154,7 @@
         };
         </script>
      </canvas>
-     
+    </div>
 </div>
                 
              

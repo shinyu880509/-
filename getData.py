@@ -2,13 +2,12 @@ import pandas as pd
 import csv
 import numpy as np
 
-def getData(a):
+#股票代碼
+def getCsv(a):
     table = pd.read_csv("catStock/"+a+'.csv')
-   
 
     date = np.array(table.date)
     datelist = date.tolist()
-  
     close = np.array(table.close)
     closelist = close.tolist()
 
@@ -20,23 +19,130 @@ def getData(a):
     changelist = change.tolist()
     trans = np.array(table.Trading_turnover)
     translist = trans.tolist()
+    high = np.array(table.high)
+    high = high.tolist()
+    low = np.array(table.low)
+    low = low.tolist()
+    return datelist,closelist,capacitylist,turnoverlist,changelist,high,low,translist
 
-  
-
+#股票代碼
+def getData(a):
+    csv = getCsv(a)
     re = []
     mou = -30
-    a = sum(capacitylist[mou:])
-    re.append(str(a))
-    a = sum(turnoverlist[mou:])
-    re.append(str(a))
-    a = sum(translist[mou:])
-    re.append(str(a))
-    a = max(closelist[mou:])
-    re.append(str(a))
-    a = min(closelist[mou:])
-    re.append(str(a))
-    b = round(sum(changelist[mou:]),2)
+    z = sum(csv[2][mou:])
+    re.append(str(z))
+    z = sum(csv[3][mou:])
+    re.append(str(z))
+    z = sum(csv[7][mou:])
+    re.append(str(z))
+    z = max(csv[1][mou:])
+    re.append(str(z))
+    z = min(csv[1][mou:])
+    re.append(str(z))
+    b = round(sum(csv[4][mou:]),2)
     re.append(str(b))
-    b = round(sum(closelist[mou:])/len(closelist[mou:]),2)
+    b = round(sum(csv[1][mou:])/len(csv[1][mou:]),2)
     re.append(str(b))
-    return datelist[mou:],closelist[mou:],translist[mou:],re
+    re.append(csv[0][mou:])
+    re.append(csv[1][mou:])
+    re.append(csv[7][mou:])
+    return re
+
+#股票代碼
+def getKD(a):
+    csv = getCsv(a)
+    clo = csv[1][-40:]
+    hi = csv[5][-49:]
+    lo = csv[6][-49:]
+    rsv = []
+    k = [50]
+    d = [50]
+
+    for i in range(len(clo)):
+        zr = (clo[i] - min(lo[i:10 + i]))/(max(hi[i:10 + i]) - min(lo[i:10 + i]))
+        zr *= 100
+        rsv.append(round(zr,2))
+
+        zk = (rsv[i]/3) + (k[i]/3*2)
+        k.append(round(zk,2))
+        zd = (k[i]/3) + (d[i]/3*2)
+        d.append(round(zd,2))
+    return k[-30:],d[-30:]
+
+#平均
+def ema(a,d):
+    return sum(a)/d
+
+#股票代碼
+def getMACD(a):
+    csv = getCsv(a)
+    clo = csv[1][-64:]
+    dif = []
+    macd = []
+
+    for i in range(39):
+        ema12 = ema(clo[14+i:26+i],12)
+        ema26 = ema(clo[i:26+i],26)
+        zdif = ema12-ema26
+        dif.append(round(zdif,2))
+        if i > 7:
+            zmacd = sum(dif[i-8:i+1])/9
+            macd.append(round(zmacd,2))
+    return dif,macd
+
+#股票代碼,平均的天數,列出幾天
+def getBIAS(a, long, dd):
+    csv = getCsv(a)
+    days = [6,12,24,72]
+    clo = csv[1][-(days[long]+dd-1):]
+    bias = []
+    
+    for i in range(dd):
+        ema30 = ema(clo[i:days[long]+i],days[long])
+        zbias = ((clo[days[long]-1+i]-ema30)/ema30)*100
+        bias.append(round(zbias,2))
+
+        if long == 3 and (bias[i] <= -11 or bias[i] >= 11):
+            print(clo[days[long]-1+i],bias[i])
+        elif long == 2 and (bias[i] <= -7 or bias[i] >= 8):
+            print(clo[days[long]-1+i],bias[i])
+        elif long == 1 and (bias[i] <= -4.5 or bias[i] >= 5):
+            print(clo[days[long]-1+i],bias[i])
+        elif long == 0 and (bias[i] <= -3 or bias[i] >= 3.5):
+            print(clo[days[long]-1+i],bias[i])
+    return bias
+
+#股票代碼,平均的天數,列出幾天
+def getRSI(a, long, dd):
+    csv = getCsv(a)
+    days = long
+    clo = csv[1][-(days+dd):]
+    change = []
+    rsi = []
+
+    for i in range(len(clo)-1):
+        z = clo[i+1] - clo[i]
+        change.append(z)
+    for i in range(dd):
+        hi = []
+        lo = []
+        for j in range(days):
+            if change[i+j] > 0:
+                hi.append(change[i+j])
+            elif change[i+j] < 0:
+                lo.append(change[i+j])
+        aHi = ema(hi,days)
+        aLo = ema(lo,days)
+        zrsi = (aHi/(aHi-aLo))*100
+        rsi.append(round(zrsi,2))
+    return rsi
+
+def getAll(a):
+    kd = getKD(a)
+    ma = getMACD(a)
+    return getRSI(a,30,30), kd[0], kd[1], ma[0], ma[1], getBIAS(a,2,30)
+#print(getBIAS('2427',2,30))
+#print(getRSI('2427',30,30))
+print(getMACD('2427'))
+#print(getKD('2427'))

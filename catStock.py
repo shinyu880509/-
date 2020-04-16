@@ -28,6 +28,5 @@ def catStocktoday():
         stocktoday = pd.read_html(url, encoding='big-5')[3]
         columns = ['time','open','high','low','close','upanddown','transaction']
         stocktoday.columns = columns
-        stocktoday = stocktoday.sort_index(ascending=False)
         stocktoday.to_csv('catStock/' + stockID + 'today.csv', header = 0 , index = 0, encoding = 'utf_8_sig')
     return

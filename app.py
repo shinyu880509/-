@@ -15,6 +15,7 @@ def home():
     name = getID.getName(stockID)
     data = getData.getData(stockID)
     dataTec = getData.getAll(stockID)
+    print(data)
     return render_template('index.html',re = data, name = name, tec = dataTec, stock = itStock) 
 
 @app.route("/",methods=['POST'])

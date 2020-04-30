@@ -22,20 +22,40 @@ html, body{
 
 div.header
 {
-	/*border: 1px solid #2D2E34;*/
 	position: relative;
 	padding: 3em 0em;
-	height: 10px;
+	height: 29px;
+	/*border: 1px solid #2D2E34;*/
 }
 
+div.title{
+	width:310px;
+	height: 85px;
+	margin-top: -47px;
+	/*border: 1px solid #2D2E34;*/
+}
+
+img.avatar{
+	border-radius:40px;
+	box-shadow:0px 3px 5px 0px #000;
+}
+
+h1.title{
+	position:relative;
+	display:inline;
+	font-size:25spx;
+	font-weight:500;
+	top:-20px;
+	left:20px;
+}
 
 /* ------------------------ */
 /* 下拉式選單                                                                          */
 /* ------------------------ */
 div.about{
 	position: relative;
-	margin-left: 450px;
-	top: -70px;
+	margin-left: 100px;
+	top: -10px;
 	
 }
 ul { /* 取消ul預設的內縮及樣式 */
@@ -43,6 +63,7 @@ ul { /* 取消ul預設的內縮及樣式 */
 	padding: 0;
 	list-style: none;
 	/*border: 1px solid #2D2E34;*/
+	
 }
 
 ul.drop-down-menu {
@@ -118,68 +139,50 @@ div ul li.current_page_item{
 	color: #FFF;
 	
 }
-
-
-
-
-
-
-/* ------------------------ */
-/* 圖表                                                                          */
-/* ------------------------ */
-div.history{
-	background-color: beige;
-	width: 340px;
-	margin-left: 650px;
-}
-
-table.zz {
-	border: 1px solid #4F7849;
-	width: 340px;
-	text-align: center;
-	border-collapse: collapse;
-  }
-
-table.zz td, table.zz th {
-	border: 1px solid #4F7849;
-	padding: 3px 2px;
-}
-
-table.zz td {
-	font-size: 13.5px;
-	font-weight: bold;
-	color: #4F7849;
-  }
-  table.zz tr:nth-child(even) {
-	background: #CEE0CC;
-  }
-
-
 /* ------------------------ */
 div.container{
 	position:relative;
 	top:0px;
-	width:1260px;
+	width:1510px;
 	margin:0px;
 	margin-left:auto;
 	margin-right:auto;
 	text-align:justify;
 	z-index:5;
+	/*border: 1px solid #000; */
+}
+
+
+/* ------------------------ */
+/* 左方股票代碼                                                                         */
+/* ------------------------ */
+div.bd-toc-item {
+	padding-left: 20px;
+	width:150px;
+	margin:0;
+	/*border: 1px solid #4F7849; */
+}
+a { /*左方股票代碼字體樣式*/
+	color:gray;
+	font-size: 16px;
+	font-weight: 400;
+	line-height:35px;
+	text-decoration:none; /*隱藏超連結底線*/
+}
+
+ul.bd-sidenav a:hover { /*滑鼠滑入字體變色*/
+	color: #000;
 }
 /* ------------------------ */
 div.content{
 	background:#fff;
-	padding:10px 50px 30px 50px;
+	width:1260px;
+	margin-top: -400px;
+	margin-left: auto;
+	padding:30px 50px 30px 50px;
 	line-height:25px;
 	font-weight:550;
-	/*border: 1px solid #2D2E34;*/
-}
-
-div.title{
-	/*border: 1px solid #2D2E34;*/
-	width:380px;
-	height: 100px;
-	margin-top: -35px;
+	/*border: 1px solid red; */
 }
 /*
 div.searchInput{
@@ -189,8 +192,9 @@ div.searchInput{
 	position: relative; top:-90px; left:500px;
 }*/
 
+/*
 div.stockSearch{
-	/*border: 1px solid #2D2E34; */
+	border: 1px solid #2D2E34; 
 
 	
 	font-size: 15px;
@@ -200,30 +204,19 @@ div.stockSearch{
 	top:-41px; left:990px;
 	
 }
-
-div.news{
-	margin-top: -30px;
-	margin-left: 50px;
-	width:950px;
-	padding-left: 50px;
-	font-weight:450;
-	position:relative;
-	float:left;
-	height:340px;
-	/*border: 1px solid #2D2E34;*/
-} 
-div.newsbar{
-	height: 575px;
-}
+*/
 
 
-
+/*
 div.allstock{
-	/*margin-left: 125px;*/
+	margin-left: 125px;
 	width:300px;
 	position: absolute ; top:40px; left:-70px  ;
 	
 }
+*/
+
+/*
 table.comicGreen {
 	border: 1px solid #003333;
 	width: 340px;
@@ -243,34 +236,8 @@ table.comicGreen {
 	background: #00939328;
   }
 
-img.avatar{
-	border-radius:40px;
-	box-shadow:0px 3px 5px 0px #000;
-}
-
-p.center{
-	text-align:center;
-	font-size:16px;
-	font-weight:400;
-	line-height:10px;
-	color: #003333;
-}
-/*
-p.left{
-	text-align:left;
-	font-weight:500;
-	font-size:12px;
-}*/
-h1.title{
-	position:relative;
-	display:inline;
-	font-size:30px;
-	font-weight:500;
-	top:-15px;
-	left:20px;
-}
-
-div.title1 h2{
+*/
+  div.title1 h2{
 	position:relative;
 	/*border: 1px solid #2D2E34;*/
 	margin-top: 3px;
@@ -288,19 +255,6 @@ img.stockimage{
 div.clear{
 	clear:both;	
 }
-
-/*div.news{
-    font-weight:550;
-    width:220px;
-    height:380px;
-    box-sizing:border-box;
-    text-align:justify;
-    float:left;	
-    border: 1px solid #2D2E34;
-    overflow: hidden;
-    position:relative;
-}*/
-
 /*---------------------------*/
 /* 定義導覽列                 */
 /*---------------------------*/
@@ -318,24 +272,21 @@ div.navbar ul{
     list-style-type:none;
 }
 
-div.navbar ul li{
-	margin-top: -30px;
-	margin-right: 10px;
-    width:auto;
-    height:40px;
-    line-height:40px;	
-    text-align:center;
-    float:left;
-}
-
-
 div.navbar ul li:nth-child(10){
     margin-right:10px;
 }
 
-
-
-
+div.news{
+	margin-top: -30px;
+	margin-left: 50px;
+	width:950px;
+	padding-left: 50px;
+	font-weight:450;
+	position:relative;
+	float:left;
+	height:340px;
+	/*border: 1px solid #2D2E34;*/
+} 
 div.news h2{
     font-size:21px;
     padding-left:10px;
@@ -361,21 +312,8 @@ div.clear{
     clear:both;
 }
 
-div.information h3{
-	letter-spacing:normal;
-	
-}
-div.news{
-	margin-top: -30px;
-	margin-left: 50px;
-	width:950px;
-	padding-left: 50px;
-	font-weight:450;
-	position:relative;
-	float:left;
-	height:340px;
-	/*border: 1px solid #2D2E34;*/
-} 
+
+
 div.news:nth-child(1){
 	width:960px;
 	float: left;
@@ -388,6 +326,8 @@ div.news:nth-child(2){
 	
 }
 
+
+
 /* ------------------------ */
 div.footer{
 	height:70px;
@@ -399,4 +339,18 @@ div.footer{
 	color:#fff;
 	background:#003333;
 	letter-spacing:1px;
+}
+
+div.navbar ul li{
+	margin-top: -30px;
+	margin-right: 10px;
+    width:auto;
+    height:40px;
+    line-height:40px;	
+    text-align:center;
+    float:left;
+}
+
+div.newsbar{
+	height: 575px;
 }

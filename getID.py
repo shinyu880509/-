@@ -7,8 +7,8 @@ def getName(id):
 
 def check(idd):
     stockID = ['2427', '2453', '2468', '2471', '2480', '3029', '3130', '4994', '5203', '6112', '6183', '6214']
-    c = 0
+    c = 1
     for i in range(len(stockID)):
         if idd == stockID[i]:
-            c = 1
+            c = 0
     return c

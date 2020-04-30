@@ -102,7 +102,7 @@ def getBIAS(a, long, dd):
         ema30 = ema(clo[i:days[long]+i],days[long])
         zbias = ((clo[days[long]-1+i]-ema30)/ema30)*100
         bias.append(round(zbias,2))
-
+        '''可投資
         if long == 3 and (bias[i] <= -11 or bias[i] >= 11):
             print(clo[days[long]-1+i],bias[i])
         elif long == 2 and (bias[i] <= -7 or bias[i] >= 8):
@@ -111,6 +111,7 @@ def getBIAS(a, long, dd):
             print(clo[days[long]-1+i],bias[i])
         elif long == 0 and (bias[i] <= -3 or bias[i] >= 3.5):
             print(clo[days[long]-1+i],bias[i])
+        '''
     return bias
 
 #股票代碼,平均的天數,列出幾天
@@ -144,5 +145,5 @@ def getAll(a):
     return getRSI(a,30,30), kd[0], kd[1], ma[0], ma[1], getBIAS(a,2,30)
 #print(getBIAS('2427',2,30))
 #print(getRSI('2427',30,30))
-print(getMACD('2427'))
+#print(getMACD('2427'))
 #print(getKD('2427'))

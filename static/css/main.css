@@ -51,9 +51,10 @@ h1.title{
 /* ---------------------------下拉式選單 ------------------------------ */
 div.about{
 	position: relative;
-	margin-left: 350px;
-	top: -40px;
-	
+	margin-left: 380px;
+	top: -55px;
+	height:20px;
+	/*border: 1px solid #2D2E34;*/
 }
 ul { /* 取消ul預設的內縮及樣式 */
 	margin: 0;
@@ -67,6 +68,7 @@ ul.drop-down-menu {
 	display: inline-block;
 	/*font-family: 'Open Sans', Arial, sans-serif;*/
 	font-size: 13px;
+	width: 660px;
 }
 
 ul.drop-down-menu li {
@@ -136,7 +138,16 @@ div ul li.current_page_item{
 	color: #FFF;
 	
 }
-/* ---------------------------下拉式選單 ------------------------------ */
+	/* ------------------------搜尋位置調整------------------------- */
+	div.search ul{
+		/*border: 1px solid #2D2E34;*/
+		height: 30px;
+		margin-top:-45px;
+		margin-left: 600px;
+	}
+	/* ------------------------搜尋位置調整結束---------------------- */
+
+/* ---------------------------下拉式選單結束 ------------------------------ */
 
 /* ------------------------container----------------------------------- */
 div.container{
@@ -159,17 +170,22 @@ div.bd-toc-item {
 	width:200px;
 	margin:0;
 }
-a { /*左方股票代碼字體樣式*/
-	color:gray;
-	font-size: 16px;
-	font-weight: 400;
-	line-height:35px;
-	text-decoration:none; /*隱藏超連結底線*/
-}
+	/*左方股票代碼字體樣式*/
+	a { 
+		color:gray;
+		font-size: 16px;
+		font-weight: 400;
+		line-height:35px;
+		text-decoration:none; /*隱藏超連結底線*/
+	}
+	/*左方股票代碼字體樣式結束*/
 
-ul.bd-sidenav a:hover { /*滑鼠滑入字體變色*/
-	color: #000;
-}
+	/*滑鼠滑入字體變色*/
+	ul.bd-sidenav a:hover { 
+		color: #000;
+	}
+	/*滑鼠滑入字體變色結束*/
+
 /* ------------------------container左方股票代碼結束----------------------------------- */
 
 /* ------------------------container右方圖表----------------------------------- */

@@ -6,8 +6,6 @@
 <link rel="stylesheet" href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <link href="https://fonts.googleapis.com/css?family=Noto+Sans+TC" rel="stylesheet">
 <link href="{{ url_for('static', filename='css/main.css') }}" rel="stylesheet" type="text/css" />      
-
-
 </head>
 <body>
 <!---------------------------------------------->
@@ -106,19 +104,17 @@
         </div>
     </div>
 </div>
-
-<div class="container">
 <!---------------------------------------------->
-{% if err == 1%}
-    <h1>輸入錯誤</h1>
-{% endif %}
-
-    
+<div class="container">
+    <!---------------------------------------------->
+    {% if err == 1%}
+        <h1>輸入錯誤</h1>
+    {% endif %}
+    <!---------------------------------------------->
     <div class="bd-toc-item active">
         <a class="bd-toc-link" style="font-weight:550;color: black;font-size:17px;">
-            資訊服務類股代號
+            資訊類股代號
         </a>
-  
         <ul class="nav bd-sidenav">
             <li>
                 <a href="/stockpd2427">2427三商電</a>
@@ -158,54 +154,44 @@
             </li>
         </ul>
     </div>
-
+    <!---------------------------------------------->
     <div class="content">
-
-<div class="title1">
-    <h2>{{name}}</h2>
-</div>
-        
-
-
-
-<div class="navbar">
-    <ul>
-        <li>成交量:{{re[0]}}</li>
-        <li>成交金額:{{re[1]}}</li>
-        <li>成交筆數:{{re[2]}}</li>
-        <li>最高:{{re[3]}}</li>
-        <li>最低:{{re[4]}}</li>
-        <li>漲跌:{{re[5]}}</li>
-        <li>均價:{{re[6]}}</li>
-    </ul>
-</div>
-
-<div class="newsbar">
-    <div class="news">
-        <h2>近30日走勢圖</h2>
-        <canvas id="canvas"></canvas>
-    </div>
-</div>
-<div class="newsbar">
-    <div class="news">
-        <h2>技術指標</h2>
-        <canvas id="canvas2"></canvas>
-    </div>
-</div>
-                
-             
-            <div class="clear"></div> 
+        <!---------------------------------------------->
+        <div class="title1"><h2>{{name}}</h2></div>
+        <!---------------------------------------------->            
+        <div class="navbar">
+            <ul>
+                <li>成交量:{{re[0]}}</li>
+                <li>成交金額:{{re[1]}}</li>
+                <li>成交筆數:{{re[2]}}</li>
+                <li>最高:{{re[3]}}</li>
+                <li>最低:{{re[4]}}</li>
+                <li>漲跌:{{re[5]}}</li>
+                <li>均價:{{re[6]}}</li>
+            </ul>
+        </div>
+        <!---------------------------------------------->
+        <div class="newsbar">
+            <div class="news">
+                <h2>近30日走勢圖</h2>
+                <canvas id="canvas"></canvas>
+            </div>
+        </div>
+        <!---------------------------------------------->
+        <div class="newsbar">
+            <div class="news">
+                <h2>技術指標</h2>
+                <canvas id="canvas2"></canvas>
+            </div>
+        </div>
+        <!---------------------------------------------->                 
+        <div class="clear"></div> 
 		
-
+    </div>
 </div>
 <!---------------------------------------------->
-
-
 <div class="footer">
-取得更多資訊
-</div>
-
-
+    &copyntubimd2020
 </div>
 <!---------------------------------------------->
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>

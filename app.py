@@ -2,7 +2,6 @@ from flask import Flask, request, render_template
 import pandas as pd
 import csv
 import numpy as np
-import twstock
 import getData, catStock, getID
 
 app = Flask(__name__)

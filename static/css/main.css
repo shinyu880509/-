@@ -2,22 +2,20 @@
 /* CSS Document */
 @import url(http://fonts.googleapis.com/earlyaccess/notosanstc.css);
 @import url(http://fonts.googleapis.com/earlyaccess/cwtexfangsong.css);
-
-/* ------------------------ */
-
+/* ---------------------body------------------------- */
 html, body{
 	font-family: 'Noto Sans TC', sans-serif;
-	/*font-family: 'cwTeXFangSong', serif;*/
 	margin:0;
 	background:rgb(255, 255, 255);	
+	width:1300px;
 }
 
-/* ------------------------ */
-
+/* --------------------------header-------------------------------- */
 #header-wrapper
 {
 	background: rgba(64,161,161,0.5);
 	height:130px;
+	width: 1300px;
 }
 
 div.header
@@ -25,14 +23,12 @@ div.header
 	position: relative;
 	padding: 3em 0em;
 	height: 29px;
-	/*border: 1px solid #2D2E34;*/
 }
 
 div.title{
 	width:310px;
 	height: 85px;
 	margin-top: -47px;
-	/*border: 1px solid #2D2E34;*/
 }
 
 img.avatar{
@@ -48,10 +44,9 @@ h1.title{
 	top:-20px;
 	left:20px;
 }
+/* ---------------------------header結束----------------------------- */
 
-/* ------------------------ */
-/* 下拉式選單                                                                          */
-/* ------------------------ */
+/* ---------------------------下拉式選單 ------------------------------ */
 div.about{
 	position: relative;
 	margin-left: 100px;
@@ -139,28 +134,28 @@ div ul li.current_page_item{
 	color: #FFF;
 	
 }
-/* ------------------------ */
+/* ---------------------------下拉式選單 ------------------------------ */
+
+/* ------------------------container----------------------------------- */
 div.container{
-	position:relative;
-	top:0px;
-	width:1510px;
+	position: relative;;	
+	width:1300px;
+	height: 1300px;
 	margin:0px;
 	margin-left:auto;
 	margin-right:auto;
 	text-align:justify;
 	z-index:5;
-	/*border: 1px solid #000; */
 }
+/* ------------------------container----------------------------------- */
 
 
-/* ------------------------ */
-/* 左方股票代碼                                                                         */
-/* ------------------------ */
+/* ------------------------container左方股票代碼----------------------------------- */
 div.bd-toc-item {
-	padding-left: 20px;
-	width:150px;
+	position: absolute;
+	padding-left: 10px;
+	width:200px;
 	margin:0;
-	/*border: 1px solid #4F7849; */
 }
 a { /*左方股票代碼字體樣式*/
 	color:gray;
@@ -173,17 +168,28 @@ a { /*左方股票代碼字體樣式*/
 ul.bd-sidenav a:hover { /*滑鼠滑入字體變色*/
 	color: #000;
 }
-/* ------------------------ */
+/* ------------------------container左方股票代碼結束----------------------------------- */
+
+/* ------------------------container右方圖表----------------------------------- */
 div.content{
-	background:#fff;
-	width:1260px;
-	margin-top: -400px;
-	margin-left: auto;
-	padding:30px 50px 30px 50px;
-	line-height:25px;
-	font-weight:550;
-	/*border: 1px solid red; */
+	position: absolute;
+	background: #fff;
+    width: 1100px;
+    margin-top: 0px;
+    margin-left: 130px;
+    line-height: 25px;
+	font-weight: 550;
 }
+div.title1 h2{
+	position:relative;
+	margin-top: 3px;
+	width: 200px;
+	font-size: 25px;
+	padding-top: 20px;
+	height: 40px;
+	text-align: center;
+}
+  
 /*
 div.searchInput{
 	border: 1px solid #2D2E34;
@@ -237,16 +243,8 @@ table.comicGreen {
   }
 
 */
-  div.title1 h2{
-	position:relative;
-	/*border: 1px solid #2D2E34;*/
-	margin-top: 3px;
-	width: 200px;
-	font-size: 25px;
-	padding-top: 20px;
-	height: 40px;
-	text-align: center;
-}
+
+
 
 img.stockimage{
 	padding-left: -40px;
@@ -262,8 +260,8 @@ div.navbar{
 	
     width:1000px;
     height:40px;	
-    margin:40px auto 0px auto;	
-}
+	margin:40px auto 0px auto;
+	}
 
 div.navbar ul{
 
@@ -326,21 +324,6 @@ div.news:nth-child(2){
 	
 }
 
-
-
-/* ------------------------ */
-div.footer{
-	height:70px;
-	line-height:70px;
-	width:1160px;
-	margin-left:auto;
-	margin-right:auto;
-	text-align:center;
-	color:#fff;
-	background:#003333;
-	letter-spacing:1px;
-}
-
 div.navbar ul li{
 	margin-top: -30px;
 	margin-right: 10px;
@@ -354,3 +337,19 @@ div.navbar ul li{
 div.newsbar{
 	height: 575px;
 }
+/* ------------------------container右方圖表結束----------------------------------- */
+
+/* -------------------------------footer------------------------------------- */
+	div.footer{
+		position: absolute;
+		height:70px;
+		line-height:70px;
+		width:1300px;
+		margin-left:auto;
+		margin-right:auto;
+		text-align:center;
+		color:#fff;
+		background:#003333;
+		letter-spacing:1px;
+	}
+/* -------------------------------footer結束------------------------------------- */

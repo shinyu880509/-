@@ -14,7 +14,7 @@ html, body{
 #header-wrapper
 {
 	background: rgba(64,161,161,0.5);
-	height:130px;
+	height:100px;
 	width: 1300px;
 }
 
@@ -28,7 +28,9 @@ div.header
 div.title{
 	width:310px;
 	height: 85px;
-	margin-top: -47px;
+	margin-top: -40px;
+	/*: 1px solid #2D2E34;*/
+	margin-left: 45px;
 }
 
 img.avatar{
@@ -49,8 +51,8 @@ h1.title{
 /* ---------------------------下拉式選單 ------------------------------ */
 div.about{
 	position: relative;
-	margin-left: 100px;
-	top: -10px;
+	margin-left: 350px;
+	top: -40px;
 	
 }
 ul { /* 取消ul預設的內縮及樣式 */
@@ -153,7 +155,7 @@ div.container{
 /* ------------------------container左方股票代碼----------------------------------- */
 div.bd-toc-item {
 	position: absolute;
-	padding-left: 10px;
+	padding-left: 50px;
 	width:200px;
 	margin:0;
 }
@@ -176,7 +178,7 @@ div.content{
 	background: #fff;
     width: 1100px;
     margin-top: 0px;
-    margin-left: 130px;
+    margin-left: 155px;
     line-height: 25px;
 	font-weight: 550;
 }

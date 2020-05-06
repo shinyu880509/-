@@ -26,7 +26,5 @@ def catStocktoday():
         stockID = itStock[i]
         url =f"https://tw.stock.yahoo.com/q/ts?s={stockID}&t=50"
         stocktoday = pd.read_html(url, encoding='big-5')[3]
-        columns = ['time','open','high','low','close','upanddown','transaction']
-        stocktoday.columns = columns
         stocktoday.to_csv('catStock/' + stockID + 'today.csv', header = 0 , index = 0, encoding = 'utf_8_sig')
     return

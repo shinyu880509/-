@@ -25,6 +25,36 @@ def getCsv(a):
     low = low.tolist()
     return datelist,closelist,capacitylist,turnoverlist,changelist,high,low,translist
 
+def getTodayCsv(a):
+    table = pd.read_csv("catStock/"+a+'today.csv')
+    columns = ['time','open','high','low','close','upanddown','transaction']
+    table.columns = columns
+    table = table.sort_index(ascending=False)
+
+    time = np.array(table.time)
+    timelist = time.tolist()
+    open = np.array(table.open)
+    openlist = open.tolist()
+    high = np.array(table.high)
+    highlist = high.tolist()
+    low = np.array(table.low)
+    lowlist = low.tolist()
+    close = np.array(table.close)
+    closelist = close.tolist()
+    transaction = np.array(table.transaction)
+    translist = transaction.tolist()
+
+    re = []
+    re.append(openlist[-1])
+    z = max(highlist)
+    re.append(str(z))
+    z = min(lowlist)
+    re.append(str(z))
+    re.append(closelist[1])
+    z = sum(translist)
+    re.append(str(z))
+    return timelist,closelist,translist,re
+
 #股票代碼
 def getData(a):
     csv = getCsv(a)

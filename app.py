@@ -13,9 +13,10 @@ a = 0
 def home():
     name = getID.getName(stockID)
     data = getData.getData(stockID)
+    datatoday = getData.getTodayCsv(stockID)
     dataTec = getData.getAll(stockID)
     #print(data)
-    return render_template('index.html',re = data, name = name, tec = dataTec, stock = itStock) 
+    return render_template('index.html',re = data, name = name, tec = dataTec, stock = itStock, today = datatoday) 
 
 #查詢功能
 @app.route("/",methods=['POST'])
@@ -27,8 +28,9 @@ def search():
         stockID = ID
     name = getID.getName(stockID)
     data = getData.getData(stockID)
+    datatoday = getData.getTodayCsv(stockID)
     dataTec = getData.getAll(stockID)
-    return render_template('index.html',re = data, name = name, tec = dataTec, err = err) 
+    return render_template('index.html',re = data, name = name, tec = dataTec, today = datatoday, err = err) 
 
 #輸入網址進入對應股票
 @app.route("/stockpd<stId>")
@@ -40,8 +42,9 @@ def searchB(stId):
         stockID = stId
     name = getID.getName(stockID)
     data = getData.getData(stockID)
+    datatoday = getData.getTodayCsv(stockID)
     dataTec = getData.getAll(stockID)
-    return render_template('index.html',re = data, name = name, tec = dataTec, err = err) 
+    return render_template('index.html',re = data, name = name, tec = dataTec, today = datatoday, err = err) 
 
 
 #catStock.catStock() 更新股票資料 會跑1分鐘

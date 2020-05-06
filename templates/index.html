@@ -13,7 +13,7 @@
     <div id="header-wrapper">
         <div class="header" >
             <div class="title">
-                <img src="{{ url_for('static', filename='images/1.jpg') }}" class="avatar">
+                <img src="{{ url_for('static', filename='images/icon.png') }}"  width="80" height="80" class="avatar">
                 <h1 class="title">資訊股分析網</h1>
             </div>
             <form action="/" method="post">
@@ -152,21 +152,36 @@
         <!---------------------------------------------->
         <div class="title1"><h2>{{name}}</h2></div>
         <!---------------------------------------------->            
-        <div class="navbar">
-            <ul>
-                <li>成交量:{{re[0]}}</li>
-                <li>成交金額:{{re[1]}}</li>
-                <li>成交筆數:{{re[2]}}</li>
-                <li>最高:{{re[3]}}</li>
-                <li>最低:{{re[4]}}</li>
-                <li>漲跌:{{re[5]}}</li>
-                <li>均價:{{re[6]}}</li>
-            </ul>
-        </div>
+        <div class="newsbar">
+            <div class="news">
+                <h2>當日交易圖</h2>
+                <div class="navbar">
+                    <ul>
+                        <li>開盤價:{{today[3][0]}}</li>
+                        <li>最高價:{{today[3][1]}}</li>
+                        <li>最低價:{{today[3][2]}}</li>
+                        <li>收盤價:{{today[3][3]}}</li>
+                        <li>總交易量:{{today[3][4]}}</li>
+                    </ul>
+                </div>
+                <canvas id="canvas3"></canvas>
+            </div>
+        </div>        
         <!---------------------------------------------->
         <div class="newsbar">
             <div class="news">
                 <h2>近30日走勢圖</h2>
+                <div class="navbar">
+                    <ul>
+                        <li>成交量:{{re[0]}}</li>
+                        <li>成交金額:{{re[1]}}</li>
+                        <li>成交筆數:{{re[2]}}</li>
+                        <li>最高:{{re[3]}}</li>
+                        <li>最低:{{re[4]}}</li>
+                        <li>漲跌:{{re[5]}}</li>
+                        <li>均價:{{re[6]}}</li>
+                    </ul>
+                </div>
                 <canvas id="canvas"></canvas>
             </div>
         </div>
@@ -201,7 +216,32 @@
     var dif = {{tec[3]|safe}};
     var macd = {{tec[4]|safe}};
     var bias = {{tec[5]|safe}};
+    var time = {{today[0]|safe}};
+    var closetoday = {{today[1]|safe}};
+    var transtoday = {{today[2]|safe}};
 
+    var lineChartData3 = {
+        labels: time, //顯示區間名稱
+        datasets: [{
+            type: 'line',
+            label: '收盤價', // tootip 出現的名稱
+            lineTension: 0, // 曲線的彎度，設0 表示直線
+            backgroundColor: "#ea464d",
+            borderColor: "#ea464d",
+            borderWidth: 5,
+            data: closetoday, // 資料
+            fill: false, // 是否填滿色彩
+        },{
+            type: 'bar',
+            label: '交易量', // tootip 出現的名稱
+            backgroundColor: "#055ffa",
+            borderColor: "#055ffa",
+            borderWidth: 2,
+            data: transtoday, // 資料
+            fill: false, // 是否填滿色彩
+            yAxisID: 'y-axis-1',
+        }]
+    };
 
     var lineChartData = {
         labels: datelist, //顯示區間名稱
@@ -324,6 +364,8 @@
         drawLineCanvas(ctx,lineChartData);
         var ctx2 = document.getElementById("canvas2").getContext("2d");
         drawLineCanvas(ctx2,lineChartData2);
+        var ctx3 = document.getElementById("canvas3").getContext("2d");
+        drawLineCanvas(ctx3,lineChartData3);
     };
 </script>
 </body>

@@ -166,7 +166,7 @@ div.container{
 /* ------------------------container左方股票代碼----------------------------------- */
 div.bd-toc-item {
 	position: absolute;
-	padding-left: 50px;
+	padding-left: 35px;
 	width:200px;
 	margin:0;
 }
@@ -194,16 +194,18 @@ div.content{
 	background: #fff;
     width: 1100px;
     margin-top: 0px;
-    margin-left: 155px;
+    margin-left: 120px;
     line-height: 25px;
 	font-weight: 550;
 }
 div.title1 h2{
 	position:relative;
 	margin-top: 3px;
+	margin-bottom:-5px;
 	width: 200px;
 	font-size: 25px;
 	padding-top: 20px;
+	padding-left: 60px;
 	height: 40px;
 	text-align: center;
 }
@@ -353,7 +355,9 @@ div.navbar ul li{
 }
 
 div.newsbar{
+	padding-top: 20px;
 	height: 575px;
+
 }
 /* ------------------------container右方圖表結束----------------------------------- */
 
@@ -369,5 +373,6 @@ div.newsbar{
 		color:#fff;
 		background:#003333;
 		letter-spacing:1px;
+		margin-top: 580px;
 	}
 /* -------------------------------footer結束------------------------------------- */

@@ -1,0 +1,90 @@
+@charset "utf-8";
+/* CSS Document */
+@import url(http://fonts.googleapis.com/earlyaccess/notosanstc.css);
+@import url(http://fonts.googleapis.com/earlyaccess/cwtexfangsong.css);
+/* ---------------------body------------------------- */
+html, body{
+	font-family: 'Noto Sans TC', sans-serif;
+	margin:0;
+	background:rgb(255, 255, 255);	
+	width:1300px;
+}
+
+/* --------------------------header-------------------------------- */
+#header-wrapper
+{
+	background: rgba(64,161,161,0.5);
+	height:100px;
+	width: 1300px;
+}
+
+div.header
+{
+	position: relative;
+	padding: 3em 0em;
+	height: 29px;
+}
+
+div.title{
+	width:310px;
+	height: 85px;
+	margin-top: -40px;
+	/*: 1px solid #2D2E34;*/
+	margin-left: 45px;
+}
+
+img.avatar{
+	/*border-radius:40px;
+	box-shadow:0px 3px 5px 0px #000;*/
+	margin-left: -10px;
+}
+
+h1.title{
+	position:relative;
+	display:inline;
+	font-size:25spx;
+	font-weight:500;
+	top:-20px;
+	left:20px;
+}
+/* ---------------------------header結束----------------------------- */
+
+
+
+/* ------------------------container----------------------------------- */
+div.container{
+	position: relative;;	
+	width:1300px;
+	height: 1300px;
+	margin:0px;
+	margin-left:auto;
+	margin-right:auto;
+	text-align:justify;
+	z-index:5;
+}
+/* ------------------------container----------------------------------- */
+
+
+/* ------------------------container左方股票代碼----------------------------------- */
+
+	/*左方股票代碼字體樣式*/
+	a { 
+		color:gray;
+		font-size: 16px;
+		font-weight: 400;
+		line-height:35px;
+		text-decoration:none; /*隱藏超連結底線*/
+	}
+	/*左方股票代碼字體樣式結束*/
+
+	/*滑鼠滑入字體變色*/
+	ul.bd-sidenav a:hover { 
+		color: #000;
+	}
+	/*滑鼠滑入字體變色結束*/
+
+/* ------------------------container左方股票代碼結束----------------------------------- */
+
+
+
+  

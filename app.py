@@ -16,7 +16,7 @@ def home():
     datatoday = getData.getTodayCsv(stockID)
     dataTec = getData.getAll(stockID)
     #print(data)
-    return render_template('index.html',re = data, name = name, tec = dataTec, stock = itStock, today = datatoday) 
+    return render_template('homepage.html',re = data, name = name, tec = dataTec, stock = itStock, today = datatoday) 
 
 #查詢功能
 @app.route("/",methods=['POST'])
@@ -30,7 +30,7 @@ def search():
     data = getData.getData(stockID)
     datatoday = getData.getTodayCsv(stockID)
     dataTec = getData.getAll(stockID)
-    return render_template('index.html',re = data, name = name, tec = dataTec, today = datatoday, err = err) 
+    return render_template('homepage.html',re = data, name = name, tec = dataTec, today = datatoday, err = err) 
 
 #輸入網址進入對應股票
 @app.route("/stockpd<stId>")
@@ -44,7 +44,7 @@ def searchB(stId):
     data = getData.getData(stockID)
     datatoday = getData.getTodayCsv(stockID)
     dataTec = getData.getAll(stockID)
-    return render_template('index.html', re = data, name = name, tec = dataTec, today = datatoday, err = err) 
+    return render_template('homepage.html', re = data, name = name, tec = dataTec, today = datatoday, err = err) 
 
 @app.route("/technical/<cType>/<stId>")
 def technical(cType,stId):

@@ -5,7 +5,7 @@
 <title>專題-股票分析</title>
 <link rel="stylesheet" href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <link href="https://fonts.googleapis.com/css?family=Noto+Sans+TC" rel="stylesheet">
-<link href="{{ url_for('static', filename='css/main.css') }}" rel="stylesheet" type="text/css" />      
+<link href="{{ url_for('static', filename='css/homepage.css') }}" rel="stylesheet" type="text/css" />      
 </head>
 <body>
 <!---------------------------------------------->
@@ -18,70 +18,7 @@
             </div>
             <form action="/" method="post">
                 <div class="about">
-                    <ul class="drop-down-menu">                      
-                        <li class="current_page_item"><a href="#" accesskey="2" title="" class="chart" a href="#">圖表</a>
-                            <ul>
-                                <li>
-                                    <a href="#">近30日</a>
-                                </li>
-                                <li>
-                                    <a href="#">當日</a>
-                                </li>
-                                
-                            </ul>
-                        </li>
-                        <li class="current_page_item"><a href="#" accesskey="1" title="" a href="#">預測圖表</a>
-                            <ul>
-                                <li>
-                                    <a href="#">歷史圖表</a>
-                                </li>
-                            </ul>
-                        </li>
-
-                        <li>
-                            <a href="#" accesskey="3" title="">新聞</a>
-                        </li>
-                        <li>
-                            <a href="#" accesskey="4" title="">財務分析</a>
-                            <ul>
-                                <li>
-                                    <a href="#">營業利益率</a>
-                                </li>
-                                <li>
-                                    <a href="#">毛利率</a>
-                                </li>
-                                <li>
-                                    <a href="#">總資產週轉率</a>
-                                </li>
-                                <li>
-                                    <a href="#">權益負債比</a>
-                                </li>
-                                <li>
-                                    <a href="#">營收概況</a>
-                                </li>
-                                <li>
-                                    <a href="#">股利概況</a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li><a href="#" accesskey="5" title="">技術分析</a>
-                            <ul>
-                                <li>
-                                    <a href="#">RSI線</a>
-                                </li>
-                                <li>
-                                    <a href="#">KD線</a>
-                                </li>
-                                <li>
-                                    <a href="#">MACD線</a>
-                                </li>
-                                <li>
-                                    <a href="#">DIF線</a>
-                                </li>
-                            </ul>
-                        </li>
-                        
-                    </ul>
+                    
                     <div class="search">
                         <ul>
                             <img id="searchIcon" width="24px" src="https://s.yimg.com/cv/apiv2/twstock/icon-search.png"
@@ -105,11 +42,7 @@
     {% if err == 1%}
         <h1>輸入錯誤</h1>
     {% endif %}
-    <!---------------------------------------------->
-    <div class="bd-toc-item active">
-        <a class="bd-toc-link" style="font-weight:550;color: black;font-size:17px;">
-            資訊股代號
-        </a>
+
         <ul class="nav bd-sidenav">
             <li>
                 <a href="/stockpd2427">2427三商電</a>
@@ -148,56 +81,10 @@
                 <a href="/stockpd6214">6214精誠</a>
             </li>
         </ul>
-    </div>
-    <!---------------------------------------------->
-    <div class="content">
-        <!---------------------------------------------->
-        <div class="title1"><h2>{{name}}</h2></div>
-        <!---------------------------------------------->            
-        <div class="newsbar">
-            <div class="news">
-                <h2>當日交易圖</h2>
-                <div class="navbar">
-                    <ul>
-                        <li>開盤價:{{today[3][0]}}</li>
-                        <li>最高價:{{today[3][1]}}</li>
-                        <li>最低價:{{today[3][2]}}</li>
-                        <li>收盤價:{{today[3][3]}}</li>
-                        <li>總交易量:{{today[3][4]}}</li>
-                    </ul>
-                </div>
-                <canvas id="canvas3"></canvas>
-            </div>
-        </div>        
-        <!---------------------------------------------->
-        <div class="newsbar">
-            <div class="news">
-                <h2>近30日走勢圖</h2>
-                <div class="navbar1">
-                    <ul>
-                        <li>成交量:{{re[0]}}</li>
-                        <li>成交金額:{{re[1]}}</li>
-                        <li>成交筆數:{{re[2]}}</li>
-                        <li>最高:{{re[3]}}</li>
-                        <li>最低:{{re[4]}}</li>
-                        <li>漲跌:{{re[5]}}</li>
-                        <li>均價:{{re[6]}}</li>
-                    </ul>
-                </div>
-                <canvas id="canvas"></canvas>
-            </div>
-        </div>
-        <!---------------------------------------------->
-        <div class="newsbar">
-            <div class="news">
-                <h2>技術指標</h2>
-                <canvas id="canvas2"></canvas>
-            </div>
-        </div>
         <!---------------------------------------------->                 
         <div class="clear"></div> 
 		
-    </div>
+    
 </div>
 <!---------------------------------------------->
 <div class="footer">

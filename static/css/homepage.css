@@ -7,7 +7,8 @@ html, body{
 	font-family: 'Noto Sans TC', sans-serif;
 	margin:0;
 	background:rgb(255, 255, 255);	
-	width:1300px;
+	width:100vw;
+	height: 100vh;
 }
 
 /* --------------------------header-------------------------------- */
@@ -15,14 +16,14 @@ html, body{
 {
 	background: rgba(64,161,161,0.5);
 	height:100px;
-	width: 1300px;
+	width: 100vw;
 }
 
 div.header
 {
 	position: relative;
 	padding: 3em 0em;
-	height: 29px;
+	height: 20vh;
 }
 
 div.title{
@@ -47,6 +48,7 @@ h1.title{
 	top:-20px;
 	left:20px;
 }
+
 /* ---------------------------header結束----------------------------- */
 
 
@@ -54,8 +56,8 @@ h1.title{
 /* ------------------------container----------------------------------- */
 div.container{
 	position: relative;;	
-	width:1300px;
-	height: 1300px;
+	width:100vw;
+	height: 80vh;
 	margin:0px;
 	margin-left:auto;
 	margin-right:auto;
@@ -78,10 +80,28 @@ div.container{
 	/*左方股票代碼字體樣式結束*/
 
 	/*滑鼠滑入字體變色*/
-	ul.bd-sidenav a:hover { 
+	div.table tr td a:hover { 
 		color: #000;
 	}
-	/*滑鼠滑入字體變色結束*/
+
+	table { 
+		border:1px solid #000; 
+		font-family: 微軟正黑體; 
+		font-size:16px; 
+		width:100vw;
+		height: 99vh;
+		text-align:center;
+		border-collapse:collapse;
+		margin-left:auto; 
+		margin-right:auto;
+		margin-top:auto; 
+		margin-bottom:auto;
+	  } 
+
+	  td { 
+		border:1px solid #000;
+		padding:5px;
+	  } 
 
 /* ------------------------container左方股票代碼結束----------------------------------- */
 

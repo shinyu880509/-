@@ -17,7 +17,8 @@
                 <h1 class="title">資訊股分析網</h1>
             </div>
             <form action="/" method="post">
-                <div class="about">
+                
+                <!---<div class="about">
                     
                     <div class="search">
                         <ul>
@@ -29,8 +30,9 @@
                                 style="cursor: pointer; display: none" />
                                 <button class="btn btn-primary my-2 my-sm-0" type="submit">搜尋</button>
                         </ul>
-                    </div>   
-                </div>
+                    </div>  
+                
+                </div>--> 
 
             </form>  
         </div>
@@ -42,54 +44,34 @@
     {% if err == 1%}
         <h1>輸入錯誤</h1>
     {% endif %}
-
-        <ul class="nav bd-sidenav">
-            <li>
-                <a href="/stockpd2427">2427三商電</a>
-            </li>
-            <li>
-                <a href="/stockpd2453">2453凌群</a>
-            </li>
-            <li>
-                <a href="/stockpd2468">2468華經</a>
-            </li>
-            <li>
-                <a href="/stockpd2471">2471資通</a>
-            </li>
-            <li>
-                <a href="/stockpd2480">2480敦陽</a>
-            </li>
-            <li>
-                <a href="/stockpd3029">3029零壹</a>
-            </li>
-            <li>
-                <a href="/stockpd3130">3130一零四</a>
-            </li>
-            <li>
-                <a href="/stockpd4994">4994傳奇</a>
-            </li>
-            <li>
-                <a href="/stockpd5203">5203訊連</a>
-            </li>
-            <li>
-                <a href="/stockpd6112">6112聚碩</a>
-            </li>
-            <li>
-                <a href="/stockpd6183">6183關貿</a>
-            </li>
-            <li>
-                <a href="/stockpd6214">6214精誠</a>
-            </li>
-        </ul>
+    <table class="table"> 
+        <tr class="1"> 
+            <td><a href="/stockpd2427">2427三商電</a></th> 
+            <td><a href="/stockpd2453">2453凌群</a></td>
+            <td><a href="/stockpd2468">2468華經</a></th> 
+            <td><a href="/stockpd2471">2471資通</a></td> 
+        </tr> 
+        <tr> 
+            <td><a href="/stockpd2480">2480敦陽</a></th> 
+            <td><a href="/stockpd3029">3029零壹</a></td>
+            <td><a href="/stockpd3130">3130一零四</a></th> 
+            <td><a href="/stockpd4994">4994傳奇</a></td> 
+        </tr> 
+        <tr> 
+            <td><a href="/stockpd5203">5203訊連</a></th> 
+            <td><a href="/stockpd6112">6112聚碩</a></td>
+            <td><a href="/stockpd6183">6183關貿</a></th> 
+            <td><a href="/stockpd6214">6214精誠</a></td> 
+        </tr> 
+      </table>
+    
         <!---------------------------------------------->                 
         <div class="clear"></div> 
 		
     
 </div>
 <!---------------------------------------------->
-<div class="footer">
-    &copyntubimd2020
-</div>
+
 <!---------------------------------------------->
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>      

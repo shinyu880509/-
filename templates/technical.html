@@ -149,7 +149,14 @@
     </div>
     <!---------------------------------------------->
     <div class="content">
-        
+        <div class="title1"><h2>{{name[0]}}</h2></div>
+        <!---------------------------------------------->            
+        <div class="newsbar">
+            <div class="news">
+                <h2>{{name[1]}}技術指標</h2>
+                <canvas id="canvas"></canvas>
+            </div>
+        </div>        
     </div>
 </div>
 <!---------------------------------------------->
@@ -171,9 +178,9 @@
     var dif = {{tec[3]|safe}};
     var macd = {{tec[4]|safe}};
     var bias = {{tec[5]|safe}};
+    var cha = {{cType|safe}};
 
-
-    var lineChartData = {
+    var chartRsi = {
         labels: datelist, //顯示區間名稱
         datasets: [{
             type: 'line',
@@ -193,60 +200,28 @@
             data: translist, // 資料
             fill: false, // 是否填滿色彩
             yAxisID: 'y-axis-1',
-        }]
-    };
-
-    var lineChartData2 = {
-        labels: datelist, //顯示區間名稱
-        datasets: [
-        {
+        },{
             type: 'line',
             label: 'rsi', // tootip 出現的名稱
             lineTension: 0, // 曲線的彎度，設0 表示直線
-            backgroundColor: "#ea464d",
-            borderColor: "#ea464d",
+            backgroundColor: "#f57f24",
+            borderColor: "#f57f24",
             borderWidth: 5,
             data: rsi, // 資料
             fill: false, // 是否填滿色彩
-        },
-        {
+        }]
+    };
+
+    var chartKd = {
+        labels: datelist, //顯示區間名稱
+        datasets: [{
             type: 'line',
-            label: 'k', // tootip 出現的名稱
+            label: '收盤價', // tootip 出現的名稱
             lineTension: 0, // 曲線的彎度，設0 表示直線
             backgroundColor: "#ea464d",
             borderColor: "#ea464d",
             borderWidth: 5,
-            data: k, // 資料
-            fill: false, // 是否填滿色彩
-        },
-        {
-            type: 'line',
-            label: 'd', // tootip 出現的名稱
-            lineTension: 0, // 曲線的彎度，設0 表示直線
-            backgroundColor: "#ea464d",
-            borderColor: "#ea464d",
-            borderWidth: 5,
-            data: d, // 資料
-            fill: false, // 是否填滿色彩
-        },
-        {
-            type: 'line',
-            label: 'macd', // tootip 出現的名稱
-            lineTension: 0, // 曲線的彎度，設0 表示直線
-            backgroundColor: "#ea464d",
-            borderColor: "#ea464d",
-            borderWidth: 5,
-            data: macd, // 資料
-            fill: false, // 是否填滿色彩
-        },
-        {
-            type: 'line',
-            label: 'dif', // tootip 出現的名稱
-            lineTension: 0, // 曲線的彎度，設0 表示直線
-            backgroundColor: "#ea464d",
-            borderColor: "#ea464d",
-            borderWidth: 5,
-            data: dif, // 資料
+            data: closelist, // 資料
             fill: false, // 是否填滿色彩
         },
         {
@@ -255,12 +230,108 @@
             backgroundColor: "#055ffa",
             borderColor: "#055ffa",
             borderWidth: 2,
+            data: translist, // 資料
+            fill: false, // 是否填滿色彩
+            yAxisID: 'y-axis-1',
+        },
+        {
+            type: 'line',
+            label: 'k', // tootip 出現的名稱
+            lineTension: 0, // 曲線的彎度，設0 表示直線
+            backgroundColor: "#f5cf24",
+            borderColor: "#f5cf24",
+            borderWidth: 5,
+            data: k, // 資料
+            fill: false, // 是否填滿色彩
+        },
+        {
+            type: 'line',
+            label: 'd', // tootip 出現的名稱
+            lineTension: 0, // 曲線的彎度，設0 表示直線
+            backgroundColor: "#f57f24",
+            borderColor: "#f57f24",
+            borderWidth: 5,
+            data: d, // 資料
+            fill: false, // 是否填滿色彩
+        }]
+    };
+
+    var chartMacd = {
+        labels: datelist, //顯示區間名稱
+        datasets: [{
+            type: 'line',
+            label: '收盤價', // tootip 出現的名稱
+            lineTension: 0, // 曲線的彎度，設0 表示直線
+            backgroundColor: "#ea464d",
+            borderColor: "#ea464d",
+            borderWidth: 5,
+            data: closelist, // 資料
+            fill: false, // 是否填滿色彩
+        },{
+            type: 'bar',
+            label: '交易量', // tootip 出現的名稱
+            backgroundColor: "#055ffa",
+            borderColor: "#055ffa",
+            borderWidth: 2,
+            data: translist, // 資料
+            fill: false, // 是否填滿色彩
+            yAxisID: 'y-axis-1',
+        },
+        {
+            type: 'line',
+            label: 'macd', // tootip 出現的名稱
+            lineTension: 0, // 曲線的彎度，設0 表示直線
+            backgroundColor: "#f5cf24",
+            borderColor: "#f5cf24",
+            borderWidth: 5,
+            data: macd, // 資料
+            fill: false, // 是否填滿色彩
+        },
+        {
+            type: 'line',
+            label: 'dif', // tootip 出現的名稱
+            lineTension: 0, // 曲線的彎度，設0 表示直線
+            backgroundColor: "#f57f24",
+            borderColor: "#f57f24",
+            borderWidth: 5,
+            data: dif, // 資料
+            fill: false, // 是否填滿色彩
+        }]
+    };
+
+var chartBias = {
+        labels: datelist, //顯示區間名稱
+        datasets: [{
+            type: 'line',
+            label: '收盤價', // tootip 出現的名稱
+            lineTension: 0, // 曲線的彎度，設0 表示直線
+            backgroundColor: "#ea464d",
+            borderColor: "#ea464d",
+            borderWidth: 5,
+            data: closelist, // 資料
+            fill: false, // 是否填滿色彩
+        },
+        {
+            type: 'bar',
+            label: '交易量', // tootip 出現的名稱
+            backgroundColor: "#055ffa",
+            borderColor: "#055ffa",
+            borderWidth: 2,
+            data: translist, // 資料
+            fill: false, // 是否填滿色彩
+            yAxisID: 'y-axis-1',
+        },
+        {
+            type: 'bar',
+            label: 'bias', // tootip 出現的名稱
+            backgroundColor: "#f57f24",
+            borderColor: "#f57f24",
+            borderWidth: 2,
             data: bias, // 資料
             fill: false, // 是否填滿色彩
             yAxisID: 'y-axis-1',
         }]
     };
-
 
     function drawLineCanvas(ctx,data) {
         window.myLine = new Chart(ctx, {  //先建立一個 chart
@@ -291,9 +362,19 @@
 
     window.onload = function () {
         var ctx = document.getElementById("canvas").getContext("2d");
-        drawLineCanvas(ctx,lineChartData);
-        var ctx2 = document.getElementById("canvas2").getContext("2d");
-        drawLineCanvas(ctx2,lineChartData2);
+        if (cha == 0){
+            drawLineCanvas(ctx,chartRsi);
+        }
+        else if (cha == 1){
+            drawLineCanvas(ctx,chartKd);
+        }
+        else if (cha == 2){
+            drawLineCanvas(ctx,chartMacd);
+        }
+        else if (cha == 3){
+            drawLineCanvas(ctx,chartBias);
+        }
+
     };
 </script>
 </body>

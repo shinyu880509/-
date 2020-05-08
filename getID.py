@@ -12,3 +12,11 @@ def check(idd):
         if idd == stockID[i]:
             c = 0
     return c
+
+def checkType(ty):
+    typeID = ['rsi', 'kd', 'macd', 'bias']
+    c = 1
+    for i in range(len(typeID)):
+        if ty == typeID[i]:
+            c = i
+    return c

@@ -44,10 +44,24 @@ def searchB(stId):
     data = getData.getData(stockID)
     datatoday = getData.getTodayCsv(stockID)
     dataTec = getData.getAll(stockID)
-    return render_template('index.html',re = data, name = name, tec = dataTec, today = datatoday, err = err) 
+    return render_template('index.html', re = data, name = name, tec = dataTec, today = datatoday, err = err) 
+
+@app.route("/technical/<cType>/<stId>")
+def technical(cType,stId):
+    global stockID
+    print(stId)
+    err = getID.check(stId)
+    chart = getID.checkType(cType)
+    if err == 0:
+        stockID = stId
+    dataTec = getData.getAll(stockID)
+    data = getData.getData(stockID)
+    name = []
+    name.append(getID.getName(stockID))
+    name.append(cType)
+    return render_template('technical.html', re = data, name = name, tec = dataTec, cType = chart, err = err) 
 
 
-#catStock.catStock() 更新股票資料 會跑1分鐘
 
 if __name__ == "__main__":
     app.run()

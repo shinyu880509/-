@@ -44,7 +44,7 @@ def searchB(stId):
     data = getData.getData(stockID)
     datatoday = getData.getTodayCsv(stockID)
     dataTec = getData.getAll(stockID)
-    return render_template('homepage.html', re = data, name = name, tec = dataTec, today = datatoday, err = err) 
+    return render_template('index.html', re = data, name = name, tec = dataTec, today = datatoday, err = err) 
 
 @app.route("/technical/<cType>/<stId>")
 def technical(cType,stId):

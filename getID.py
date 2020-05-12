@@ -13,10 +13,20 @@ def check(idd):
             c = 0
     return c
 
-def checkType(ty):
+def checkTec(ty):
     typeID = ['rsi', 'kd', 'macd', 'bias']
-    c = 1
+    c = ['rsi', 0]
     for i in range(len(typeID)):
         if ty == typeID[i]:
-            c = i
+            c[0] = typeID[i]
+            c[1] = i
+    return c
+
+def checkCha(ty):
+    typeID = ['30days', 'today']
+    c = ['30days', 0]
+    for i in range(len(typeID)):
+        if ty == typeID[i]:
+            c[0] = typeID[i]
+            c[1] = i
     return c

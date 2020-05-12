@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="utf-8">
-<title>專題-股票分析</title>
+<title>aaa專題-股票分析</title>
 <link rel="stylesheet" href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <link href="https://fonts.googleapis.com/css?family=Noto+Sans+TC" rel="stylesheet">
 <link href="{{ url_for('static', filename='css/main.css') }}" rel="stylesheet" type="text/css" />      
@@ -16,16 +16,16 @@
                 <img src="{{ url_for('static', filename='images/icon.png') }}"  width="80" height="80" class="avatar">
                 <h1 class="title">資訊股分析網</h1>
             </div>
-            <form action="/" method="post">
+            <form action="/chart/{{cType[0]}}" method="post">
                 <div class="about">
                     <ul class="drop-down-menu">                      
                         <li class="current_page_item"><a href="#" accesskey="2" title="" class="chart" a href="#">圖表</a>
                             <ul>
                                 <li>
-                                    <a href="#">近30日</a>
+                                    <a href="/chart/30days/{{stock}}">近30日</a>
                                 </li>
                                 <li>
-                                    <a href="#">當日</a>
+                                    <a href="/chart/today/{{stock}}">當日</a>
                                 </li>
                                 
                             </ul>
@@ -67,16 +67,16 @@
                         <li><a href="#" accesskey="5" title="">技術分析</a>
                             <ul>
                                 <li>
-                                    <a href="#">RSI線</a>
+                                    <a href="/technical/rsi/{{stock}}">RSI線</a>
                                 </li>
                                 <li>
-                                    <a href="#">KD線</a>
+                                    <a href="/technical/kd/{{stock}}">KD線</a>
                                 </li>
                                 <li>
-                                    <a href="#">MACD線</a>
+                                    <a href="/technical/macd/{{stock}}">MACD線</a>
                                 </li>
                                 <li>
-                                    <a href="#">DIF線</a>
+                                    <a href="/technical/bias/{{stock}}">BIAS線</a>
                                 </li>
                             </ul>
                         </li>
@@ -112,40 +112,40 @@
         </a>
         <ul class="nav bd-sidenav">
             <li>
-                <a href="/stockpd2427">2427三商電</a>
+                <a href="/chart/{{cType[0]}}/2427">2427三商電</a>
             </li>
             <li>
-                <a href="/stockpd2453">2453凌群</a>
+                <a href="/chart/{{cType[0]}}/2453">2453凌群</a>
             </li>
             <li>
-                <a href="/stockpd2468">2468華經</a>
+                <a href="/chart/{{cType[0]}}/2468">2468華經</a>
             </li>
             <li>
-                <a href="/stockpd2471">2471資通</a>
+                <a href="/chart/{{cType[0]}}/2471">2471資通</a>
             </li>
             <li>
-                <a href="/stockpd2480">2480敦陽</a>
+                <a href="/chart/{{cType[0]}}/2480">2480敦陽</a>
             </li>
             <li>
-                <a href="/stockpd3029">3029零壹</a>
+                <a href="/chart/{{cType[0]}}/3029">3029零壹</a>
             </li>
             <li>
-                <a href="/stockpd3130">3130一零四</a>
+                <a href="/chart/{{cType[0]}}/3130">3130一零四</a>
             </li>
             <li>
-                <a href="/stockpd4994">4994傳奇</a>
+                <a href="/chart/{{cType[0]}}/4994">4994傳奇</a>
             </li>
             <li>
-                <a href="/stockpd5203">5203訊連</a>
+                <a href="/chart/{{cType[0]}}/5203">5203訊連</a>
             </li>
             <li>
-                <a href="/stockpd6112">6112聚碩</a>
+                <a href="/chart/{{cType[0]}}/6112">6112聚碩</a>
             </li>
             <li>
-                <a href="/stockpd6183">6183關貿</a>
+                <a href="/chart/{{cType[0]}}/6183">6183關貿</a>
             </li>
             <li>
-                <a href="/stockpd6214">6214精誠</a>
+                <a href="/chart/{{cType[0]}}/6214">6214精誠</a>
             </li>
         </ul>
     </div>
@@ -153,7 +153,8 @@
     <div class="content">
         <!---------------------------------------------->
         <div class="title1"><h2>{{name}}</h2></div>
-        <!---------------------------------------------->            
+        <!---------------------------------------------->     
+        {% if cType[0] == "today"%}       
         <div class="newsbar">
             <div class="news">
                 <h2>當日交易圖</h2>
@@ -169,7 +170,9 @@
                 <canvas id="canvas3"></canvas>
             </div>
         </div>        
+        {% endif %}
         <!---------------------------------------------->
+        {% if cType[0] == "30days"%}
         <div class="newsbar">
             <div class="news">
                 <h2>近30日走勢圖</h2>
@@ -187,14 +190,8 @@
                 <canvas id="canvas"></canvas>
             </div>
         </div>
-        <!---------------------------------------------->
-        <div class="newsbar">
-            <div class="news">
-                <h2>技術指標</h2>
-                <canvas id="canvas2"></canvas>
-            </div>
-        </div>
-        <!---------------------------------------------->                 
+        {% endif %}
+        <!---------------------------------------------->             
         <div class="clear"></div> 
 		
     </div>
@@ -212,15 +209,10 @@
     var datelist = {{re[7]|safe}};
     var closelist= {{re[8]|safe}};
     var translist = {{re[9]|safe}};
-    var rsi = {{tec[0]|safe}};
-    var k = {{tec[1]|safe}};
-    var d = {{tec[2]|safe}};
-    var dif = {{tec[3]|safe}};
-    var macd = {{tec[4]|safe}};
-    var bias = {{tec[5]|safe}};
     var time = {{today[0]|safe}};
     var closetoday = {{today[1]|safe}};
     var transtoday = {{today[2]|safe}};
+    var c = {{cType[1]|safe}};
 
     var lineChartData3 = {
         labels: time, //顯示區間名稱
@@ -268,71 +260,6 @@
         }]
     };
 
-    var lineChartData2 = {
-        labels: datelist, //顯示區間名稱
-        datasets: [
-        {
-            type: 'line',
-            label: 'rsi', // tootip 出現的名稱
-            lineTension: 0, // 曲線的彎度，設0 表示直線
-            backgroundColor: "#ea464d",
-            borderColor: "#ea464d",
-            borderWidth: 5,
-            data: rsi, // 資料
-            fill: false, // 是否填滿色彩
-        },
-        {
-            type: 'line',
-            label: 'k', // tootip 出現的名稱
-            lineTension: 0, // 曲線的彎度，設0 表示直線
-            backgroundColor: "#ea464d",
-            borderColor: "#ea464d",
-            borderWidth: 5,
-            data: k, // 資料
-            fill: false, // 是否填滿色彩
-        },
-        {
-            type: 'line',
-            label: 'd', // tootip 出現的名稱
-            lineTension: 0, // 曲線的彎度，設0 表示直線
-            backgroundColor: "#ea464d",
-            borderColor: "#ea464d",
-            borderWidth: 5,
-            data: d, // 資料
-            fill: false, // 是否填滿色彩
-        },
-        {
-            type: 'line',
-            label: 'macd', // tootip 出現的名稱
-            lineTension: 0, // 曲線的彎度，設0 表示直線
-            backgroundColor: "#ea464d",
-            borderColor: "#ea464d",
-            borderWidth: 5,
-            data: macd, // 資料
-            fill: false, // 是否填滿色彩
-        },
-        {
-            type: 'line',
-            label: 'dif', // tootip 出現的名稱
-            lineTension: 0, // 曲線的彎度，設0 表示直線
-            backgroundColor: "#ea464d",
-            borderColor: "#ea464d",
-            borderWidth: 5,
-            data: dif, // 資料
-            fill: false, // 是否填滿色彩
-        },
-        {
-            type: 'bar',
-            label: '交易量', // tootip 出現的名稱
-            backgroundColor: "#055ffa",
-            borderColor: "#055ffa",
-            borderWidth: 2,
-            data: bias, // 資料
-            fill: false, // 是否填滿色彩
-            yAxisID: 'y-axis-1',
-        }]
-    };
-
 
     function drawLineCanvas(ctx,data) {
         window.myLine = new Chart(ctx, {  //先建立一個 chart
@@ -362,12 +289,14 @@
     };
 
     window.onload = function () {
-        var ctx = document.getElementById("canvas").getContext("2d");
-        drawLineCanvas(ctx,lineChartData);
-        var ctx2 = document.getElementById("canvas2").getContext("2d");
-        drawLineCanvas(ctx2,lineChartData2);
-        var ctx3 = document.getElementById("canvas3").getContext("2d");
-        drawLineCanvas(ctx3,lineChartData3);
+        if (c == 0){
+            var ctx = document.getElementById("canvas").getContext("2d");
+            drawLineCanvas(ctx,lineChartData);
+        }
+        else if (c == 1){
+            var ctx3 = document.getElementById("canvas3").getContext("2d");
+            drawLineCanvas(ctx3,lineChartData3);
+        }
     };
 </script>
 </body>

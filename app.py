@@ -1,4 +1,4 @@
-from flask import Flask, request, render_template
+from flask import Flask, request, render_template ,redirect ,url_for
 import pandas as pd
 import csv
 import numpy as np
@@ -11,55 +11,59 @@ itStock = ['2427', '2453', '2468', '2471', '2480', '3029', '3130', '4994', '5203
 a = 0
 @app.route("/")
 def home():
-    name = getID.getName(stockID)
-    data = getData.getData(stockID)
-    datatoday = getData.getTodayCsv(stockID)
-    dataTec = getData.getAll(stockID)
-    #print(data)
-    return render_template('homepage.html',re = data, name = name, tec = dataTec, stock = itStock, today = datatoday) 
+    return render_template('homepage.html') 
 
-#查詢功能
-@app.route("/",methods=['POST'])
-def search():
+#查詢功能 + 重新導向
+@app.route("/chart/<cType>",methods=['POST'])
+def searchCha(cType):
     global stockID
     ID = str(request.values['stock_id'])
     err = getID.check(ID)
+    chart = getID.checkCha(cType)
     if err == 0:
         stockID = ID
-    name = getID.getName(stockID)
-    data = getData.getData(stockID)
-    datatoday = getData.getTodayCsv(stockID)
-    dataTec = getData.getAll(stockID)
-    return render_template('homepage.html',re = data, name = name, tec = dataTec, today = datatoday, err = err) 
+    return redirect(url_for('chart', stId = stockID, cType = chart[0]))
 
-#輸入網址進入對應股票
-@app.route("/stockpd<stId>")
-def searchB(stId):
+@app.route("/technical/<cType>",methods=['POST'])
+def searchTec(cType):
+    global stockID
+    ID = str(request.values['stock_id'])
+    err = getID.check(ID)
+    chart = getID.checkTec(cType)
+    if err == 0:
+        stockID = ID
+    return redirect(url_for('technical', stId = stockID, cType = chart[0]))
+    
+
+#進入30日圖表 /chart/30days/2427
+#進入當日圖表 /chart/today/2427
+@app.route("/chart/<cType>/<stId>")
+def chart(cType,stId):
     global stockID
     print(stId)
+    print(cType)
     err = getID.check(stId)
+    chart = getID.checkCha(cType)
     if err == 0:
         stockID = stId
     name = getID.getName(stockID)
     data = getData.getData(stockID)
     datatoday = getData.getTodayCsv(stockID)
-    dataTec = getData.getAll(stockID)
-    return render_template('index.html', re = data, name = name, tec = dataTec, today = datatoday, err = err) 
+    return render_template('index.html', re = data, name = name, today = datatoday, cType = chart, err = err, stock = stockID) 
 
+#進入技術指標 /technical/rsi/2427 
 @app.route("/technical/<cType>/<stId>")
 def technical(cType,stId):
     global stockID
     print(stId)
     err = getID.check(stId)
-    chart = getID.checkType(cType)
+    chart = getID.checkTec(cType)
     if err == 0:
         stockID = stId
     dataTec = getData.getAll(stockID)
     data = getData.getData(stockID)
-    name = []
-    name.append(getID.getName(stockID))
-    name.append(cType)
-    return render_template('technical.html', re = data, name = name, tec = dataTec, cType = chart, err = err) 
+    name = getID.getName(stockID)
+    return render_template('technical.html', re = data, name = name, tec = dataTec, cType = chart, err = err, stock = stockID) 
 
 
 

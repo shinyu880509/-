@@ -16,24 +16,25 @@
                 <img src="{{ url_for('static', filename='images/1.jpg') }}" class="avatar">
                 <h1 class="title">資訊股分析網</h1>
             </div>
-            <form action="/" method="post">
+            <form action="/technical/{{cType[0]}}" method="post">
                 <div class="about">
                     <ul class="drop-down-menu">                      
                         <li class="current_page_item"><a href="#" accesskey="2" title="" class="chart" a href="#">圖表</a>
                             <ul>
                                 <li>
-                                    <a href="#">近30日</a>
+                                    <a href="/chart/30days/{{stock}}">近30日</a>
                                 </li>
                                 <li>
-                                    <a href="#">當日</a>
-                                </li>
-                                <li>
-                                    <a href="#">歷史圖表</a>
+                                    <a href="/chart/today/{{stock}}">當日</a>
                                 </li>
                             </ul>
                         </li>
                         <li class="current_page_item"><a href="#" accesskey="1" title="" a href="#">預測圖表</a>
-                            
+                            <ul>
+                                <li>
+                                    <a href="#">歷史圖表</a>
+                                </li>
+                            </ul>
                         </li>
 
                         <li>
@@ -65,16 +66,16 @@
                         <li><a href="#" accesskey="5" title="">技術分析</a>
                             <ul>
                                 <li>
-                                    <a href="#">RSI線</a>
+                                    <a href="/technical/rsi/{{stock}}">RSI線</a>
                                 </li>
                                 <li>
-                                    <a href="#">KD線</a>
+                                    <a href="/technical/kd/{{stock}}">KD線</a>
                                 </li>
                                 <li>
-                                    <a href="#">MACD線</a>
+                                    <a href="/technical/macd/{{stock}}">MACD線</a>
                                 </li>
                                 <li>
-                                    <a href="#">DIF線</a>
+                                    <a href="/technical/bias/{{stock}}">BIAS線</a>
                                 </li>
                             </ul>
                         </li>
@@ -110,50 +111,50 @@
         </a>
         <ul class="nav bd-sidenav">
             <li>
-                <a href="/stockpd2427">2427三商電</a>
+                <a href="/technical/{{cType[0]}}/2427">2427三商電</a>
             </li>
             <li>
-                <a href="/stockpd2453">2453凌群</a>
+                <a href="/technical/{{cType[0]}}/2453">2453凌群</a>
             </li>
             <li>
-                <a href="/stockpd2468">2468華經</a>
+                <a href="/technical/{{cType[0]}}/2468">2468華經</a>
             </li>
             <li>
-                <a href="/stockpd2471">2471資通</a>
+                <a href="/technical/{{cType[0]}}/2471">2471資通</a>
             </li>
             <li>
-                <a href="/stockpd2480">2480敦陽</a>
+                <a href="/technical/{{cType[0]}}/2480">2480敦陽</a>
             </li>
             <li>
-                <a href="/stockpd3029">3029零壹</a>
+                <a href="/technical/{{cType[0]}}/3029">3029零壹</a>
             </li>
             <li>
-                <a href="/stockpd3130">3130一零四</a>
+                <a href="/technical/{{cType[0]}}/3130">3130一零四</a>
             </li>
             <li>
-                <a href="/stockpd4994">4994傳奇</a>
+                <a href="/technical/{{cType[0]}}/4994">4994傳奇</a>
             </li>
             <li>
-                <a href="/stockpd5203">5203訊連</a>
+                <a href="/technical/{{cType[0]}}/5203">5203訊連</a>
             </li>
             <li>
-                <a href="/stockpd6112">6112聚碩</a>
+                <a href="/technical/{{cType[0]}}/6112">6112聚碩</a>
             </li>
             <li>
-                <a href="/stockpd6183">6183關貿</a>
+                <a href="/technical/{{cType[0]}}/6183">6183關貿</a>
             </li>
             <li>
-                <a href="/stockpd6214">6214精誠</a>
+                <a href="/technical/{{cType[0]}}/6214">6214精誠</a>
             </li>
         </ul>
     </div>
     <!---------------------------------------------->
     <div class="content">
-        <div class="title1"><h2>{{name[0]}}</h2></div>
+        <div class="title1"><h2>{{name}}</h2></div>
         <!---------------------------------------------->            
         <div class="newsbar">
             <div class="news">
-                <h2>{{name[1]}}技術指標</h2>
+                <h2>{{cType[0] | upper}}技術指標</h2>
                 <canvas id="canvas"></canvas>
             </div>
         </div>        
@@ -178,7 +179,7 @@
     var dif = {{tec[3]|safe}};
     var macd = {{tec[4]|safe}};
     var bias = {{tec[5]|safe}};
-    var cha = {{cType|safe}};
+    var cha = {{cType[1]|safe}};
 
     var chartRsi = {
         labels: datelist, //顯示區間名稱

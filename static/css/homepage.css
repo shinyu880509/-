@@ -32,24 +32,26 @@ div.title{
 	margin-top: 1vh;
 	: 1px solid #2D2E34;
 	margin-left: 40vw;*/
-	width: 35vw;
-	height: 10vh;
+	width: 40vw;
+	height: 18vh;
 	margin:auto auto auto auto;
-	padding-top: 3vh;
+	vertical-align: middle;
+	text-align: center;
 }
 
 img.avatar{
 	/*border-radius:40px;
 	box-shadow:0px 3px 5px 0px #000;*/
-
+	margin-top: 4vh;
 }
 
 h1.title{
 	position:relative;
 	display:inline;
-	font-size:40px;
+	font-size:50px;
 	font-weight:500;
-	top:-5vh
+	top:-3.5vh;
+	letter-spacing:1vh;
 }
 
 /* ---------------------------header結束----------------------------- */

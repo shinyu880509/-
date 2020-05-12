@@ -25,25 +25,23 @@ html, body{
 div.header
 {
 	position: relative;
-	padding: 3em 0em;
 	height: 20vh;
 	/*width:1300px;*/
 	width: 100vw;
 }
 
 div.title{
-	/*width:310px;*/
-	height: 15vh;
-	margin-top: -40px;
-	/*: 1px solid #2D2E34;*/
+	height: 20vh;
 	margin-left: 2vw;
 	width: 30vw;
+
 }
 
 img.avatar{
 	/*border-radius:40px;
 	box-shadow:0px 3px 5px 0px #000;*/
 	margin-left: 1vw;
+	margin-top:3vh;
 }
 
 h1.title{
@@ -53,6 +51,7 @@ h1.title{
 	font-weight:500;
 	top:-20px;
 	left:20px;
+	vertical-align: middle;
 }
 /* ---------------------------header結束----------------------------- */
 
@@ -60,7 +59,9 @@ h1.title{
 div.about{
 	position: relative;
 	margin-left: 30vw;
-	top: -10vh;
+	vertical-align: middle;
+	text-align: left;
+	top: -12vh;
 	/*border: 1px solid #2D2E34;*/
 }
 ul { /* 取消ul預設的內縮及樣式 */
@@ -160,7 +161,7 @@ div ul li.current_page_item{
 div.container{
 	position: relative;;	
 	widows: 100vw;
-	height: 80vh;
+	height: 1900px;
 	margin:0px;
 	margin-left:auto;
 	margin-right:auto;
@@ -173,17 +174,17 @@ div.container{
 /* ------------------------container左方股票代碼----------------------------------- */
 div.bd-toc-item {
 	position: absolute;
-	padding-left: 35px;
-	width:18vw;
+	padding-left: 0.5vw;
+	width:16vw;
 	margin:0;
-
+	text-align: center;
 }
 	/*左方股票代碼字體樣式*/
 	a { 
 		color:gray;
-		font-size: 16px;
+		font-size: 20px;
 		font-weight: 400;
-		line-height:35px;
+		line-height:50px;
 		text-decoration:none; /*隱藏超連結底線*/
 	}
 	/*左方股票代碼字體樣式結束*/
@@ -198,11 +199,11 @@ div.bd-toc-item {
 
 /* ------------------------container右方圖表----------------------------------- */
 div.content{
-	position: absolute;
+	position: relative;
 	background: #fff;
-    width: 82vw;
+	left: 14vw;
+    width: 70vw;
     margin-top: 0px;
-    margin-left: 120px;
     line-height: 25px;
 	font-weight: 550;
 }
@@ -395,7 +396,7 @@ div.newsbar{
 
 /* -------------------------------footer------------------------------------- */
 	div.footer{
-		position: absolute;
+		position: relative;
 		height:70px;
 		line-height:70px;
 		width:100vw;
@@ -405,6 +406,6 @@ div.newsbar{
 		color:#fff;
 		background:#003333;
 		letter-spacing:1px;
-		margin-top: 240vh;
+
 	}
 /* -------------------------------footer結束------------------------------------- */

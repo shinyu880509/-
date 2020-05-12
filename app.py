@@ -3,6 +3,7 @@ import pandas as pd
 import csv
 import numpy as np
 import getData, catStock, getID
+import click
 
 app = Flask(__name__)
 app.config["JSON_AS_ASCII"] = False
@@ -12,6 +13,10 @@ a = 0
 @app.route("/")
 def home():
     return render_template('homepage.html') 
+
+@app.cli.command("refresh")
+def refresh():
+    catStock.catStock()
 
 #查詢功能 + 重新導向
 @app.route("/chart/<cType>",methods=['POST'])

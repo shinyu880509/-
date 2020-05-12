@@ -7,36 +7,43 @@ html, body{
 	font-family: 'Noto Sans TC', sans-serif;
 	margin:0;
 	background:rgb(255, 255, 255);	
-	width:1300px;
+	/*width:1300px;*/
+	width: 100vw;
+	height: 100vh;
 }
 
 /* --------------------------header-------------------------------- */
 #header-wrapper
 {
 	background: rgba(64,161,161,0.5);
-	height:100px;
-	width: 1300px;
+	/*height:100px;
+	width:1300px;*/
+	width: 100vw;
+	height: 20vh;
 }
 
 div.header
 {
 	position: relative;
 	padding: 3em 0em;
-	height: 29px;
+	height: 20vh;
+	/*width:1300px;*/
+	width: 100vw;
 }
 
 div.title{
-	width:310px;
-	height: 85px;
+	/*width:310px;*/
+	height: 15vh;
 	margin-top: -40px;
 	/*: 1px solid #2D2E34;*/
-	margin-left: 45px;
+	margin-left: 2vw;
+	width: 30vw;
 }
 
 img.avatar{
 	/*border-radius:40px;
 	box-shadow:0px 3px 5px 0px #000;*/
-	margin-left: -10px;
+	margin-left: 1vw;
 }
 
 h1.title{
@@ -52,9 +59,8 @@ h1.title{
 /* ---------------------------下拉式選單 ------------------------------ */
 div.about{
 	position: relative;
-	margin-left: 380px;
-	top: -55px;
-	height:20px;
+	margin-left: 30vw;
+	top: -10vh;
 	/*border: 1px solid #2D2E34;*/
 }
 ul { /* 取消ul預設的內縮及樣式 */
@@ -153,8 +159,8 @@ div ul li.current_page_item{
 /* ------------------------container----------------------------------- */
 div.container{
 	position: relative;;	
-	width:1300px;
-	height: 1300px;
+	widows: 100vw;
+	height: 80vh;
 	margin:0px;
 	margin-left:auto;
 	margin-right:auto;
@@ -168,7 +174,7 @@ div.container{
 div.bd-toc-item {
 	position: absolute;
 	padding-left: 35px;
-	width:200px;
+	width:18vw;
 	margin:0;
 
 }
@@ -194,7 +200,7 @@ div.bd-toc-item {
 div.content{
 	position: absolute;
 	background: #fff;
-    width: 1100px;
+    width: 82vw;
     margin-top: 0px;
     margin-left: 120px;
     line-height: 25px;
@@ -204,7 +210,7 @@ div.title1 h2{
 	position:relative;
 	margin-top: 3px;
 	margin-bottom:-5px;
-	width: 200px;
+	width: 10vw;
 	font-size: 25px;
 	padding-top: 20px;
 	padding-left: 60px;
@@ -279,7 +285,7 @@ div.clear{
 /* 定義導覽列                 */
 /*-------------當日--------------*/
 div.navbar{	
-    width:1000px;
+    width:80vw;
     height:40px;	
 	margin:40px auto 0px auto;
 }
@@ -305,7 +311,7 @@ div.navbar ul li{
 }
 /*------------近30日---------------*/
 div.navbar1{	
-    width:1000px;
+    width: 80vw;
     height:40px;	
 	margin:40px auto 0px auto;
 }
@@ -333,7 +339,7 @@ div.navbar1 ul li{
 div.news{
 	margin-top: -30px;
 	margin-left: 50px;
-	width:950px;
+	width:80vw;
 	padding-left: 50px;
 	font-weight:450;
 	position:relative;
@@ -380,10 +386,6 @@ div.news:nth-child(2){
 	
 }
 
-
-
-
-
 div.newsbar{
 	padding-top: 20px;
 	height: 575px;
@@ -396,13 +398,13 @@ div.newsbar{
 		position: absolute;
 		height:70px;
 		line-height:70px;
-		width:1300px;
+		width:100vw;
 		margin-left:auto;
 		margin-right:auto;
 		text-align:center;
 		color:#fff;
 		background:#003333;
 		letter-spacing:1px;
-		margin-top: 580px;
+		margin-top: 240vh;
 	}
 /* -------------------------------footer結束------------------------------------- */

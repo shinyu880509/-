@@ -7,7 +7,6 @@ html, body{
 	font-family: 'Noto Sans TC', sans-serif;
 	margin:0;
 	background:rgb(255, 255, 255);	
-	/*width:1300px;*/
 	width: 100vw;
 	height: 100vh;
 }
@@ -16,8 +15,6 @@ html, body{
 #header-wrapper
 {
 	background: rgba(64,161,161,0.5);
-	/*height:100px;
-	width:1300px;*/
 	width: 100vw;
 	height: 20vh;
 }
@@ -26,7 +23,6 @@ div.header
 {
 	position: relative;
 	height: 20vh;
-	/*width:1300px;*/
 	width: 100vw;
 }
 
@@ -38,8 +34,6 @@ div.title{
 }
 
 img.avatar{
-	/*border-radius:40px;
-	box-shadow:0px 3px 5px 0px #000;*/
 	margin-left: 1vw;
 	margin-top:3vh;
 }
@@ -149,9 +143,9 @@ div ul li.current_page_item{
 	/* ------------------------搜尋位置調整------------------------- */
 	div.search ul{
 		/*border: 1px solid #2D2E34;*/
-		height: 30px;
+		height: 50px;
 		margin-top:-45px;
-		margin-left: 600px;
+		margin-left: 50vw;
 	}
 	/* ------------------------搜尋位置調整結束---------------------- */
 
@@ -160,8 +154,7 @@ div ul li.current_page_item{
 /* ------------------------container----------------------------------- */
 div.container{
 	position: relative;;	
-	widows: 100vw;
-	height: 1900px;
+	width: 100vw;
 	margin:0px;
 	margin-left:auto;
 	margin-right:auto;
@@ -211,7 +204,7 @@ div.title1 h2{
 	position:relative;
 	margin-top: 3px;
 	margin-bottom:-5px;
-	width: 10vw;
+	width: 13vw;
 	font-size: 25px;
 	padding-top: 20px;
 	padding-left: 60px;
@@ -273,8 +266,6 @@ table.comicGreen {
 
 */
 
-
-
 img.stockimage{
 	padding-left: -40px;
 }
@@ -282,8 +273,6 @@ img.stockimage{
 div.clear{
 	clear:both;	
 }
-/*---------------------------*/
-/* 定義導覽列                 */
 /*-------------當日--------------*/
 div.navbar{	
     width:80vw;
@@ -400,6 +389,7 @@ div.newsbar{
 		height:70px;
 		line-height:70px;
 		width:100vw;
+		margin-top:3vh;
 		margin-left:auto;
 		margin-right:auto;
 		text-align:center;

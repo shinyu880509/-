@@ -195,7 +195,7 @@ div.content{
 	position: relative;
 	background: #fff;
 	left: 14vw;
-    width: 70vw;
+    max-width: 84vw;
     margin-top: 0px;
     line-height: 25px;
 	font-weight: 550;
@@ -379,6 +379,7 @@ div.news:nth-child(2){
 div.newsbar{
 	padding-top: 20px;
 	height: 575px;
+	width: 84vw;
 
 }
 /* ------------------------container右方圖表結束----------------------------------- */

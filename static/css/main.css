@@ -29,7 +29,7 @@ div.header
 div.title{
 	height: 20vh;
 	margin-left: 2vw;
-	width: 30vw;
+	width: 25vw;
 
 }
 
@@ -52,7 +52,7 @@ h1.title{
 /* ---------------------------下拉式選單 ------------------------------ */
 div.about{
 	position: relative;
-	margin-left: 30vw;
+	margin-left: 28vw;
 	vertical-align: middle;
 	text-align: left;
 	top: -12vh;
@@ -70,7 +70,7 @@ ul.drop-down-menu {
 	display: inline-block;
 	/*font-family: 'Open Sans', Arial, sans-serif;*/
 	font-size: 13px;
-	width: 660px;
+	width: 50vw;
 }
 
 ul.drop-down-menu li {
@@ -145,7 +145,7 @@ div ul li.current_page_item{
 		/*border: 1px solid #2D2E34;*/
 		height: 50px;
 		margin-top:-45px;
-		margin-left: 50vw;
+		margin-left:50vw;
 	}
 	/* ------------------------搜尋位置調整結束---------------------- */
 

@@ -16,7 +16,7 @@
                 <img src="{{ url_for('static', filename='images/icon.png') }}"  width="80" height="80" class="avatar">
                 <h1 class="title">資訊股分析網</h1>
             </div>
-            <form action="/predict/{{cType[0]}}" method="post">
+            <form action="/chart/{{cType[0]}}" method="post">
                 <div class="about">
                     <ul class="drop-down-menu">                      
                         <li class="current_page_item"><a href="#" accesskey="2" title="" class="chart" a href="#">圖表</a>
@@ -39,7 +39,7 @@
                                     <a href="/predict/pre/{{stock}}">預測圖表</a>
                                 </li>
                                 <li>
-                                    <a href="text.html">預測圖表分析</a>
+                                    <a href="#">預測圖表分析</a>
                                 </li>
                             </ul>
                         </li>
@@ -114,64 +114,56 @@
 <!---------------------------------------------->
 <div class="container">
     <!---------------------------------------------->
-    {% if err == 1%}
-        <h1>輸入錯誤</h1>
-    {% endif %}
     <!---------------------------------------------->
     <div class="bd-toc-item active">
-        <a class="bd-toc-link" style="font-weight:550;color: black;font-size:17px;">
-            資訊類股代號
+        <a class="bd-toc-link" style="font-weight:550;color: black;font-size:25px;">
+            資訊股代號
         </a>
         <ul class="nav bd-sidenav">
             <li>
-                <a href="/predict/{{cType[0]}}/2427">2427三商電</a>
+                <a href="/chart/{{cType[0]}}/2427">2427三商電</a>
             </li>
             <li>
-                <a href="/predict/{{cType[0]}}/2453">2453凌群</a>
+                <a href="/chart/{{cType[0]}}/2453">2453凌群</a>
             </li>
             <li>
-                <a href="/predict/{{cType[0]}}/2468">2468華經</a>
+                <a href="/chart/{{cType[0]}}/2468">2468華經</a>
             </li>
             <li>
-                <a href="/predict/{{cType[0]}}/2471">2471資通</a>
+                <a href="/chart/{{cType[0]}}/2471">2471資通</a>
             </li>
             <li>
-                <a href="/predict/{{cType[0]}}/2480">2480敦陽</a>
+                <a href="/chart/{{cType[0]}}/2480">2480敦陽</a>
             </li>
             <li>
-                <a href="/predict/{{cType[0]}}/3029">3029零壹</a>
+                <a href="/chart/{{cType[0]}}/3029">3029零壹</a>
             </li>
             <li>
-                <a href="/predict/{{cType[0]}}/3130">3130一零四</a>
+                <a href="/chart/{{cType[0]}}/3130">3130一零四</a>
             </li>
             <li>
-                <a href="/predict/{{cType[0]}}/4994">4994傳奇</a>
+                <a href="/chart/{{cType[0]}}/4994">4994傳奇</a>
             </li>
             <li>
-                <a href="/predict/{{cType[0]}}/5203">5203訊連</a>
+                <a href="/chart/{{cType[0]}}/5203">5203訊連</a>
             </li>
             <li>
-                <a href="/predict/{{cType[0]}}/6112">6112聚碩</a>
+                <a href="/chart/{{cType[0]}}/6112">6112聚碩</a>
             </li>
             <li>
-                <a href="/predict/{{cType[0]}}/6183">6183關貿</a>
+                <a href="/chart/{{cType[0]}}/6183">6183關貿</a>
             </li>
             <li>
-                <a href="/predict/{{cType[0]}}/6214">6214精誠</a>
+                <a href="/chart/{{cType[0]}}/6214">6214精誠</a>
             </li>
         </ul>
     </div>
     <!---------------------------------------------->
     <div class="content">
+        <!---------------------------------------------->
         <div class="title1"><h2>{{name}}</h2></div>
-        <!---------------------------------------------->            
-        <div class="newsbar">
-            <div class="news">
-                <h2>未來30日走勢圖</h2>
-                <canvas id="canvas"></canvas>
-            </div>
-        </div>        
-    </div>
+        <!---------------------------------------------->     
+
 </div>
 <!---------------------------------------------->
 <div class="footer">
@@ -183,10 +175,36 @@
 <script src="{{ url_for('static', filename='scripts/main.js') }}"></script>    
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.js"></script>
 <script type="text/javascript">
-    var datelist = {{pre[5]|safe}};
-    var closelist= {{pre[1]|safe}};
-    var translist = {{pre[4]|safe}};
+    var datelist = {{re[7]|safe}};
+    var closelist= {{re[8]|safe}};
+    var translist = {{re[9]|safe}};
+    var time = {{today[0]|safe}};
+    var closetoday = {{today[1]|safe}};
+    var transtoday = {{today[2]|safe}};
+    var c = {{cType[1]|safe}};
 
+    var lineChartData3 = {
+        labels: time, //顯示區間名稱
+        datasets: [{
+            type: 'line',
+            label: '收盤價', // tootip 出現的名稱
+            lineTension: 0, // 曲線的彎度，設0 表示直線
+            backgroundColor: "#ea464d",
+            borderColor: "#ea464d",
+            borderWidth: 5,
+            data: closetoday, // 資料
+            fill: false, // 是否填滿色彩
+        },{
+            type: 'bar',
+            label: '交易量', // tootip 出現的名稱
+            backgroundColor: "#055ffa",
+            borderColor: "#055ffa",
+            borderWidth: 2,
+            data: transtoday, // 資料
+            fill: false, // 是否填滿色彩
+            yAxisID: 'y-axis-1',
+        }]
+    };
 
     var lineChartData = {
         labels: datelist, //顯示區間名稱
@@ -240,8 +258,14 @@
     };
 
     window.onload = function () {
-        var ctx = document.getElementById("canvas").getContext("2d");
-        drawLineCanvas(ctx,lineChartData);
+        if (c == 0){
+            var ctx = document.getElementById("canvas").getContext("2d");
+            drawLineCanvas(ctx,lineChartData);
+        }
+        else if (c == 1){
+            var ctx3 = document.getElementById("canvas3").getContext("2d");
+            drawLineCanvas(ctx3,lineChartData3);
+        }
     };
 </script>
 </body>

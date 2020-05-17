@@ -43,7 +43,7 @@ h1.title{
 	display:inline;
 	font-size:25spx;
 	font-weight:500;
-	top:-20px;
+	top:-30px;
 	left:20px;
 	vertical-align: middle;
 }
@@ -168,7 +168,7 @@ div.container{
 div.bd-toc-item {
 	position: absolute;
 	padding-left: 0.5vw;
-	width:16vw;
+	width:14vw;
 	margin:0;
 	text-align: center;
 }
@@ -194,7 +194,7 @@ div.bd-toc-item {
 div.content{
 	position: relative;
 	background: #fff;
-	left: 14vw;
+	left: 12.5vw;
     max-width: 84vw;
     margin-top: 0px;
     line-height: 25px;
@@ -204,7 +204,7 @@ div.title1 h2{
 	position:relative;
 	margin-top: 3px;
 	margin-bottom:-5px;
-	width: 13vw;
+	width: 11vw;
 	font-size: 25px;
 	padding-top: 20px;
 	padding-left: 60px;

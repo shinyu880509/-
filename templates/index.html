@@ -36,35 +36,40 @@
                                     <a href="#">歷史圖表</a>
                                 </li>
                                 <li>
-                                    <a href="#">預測圖表</a>
+                                    <a href="/predict/pre/{{stock}}">預測圖表</a>
                                 </li>
-
                             </ul>
                         </li>
 
                         <li>
-                            <a href="news.html" accesskey="3" title="">新聞</a>
+                            <a href="#" accesskey="3" title="">新聞</a>
                         </li>
                         <li>
                             <a href="#" accesskey="4" title="">財務分析</a>
                             <ul>
                                 <li>
-                                    <a href="#">營業利益率</a>
+                                    <a href="/financial/SymScore/{{stock}}">個股月營收</a>
                                 </li>
                                 <li>
-                                    <a href="#">毛利率</a>
+                                    <a href="/financial/GrowthAnly/{{stock}}">成長性分析</a>
                                 </li>
                                 <li>
-                                    <a href="#">總資產週轉率</a>
+                                    <a href="/financial/Divpolicy/{{stock}}">股利政策</a>
                                 </li>
                                 <li>
-                                    <a href="#">權益負債比</a>
+                                    <a href="/financial/ProfitByQr/{{stock}}">獲利能力分析(季)</a>
                                 </li>
                                 <li>
-                                    <a href="#">營收概況</a>
+                                    <a href="/financial/Capstreq/{{stock}}">資本形成-股東權益(季)</a>
                                 </li>
                                 <li>
-                                    <a href="#">股利概況</a>
+                                    <a href="/financial/Cashratio/{{stock}}">現金分析(年)</a>
+                                </li>
+                                <li>
+                                    <a href="/financial/SolvencyBySym/{{stock}}">償還能力分析(季)</a>
+                                </li>
+                                <li>
+                                    <a href="/financial/Oper/{{stock}}">經營能力分析(年)</a>
                                 </li>
                             </ul>
                         </li>
@@ -105,11 +110,11 @@
 </div>
 <!---------------------------------------------->
 <div class="container">
-    <!-------------------------------------------
+    <!---------------------------------------------->
     {% if err == 1%}
         <h1>輸入錯誤</h1>
     {% endif %}
-   -------------------------------------------->
+    <!---------------------------------------------->
     <div class="bd-toc-item active">
         <a class="bd-toc-link" style="font-weight:550;color: black;font-size:25px;">
             資訊股代號

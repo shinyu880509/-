@@ -1,0 +1,317 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>專題-股票分析</title>
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<link href="https://fonts.googleapis.com/css?family=Noto+Sans+TC" rel="stylesheet">
+<link href="{{ url_for('static', filename='css/main.css') }}" rel="stylesheet" type="text/css" />      
+</head>
+<body>
+<!---------------------------------------------->
+<div id="wrapper">
+    <div id="header-wrapper">
+        <div class="header" >
+            <div class="title">
+                <img src="{{ url_for('static', filename='images/icon.png') }}"  width="80" height="80" class="avatar">
+                <h1 class="title">資訊股分析網</h1>
+            </div>
+            <form action="/" method="post">
+                <div class="about">
+                    <ul class="drop-down-menu">                      
+                        <li class="current_page_item"><a href="chart.html" accesskey="2" title="" class="chart" a href="#">圖表</a>
+                            <ul>
+                                <li>
+                                    <a href="#">近30日</a>
+                                </li>
+                                <li>
+                                    <a href="#">當日</a>
+                                </li>
+                                <li>
+                                    <a href="#">歷史圖表</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="current_page_item"><a href="predict.html" accesskey="1" title="" a href="#">預測圖表</a>
+                            
+                        </li>
+
+                        <li>
+                            <a href="news.html" accesskey="3" title="">新聞</a>
+                        </li>
+                        <li>
+                            <a href="financial.html" accesskey="4" title="">財務分析</a>
+                            <ul>
+                                <li>
+                                    <a href="#">營業利益率</a>
+                                </li>
+                                <li>
+                                    <a href="#">毛利率</a>
+                                </li>
+                                <li>
+                                    <a href="#">總資產週轉率</a>
+                                </li>
+                                <li>
+                                    <a href="#">權益負債比</a>
+                                </li>
+                                <li>
+                                    <a href="#">營收概況</a>
+                                </li>
+                                <li>
+                                    <a href="#">股利概況</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li><a href="technical.html" accesskey="5" title="">技術分析</a>
+                            <ul>
+                                <li>
+                                    <a href="#">RSI線</a>
+                                </li>
+                                <li>
+                                    <a href="#">KD線</a>
+                                </li>
+                                <li>
+                                    <a href="#">MACD線</a>
+                                </li>
+                                <li>
+                                    <a href="#">DIF線</a>
+                                </li>
+                            </ul>
+                        </li>
+                        
+                    </ul>
+                    <div class="search">
+                        <ul>
+                            <img id="searchIcon" width="24px" src="https://s.yimg.com/cv/apiv2/twstock/icon-search.png"
+                                srcset="https://s.yimg.com/cv/apiv2/twstock/icon-search@2x.png 2x, https://s.yimg.com/cv/apiv2/twstock/icon-search@3x.png 3x" />
+                                <input id="stock_id" type="text" name="stock_id" placeholder="搜尋台股代號/名稱" />
+                                <img id="closeBtn" src="https://s.yimg.com/cv/apiv2/twstock/cancel.png"
+                                srcset="https://s.yimg.com/cv/apiv2/twstock/cancel@2x.png 2x, https://s.yimg.com/cv/apiv2/twstock/cancel@3x.png 3x"
+                                style="cursor: pointer; display: none" />
+                                <button class="btn btn-primary my-2 my-sm-0" type="submit">搜尋</button>
+                        </ul>
+                    </div>   
+                </div>
+
+            </form>  
+        </div>
+    </div>
+</div>
+<!---------------------------------------------->
+<div class="container">
+    <!---------------------------------------------->
+    {% if err == 1%}
+        <h1>輸入錯誤</h1>
+    {% endif %}
+    <!---------------------------------------------->
+    <div class="bd-toc-item active">
+        <a class="bd-toc-link" style="font-weight:550;color: black;font-size:17px;">
+            資訊類股代號
+        </a>
+        <ul class="nav bd-sidenav">
+            <li>
+                <a href="/stockpd2427">2427三商電</a>
+            </li>
+            <li>
+                <a href="/stockpd2453">2453凌群</a>
+            </li>
+            <li>
+                <a href="/stockpd2468">2468華經</a>
+            </li>
+            <li>
+                <a href="/stockpd2471">2471資通</a>
+            </li>
+            <li>
+                <a href="/stockpd2480">2480敦陽</a>
+            </li>
+            <li>
+                <a href="/stockpd3029">3029零壹</a>
+            </li>
+            <li>
+                <a href="/stockpd3130">3130一零四</a>
+            </li>
+            <li>
+                <a href="/stockpd4994">4994傳奇</a>
+            </li>
+            <li>
+                <a href="/stockpd5203">5203訊連</a>
+            </li>
+            <li>
+                <a href="/stockpd6112">6112聚碩</a>
+            </li>
+            <li>
+                <a href="/stockpd6183">6183關貿</a>
+            </li>
+            <li>
+                <a href="/stockpd6214">6214精誠</a>
+            </li>
+        </ul>
+    </div>
+    <!---------------------------------------------->
+    <div class="content">
+        <!---------------------------------------------->
+        <div class="title1"><h2>{{name}}</h2></div>
+        <!---------------------------------------------->            
+        <div class="newsbar">
+            <div class="news">
+                <h2>當日交易圖</h2>
+                <div class="navbar">
+                    <ul>
+                        <li>開盤價:{{today[3][0]}}</li>
+                        <li>最高價:{{today[3][1]}}</li>
+                        <li>最低價:{{today[3][2]}}</li>
+                        <li>收盤價:{{today[3][3]}}</li>
+                        <li>總交易量:{{today[3][4]}}</li>
+                    </ul>
+                </div>
+                <canvas id="canvas3"></canvas>
+            </div>
+        </div>  
+    </div>
+</div>
+<!---------------------------------------------->
+<div class="footer">
+    &copyntubimd2020
+</div>
+<!---------------------------------------------->
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>      
+<script src="{{ url_for('static', filename='scripts/main.js') }}"></script>    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.js"></script>
+<script type="text/javascript">
+    var datelist = {{re[7]|safe}};
+    var closelist= {{re[8]|safe}};
+    var translist = {{re[9]|safe}};
+    var rsi = {{tec[0]|safe}};
+    var k = {{tec[1]|safe}};
+    var d = {{tec[2]|safe}};
+    var dif = {{tec[3]|safe}};
+    var macd = {{tec[4]|safe}};
+    var bias = {{tec[5]|safe}};
+
+
+    var lineChartData = {
+        labels: datelist, //顯示區間名稱
+        datasets: [{
+            type: 'line',
+            label: '收盤價', // tootip 出現的名稱
+            lineTension: 0, // 曲線的彎度，設0 表示直線
+            backgroundColor: "#ea464d",
+            borderColor: "#ea464d",
+            borderWidth: 5,
+            data: closelist, // 資料
+            fill: false, // 是否填滿色彩
+        },{
+            type: 'bar',
+            label: '交易量', // tootip 出現的名稱
+            backgroundColor: "#055ffa",
+            borderColor: "#055ffa",
+            borderWidth: 2,
+            data: translist, // 資料
+            fill: false, // 是否填滿色彩
+            yAxisID: 'y-axis-1',
+        }]
+    };
+
+    var lineChartData2 = {
+        labels: datelist, //顯示區間名稱
+        datasets: [
+        {
+            type: 'line',
+            label: 'rsi', // tootip 出現的名稱
+            lineTension: 0, // 曲線的彎度，設0 表示直線
+            backgroundColor: "#ea464d",
+            borderColor: "#ea464d",
+            borderWidth: 5,
+            data: rsi, // 資料
+            fill: false, // 是否填滿色彩
+        },
+        {
+            type: 'line',
+            label: 'k', // tootip 出現的名稱
+            lineTension: 0, // 曲線的彎度，設0 表示直線
+            backgroundColor: "#ea464d",
+            borderColor: "#ea464d",
+            borderWidth: 5,
+            data: k, // 資料
+            fill: false, // 是否填滿色彩
+        },
+        {
+            type: 'line',
+            label: 'd', // tootip 出現的名稱
+            lineTension: 0, // 曲線的彎度，設0 表示直線
+            backgroundColor: "#ea464d",
+            borderColor: "#ea464d",
+            borderWidth: 5,
+            data: d, // 資料
+            fill: false, // 是否填滿色彩
+        },
+        {
+            type: 'line',
+            label: 'macd', // tootip 出現的名稱
+            lineTension: 0, // 曲線的彎度，設0 表示直線
+            backgroundColor: "#ea464d",
+            borderColor: "#ea464d",
+            borderWidth: 5,
+            data: macd, // 資料
+            fill: false, // 是否填滿色彩
+        },
+        {
+            type: 'line',
+            label: 'dif', // tootip 出現的名稱
+            lineTension: 0, // 曲線的彎度，設0 表示直線
+            backgroundColor: "#ea464d",
+            borderColor: "#ea464d",
+            borderWidth: 5,
+            data: dif, // 資料
+            fill: false, // 是否填滿色彩
+        },
+        {
+            type: 'bar',
+            label: '交易量', // tootip 出現的名稱
+            backgroundColor: "#055ffa",
+            borderColor: "#055ffa",
+            borderWidth: 2,
+            data: bias, // 資料
+            fill: false, // 是否填滿色彩
+            yAxisID: 'y-axis-1',
+        }]
+    };
+
+
+    function drawLineCanvas(ctx,data) {
+        window.myLine = new Chart(ctx, {  //先建立一個 chart
+            data: data,
+            options: {
+                responsive: true,
+                legend: { //是否要顯示圖示
+                    display: true,
+                },
+                tooltips: { //是否要顯示 tooltip
+                    enabled: true
+                },
+                scales: {  //是否要顯示 x、y 軸
+                    xAxes: [{
+                        display: true
+                    },],
+                    yAxes: [{
+                        display: true
+                    },{
+                        id: 'y-axis-1',
+                        position: 'right',
+                        display: true
+                    }]
+                },
+            }
+        });
+    };
+
+    window.onload = function () {
+        var ctx = document.getElementById("canvas").getContext("2d");
+        drawLineCanvas(ctx,lineChartData);
+        var ctx2 = document.getElementById("canvas2").getContext("2d");
+        drawLineCanvas(ctx2,lineChartData2);
+    };
+</script>
+</body>
+</html>

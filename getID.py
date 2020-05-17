@@ -30,3 +30,23 @@ def checkCha(ty):
             c[0] = typeID[i]
             c[1] = i
     return c
+    
+def checkFin(ty):
+    typeName = ['個股月營收', '成長性分析', '股利政策', '獲利能力分析(季)', '資本形成-股東權益(季)', '現金分析(年)', '償還能力分析(季)', '經營能力分析(年)']
+    typeID = ['SymScore', 'GrowthAnly', 'Divpolicy', 'ProfitByQr', 'Capstreq', 'Cashratio', 'SolvencyBySym', 'Oper']
+    c = ['SymScore', 0, '個股月營收']
+    for i in range(len(typeID)):
+        if ty == typeID[i]:
+            c[0] = typeID[i]
+            c[1] = i
+            c[2] = typeName[i]
+    return c
+
+def checkPre(ty):
+    typeID = ['pre', 'today']
+    c = ['pre', 0]
+    for i in range(len(typeID)):
+        if ty == typeID[i]:
+            c[0] = typeID[i]
+            c[1] = i
+    return c

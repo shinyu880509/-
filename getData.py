@@ -24,6 +24,22 @@ def getCsv(a):
     low = np.array(table.low)
     low = low.tolist()
     return datelist,closelist,capacitylist,turnoverlist,changelist,high,low,translist
+    
+#股票代碼
+def getPre(a):
+    table = pd.read_csv("preStock/"+a+'.csv')
+    date = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24', '25', '26', '27', '28', '29', '30']
+    opena = np.array(table.open)
+    openlist = opena.tolist()
+    close = np.array(table.close)
+    closelist = close.tolist()
+    trans = np.array(table.Trading_turnover)
+    translist = trans.tolist()
+    high = np.array(table.high)
+    high = high.tolist()
+    low = np.array(table.low)
+    low = low.tolist()
+    return openlist,closelist,high,low,translist,date
 
 def getTodayCsv(a):
     table = pd.read_csv("catStock/"+a+'today.csv')
@@ -33,8 +49,8 @@ def getTodayCsv(a):
 
     time = np.array(table.time)
     timelist = time.tolist()
-    open = np.array(table.open)
-    openlist = open.tolist()
+    opena = np.array(table.open)
+    openlist = opena.tolist()
     high = np.array(table.high)
     highlist = high.tolist()
     low = np.array(table.low)
@@ -177,3 +193,27 @@ def getAll(a):
 #print(getRSI('2427',30,30))
 #print(getMACD('2427'))
 #print(getKD('2427'))
+
+#代碼
+def getFin(sid,a):
+    table = pd.read_csv("catFin/"+str(sid) + str(a) +'.csv')
+    table.columns
+    data = []
+    head = []
+    for i in range(len(table.columns)):
+        z = table.columns[i]
+        head.append(z)
+        small = []
+        for j in range(len(table[z])):
+            small.append(table[z][j])
+        data.append(small)
+    for i in range(8-len(data)):
+        aa = []
+        data.append(aa)
+    for i in range(8-len(head)):
+        aa = []
+        head.append(aa)
+    return head, data
+#aa = getFin(2427,2)
+#print(aa[1])
+#print(len(aa[1]))

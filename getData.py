@@ -116,6 +116,29 @@ def getKD(a):
         d.append(round(zd,2))
     return k[-30:],d[-30:]
 
+def getPreKD(a):
+    csv = getCsv(a)
+    clo = csv[1][-10:]
+    hi = csv[5][-19:]
+    lo = csv[6][-39:]
+    aa = getPre(a)
+    clo = clo + aa[1]
+    hi = hi + aa[2]
+    lo = lo + aa[3]
+    rsv = []
+    k = [50]
+    d = [50]
+    for i in range(len(clo)):
+        zr = (clo[i] - min(lo[i:10 + i]))/(max(hi[i:10 + i]) - min(lo[i:10 + i]))
+        zr *= 100
+        rsv.append(round(zr,2))
+
+        zk = (rsv[i]/3) + (k[i]/3*2)
+        k.append(round(zk,2))
+        zd = (k[i]/3) + (d[i]/3*2)
+        d.append(round(zd,2))
+    return k[-30:],d[-30:]
+
 #平均
 def ema(a,d):
     return sum(a)/d
@@ -135,7 +158,25 @@ def getMACD(a):
         if i > 7:
             zmacd = sum(dif[i-8:i+1])/9
             macd.append(round(zmacd,2))
-    return dif,macd
+    return dif[-30:],macd[-30:]
+
+def getPreMACD(a):
+    csv = getCsv(a)
+    clo = csv[1][-34:]
+    aa = getPre(a)
+    clo = clo + aa[1]
+    dif = []
+    macd = []
+
+    for i in range(39):
+        ema12 = ema(clo[14+i:26+i],12)
+        ema26 = ema(clo[i:26+i],26)
+        zdif = ema12-ema26
+        dif.append(round(zdif,2))
+        if i > 7:
+            zmacd = sum(dif[i-8:i+1])/9
+            macd.append(round(zmacd,2))
+    return dif[-30:],macd[-30:]
 
 #股票代碼,平均的天數,列出幾天
 def getBIAS(a, long, dd):
@@ -159,6 +200,34 @@ def getBIAS(a, long, dd):
             print(clo[days[long]-1+i],bias[i])
         '''
     return bias
+
+def getPreBIAS(a, long):
+    csv = getCsv(a)
+    days = [6,12,24,72]
+    clo = csv[1][-(days[long]-1):]
+    aa = getPre(a)
+    clo = clo + aa[1]
+    bias = []
+    re = []
+
+    for i in range(len(aa[1])):
+        ema30 = ema(clo[i:days[long]+i],days[long])
+        zbias = ((clo[days[long]-1+i]-ema30)/ema30)*100
+        bias.append(round(zbias,2))
+        z = []
+        if long == 3 and (bias[i] <= -11 or bias[i] >= 11):
+            z = [clo[days[long]-1+i],bias[i]]
+            re.append(z)
+        elif long == 2 and (bias[i] <= -7 or bias[i] >= 8):
+            z = [clo[days[long]-1+i],bias[i]]
+            re.append(z)
+        elif long == 1 and (bias[i] <= -4.5 or bias[i] >= 5):
+            z = [clo[days[long]-1+i],bias[i]]
+            re.append(z)
+        elif long == 0 and (bias[i] <= -3 or bias[i] >= 3.5):
+            z = [clo[days[long]-1+i],bias[i]]
+            re.append(z)
+    return bias,re
 
 #股票代碼,平均的天數,列出幾天
 def getRSI(a, long, dd):
@@ -184,6 +253,34 @@ def getRSI(a, long, dd):
         zrsi = (aHi/(aHi-aLo))*100
         rsi.append(round(zrsi,2))
     return rsi
+
+def getPreRSI(a, long):
+    csv = getCsv(a)
+    days = long
+    clo = csv[1][-(days):]
+    aa = getPre(a)
+    clo = clo + aa[1]
+    change = []
+    rsi = []
+
+    for i in range(len(clo)-1):
+        z = clo[i+1] - clo[i]
+        change.append(z)
+    for i in range(len(aa[1])):
+        hi = []
+        lo = []
+        for j in range(days):
+            if change[i+j] > 0:
+                hi.append(change[i+j])
+            elif change[i+j] < 0:
+                lo.append(change[i+j])
+        aHi = ema(hi,days)
+        aLo = ema(lo,days)
+        zrsi = (aHi/(aHi-aLo))*100
+        rsi.append(round(zrsi,2))
+    return rsi
+print(getPreRSI('2453',30))
+print(getRSI('2453',30,30))
 
 def getAll(a):
     kd = getKD(a)

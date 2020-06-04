@@ -279,8 +279,8 @@ def getPreRSI(a, long):
         zrsi = (aHi/(aHi-aLo))*100
         rsi.append(round(zrsi,2))
     return rsi
-print(getPreRSI('2453',30))
-print(getRSI('2453',30,30))
+#print(getPreRSI('2453',30))
+#print(getRSI('2453',30,30))
 
 def getAll(a):
     kd = getKD(a)
@@ -294,7 +294,6 @@ def getAll(a):
 #代碼
 def getFin(sid,a):
     table = pd.read_csv("catFin/"+str(sid) + str(a) +'.csv')
-    table.columns
     data = []
     head = []
     for i in range(len(table.columns)):
@@ -302,7 +301,14 @@ def getFin(sid,a):
         head.append(z)
         small = []
         for j in range(len(table[z])):
-            small.append(table[z][j])
+            zz = str(table[z][j])
+            zz = zz.split('%')
+            if str(table[z][j])=='nan':
+                small.append(0)
+            elif len(zz) == 2:
+                small.append(zz[0])
+            else:
+                small.append(table[z][j])
         data.append(small)
     for i in range(8-len(data)):
         aa = []

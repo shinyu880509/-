@@ -8,91 +8,16 @@
 <link href="{{ url_for('static', filename='css/main.css') }}" rel="stylesheet" type="text/css" />      
 </head>
 <body>
-<!---------------------------------------------->
+<!----------------------------------------------------------->
 <div id="wrapper">
-    <div id="header-wrapper">
+<!--------------------------header------------------------------->
         <div class="header" >
             <div class="title">
                 <a href="/"><img src="{{ url_for('static', filename='images/icon.png') }}"  width="80" height="80" class="avatar"></a>
                 <h1 class="title">資訊股分析網</h1>
-            </div>
-            <form action="/chart/{{cType[0]}}" method="post">
-                <div class="about">
-                    <ul class="drop-down-menu">                      
-                        <li class="current_page_item"><a href="#" accesskey="2" title="" class="chart" a href="#">圖表</a>
-                            <ul>
-                                <li>
-                                    <a href="/chart/30days/{{stock}}">近30日</a>
-                                </li>
-                                <li>
-                                    <a href="/chart/today/{{stock}}">當日</a>
-                                </li>
-                                
-                            </ul>
-                        </li>
-                        <li class="current_page_item"><a href="#" accesskey="1" title="" a href="#">預測圖表</a>
-                            <ul>
-                                <li>
-                                    <a href="/predict/pre/{{stock}}">預測圖表</a>
-                                </li>
-                                <li>
-                                    <a href="#">歷史圖表</a>
-                                </li>
-                                
-                            </ul>
-                        </li>
+            </div>  
 
-                        <li>
-                            <a href="#" accesskey="3" title="">新聞</a>
-                        </li>
-                        <li>
-                            <a href="#" accesskey="4" title="">財務分析</a>
-                            <ul>
-                                <li>
-                                    <a href="/financial/SymScore/{{stock}}">個股月營收</a>
-                                </li>
-                                <li>
-                                    <a href="/financial/GrowthAnly/{{stock}}">成長性分析</a>
-                                </li>
-                                <li>
-                                    <a href="/financial/Divpolicy/{{stock}}">股利政策</a>
-                                </li>
-                                <li>
-                                    <a href="/financial/ProfitByQr/{{stock}}">獲利能力分析(季)</a>
-                                </li>
-                                <li>
-                                    <a href="/financial/Capstreq/{{stock}}">資本形成-股東權益(季)</a>
-                                </li>
-                                <li>
-                                    <a href="/financial/Cashratio/{{stock}}">現金分析(年)</a>
-                                </li>
-                                <li>
-                                    <a href="/financial/SolvencyBySym/{{stock}}">償還能力分析(季)</a>
-                                </li>
-                                <li>
-                                    <a href="/financial/Oper/{{stock}}">經營能力分析(年)</a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li><a href="#" accesskey="5" title="">技術分析</a>
-                            <ul>
-                                <li>
-                                    <a href="/technical/rsi/{{stock}}">RSI線</a>
-                                </li>
-                                <li>
-                                    <a href="/technical/kd/{{stock}}">KD線</a>
-                                </li>
-                                <li>
-                                    <a href="/technical/macd/{{stock}}">MACD線</a>
-                                </li>
-                                <li>
-                                    <a href="/technical/bias/{{stock}}">BIAS線</a>
-                                </li>
-                            </ul>
-                        </li>
-                        
-                    </ul>
-                    <div class="search">
+                    <!---<div class="search">
                         <ul>
                             <img id="searchIcon" width="24px" src="https://s.yimg.com/cv/apiv2/twstock/icon-search.png"
                                 srcset="https://s.yimg.com/cv/apiv2/twstock/icon-search@2x.png 2x, https://s.yimg.com/cv/apiv2/twstock/icon-search@3x.png 3x" />
@@ -102,89 +27,66 @@
                                 style="cursor: pointer; display: none" />
                                 <button class="btn btn-primary my-2 my-sm-0" type="submit">搜尋</button>
                         </ul>
-                    </div>   
-                </div>
-
-            </form>  
+                    </div>  ----> 
+        </div>
+<!---------------------------header結束------------------------------>
+    
+<!---------------------------sidebar1----------------------------->
+    <div class="sidebar1">
+        <div class="bd-toc-item active">
+            <a class="bd-toc-link" style="font-weight:bold; color: black;font-size:20px;">
+                資訊股代號
+            </a>
+            <ul class="nav bd-sidenav">
+                <li>
+                    <a href="/chart/{{cType[0]}}/2427">2427三商電</a>
+                </li>
+                <li>
+                    <a href="/chart/{{cType[0]}}/2453">2453凌群</a>
+                </li>
+                <li>
+                    <a href="/chart/{{cType[0]}}/2468">2468華經</a>
+                </li>
+                <li>
+                    <a href="/chart/{{cType[0]}}/2471">2471資通</a>
+                </li>
+                <li>
+                    <a href="/chart/{{cType[0]}}/2480">2480敦陽</a>
+                </li>
+                <li>
+                    <a href="/chart/{{cType[0]}}/3029">3029零壹</a>
+                </li>
+                <li>
+                    <a href="/chart/{{cType[0]}}/3130">3130一零四</a>
+                </li>
+                <li>
+                    <a href="/chart/{{cType[0]}}/4994">4994傳奇</a>
+                </li>
+                <li>
+                    <a href="/chart/{{cType[0]}}/5203">5203訊連</a>
+                </li>
+                <li>
+                    <a href="/chart/{{cType[0]}}/6112">6112聚碩</a>
+                </li>
+                <li>
+                    <a href="/chart/{{cType[0]}}/6183">6183關貿</a>
+                </li>
+                <li>
+                    <a href="/chart/{{cType[0]}}/6214">6214精誠</a>
+                </li>
+            </ul>
         </div>
     </div>
-</div>
-<!---------------------------------------------->
-<div class="container">
-    <!---------------------------------------------->
+<!---------------------------sidebar1結束------------------------------>
 
-    <!---------------------------------------------->
-    <div class="bd-toc-item active">
-        <a class="bd-toc-link" style="font-weight:550;color: black;font-size:25px;">
-            資訊股代號
-        </a>
-        <ul class="nav bd-sidenav">
-            <li>
-                <a href="/chart/{{cType[0]}}/2427">2427三商電</a>
-            </li>
-            <li>
-                <a href="/chart/{{cType[0]}}/2453">2453凌群</a>
-            </li>
-            <li>
-                <a href="/chart/{{cType[0]}}/2468">2468華經</a>
-            </li>
-            <li>
-                <a href="/chart/{{cType[0]}}/2471">2471資通</a>
-            </li>
-            <li>
-                <a href="/chart/{{cType[0]}}/2480">2480敦陽</a>
-            </li>
-            <li>
-                <a href="/chart/{{cType[0]}}/3029">3029零壹</a>
-            </li>
-            <li>
-                <a href="/chart/{{cType[0]}}/3130">3130一零四</a>
-            </li>
-            <li>
-                <a href="/chart/{{cType[0]}}/4994">4994傳奇</a>
-            </li>
-            <li>
-                <a href="/chart/{{cType[0]}}/5203">5203訊連</a>
-            </li>
-            <li>
-                <a href="/chart/{{cType[0]}}/6112">6112聚碩</a>
-            </li>
-            <li>
-                <a href="/chart/{{cType[0]}}/6183">6183關貿</a>
-            </li>
-            <li>
-                <a href="/chart/{{cType[0]}}/6214">6214精誠</a>
-            </li>
-        </ul>
-    </div>
-    <!---------------------------------------------->
+
+<!---------------------------content開始------------------------------->
     <div class="content">
-        <!---------------------------------------------->
-        <div class="title1"><h2>{{name}}</h2></div>
-        <!---------------------------------------------->     
-        {% if cType[0] == "today"%}       
-        <div class="newsbar">
-            <div class="news">
-                <h2>當日交易圖</h2>
-                <div class="navbar">
-                    <ul>
-                        <li>開盤價:{{today[3][0]}}</li>
-                        <li>最高價:{{today[3][1]}}</li>
-                        <li>最低價:{{today[3][2]}}</li>
-                        <li>收盤價:{{today[3][3]}}</li>
-                        <li>總交易量:{{today[3][4]}}</li>
-                    </ul>
-                </div>
-                <canvas id="canvas3"></canvas>
-            </div>
-        </div>        
-        {% endif %}
-        <!---------------------------------------------->
+        <div class="title1"><h2>{{name}}</h2></div>   
         {% if cType[0] == "30days"%}
         <div class="newsbar">
-            <div class="news">
                 <h2>近30日走勢圖</h2>
-                <div class="navbar1">
+                <!--<div class="navbar1">-->
                     <ul>
                         <li>成交量:{{re[0]}}</li>
                         <li>成交金額:{{re[1]}}</li>
@@ -194,21 +96,36 @@
                         <li>漲跌:{{re[5]}}</li>
                         <li>均價:{{re[6]}}</li>
                     </ul>
+                <!--</div>-->
+                <div class="pic">
+                    <canvas id="canvas3"></canvas>
                 </div>
-                <canvas id="canvas"></canvas>
-            </div>
+            
         </div>
         {% endif %}
-        <!---------------------------------------------->             
-        <div class="clear"></div> 
-		
+                 
     </div>
-</div>
-<!---------------------------------------------->
+<!---------------------------content結束------------------------------->
+
+
+<!---------------------------新聞開始------------------------------->
+    <div class="sidebar2">右側欄區</div>
+<!---------------------------新聞結束------------------------------->
+
+
+
+<!---------------------------footer開始------------------------------->
 <div class="footer">
-    &copyntubimd2020
+        &copyntubimd2020
+    </div>
+<!---------------------------footer結束-------------------------------> 
 </div>
-<!---------------------------------------------->
+
+
+<!------------------wrapper範圍------------------------>
+
+
+<!---------------------------連結------------------------------->
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>      
 <script src="{{ url_for('static', filename='scripts/main.js') }}"></script>    

@@ -13,9 +13,9 @@
 <!--------------------------header------------------------------->
         <div class="header" >
             <div class="title">
-                <a href="/"><img src="{{ url_for('static', filename='images/icon.png') }}"  width="80" height="80" class="avatar"></a>
                 <h1 class="title">資訊股分析網</h1>
-            </div>  
+                <a href="/"><img src="{{ url_for('static', filename='images/icon.png') }}"  width="80" height="80" class="avatar"></a>
+            </div>     
 
                     <!---<div class="search">
                         <ul>
@@ -31,13 +31,13 @@
         </div>
 <!---------------------------header結束------------------------------>
     
-<!---------------------------sidebar1----------------------------->
+<!---------------------------sidebar1---------- class="bd-toc-link" style="font-weight:bold; color: black; font-size:20px;"------------------->
     <div class="sidebar1">
-        <div class="bd-toc-item active">
-            <a class="bd-toc-link" style="font-weight:bold; color: black;font-size:20px;">
+        <div class="bd-toc-item">
+            <h3 class="title">
                 資訊股代號
-            </a>
-            <ul class="nav bd-sidenav">
+            </h3>
+            <ul>
                 <li>
                     <a href="/chart/{{cType[0]}}/2427">2427三商電</a>
                 </li>
@@ -109,7 +109,7 @@
 
 
 <!---------------------------新聞開始------------------------------->
-    <div class="sidebar2">右側欄區</div>
+    <div class="sidebar2">新聞</div>
 <!---------------------------新聞結束------------------------------->
 
 

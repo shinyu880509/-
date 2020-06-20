@@ -10,44 +10,50 @@ html, body{
 	width: 100vw;
 	height: 100vh;
 }
-
-
 div.wrapper
 {
 	background:#FFFFFF;
-	margin: 0 1vw 0 1vw;
-    width: 98vw;
+	margin: 0;
+    width: 100vw;
     height:90vw;
 }
 /* --------------------------header開始-------------------------------- */
 div.header
 {
 	background: rgba(64,161,161,0.5);
-	width: 98vw;
+	width: 100vw;
     height:8vw;
 }
 
 div.title{
-	height: 20vh;
-	margin-left: 2vw;
-	width: 25vw;
-
-}
-
-img.avatar{
-	margin-left: 1vw;
-	margin-top:3vh;
+	position:relative;
+	height: 8vw;
+	text-align: center;
+	vertical-align: middle;
+	margin: 0;
 }
 
 h1.title{
-	position:relative;
-	display:inline;
-	font-size:25spx;
+	position: relative;
+	text-align: center;
+	font-size:25px;
 	font-weight:500;
-	top:-30px;
-	left:20px;
-	vertical-align: middle;
+	margin:0;
+	top:30px;
 }
+
+div.title a{
+	clear: both;
+	position: relative;
+	float:left;
+}
+
+img.avatar{
+	padding-left: 37.5vw;
+	margin-top:-30px;
+}
+
+
 /* ---------------------------header結束----------------------------- */
 
 									/* ------------------------搜尋位置調整---------------------
@@ -60,31 +66,43 @@ h1.title{
 
 /* -------------------------------左方欄開始----------------------------------- */
 div.sidebar1{
-    /* --border:1px black solid;-- */
+	/* --border:1px black solid;-- */
+	clear: both;
     background-color: #FFFFFF;
-    width: 12vw;
+    width: 14vw;
     height:90vw;
 	float:left;
-	border:1px black solid;
+	margin: 0;
 }
-
 div.bd-toc-item {
-	width:12vw;
+	width:14vw;
 	margin:0;
 	text-align: center;
 }
+
+div title.h3{
+	font-size: 20px;
+	font-weight:500;
+	color: black;
+}
+
+div.bd-toc-item ul{
+	margin:0 auto 0 auto;
+	padding:0 auto 0 auto;
+}
 /*左方股票代碼字體樣式*/
-a { 
+div.bd-toc-item ul li a { 
 	color:gray;
 	font-size: 14px;
-	font-weight: 200;
+	font-weight: 300;
 	line-height:20px;
 	text-decoration:none; /*隱藏超連結底線*/
+	list-style:none;
 }
 /*左方股票代碼字體樣式結束*/
 
 /*滑鼠滑入字體變色*/
-ul.bd-sidenav a:hover { 
+div.bd-toc-item ul li a:hover { 
 	color: #000;
 }
 /*滑鼠滑入字體變色結束*/
@@ -94,23 +112,20 @@ ul.bd-sidenav a:hover {
 div.content{
     /* --border:1px black solid;-- */
     background:#FFFFFF;
-    width: 71vw;
+    width: 69vw;
     height:90vw;
-    float: left;  
+	float: left; 
+	margin: 0;
 }
 
 div.title1 h2{
-	font-size:21px;
+	font-size:24px;   /* -----------------股票名稱-------------------- */
 	font-weight:500;
 }
 
 div.pic{
-	height: 500px;
-	width: 700px;
-}
-
-img.stockimage{
-	padding-left: -40px;
+	height: 450px;
+	width: 68vw;
 }
 
 div.clear{
@@ -118,30 +133,28 @@ div.clear{
 }
 
 div.newsbar{
-	padding-top: 20px;
-	width: 71vw;
+	width: 69vw;
 }
 
 div.newsbar h2{
-    font-size:18px;
-	font-weight:300;
+    font-size:20px;
+	font-weight:450;
 }
-
-
 
 div.clear{
     clear:both;
 }
+
 /* -------------------------------content結束----------------------------------- */
 
 /* -------------------------------新聞開始----------------------------------- */
 div.sidebar2{
     /* --border:1px black solid;-- */
-    background-color: aqua;
-    width: 15vw;
+    background-color:#FFFFFF;
+    width: 17vw;
     height:90vw;
 	float: right;
-	border:1px black solid;
+	margin: 0;
 }
 
 /* -------------------------------新聞結束----------------------------------- */
@@ -152,7 +165,7 @@ div.footer{
     position: relative;
     height:70px;
     line-height:70px;
-    width: 98vw;
+    width: 100vw;
     margin-top:3vh;
     margin-left:auto;
     margin-right:auto;

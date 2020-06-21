@@ -121,3 +121,4 @@ def predict(cType,stId):
 
 if __name__ == "__main__":
     app.run()
+    app.debug=True

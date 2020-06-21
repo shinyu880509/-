@@ -20,7 +20,7 @@ div.wrapper
 /* --------------------------header開始-------------------------------- */
 div.header
 {
-	background: rgba(64,161,161,0.5);
+	background-color:#000;
 	width: 100vw;
     height:8vw;
 }
@@ -34,6 +34,7 @@ div.title{
 }
 
 h1.title{
+	color: #FFFFFF;
 	position: relative;
 	text-align: center;
 	font-size:25px;
@@ -93,15 +94,17 @@ div.bd-toc-item ul{
 	float:left;
 	margin: 0px 0px 0px 20px;
 	padding:0;
+	list-style:none;
 }
 /*左方股票代碼字體樣式*/
 div.bd-toc-item ul li a { 
+	clear: both;
+	float: left;
 	color:gray;
 	font-size: 14px;
 	font-weight: 300;
 	line-height:20px;
 	text-decoration:none; /*隱藏超連結底線*/
-	list-style:none;
 }
 /*左方股票代碼字體樣式結束*/
 
@@ -110,6 +113,8 @@ div.bd-toc-item ul li a:hover {
 	color: #000;
 }
 /*滑鼠滑入字體變色結束*/
+
+
 /* -------------------------------左方欄結束----------------------------------- */
 
 /* -------------------------------content開始----------------------------------- */
@@ -127,10 +132,7 @@ div.title1 h2{
 	font-weight:500;
 }
 
-div.pic{
-	height: 450px;
-	width: 68vw;
-}
+
 
 div.clear{
 	clear:both;	
@@ -144,11 +146,27 @@ div.newsbar h2{
     font-size:20px;
 	font-weight:450;
 }
+div.newsbar ul  {
+	list-style:none;
+	padding-left: 0;
+} 
+div.newsbar ul li {
+	display:inline;
+	font-size:12px;
+	font-weight:250;
+	line-height: 20px;
+	margin-left: 15px;
+} 
 
 div.clear{
     clear:both;
 }
 
+
+div.pic{
+	height: 450px;
+	width: 65vw;
+}
 /* -------------------------------content結束----------------------------------- */
 
 /* -------------------------------新聞開始----------------------------------- */

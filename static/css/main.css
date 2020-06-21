@@ -80,15 +80,19 @@ div.bd-toc-item {
 	text-align: center;
 }
 
-div title.h3{
+div h3.title{
+	float: left;
+	margin-left: 20px;
 	font-size: 20px;
 	font-weight:500;
 	color: black;
 }
 
 div.bd-toc-item ul{
-	margin:0 auto 0 auto;
-	padding:0 auto 0 auto;
+	clear: both;
+	float:left;
+	margin: 0px 0px 0px 20px;
+	padding:0;
 }
 /*左方股票代碼字體樣式*/
 div.bd-toc-item ul li a { 

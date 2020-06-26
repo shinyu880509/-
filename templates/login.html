@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>登入頁面</title>
+<link href="{{ url_for('static', filename='css/login.css') }}" rel="stylesheet" type="text/css" />   
+<script type="text/javascript" src="scripts/login.js"></script>
+</head>
+<body>
+<div id="login_frame">
+<p id="image_logo"><img src="{{ url_for('static', filename='images/icon.png') }}" width="80" height="80"></p>
+<form method="post" action="login.js">
+<p><label class="label_input">帳號</label><input type="text" id="username" class="text_field"/></p>
+<p><label class="label_input">密碼</label><input type="text" id="password" class="text_field"/></p>
+<div id="login_control">
+<input type="button" id="btn_login" value="登入" onclick="login();"/>
+<div class="tx">
+    <ul>
+        <a id="forget_pwd" href="forget_pwd.html">忘記密碼</a>
+    </ul> 
+    <ul> 
+        <a id="account" href="account.html">註冊帳號</a>
+    </ul> 
+</div>
+</div>
+</form>
+</div>
+</body>
+</html>

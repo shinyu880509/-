@@ -12,7 +12,7 @@ itStock = ['2427', '2453', '2468', '2471', '2480', '3029', '3130', '4994', '5203
 a = 0
 @app.route("/")
 def home():
-    return render_template('homepage.html') 
+    return render_template('login.html') 
 
 @app.cli.command("refresh")
 def refresh():

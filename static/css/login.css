@@ -16,7 +16,7 @@ body {
     top: 50%;
     margin-left: -250px;
     margin-top: -180px;
-    background-color: rgba(255,255,255,0.5);
+    background-color: rgba(255,255,255,0.3);
     border-radius: 10px;
     text-align: center;
 }
@@ -66,10 +66,11 @@ div.tx ul{
 
 #forget_pwd {
     font-size: 12px;
-    color:#000000;
+    color:rgba(0,0,0,0.7);
     text-decoration: none;
     position: relative;
     float:right;
+    margin-right: 50px;
     top: 5px;
 
 }
@@ -82,10 +83,11 @@ div.tx ul{
 #account{
     clear: both;
     font-size: 12px;
-    color:#000000;
+    color:rgba(0,0,0,0.7);
     text-decoration: none;
     position: relative;
     float: right;
+    margin-right: 50px;
     top: 5px;
     }
 #account:hover {

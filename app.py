@@ -117,7 +117,9 @@ def predict(cType,stId):
     name = getID.getName(stockID)
     return render_template('predict.html', name = name, pre = dataPre, cType = chart, err = err, stock = stockID)     
 
-
+@app.route("/index")
+def index():
+    return render_template('index.html')
 
 if __name__ == "__main__":
     app.run()

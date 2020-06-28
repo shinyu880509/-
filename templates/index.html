@@ -39,40 +39,40 @@
                 </h3>
                     <ul>
                         <li>
-                            <a href="/chart/{{cType[0]}}/2427">2427三商電 <img src=" {{ url_for('static', filename='images/plus.png'  ) }}  "width="10" height="10" class="plus"></a>
+                            <a href="/chart/2427">2427三商電 <img src=" {{ url_for('static', filename='images/plus.png'  ) }}  "width="10" height="10" class="plus"></a>
                         </li>
                         <li>
-                            <a href="/chart/{{cType[0]}}/2453">2453凌群   <img src=" {{ url_for('static', filename='images/plus.png'  ) }}  "width="10" height="10" class="plus"></a>
+                            <a href="/chart/2453">2453凌群   <img src=" {{ url_for('static', filename='images/plus.png'  ) }}  "width="10" height="10" class="plus"></a>
                         </li>
                         <li>
-                            <a href="/chart/{{cType[0]}}/2468">2468華經   <img src=" {{ url_for('static', filename='images/plus.png'  ) }}  "width="10" height="10" class="plus"></a>
+                            <a href="/chart/2468">2468華經   <img src=" {{ url_for('static', filename='images/plus.png'  ) }}  "width="10" height="10" class="plus"></a>
                         </li>
                         <li>
-                            <a href="/chart/{{cType[0]}}/2471">2471資通   <img src=" {{ url_for('static', filename='images/plus.png'  ) }}  "width="10" height="10" class="plus"></a>
+                            <a href="/chart/2471">2471資通   <img src=" {{ url_for('static', filename='images/plus.png'  ) }}  "width="10" height="10" class="plus"></a>
                         </li>
                         <li>
-                            <a href="/chart/{{cType[0]}}/2480">2480敦陽   <img src=" {{ url_for('static', filename='images/plus.png'  ) }}  "width="10" height="10" class="plus"></a>
+                            <a href="/chart/2480">2480敦陽   <img src=" {{ url_for('static', filename='images/plus.png'  ) }}  "width="10" height="10" class="plus"></a>
                         </li>
                         <li>
-                            <a href="/chart/{{cType[0]}}/3029">3029零壹   <img src=" {{ url_for('static', filename='images/plus.png'  ) }}  "width="10" height="10" class="plus"></a>
+                            <a href="/chart/3029">3029零壹   <img src=" {{ url_for('static', filename='images/plus.png'  ) }}  "width="10" height="10" class="plus"></a>
                         </li>
                         <li>
-                            <a href="/chart/{{cType[0]}}/3130">3130一零四 <img src=" {{ url_for('static', filename='images/plus.png'  ) }}  "width="10" height="10" class="plus"></a>
+                            <a href="/chart/3130">3130一零四 <img src=" {{ url_for('static', filename='images/plus.png'  ) }}  "width="10" height="10" class="plus"></a>
                         </li>
                         <li>
-                            <a href="/chart/{{cType[0]}}/4994">4994傳奇   <img src=" {{ url_for('static', filename='images/plus.png'  ) }}  "width="10" height="10" class="plus"></a>
+                            <a href="/chart/4994">4994傳奇   <img src=" {{ url_for('static', filename='images/plus.png'  ) }}  "width="10" height="10" class="plus"></a>
                         </li>
                         <li>
-                            <a href="/chart/{{cType[0]}}/5203">5203訊連   <img src=" {{ url_for('static', filename='images/plus.png'  ) }}  "width="10" height="10" class="plus"></a>
+                            <a href="/chart/5203">5203訊連   <img src=" {{ url_for('static', filename='images/plus.png'  ) }}  "width="10" height="10" class="plus"></a>
                         </li>
                         <li>
-                            <a href="/chart/{{cType[0]}}/6112">6112聚碩   <img src=" {{ url_for('static', filename='images/plus.png'  ) }}  "width="10" height="10" class="plus"></a>
+                            <a href="/chart/6112">6112聚碩   <img src=" {{ url_for('static', filename='images/plus.png'  ) }}  "width="10" height="10" class="plus"></a>
                         </li>
                         <li>
-                            <a href="/chart/{{cType[0]}}/6183">6183關貿   <img src=" {{ url_for('static', filename='images/plus.png'  ) }}  "width="10" height="10" class="plus"></a>
+                            <a href="/chart/6183">6183關貿   <img src=" {{ url_for('static', filename='images/plus.png'  ) }}  "width="10" height="10" class="plus"></a>
                         </li>
                         <li>
-                            <a href="/chart/{{cType[0]}}/6214">6214精誠   <img src=" {{ url_for('static', filename='images/plus.png'  ) }}  "width="10" height="10" class="plus"></a>
+                            <a href="/chart/6214">6214精誠   <img src=" {{ url_for('static', filename='images/plus.png'  ) }}  "width="10" height="10" class="plus"></a>
                         </li>
                     </ul>
             </div>
@@ -82,28 +82,24 @@
     
     <!---------------------------content開始------------------------------->
         <div class="content">
-            <div class="title1"><h2>{{name}}</h2></div>   
-            {% if cType[0] == "30days"%}
+            <div class="title1"><h2>name</h2></div>   
             <div class="newsbar">
                     <h2>近30日走勢圖</h2>
                     <!--<div class="navbar1">-->
                         <ul>
-                            <li>成交量:{{re[0]}}</li>
-                            <li>成交金額:{{re[1]}}</li>
-                            <li>成交筆數:{{re[2]}}</li>
-                            <li>最高:{{re[3]}}</li>
-                            <li>最低:{{re[4]}}</li>
-                            <li>漲跌:{{re[5]}}</li>
-                            <li>均價:{{re[6]}}</li>
+                            <li>成交量:</li>
+                            <li>成交金額:</li>
+                            <li>成交筆數:</li>
+                            <li>最高:</li>
+                            <li>最低:</li>
+                            <li>漲跌:</li>
+                            <li>均價:</li>
                         </ul>
                     <!--</div>-->
                     <div class="pic">
                         <canvas id="canvas3"></canvas>
                     </div>
-                
-            </div>
-            {% endif %}
-                     
+            </div>              
         </div>
     <!---------------------------content結束------------------------------->
     
@@ -131,13 +127,13 @@
     <script src="{{ url_for('static', filename='scripts/main.js') }}"></script>    
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.js"></script>
     <script type="text/javascript">
-        var datelist = {{re[7]|safe}};
-        var closelist= {{re[8]|safe}};
-        var translist = {{re[9]|safe}};
-        var time = {{today[0]|safe}};
-        var closetoday = {{today[1]|safe}};
-        var transtoday = {{today[2]|safe}};
-        var c = {{cType[1]|safe}};
+        var datelist = 0;
+        var closelist= 0;
+        var translist = 0;
+        var time = 0;
+        var closetoday = 0;
+        var transtoday = 0;
+        var c = 0;
     
         var lineChartData3 = {
             labels: time, //顯示區間名稱

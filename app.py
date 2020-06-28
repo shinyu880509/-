@@ -11,13 +11,22 @@ stockID = '2427'
 itStock = ['2427', '2453', '2468', '2471', '2480', '3029', '3130', '4994', '5203', '6112', '6183', '6214']
 a = 0
 
+#記錄登入狀況
 @app.route("/")
 def home():
     return render_template('login.html') 
 
-#@app.route("index")
-#def index():
- #  return render_template('index.html')
+@app.route("/login")
+def login():
+    return render_template('login.html') 
+
+@app.route("/index")
+def index():
+    return render_template('index.html')
+
+@app.route("/account")
+def account():
+    return render_template('account.html')
 
 @app.cli.command("refresh")
 def refresh():

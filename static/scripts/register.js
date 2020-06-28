@@ -12,7 +12,7 @@ function register() {
             alert("密碼與確認密碼不同");
         }else{
             alert("註冊成功");
-            window.location.href="templates/login.html"; /*------------跳回login-------------*/ 
+            window.location.href="/login"; /*------------跳回login-------------*/ 
     }
     /*--------------註冊資料放進資料庫-------------*/  
 

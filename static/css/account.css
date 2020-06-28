@@ -46,7 +46,7 @@ form p > * {
     border-bottom-right-radius: 5px;
     border: 0;
 }
-#btn_login {
+#btn_register {
     font-size: 14px;
     font-family: 宋體;
     width: 120px;
@@ -58,43 +58,4 @@ form p > * {
     border-radius: 6px;
     border: 0;
     float: center;
-}
-
-div.tx ul{
-    text-decoration: none;
-}
-
-#forget {
-    font-size: 12px;
-    color:rgba(0,0,0,0.7);
-    text-decoration: none;
-    position: relative;
-    float:right;
-    margin-right: 50px;
-    top: 5px;
-
-}
-#forget:hover {
-    color: blue;
-    text-decoration: underline;
-    font-size: 15px;
-}
-
-#account{
-    clear: both;
-    font-size: 12px;
-    color:rgba(0,0,0,0.7);
-    text-decoration: none;
-    position: relative;
-    float: right;
-    margin-right: 50px;
-    top: 5px;
-    }
-#account:hover {
-    color: blue;
-    text-decoration: underline;
-    font-size:15px;
-}
-#login_control {
-padding: 0 28px;
 }

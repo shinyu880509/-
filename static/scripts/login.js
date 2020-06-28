@@ -6,7 +6,7 @@ if (username.value == "") {
     } else if (pass.value  == "") {
         alert("請輸入密碼");
     } else if(username.value == "1" && pass.value == "1"){
-        window.location.href="/homepage.html";
+        window.location.href="templates/index.html";
     } else {
         alert("請輸入正確的帳號和密碼！")
     }

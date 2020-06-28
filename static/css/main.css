@@ -8,19 +8,19 @@ html, body{
 	margin:0;
 	background:rgb(255, 255, 255);	
 	width: 100vw;
-	height: 100vh;
+	height: 350vh;
 }
 div.wrapper
 {
 	background:#FFFFFF;
 	margin: 0;
     width: 100vw;
-    height:90vw;
+    height:350vh;
 }
 /* --------------------------header開始-------------------------------- */
 div.header
 {
-	background-color:#000;
+	background-color:rgba(95, 243, 107, 0.808);
 	width: 100vw;
     height:8vw;
 }
@@ -34,7 +34,7 @@ div.title{
 }
 
 h1.title{
-	color: #FFFFFF;
+	color: #000000;
 	position: relative;
 	text-align: center;
 	font-size:25px;

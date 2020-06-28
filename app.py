@@ -14,7 +14,7 @@ a = 0
 #記錄登入狀況
 @app.route("/")
 def home():
-    return render_template('index.html') 
+    return render_template('login.html') 
 
 @app.route("/login")
 def login():

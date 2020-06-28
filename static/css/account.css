@@ -16,7 +16,7 @@ body {
     top: 50%;
     margin-left: -250px;
     margin-top: -180px;
-    background-color: rgba(255,255,255,0.3);
+    background-color: rgba(255,255,255,0.7);
     border-radius: 10px;
     text-align: center;
 }
@@ -58,4 +58,19 @@ form p > * {
     border-radius: 6px;
     border: 0;
     float: center;
+}
+
+#back{
+    text-decoration: none;
+    font-size: 12px;
+    color:rgba(0,0,0,0.7);
+    position: relative;
+    float: right;
+    margin-right: 50px;
+    top: 5px;
+    }
+#back:hover {
+    color: blue;
+    text-decoration: underline;
+    font-size:15px;
 }

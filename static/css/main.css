@@ -8,14 +8,14 @@ html, body{
 	margin:0;
 	background:rgb(255, 255, 255);	
 	width: 100vw;
-	height: 350vh;
+	height: 300vh;
 }
 div.wrapper
 {
 	background:#FFFFFF;
 	margin: 0;
     width: 100vw;
-    height:350vh;
+    height:300vh;
 }
 /* --------------------------header開始-------------------------------- */
 div.header
@@ -81,23 +81,54 @@ div.bd-toc-item {
 	text-align: center;
 }
 
+div.bd-toc-item.text{
+	float:left;
+	width:10vw;
+	list-style:none;
+}
+div.bd-toc-item.img{
+	clear: both;
+	float:right;
+	width:3vw;
+	list-style:none;
+}
+
 div h3.title{
 	float: left;
-	margin-left: 20px;
 	font-size: 20px;
 	font-weight:500;
 	color: black;
+	width:13vw;
 }
 
-div.bd-toc-item ul{
+div.bd-toc-item.text ul {
 	clear: both;
 	float:left;
-	margin: 0px 0px 0px 20px;
 	padding:0;
 	list-style:none;
+	text-decoration:none;
+}
+div.bd-toc-item.img ul {
+	clear: both;
+	float:left;
+	padding:0;
+	list-style:none;
+	text-decoration:none;
+}
+
+div.bd-toc-item.text ul li{
+	clear: both;
+	float:left;
+	padding:0;
+}
+div.bd-toc-item.img ul li{
+	clear: both;
+	float:left;
+	padding:0;
+	text-decoration:none;
 }
 /*左方股票代碼字體樣式*/
-div.bd-toc-item ul li a { 
+div.bd-toc-item.text ul li a { 
 	clear: both;
 	float: left;
 	color:gray;
@@ -109,7 +140,7 @@ div.bd-toc-item ul li a {
 /*左方股票代碼字體樣式結束*/
 
 /*滑鼠滑入字體變色*/
-div.bd-toc-item ul li a:hover { 
+div.bd-toc-item text ul li a:hover { 
 	color: #000;
 }
 /*滑鼠滑入字體變色結束*/

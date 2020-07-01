@@ -75,22 +75,21 @@ div.sidebar1{
 	float:left;
 	margin: 0;
 }
-div.bd-toc-item {
+div.sidebar1 .bd-toc-item {
 	width:14vw;
 	margin:0;
 	text-align: center;
 }
 
-div.bd-toc-item.text{
+div.sidebar1 .bd-toc-item .text{
 	float:left;
 	width:10vw;
-	list-style:none;
+
 }
-div.bd-toc-item.img{
-	clear: both;
+div.sidebar1 .bd-toc-item .img{
 	float:right;
 	width:3vw;
-	list-style:none;
+
 }
 
 div h3.title{
@@ -101,14 +100,14 @@ div h3.title{
 	width:13vw;
 }
 
-div.bd-toc-item.text ul {
+div.sidebar1 .bd-toc-item .text ul {
 	clear: both;
 	float:left;
 	padding:0;
 	list-style:none;
 	text-decoration:none;
 }
-div.bd-toc-item.img ul {
+div.sidebar1 .bd-toc-item .img ul {
 	clear: both;
 	float:left;
 	padding:0;
@@ -116,31 +115,36 @@ div.bd-toc-item.img ul {
 	text-decoration:none;
 }
 
-div.bd-toc-item.text ul li{
+div.sidebar1 .bd-toc-item .text ul li{
 	clear: both;
 	float:left;
 	padding:0;
+	list-style:none;
+	text-decoration:none;
+	line-height:20px;
+	margin-left: 10px;
 }
-div.bd-toc-item.img ul li{
+div.sidebar1 .bd-toc-item .img ul li{
 	clear: both;
 	float:left;
 	padding:0;
 	text-decoration:none;
+	line-height:30px;
 }
 /*左方股票代碼字體樣式*/
-div.bd-toc-item.text ul li a { 
+div.sidebar1 .bd-toc-item .text ul li a { 
 	clear: both;
 	float: left;
 	color:gray;
 	font-size: 14px;
 	font-weight: 300;
-	line-height:20px;
+	line-height:30px;
 	text-decoration:none; /*隱藏超連結底線*/
 }
 /*左方股票代碼字體樣式結束*/
 
 /*滑鼠滑入字體變色*/
-div.bd-toc-item text ul li a:hover { 
+div.sidebar1.bd-toc-item text ul li a:hover { 
 	color: #000;
 }
 /*滑鼠滑入字體變色結束*/

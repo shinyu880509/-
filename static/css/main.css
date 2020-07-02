@@ -144,8 +144,9 @@ div.sidebar1 .bd-toc-item .text ul li a {
 /*左方股票代碼字體樣式結束*/
 
 /*滑鼠滑入字體變色*/
-div.sidebar1.bd-toc-item text ul li a:hover { 
+div.sidebar1 .bd-toc-item .text ul li a:hover { 
 	color: #000;
+	font-size: 16px;
 }
 /*滑鼠滑入字體變色結束*/
 

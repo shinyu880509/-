@@ -60,17 +60,18 @@ form p > * {
     float: center;
 }
 
-#back{
-    text-decoration: none;
+#btn_back {
     font-size: 12px;
-    color:rgba(0,0,0,0.7);
-    position: relative;
+    font-family: 宋體;
+    width: 60px;
+    height: 24px;
+    line-height: 24px;
+    text-align: center;
+    color: white;
+    background-color: #000000;
+    border-radius: 6px;
+    border: 0;
     float: right;
-    margin-right: 50px;
-    top: 5px;
-    }
-#back:hover {
-    color: blue;
-    text-decoration: underline;
-    font-size:15px;
+    margin-right: 80px;
 }
+

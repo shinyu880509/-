@@ -13,15 +13,14 @@
         <div id="login_frame">
             <p id="image_logo"><img src="{{ url_for('static', filename='images/icon.png') }}" width="80" height="80"></p>
             <form method="post" action="register.js">
+            <p><label class="label_input">E-mail</label><input type="text" id="username" class="text_field"/></p>
             <p><label class="label_input">帳號</label><input type="text" id="username" class="text_field"/></p>
             <p><label class="label_input">密碼</label><input type="text" id="password" class="text_field"/></p>
             <p><label class="label_input">確認密碼</label><input type="text" id="confirm" class="text_field"/></p>
                 <div id="login_control">
                     <input type="button" id="btn_register" value="註冊" onclick="register();"/>
-                    <div class="back">
-                        <ul>
-                            <a id="back" href="/login">返回</a>
-                        </ul> 
+                    <input type="button" id="btn_back" value="返回" herf="/login.html"/>
+                    
                         
                     </div>   
                 </div>

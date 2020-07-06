@@ -6,23 +6,21 @@
         <title>登入頁面</title>
         <link rel="stylesheet" href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
         <link href="https://fonts.googleapis.com/css?family=Noto+Sans+TC" rel="stylesheet">
-        <link href="{{ url_for('static', filename='css/account.css') }}" rel="stylesheet" type="text/css" />   
+        <link href="{{ url_for('static', filename='css/account.css') }}" rel="stylesheet" type="text/css">   
         <script type="text/javascript" src="static/scripts/register.js"></script>
     </head>
     <body>
         <div id="login_frame">
             <p id="image_logo"><img src="{{ url_for('static', filename='images/icon.png') }}" width="80" height="80"></p>
             <form method="post" action="register.js">
-            <p><label class="label_input">E-mail</label><input type="text" id="username" class="text_field"/></p>
-            <p><label class="label_input">帳號</label><input type="text" id="username" class="text_field"/></p>
-            <p><label class="label_input">密碼</label><input type="text" id="password" class="text_field"/></p>
-            <p><label class="label_input">確認密碼</label><input type="text" id="confirm" class="text_field"/></p>
+            <p><label class="label_input">帳號</label><input type="text" id="username" class="text_field" value={{info[0]}}></p>
+            <p><label class="label_input">E-mail</label><input type="text" id="email" class="text_field" value={{info[1]}}></p>
+            <p><label class="label_input">密碼</label><input type="text" id="password" class="text_field" value={{info[2]}}></p>
+            <p><label class="label_input">確認密碼</label><input type="text" id="confirm" class="text_field" value={{info[3]}}></p>
                 <div id="login_control">
-                    <input type="button" id="btn_register" value="註冊" onclick="register();"/>
-                    <input type="button" id="btn_back" value="返回" herf="/login.html"/>
-                    
-                        
-                    </div>   
+                    <input type="button" id="btn_register" value="註冊" onclick="register()">
+                    <input type="button" id="btn_back" value="返回"  onclick="self.location.href='/login'">
+                    <input type="button" id="s" value="寄信測試" onclick="ee()">
                 </div>
             </form>
         </div>

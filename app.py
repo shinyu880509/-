@@ -1,15 +1,45 @@
 from flask import Flask, request, render_template ,redirect ,url_for
+from flask_mail import Mail,Message
 import pandas as pd
 import csv
 import numpy as np
 import getData, catStock, getID
 import click
+import datetime
 
 app = Flask(__name__)
 app.config["JSON_AS_ASCII"] = False
 stockID = '2427'
 itStock = ['2427', '2453', '2468', '2471', '2480', '3029', '3130', '4994', '5203', '6112', '6183', '6214']
 a = 0
+accountInfo = ['','','','']
+
+#信箱設置
+app.config.update(
+    DEBUG=False,
+    MAIL_SERVER='smtp.gmail.com',
+    MAIL_PORT=465,
+    MAIL_USE_SSL=True,
+    MAIL_DEFAULT_SENDER=('hahaha', 'jjfj3750@gmail.com'),
+    MAIL_MAX_EMAILS=10,
+    MAIL_USERNAME='jjfj3750@gmail.com',
+    MAIL_PASSWORD='<a1s2d3f4>'
+)
+mail = Mail(app)
+
+@app.route("/message/<ema>/<acc>/<pw1>/<pw2>")
+def message(acc,ema,pw1,pw2):
+    print(acc,pw1,pw2)
+    msg_title = 'Hahahaha'
+    msg_recipients = [ema]
+    msg_body = '沒想到成功了欸\r\n系統時間：' + str(datetime.datetime.now())
+    msg = Message(msg_title,recipients=msg_recipients)
+    msg.body = msg_body
+    mail.send(msg)
+    global accountInfo
+    accountInfo = getID.checkAccInfo(acc,ema,pw1,pw2)
+    print(accountInfo)
+    return redirect(url_for('account'))
 
 #記錄登入狀況
 @app.route("/")
@@ -26,7 +56,7 @@ def index():
 
 @app.route("/account")
 def account():
-    return render_template('account.html')
+    return render_template('account.html', info = accountInfo)
 
 @app.cli.command("refresh")
 def refresh():
@@ -133,4 +163,5 @@ def predict(cType,stId):
 
 
 if __name__ == "__main__":
+
     app.run(debug=True)

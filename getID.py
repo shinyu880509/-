@@ -50,3 +50,12 @@ def checkPre(ty):
             c[0] = typeID[i]
             c[1] = i
     return c
+
+def checkAccInfo(a,b,c,d):
+    if (a=="undefined"):
+        a = ""
+    if (c=="undefined"):
+        c = ""
+    if (d=="undefined"):
+        d = ""
+    return a,b,c,d

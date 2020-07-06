@@ -20,4 +20,32 @@ function register() {
 
     /*-------------------------------------------*/ 
 }
+
+/*-------寄信-------*/
+function ee() {
+    var username = document.getElementById("username");
+    var pass = document.getElementById("password");
+    var confirm = document.getElementById("confirm");
+    var emailname = document.getElementById("email");
+    var c = emailname.value.indexOf("@");
+    if (username.value == ""){
+        username = "a"
+    }
+    if (pass.value == ""){
+        pass = "a"
+    }
+    if (confirm.value == ""){
+        confirm = "a"
+    }
+    if (emailname.value == "") {
+        alert("請輸入信箱");
+    }
+    else if (c!=-1){
+        alert("信件已寄到 " + emailname.value + " 請確認");
+        window.location.href="/message/" + emailname.value + "/" + username.value + "/" + pass.value + "/" + confirm.value; 
+    }
+    else{
+        alert("請輸入正確的信箱");
+    }
+}
     

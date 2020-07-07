@@ -7,7 +7,7 @@ body {
     width: 100vw;
     height: 100vh;
 }
-/* --------------------------header開始-------------------------------- */
+/* --------------------------框框------------------------------- */
 #login_frame {
     width: 500px;
     height: 330px;
@@ -25,9 +25,12 @@ form p > * {
     display: inline-block;
     vertical-align: middle;
 }
+
+/* --------------------------logo------------------------------- */
 #image_logo {
     margin-top: 22px;
 }
+/* --------------------------帳號密碼欄位------------------------------- */
 .label_input {
     font-size: 14px;
     font-family: 宋體;
@@ -47,6 +50,8 @@ form p > * {
     border-bottom-right-radius: 5px;
     border: 0;
 }
+
+/* --------------------------登入------------------------------- */
 #btn_login {
     font-size: 14px;
     font-family: 宋體;
@@ -65,6 +70,7 @@ div.tx ul{
     text-decoration: none;
 }
 
+/* --------------------------忘記密碼------------------------------- */
 #forget {
     font-size: 12px;
     color:rgba(0,0,0,0.7);
@@ -81,6 +87,8 @@ div.tx ul{
     font-size: 15px;
 }
 
+
+/* --------------------------註冊帳號------------------------------- */
 #account{
     clear: both;
     font-size: 12px;

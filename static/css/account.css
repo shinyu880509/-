@@ -7,7 +7,7 @@ body {
     width: 100vw;
     height: 100vh;
 }
-/* --------------------------header開始-------------------------------- */
+/* -----------------------中間的框框--------------------------- */
 #login_frame {
     width: 500px;
     height: 330px;
@@ -20,13 +20,16 @@ body {
     border-radius: 10px;
     text-align: center;
 }
+
 form p > * {
     display: inline-block;
     vertical-align: middle;
 }
+/* --------------------------logo-------------------------- */
 #image_logo {
     margin-top: 22px;
 }
+/* ------------------------帳號 密碼 email 確認密碼欄位---------------------------- */
 .label_input {
     font-size: 14px;
     font-family: 宋體;
@@ -39,6 +42,8 @@ form p > * {
     border-top-left-radius: 5px;
     border-bottom-left-radius: 5px;
 }
+
+/* ------------------------帳號 密碼 email 確認密碼欄位調整---------------------------- */
 .text_field {
     width: 278px;
     height: 28px;
@@ -46,6 +51,8 @@ form p > * {
     border-bottom-right-radius: 5px;
     border: 0;
 }
+
+/* ------------------------註冊按鍵---------------------------- */
 #btn_register {
     font-size: 14px;
     font-family: 宋體;
@@ -60,6 +67,7 @@ form p > * {
     float: center;
 }
 
+/* ------------------------返回按鍵---------------------------- */
 #btn_back {
     font-size: 12px;
     font-family: 宋體;

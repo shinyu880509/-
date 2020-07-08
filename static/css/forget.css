@@ -52,6 +52,20 @@ form p > * {
     border: 0;
 }
 
+#btn_send {
+    font-size: 14px;
+    font-family: 宋體;
+    width: 60px;
+    height: 28px;
+    line-height: 28px;
+    text-align: center;
+    color: white;
+    background-color: #000000;
+    border-radius: 6px;
+    border: 0;
+    float: left;
+    margin-left: 80px;
+}
 /* ------------------------註冊按鍵---------------------------- */
 #btn_register {
     font-size: 14px;

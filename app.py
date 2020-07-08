@@ -13,6 +13,7 @@ stockID = '2427'
 itStock = ['2427', '2453', '2468', '2471', '2480', '3029', '3130', '4994', '5203', '6112', '6183', '6214']
 a = 0
 accountInfo = ['','','','']
+forgetInfo = ['','','','']
 
 #信箱設置
 app.config.update(
@@ -41,6 +42,19 @@ def message(acc,ema,pw1,pw2):
     print(accountInfo)
     return redirect(url_for('account'))
 
+@app.route("/message/<ema>/<acc>/<pw1>/<pw2>")
+def mesage(acc,ema,pw1,pw2):
+    print(acc,pw1,pw2)
+    msg_title = 'Hahahaha'
+    msg_recipients = [ema]
+    msg_body = '沒想到成功了欸\r\n系統時間：' + str(datetime.datetime.now())
+    msg = Message(msg_title,recipients=msg_recipients)
+    msg.body = msg_body
+    mail.send(msg)
+    global forgetInfo
+    forgetInfo = getID.checkAccInfo(acc,ema,pw1,pw2)
+    print(forgetInfo)
+    return redirect(url_for('forget'))
 #記錄登入狀況
 @app.route("/")
 def home():
@@ -57,6 +71,10 @@ def index():
 @app.route("/account")
 def account():
     return render_template('account.html', info = accountInfo)
+
+@app.route("/forget")
+def forget():
+    return render_template('forget.html', info = forgetInfo)
 
 @app.cli.command("refresh")
 def refresh():

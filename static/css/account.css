@@ -65,6 +65,7 @@ form p > * {
     border-radius: 6px;
     border: 0;
     float: center;
+    margin-left: 120px;
 }
 
 /* ------------------------返回按鍵---------------------------- */

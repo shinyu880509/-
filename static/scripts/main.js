@@ -13,3 +13,11 @@ $(function(){
     });	
 
 });
+
+$(function(){
+    // 滑鼠移入	
+    $('.button2427').click(function(){        
+        $('.2427text').toggle(); 
+    });	
+
+});

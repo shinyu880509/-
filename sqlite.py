@@ -8,18 +8,16 @@ c =conn.cursor()
 
 c.execute('''CREATE TABLE account
        (username  CHAR(50)  PRIMARY KEY     NOT NULL,
-        password  CHAR(50)    NOT NULL,
-        mail      CHAR(50)     NOT NULL);''')
+        email     CHAR(50)    NOT NULL,
+        password  CHAR(50)     NOT NULL);''')
 
 c.execute('''CREATE TABLE attention
        (username  CHAR(50)  PRIMARY KEY     NOT NULL,
         attention  CHAR(50)    NOT NULL);''')
 
-
-
 c.execute('''CREATE TABLE verification
       (username  CHAR(50)  PRIMARY KEY     NOT NULL,
-       mail      CHAR(50)     NOT NULL,
+       email      CHAR(50)     NOT NULL,
        verification CHAR(50));''')
 
 conn.commit()

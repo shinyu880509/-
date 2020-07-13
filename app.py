@@ -6,6 +6,7 @@ import numpy as np
 import getData, catStock, getID
 import click
 import datetime
+import sqlite3
 
 app = Flask(__name__)
 app.config["JSON_AS_ASCII"] = False
@@ -71,6 +72,23 @@ def index():
 @app.route("/account")
 def account():
     return render_template('account.html', info = accountInfo)
+    
+#註冊帳號寫進資料庫
+@app.route("/register.js", methods = ["POST","GET"])
+def registers():
+    if request.method == "POST":
+        try:
+            username = request.form["username"]
+            email = request.form["email"]
+            password = request.form["password"]
+            with sqlite3.connect("stock.db") as con:
+                cur = con.cursor()
+                cur.execute("INSERT INTO account (username,email,password) VALUES (?,?,?)", (username,email,password))
+                con.commit()
+        finally:
+            return render_template('login.html')
+            con.close()
+
 
 @app.route("/forget")
 def forget():

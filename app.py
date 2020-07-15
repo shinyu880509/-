@@ -64,6 +64,21 @@ def home():
 @app.route("/login")
 def login():
     return render_template('login.html') 
+ #登入資料庫查詢
+def comparedata():
+    conn = sqlite3.connect('stock.db')
+    c =conn.cursor()
+    c.execute("select * from account")
+
+    user = input("輸入帳號:")
+    password = input("輸入密碼")
+
+    for rows in c.fetchall():
+        if user == rows[0] and password == rows[2]:
+            print("成功登入")
+            break
+    else:
+       print("帳號密碼錯誤")   
 
 @app.route("/index")
 def index():

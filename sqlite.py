@@ -1,6 +1,5 @@
 import sqlite3
 
-#連結資料庫
 conn = sqlite3.connect('stock.db')
 c =conn.cursor()
 
@@ -22,3 +21,18 @@ c.execute('''CREATE TABLE verification
 
 conn.commit()
 conn.close()
+
+#查詢
+"""
+c.execute("select * from account")
+
+user = input("輸入帳號:")
+password = input("輸入密碼")
+
+for rows in c.fetchall():
+       if user == rows[0] and password == rows[2]:
+            print("成功登入")
+            break
+else:
+       print("帳號密碼錯誤")   
+"""

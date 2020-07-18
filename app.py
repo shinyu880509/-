@@ -56,6 +56,7 @@ def mesage(acc,ema,pw1,pw2):
     forgetInfo = getID.checkAccInfo(acc,ema,pw1,pw2)
     print(forgetInfo)
     return redirect(url_for('forget'))
+
 #記錄登入狀況
 @app.route("/")
 def home():
@@ -64,25 +65,22 @@ def home():
 @app.route("/login")
 def login():
     return render_template('login.html') 
- #登入資料庫查詢
-def comparedata():
-    conn = sqlite3.connect('stock.db')
-    c =conn.cursor()
-    c.execute("select * from account")
-
-    user = input("輸入帳號:")
-    password = input("輸入密碼")
-
-    for rows in c.fetchall():
-        if user == rows[0] and password == rows[2]:
-            print("成功登入")
-            break
-    else:
-       print("帳號密碼錯誤")   
 
 @app.route("/index")
 def index():
-    return render_template('index.html')
+    global stockID
+    return redirect(url_for('indexId', stId = stockID))
+
+@app.route("/index/<stId>")
+def indexId(stId):
+    global stockID
+    name = getID.getName(stId)
+    data = getData.getData(stId)
+    datatoday = getData.getTodayCsv(stId)
+    dataTec = getData.getAll(stId)
+    dataFin = getData.getFin(stId, 0)
+    dataPre = getData.getPre(stId)
+    return render_template('index.html', stock = stId, name = name, re = data, today = datatoday, tec = dataTec, fin = dataFin, pre = dataPre, chartTy = 0)  
 
 @app.route("/account")
 def account():
@@ -104,6 +102,21 @@ def registers():
             return render_template('login.html')
             con.close()
 
+ #登入資料庫查詢
+def comparedata():
+    conn = sqlite3.connect('stock.db')
+    c =conn.cursor()
+    c.execute("select * from account")
+
+    user = input("輸入帳號:")
+    password = input("輸入密碼")
+
+    for rows in c.fetchall():
+        if user == rows[0] and password == rows[2]:
+            print("成功登入")
+            break
+    else:
+       print("帳號密碼錯誤") 
 
 @app.route("/forget")
 def forget():

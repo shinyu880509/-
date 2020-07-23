@@ -15,6 +15,10 @@ itStock = ['2427', '2453', '2468', '2471', '2480', '3029', '3130', '4994', '5203
 a = 0
 accountInfo = ['','','','']
 forgetInfo = ['','','','']
+loginInfo = ['','']
+
+#登入帳號
+userAcc = ""
 
 #信箱設置
 app.config.update(
@@ -60,11 +64,31 @@ def mesage(acc,ema,pw1,pw2):
 #記錄登入狀況
 @app.route("/")
 def home():
-    return render_template('login.html') 
+    return redirect(url_for('login'))
 
 @app.route("/login")
 def login():
-    return render_template('login.html') 
+    return render_template('login.html', loginInfo = loginInfo) 
+
+@app.route("/userLogin/<userId>/<userPasswd>")
+def userLogin(userId, userPasswd):
+    check = 0
+    conn = sqlite3.connect('stock.db')
+    c =conn.cursor()
+    c.execute("select * from account")
+    for rows in c.fetchall():
+        if userId == rows[0] and userPasswd == rows[2]:
+            check = 1
+            print("成功登入")
+            global userAcc
+            userAcc = userId
+            return redirect(url_for('index'))
+    else:
+        print("帳號密碼錯誤") 
+        global loginInfo
+        loginInfo = [userId,userPasswd]
+        
+        return redirect(url_for('login'))
 
 @app.route("/index")
 def index():
@@ -80,27 +104,31 @@ def indexId(stId):
     dataTec = getData.getAll(stId)
     dataFin = getData.getFin(stId, 0)
     dataPre = getData.getPre(stId)
-    return render_template('index.html', stock = stId, name = name, re = data, today = datatoday, tec = dataTec, fin = dataFin, pre = dataPre, chartTy = 0)  
+    return render_template('index.html',userId = userAcc , stock = stId, name = name, re = data, today = datatoday, tec = dataTec, fin = dataFin, pre = dataPre, chartTy = 0)  
 
 @app.route("/account")
 def account():
     return render_template('account.html', info = accountInfo)
     
 #註冊帳號寫進資料庫
-@app.route("/register.js", methods = ["POST","GET"])
-def registers():
-    if request.method == "POST":
-        try:
-            username = request.form["username"]
-            email = request.form["email"]
-            password = request.form["password"]
+@app.route("/registeCheck/<userId>/<userPasswd>/<userEmail>")
+def registers(userId, userPasswd, userEmail):
+    err = 0
+    try:
+        conn = sqlite3.connect('stock.db')
+        c =conn.cursor()
+        c.execute("select * from account")
+        for rows in c.fetchall():
+            if userId == rows[0]:
+                err = 1
+        if err != 1:
             with sqlite3.connect("stock.db") as con:
                 cur = con.cursor()
-                cur.execute("INSERT INTO account (username,email,password) VALUES (?,?,?)", (username,email,password))
+                cur.execute("INSERT INTO account (username,email,password) VALUES (?,?,?)", (userId,userEmail,userPasswd))
                 con.commit()
-        finally:
-            return render_template('login.html')
-            con.close()
+                con.close()
+    finally:
+        return redirect(url_for('login'))
 
  #登入資料庫查詢
 def comparedata():
@@ -227,5 +255,4 @@ def predict(cType,stId):
 
 
 if __name__ == "__main__":
-
     app.run(debug=True)

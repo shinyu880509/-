@@ -301,13 +301,18 @@
     <script src="{{ url_for('static', filename='scripts/main.js') }}"></script>    
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.js"></script>
     <script type="text/javascript">
-        var dateMon = {{re[7]|safe}};
+    var dateMon = {{re[7]|safe}};
     var closeMon= {{re[8]|safe}};
     var transMon = {{re[9]|safe}};
     var time = {{today[0]|safe}};
     var closetoday = {{today[1]|safe}};
     var transtoday = {{today[2]|safe}};
     var typeCha = {{chartTy|safe}};
+    var userAcc = {{userId|safe}};
+    if (userAcc != "") {
+        alert(userAcc + "登入成功");
+        userAcc
+    }
 
     $('#detail').empty();
     $('#detail').append("<ul id='detail'><li>開盤價:{{today[3][0]}}</li><li>最高價:{{today[3][1]}}</li><li>最低價:{{today[3][2]}}</li><li>收盤價:{{today[3][3]}}</li><li>總交易量:{{today[3][4]}}</li></ul>");

@@ -2,6 +2,7 @@ function register() {
     var username = document.getElementById("username");
     var pass = document.getElementById("password");
     var confirm = document.getElementById("confirm");
+    var userEmail = document.getElementById("email");
     if (username.value == "") {
             alert("請輸入帳號");
         } else if (pass.value  == "") {
@@ -11,8 +12,7 @@ function register() {
         }else if (confirm.value  != pass.value) {
             alert("密碼與確認密碼不同");
         }else{
-            alert("註冊成功");
-            window.location.href="/login"; /*------------跳回login-------------*/ 
+            window.location.href="/registeCheck/" + username.value + "/" + pass.value + "/" + userEmail.value; /*------------跳回login-------------*/ 
     }
     /*--------------註冊資料放進資料庫-------------*/  
 

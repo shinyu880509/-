@@ -8,6 +8,9 @@
 <link href="{{ url_for('static', filename='css/main.css') }}" rel="stylesheet" type="text/css" />      
 </head>
 <body>
+    {% if current_user.is_authenticated %}
+    <a>登入成功{{current_user.id}}</a>
+    {% endif %}
 <!----------------------------------------------------------->
 <div id="wrapper">
     <!--------------------------header------------------------------->
@@ -308,11 +311,6 @@
     var closetoday = {{today[1]|safe}};
     var transtoday = {{today[2]|safe}};
     var typeCha = {{chartTy|safe}};
-    var userAcc = {{userId|safe}};
-    if (userAcc != "") {
-        alert(userAcc + "登入成功");
-        userAcc
-    }
 
     $('#detail').empty();
     $('#detail').append("<ul id='detail'><li>開盤價:{{today[3][0]}}</li><li>最高價:{{today[3][1]}}</li><li>最低價:{{today[3][2]}}</li><li>收盤價:{{today[3][3]}}</li><li>總交易量:{{today[3][4]}}</li></ul>");

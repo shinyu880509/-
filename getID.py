@@ -1,3 +1,5 @@
+import sqlite3
+
 def getName(id):
     stockID = ['2427', '2453', '2468', '2471', '2480', '3029', '3130', '4994', '5203', '6112', '6183', '6214']
     stockName = ['2427三商電','2453凌群' ,'2468華經' ,'2471資通' ,'2480敦陽' ,'3029零壹' ,'3130一零四' ,'4994傳奇' ,'5203訊連' ,'6112聚碩' ,'6183關貿' ,'6214精誠']
@@ -50,12 +52,27 @@ def checkPre(ty):
             c[0] = typeID[i]
             c[1] = i
     return c
+    
+def checkLoginAcc(uid, pwd):
+    conn = sqlite3.connect('stock.db')
+    c =conn.cursor()
+    c.execute("select * from account")
+    for rows in c.fetchall():
+        if uid == rows[0] and pwd == rows[2]:
+            print("登入成功")
+            return True
 
-def checkAccInfo(a,b,c,d):
-    if (a=="undefined"):
-        a = ""
-    if (c=="undefined"):
-        c = ""
-    if (d=="undefined"):
-        d = ""
-    return a,b,c,d
+    print("登入失敗")
+    return False
+
+def checkLoginAccID(uid):
+    conn = sqlite3.connect('stock.db')
+    c =conn.cursor()
+    c.execute("select * from account")
+    for rows in c.fetchall():
+        if uid == rows[0]:
+            print("帳號存在")
+            return True
+
+    print("帳號不存在")
+    return False

@@ -1,4 +1,4 @@
-from flask import Flask, request, render_template ,redirect ,url_for
+from flask import Flask, request, render_template , redirect , url_for, flash
 from flask_mail import Mail,Message
 import pandas as pd
 import csv
@@ -7,18 +7,17 @@ import getData, catStock, getID
 import click
 import datetime
 import sqlite3
+from flask_login import LoginManager, UserMixin, login_user, current_user, login_required, logout_user 
 
 app = Flask(__name__)
 app.config["JSON_AS_ASCII"] = False
-stockID = '2427'
-itStock = ['2427', '2453', '2468', '2471', '2480', '3029', '3130', '4994', '5203', '6112', '6183', '6214']
 a = 0
-accountInfo = ['','','','']
-forgetInfo = ['','','','']
-loginInfo = ['','']
+app.secret_key = b'_5#y2L"F4Q8z\n\xec]/'
 
-#登入帳號
-userAcc = ""
+#登入管理
+login_manager = LoginManager()
+login_manager.init_app(app)
+login_manager.session_protection = "strong"
 
 #信箱設置
 app.config.update(
@@ -33,82 +32,58 @@ app.config.update(
 )
 mail = Mail(app)
 
-@app.route("/message/<ema>/<acc>/<pw1>/<pw2>")
-def message(acc,ema,pw1,pw2):
-    print(acc,pw1,pw2)
+@app.route("/message/<ema>/<acc>")
+def mesage(acc,ema):
     msg_title = 'Hahahaha'
     msg_recipients = [ema]
     msg_body = '沒想到成功了欸\r\n系統時間：' + str(datetime.datetime.now())
     msg = Message(msg_title,recipients=msg_recipients)
     msg.body = msg_body
     mail.send(msg)
-    global accountInfo
-    accountInfo = getID.checkAccInfo(acc,ema,pw1,pw2)
-    print(accountInfo)
-    return redirect(url_for('account'))
-
-@app.route("/message/<ema>/<acc>/<pw1>/<pw2>")
-def mesage(acc,ema,pw1,pw2):
-    print(acc,pw1,pw2)
-    msg_title = 'Hahahaha'
-    msg_recipients = [ema]
-    msg_body = '沒想到成功了欸\r\n系統時間：' + str(datetime.datetime.now())
-    msg = Message(msg_title,recipients=msg_recipients)
-    msg.body = msg_body
-    mail.send(msg)
-    global forgetInfo
-    forgetInfo = getID.checkAccInfo(acc,ema,pw1,pw2)
-    print(forgetInfo)
+    #flash()
     return redirect(url_for('forget'))
 
-#記錄登入狀況
 @app.route("/")
 def home():
     return redirect(url_for('login'))
 
 @app.route("/login")
 def login():
-    return render_template('login.html', loginInfo = loginInfo) 
+    return render_template('login.html') 
 
+#登入
 @app.route("/userLogin/<userId>/<userPasswd>")
 def userLogin(userId, userPasswd):
-    check = 0
-    conn = sqlite3.connect('stock.db')
-    c =conn.cursor()
-    c.execute("select * from account")
-    for rows in c.fetchall():
-        if userId == rows[0] and userPasswd == rows[2]:
-            check = 1
-            print("成功登入")
-            global userAcc
-            userAcc = userId
-            return redirect(url_for('index'))
+    a = getID.checkLoginAcc(userId, userPasswd)
+    if a:
+        user = User()
+        user.id = userId
+        login_user(user)
+        return redirect(url_for('index'))
     else:
-        print("帳號密碼錯誤") 
-        global loginInfo
-        loginInfo = [userId,userPasswd]
-        
+        flash("1")
+        flash(userId)
         return redirect(url_for('login'))
 
 @app.route("/index")
 def index():
-    global stockID
-    return redirect(url_for('indexId', stId = stockID))
+    return redirect(url_for('indexId', stId = "2427"))
 
 @app.route("/index/<stId>")
 def indexId(stId):
-    global stockID
+    if current_user.is_authenticated == False:
+        return redirect(url_for('login'))
     name = getID.getName(stId)
     data = getData.getData(stId)
     datatoday = getData.getTodayCsv(stId)
     dataTec = getData.getAll(stId)
     dataFin = getData.getFin(stId, 0)
     dataPre = getData.getPre(stId)
-    return render_template('index.html',userId = userAcc , stock = stId, name = name, re = data, today = datatoday, tec = dataTec, fin = dataFin, pre = dataPre, chartTy = 0)  
+    return render_template('index.html', stock = stId, name = name, re = data, today = datatoday, tec = dataTec, fin = dataFin, pre = dataPre, chartTy = 0)  
 
 @app.route("/account")
 def account():
-    return render_template('account.html', info = accountInfo)
+    return render_template('account.html')
     
 #註冊帳號寫進資料庫
 @app.route("/registeCheck/<userId>/<userPasswd>/<userEmail>")
@@ -128,27 +103,14 @@ def registers(userId, userPasswd, userEmail):
                 con.commit()
                 con.close()
     finally:
-        return redirect(url_for('login'))
-
- #登入資料庫查詢
-def comparedata():
-    conn = sqlite3.connect('stock.db')
-    c =conn.cursor()
-    c.execute("select * from account")
-
-    user = input("輸入帳號:")
-    password = input("輸入密碼")
-
-    for rows in c.fetchall():
-        if user == rows[0] and password == rows[2]:
-            print("成功登入")
-            break
-    else:
-       print("帳號密碼錯誤") 
+        if err == 0:
+            return redirect(url_for('login'))
+        else:
+            return redirect(url_for('account'))
 
 @app.route("/forget")
 def forget():
-    return render_template('forget.html', info = forgetInfo)
+    return render_template('forget.html')
 
 @app.cli.command("refresh")
 def refresh():
@@ -252,6 +214,34 @@ def predict(cType,stId):
     print(dataPre)
     name = getID.getName(stockID)
     return render_template('predict.html', name = name, pre = dataPre, cType = chart, err = err, stock = stockID)     
+
+#設置登入系統
+class User(UserMixin):
+    pass
+
+@login_manager.user_loader
+def user_loader(uid):
+    a = getID.checkLoginAccID(uid)
+    if a == False:
+        return
+    user = User()
+    user.id = uid
+    return user
+
+@login_manager.request_loader
+def request_loader(request):
+    uid = request.form.get('username')
+    a = getID.checkLoginAccID(uid)
+    if a == False:
+        return
+    user = User()
+    user.id = uid
+
+    # DO NOT ever store passwords in plaintext and always compare password
+    # hashes using constant-time comparison!
+    a = getID.checkLoginAcc(uid, request.form['password'])
+    user.is_authenticated = a
+    return user
 
 
 if __name__ == "__main__":

@@ -88,10 +88,12 @@ def deleteAcc(a):
     getID.deleteAcc(a)
     return redirect(url_for('manage'))
 
-#刪除帳號
+#修改帳號
 @app.route('/alterAcc/<a>/<n>/<t>')
 def alterAcc(a,n,t):
-    getID.alterAcc(a,n,t)
+    aaa = getID.alterAcc(a,n,t)
+    if aaa == 0:
+        flash("帳號名稱重複")
     return redirect(url_for('manage'))
 
 @app.route("/index")

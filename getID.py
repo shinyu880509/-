@@ -111,10 +111,18 @@ def deleteAcc(uid):
 
 def alterAcc(uid, n, ty):
     if ty == '0':
-        with sqlite3.connect("stock.db") as con:
-            cur = con.cursor()
-            cur.execute("update account set username = '" + n + "' where username = '" + uid + "'")
-            con.commit()
+        err = 0
+        conn = sqlite3.connect('stock.db')
+        c =conn.cursor()
+        c.execute("select * from account")
+        for rows in c.fetchall():
+            if n == rows[0]:
+                return 0
+        if err != 1:
+            with sqlite3.connect("stock.db") as con:
+                cur = con.cursor()
+                cur.execute("update account set username = '" + n + "' where username = '" + uid + "'")
+                con.commit()
     elif ty == '1':
         with sqlite3.connect("stock.db") as con:
             cur = con.cursor()
@@ -125,4 +133,4 @@ def alterAcc(uid, n, ty):
             cur = con.cursor()
             cur.execute("update account set password = '" + n + "' where username = '" + uid + "'")
             con.commit()
-    return
+    return 1

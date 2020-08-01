@@ -1,5 +1,11 @@
 import sqlite3
 
+#新聞用
+def getNameData():
+    stockID = ['2427', '2453', '2468', '2471', '2480', '3029', '3130', '4994', '5203', '6112', '6183', '6214']
+    stockName = ['"三商電"','"凌群"' ,'"華經"' ,'"資通"' ,'"敦陽"' ,'"零壹"' ,'"一零四"' ,'"傳奇"' ,'"訊連"' ,'"聚碩"' ,'"關貿"' ,'"精誠"']
+    return stockID,stockName
+
 def getName(id):
     stockID = ['2427', '2453', '2468', '2471', '2480', '3029', '3130', '4994', '5203', '6112', '6183', '6214']
     stockName = ['2427三商電','2453凌群' ,'2468華經' ,'2471資通' ,'2480敦陽' ,'3029零壹' ,'3130一零四' ,'4994傳奇' ,'5203訊連' ,'6112聚碩' ,'6183關貿' ,'6214精誠']
@@ -53,6 +59,7 @@ def checkPre(ty):
             c[1] = i
     return c
     
+#登入驗證
 def checkLoginAcc(uid, pwd):
     conn = sqlite3.connect('stock.db')
     c =conn.cursor()
@@ -76,3 +83,46 @@ def checkLoginAccID(uid):
 
     print("帳號不存在")
     return False
+
+#帳號管理
+def getAcc():
+    conn = sqlite3.connect('stock.db')
+    c =conn.cursor()
+    c.execute("select * from account")
+    re = []
+    for rows in c.fetchall():
+        re.append(rows)
+    return re
+
+def deleteAcc(uid):
+    err = 0
+    conn = sqlite3.connect('stock.db')
+    c =conn.cursor()
+    c.execute("select * from account")
+    for rows in c.fetchall():
+        if uid == rows[0]:
+            err = 1
+    if err == 1:
+        with sqlite3.connect("stock.db") as con:
+            cur = con.cursor()
+            cur.execute("delete from account where username = '" + uid + "'")
+            con.commit()
+    return
+
+def alterAcc(uid, n, ty):
+    if ty == '0':
+        with sqlite3.connect("stock.db") as con:
+            cur = con.cursor()
+            cur.execute("update account set username = '" + n + "' where username = '" + uid + "'")
+            con.commit()
+    elif ty == '1':
+        with sqlite3.connect("stock.db") as con:
+            cur = con.cursor()
+            cur.execute("update account set email = '" + n + "' where username = '" + uid + "'")
+            con.commit()
+    elif ty == '2':
+        with sqlite3.connect("stock.db") as con:
+            cur = con.cursor()
+            cur.execute("update account set password = '" + n + "' where username = '" + uid + "'")
+            con.commit()
+    return

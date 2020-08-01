@@ -13,9 +13,9 @@
         <div id="login_frame">
             <p id="image_logo"><img src="{{ url_for('static', filename='images/icon.png') }}" width="80" height="80"></p>
             <form method="post" action="register.js">
-            <p><label class="label_input">帳號名稱</label><input type="text" id="username" class="text_field" value={{info[0]}}></p>
-            <p><label class="label_input">E-mail</label><input type="text" id="email" class="text_field" value={{info[1]}}></p>
-            <p><label class="label_input">驗證碼</label><input type="text" id="password" class="text_field" value={{info[2]}}></p>
+            <p><label class="label_input">帳號名稱</label><input type="text" id="username" class="text_field" value=""></p>
+            <p><label class="label_input">E-mail</label><input type="text" id="email" class="text_field" value=""></p>
+            <p><label class="label_input">驗證碼</label><input type="text" id="password" class="text_field" value=""></p>
                 <div id="login_control">
                     <input type="button" id="btn_send" value="寄信" onclick="ee()">
                     <input type="button" id="btn_register" value="驗證" onclick="self.location.href='/login'">

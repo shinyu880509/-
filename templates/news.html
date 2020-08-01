@@ -8,244 +8,195 @@
 <link href="{{ url_for('static', filename='css/main.css') }}" rel="stylesheet" type="text/css" />      
 </head>
 <body>
-<!---------------------------------------------->
+    {% if current_user.is_authenticated %}
+    <a>登入成功{{current_user.id}}</a>
+    <a href="/logout">登出</a>
+    {% endif %}
+<!----------------------------------------------------------->
 <div id="wrapper">
-    <div id="header-wrapper">
-        <div class="header" >
-            <div class="title">
-                <img src="{{ url_for('static', filename='images/icon.png') }}"  width="80" height="80" class="avatar">
-                <h1 class="title">資訊股分析網</h1>
+    <!--------------------------header------------------------------->
+            <div class="header" >
+                <div class="title">
+                    <h1 class="title">資訊股分析網</h1>
+                    <a href="/"><img src="{{ url_for('static', filename='images/icon.png') }}"  width="80" height="80" class="avatar"></a>
+                </div>     
+    
+                        <!---<div class="search">
+                            <ul>
+                                <img id="searchIcon" width="24px" src="https://s.yimg.com/cv/apiv2/twstock/icon-search.png"
+                                    srcset="https://s.yimg.com/cv/apiv2/twstock/icon-search@2x.png 2x, https://s.yimg.com/cv/apiv2/twstock/icon-search@3x.png 3x" />
+          我先隱藏搜尋               <input id="stock_id" type="text" name="stock_id" placeholder="搜尋台股代號/名稱" />
+                                    <img id="closeBtn" src="https://s.yimg.com/cv/apiv2/twstock/cancel.png"
+                                    srcset="https://s.yimg.com/cv/apiv2/twstock/cancel@2x.png 2x, https://s.yimg.com/cv/apiv2/twstock/cancel@3x.png 3x"
+                                    style="cursor: pointer; display: none" />
+                                    <button class="btn btn-primary my-2 my-sm-0" type="submit">搜尋</button>
+                            </ul>
+                        </div>  ----> 
             </div>
-            <form action="/" method="post">
-                <div class="about">
-                    <ul class="drop-down-menu">                      
-                        <li class="current_page_item"><a href="#" accesskey="2" title="" class="chart" a href="#">圖表</a>
-                            <ul>
-                                <li>
-                                    <a href="#">近30日</a>
-                                </li>
-                                <li>
-                                    <a href="#">當日</a>
-                                </li>
-                                <li>
-                                    <a href="#">歷史圖表</a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li class="current_page_item"><a href="#" accesskey="1" title="" a href="#">預測圖表</a>
-                            
-                        </li>
-
-                        <li>
-                            <a href="#" accesskey="3" title="">新聞</a>
-                        </li>
-                        <li>
-                            <a href="#" accesskey="4" title="">財務分析</a>
-                            <ul>
-                                <li>
-                                    <a href="#">營業利益率</a>
-                                </li>
-                                <li>
-                                    <a href="#">毛利率</a>
-                                </li>
-                                <li>
-                                    <a href="#">總資產週轉率</a>
-                                </li>
-                                <li>
-                                    <a href="#">權益負債比</a>
-                                </li>
-                                <li>
-                                    <a href="#">營收概況</a>
-                                </li>
-                                <li>
-                                    <a href="#">股利概況</a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li><a href="#" accesskey="5" title="">技術分析</a>
-                            <ul>
-                                <li>
-                                    <a href="#">RSI線</a>
-                                </li>
-                                <li>
-                                    <a href="#">KD線</a>
-                                </li>
-                                <li>
-                                    <a href="#">MACD線</a>
-                                </li>
-                                <li>
-                                    <a href="#">DIF線</a>
-                                </li>
-                            </ul>
-                        </li>
-                        
-                    </ul>
-                    <div class="search">
-                        <ul>
-                            <img id="searchIcon" width="24px" src="https://s.yimg.com/cv/apiv2/twstock/icon-search.png"
-                                srcset="https://s.yimg.com/cv/apiv2/twstock/icon-search@2x.png 2x, https://s.yimg.com/cv/apiv2/twstock/icon-search@3x.png 3x" />
-                                <input id="stock_id" type="text" name="stock_id" placeholder="搜尋台股代號/名稱" />
-                                <img id="closeBtn" src="https://s.yimg.com/cv/apiv2/twstock/cancel.png"
-                                srcset="https://s.yimg.com/cv/apiv2/twstock/cancel@2x.png 2x, https://s.yimg.com/cv/apiv2/twstock/cancel@3x.png 3x"
-                                style="cursor: pointer; display: none" />
-                                <button class="btn btn-primary my-2 my-sm-0" type="submit">搜尋</button>
-                        </ul>
-                    </div>   
-                </div>
-
-            </form>  
-        </div>
-    </div>
-</div>
-<!---------------------------------------------->
-<div class="container">
-    <div class="content">
+    <!---------------------------header結束------------------------------>
         
+    <!---------------------------sidebar1---------- class="bd-toc-link" style="font-weight:bold; color: black; font-size:20px;"------------------->
+        <div class="sidebar1">
+            <div class="bd-toc-item">
+                <h3 class="title">
+                    資訊股代號
+                </h3>
+                <h4 class="myfavorite">
+                    我的最愛
+                </h4>
+                <div class="text">
+                    <ul>
+                        <li>
+                        <h class="2427text" style="display: none;"><a href="/news/2427">2427三商電 </a></h>
+                        </li>
+                        <li>
+                        <h class="2453text"style="display: none;"><a href="/news/2453">2453凌群 </a></h>
+                        </li>
+                        <li>
+                        <h class="2468text"style="display: none;"><a href="/news/2468">2468華經 </a></h>
+                        </li>
+                        <li>
+                        <h class="2471text"style="display: none;"><a href="/news/2471">2471資通 </a></h>
+                        </li>
+                        <li>
+                        <h class="2480text"style="display: none;"><a href="/news/2480">2480敦陽 </a></h>
+                        </li>
+                        <li>
+                        <h class="3029text"style="display: none;"><a href="/news/3029">3029零壹 </a></h>
+                        </li>    
+                        <li>
+                        <h class="3130text"style="display: none;"><a href="/news/3130">3130一零四 </a></h>
+                        </li> 
+                        <li>
+                        <h class="4994text"style="display: none;"><a href="/news/4994">4994傳奇 </a></h>
+                        </li>        
+                        <li>
+                        <h class="5203text"style="display: none;"><a href="/news/5203">5203訊連 </a></h>
+                        </li>
+                        <li>
+                        <h class="6112text"style="display: none;"><a href="/news/6112">6112聚碩 </a></h>
+                        </li>
+                        <li>
+                        <h class="6183text"style="display: none;"><a href="/news/6183">6183關貿 </a></h>
+                        </li>
+                        <li>
+                        <h class="6214text"style="display: none;"><a href="/news/6214">6214精誠 </a></h>
+                        </li>       
+                    </ul>
+                    
+                </div>
+                <h4 class="otherstock">
+                    所有代號
+                </h4>
+                <div class="text">
+                    <ul>
+                        <li>
+                            <a href="/news/2427">2427三商電 </a>
+                        </li>
+                        <li>
+                            <a href="/news/2453">2453凌群 </a>
+                        </li>
+                        <li>
+                            <a href="/news/2468">2468華經 </a>
+                        </li>
+                        <li>
+                            <a href="/news/2471">2471資通</a>
+                        </li>
+                        <li>
+                            <a href="/news/2480">2480敦陽</a>
+                        </li>
+                        <li>
+                            <a href="/news/3029">3029零壹 </a>
+                        </li>
+                        <li>
+                            <a href="/news/3130">3130一零四</a>
+                        </li>
+                        <li>
+                            <a href="/news/4994">4994傳奇 </a>
+                        </li>
+                        <li>
+                            <a href="/news/5203">5203訊連 </a>
+                        </li>
+                        <li>
+                            <a href="/news/6112">6112聚碩</a>
+                        </li>
+                        <li>
+                            <a href="/news/6183">6183關貿 </a>
+                        </li>
+                        <li>
+                            <a href="/news/6214">6214精誠 </a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="img">
+                    <ul>
+                        <li>
+                            <button class="button2427"><img src=" {{ url_for('static', filename='images/plus.png'  ) }}  "width="10" height="10" class="plus"></a></button>
+                        </li>
+                        <li>
+                            <button class="button2453"><img src=" {{ url_for('static', filename='images/plus.png'  ) }}  "width="10" height="10" class="plus"></a></button>                        
+                        </li>
+                        <li>
+                            <button class="button2468"><img src=" {{ url_for('static', filename='images/plus.png'  ) }}  "width="10" height="10" class="plus"></a></button>                        
+                        </li>
+                        <li>
+                            <button class="button2471"><img src=" {{ url_for('static', filename='images/plus.png'  ) }}  "width="10" height="10" class="plus"></a></button>                        
+                        </li>
+                        <li>
+                            <button class="button2480"><img src=" {{ url_for('static', filename='images/plus.png'  ) }}  "width="10" height="10" class="plus"></a></button>                        
+                        </li>
+                        <li>
+                            <button class="button3029"><img src=" {{ url_for('static', filename='images/plus.png'  ) }}  "width="10" height="10" class="plus"></a></button>                        
+                        </li>
+                        <li>
+                            <button class="button3130"><img src=" {{ url_for('static', filename='images/plus.png'  ) }}  "width="10" height="10" class="plus"></a></button>                        </li>
+                        <li>
+                            <button class="button4994"><img src=" {{ url_for('static', filename='images/plus.png'  ) }}  "width="10" height="10" class="plus"></a></button>                        
+                        </li>
+                        <li>
+                            <button class="button5203"><img src=" {{ url_for('static', filename='images/plus.png'  ) }}  "width="10" height="10" class="plus"></a></button>                        
+                        </li>
+                        <li>
+                            <button class="button6112"><img src=" {{ url_for('static', filename='images/plus.png'  ) }}  "width="10" height="10" class="plus"></a></button>                        
+                        </li>
+                        <li>
+                            <button class="button6183"><img src=" {{ url_for('static', filename='images/plus.png'  ) }}  "width="10" height="10" class="plus"></a></button>                        
+                        </li>
+                        <li>
+                            <button class="button6214"><img src=" {{ url_for('static', filename='images/plus.png'  ) }}  "width="10" height="10" class="plus"></a></button>                        
+                        </li>
+                    </ul>    
+                </div>
+            </div>
+        </div>
+    <!---------------------------sidebar1結束------------------------------>
+    
+    
+    <!---------------------------content開始------------------------------->
+    <div class="content">
+        <div class="title1"><h2>{{name}}</h2></div>
+        {% for i in range(n) %}
+            <li>
+                <a href = "{{news['網址'][i]}}" target="_blank">{{news['標題'][i]}}</a>
+                <h5>{{news['來源'][i]}}  {{news['日期'][i]}}</h5>
+            </li>
+        {% endfor %}
+
+    <!---------------------------footer開始------------------------------->
+        <div class="footer">
+            &copyntubimd 109403組
+        </div>
+    <!---------------------------footer結束-------------------------------> 
     </div>
-</div>
-<!---------------------------------------------->
-<div class="footer">
-    &copyntubimd2020
-</div>
-<!---------------------------------------------->
-<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>      
-<script src="{{ url_for('static', filename='scripts/main.js') }}"></script>    
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.js"></script>
-<script type="text/javascript">
-    var datelist = {{re[7]|safe}};
-    var closelist= {{re[8]|safe}};
-    var translist = {{re[9]|safe}};
-    var rsi = {{tec[0]|safe}};
-    var k = {{tec[1]|safe}};
-    var d = {{tec[2]|safe}};
-    var dif = {{tec[3]|safe}};
-    var macd = {{tec[4]|safe}};
-    var bias = {{tec[5]|safe}};
-
-
-    var lineChartData = {
-        labels: datelist, //顯示區間名稱
-        datasets: [{
-            type: 'line',
-            label: '收盤價', // tootip 出現的名稱
-            lineTension: 0, // 曲線的彎度，設0 表示直線
-            backgroundColor: "#ea464d",
-            borderColor: "#ea464d",
-            borderWidth: 5,
-            data: closelist, // 資料
-            fill: false, // 是否填滿色彩
-        },{
-            type: 'bar',
-            label: '交易量', // tootip 出現的名稱
-            backgroundColor: "#055ffa",
-            borderColor: "#055ffa",
-            borderWidth: 2,
-            data: translist, // 資料
-            fill: false, // 是否填滿色彩
-            yAxisID: 'y-axis-1',
-        }]
-    };
-
-    var lineChartData2 = {
-        labels: datelist, //顯示區間名稱
-        datasets: [
-        {
-            type: 'line',
-            label: 'rsi', // tootip 出現的名稱
-            lineTension: 0, // 曲線的彎度，設0 表示直線
-            backgroundColor: "#ea464d",
-            borderColor: "#ea464d",
-            borderWidth: 5,
-            data: rsi, // 資料
-            fill: false, // 是否填滿色彩
-        },
-        {
-            type: 'line',
-            label: 'k', // tootip 出現的名稱
-            lineTension: 0, // 曲線的彎度，設0 表示直線
-            backgroundColor: "#ea464d",
-            borderColor: "#ea464d",
-            borderWidth: 5,
-            data: k, // 資料
-            fill: false, // 是否填滿色彩
-        },
-        {
-            type: 'line',
-            label: 'd', // tootip 出現的名稱
-            lineTension: 0, // 曲線的彎度，設0 表示直線
-            backgroundColor: "#ea464d",
-            borderColor: "#ea464d",
-            borderWidth: 5,
-            data: d, // 資料
-            fill: false, // 是否填滿色彩
-        },
-        {
-            type: 'line',
-            label: 'macd', // tootip 出現的名稱
-            lineTension: 0, // 曲線的彎度，設0 表示直線
-            backgroundColor: "#ea464d",
-            borderColor: "#ea464d",
-            borderWidth: 5,
-            data: macd, // 資料
-            fill: false, // 是否填滿色彩
-        },
-        {
-            type: 'line',
-            label: 'dif', // tootip 出現的名稱
-            lineTension: 0, // 曲線的彎度，設0 表示直線
-            backgroundColor: "#ea464d",
-            borderColor: "#ea464d",
-            borderWidth: 5,
-            data: dif, // 資料
-            fill: false, // 是否填滿色彩
-        },
-        {
-            type: 'bar',
-            label: '交易量', // tootip 出現的名稱
-            backgroundColor: "#055ffa",
-            borderColor: "#055ffa",
-            borderWidth: 2,
-            data: bias, // 資料
-            fill: false, // 是否填滿色彩
-            yAxisID: 'y-axis-1',
-        }]
-    };
-
-
-    function drawLineCanvas(ctx,data) {
-        window.myLine = new Chart(ctx, {  //先建立一個 chart
-            data: data,
-            options: {
-                responsive: true,
-                legend: { //是否要顯示圖示
-                    display: true,
-                },
-                tooltips: { //是否要顯示 tooltip
-                    enabled: true
-                },
-                scales: {  //是否要顯示 x、y 軸
-                    xAxes: [{
-                        display: true
-                    },],
-                    yAxes: [{
-                        display: true
-                    },{
-                        id: 'y-axis-1',
-                        position: 'right',
-                        display: true
-                    }]
-                },
-            }
-        });
-    };
-
-    window.onload = function () {
-        var ctx = document.getElementById("canvas").getContext("2d");
-        drawLineCanvas(ctx,lineChartData);
-        var ctx2 = document.getElementById("canvas2").getContext("2d");
-        drawLineCanvas(ctx2,lineChartData2);
-    };
-</script>
+    
+    
+    <!------------------wrapper範圍------------------------>
+    
+    
+    <!---------------------------連結------------------------------->
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>      
+    <script src="{{ url_for('static', filename='scripts/main.js') }}"></script>    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.js"></script>
 </body>
 </html>

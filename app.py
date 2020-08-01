@@ -14,6 +14,9 @@ app.config["JSON_AS_ASCII"] = False
 a = 0
 app.secret_key = b'_5#y2L"F4Q8z\n\xec]/'
 
+#一頁新聞數量
+n = 15
+
 #登入管理
 login_manager = LoginManager()
 login_manager.init_app(app)
@@ -49,6 +52,8 @@ def home():
 
 @app.route("/login")
 def login():
+    if current_user.is_authenticated == True:
+        return redirect(url_for('index'))
     return render_template('login.html') 
 
 #登入
@@ -65,6 +70,30 @@ def userLogin(userId, userPasswd):
         flash(userId)
         return redirect(url_for('login'))
 
+#登出
+@app.route('/logout')
+def logout():
+    logout_user()
+    return redirect(url_for('login'))
+
+#管理帳號
+@app.route('/manage')
+def manage():
+    acc = getID.getAcc()
+    return render_template('manage.html', acc = acc, n = len(acc)) 
+
+#刪除帳號
+@app.route('/deleteAcc/<a>')
+def deleteAcc(a):
+    getID.deleteAcc(a)
+    return redirect(url_for('manage'))
+
+#刪除帳號
+@app.route('/alterAcc/<a>/<n>/<t>')
+def alterAcc(a,n,t):
+    getID.alterAcc(a,n,t)
+    return redirect(url_for('manage'))
+
 @app.route("/index")
 def index():
     return redirect(url_for('indexId', stId = "2427"))
@@ -79,7 +108,16 @@ def indexId(stId):
     dataTec = getData.getAll(stId)
     dataFin = getData.getFin(stId, 0)
     dataPre = getData.getPre(stId)
-    return render_template('index.html', stock = stId, name = name, re = data, today = datatoday, tec = dataTec, fin = dataFin, pre = dataPre, chartTy = 0)  
+    dataNews = getData.getNewsS(stId, n)
+    return render_template('index.html', stock = stId, name = name, re = data, today = datatoday, tec = dataTec, fin = dataFin, pre = dataPre, news = dataNews, n = n)  
+
+@app.route("/news/<stId>")
+def news(stId):
+    if current_user.is_authenticated == False:
+        return redirect(url_for('login'))
+    name = getID.getName(stId)
+    dataNews = getData.getNews(stId)
+    return render_template('news.html', stock = stId, name = name, news = dataNews, n = len(dataNews))  
 
 @app.route("/account")
 def account():

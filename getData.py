@@ -24,7 +24,19 @@ def getCsv(a):
     low = np.array(table.low)
     low = low.tolist()
     return datelist,closelist,capacitylist,turnoverlist,changelist,high,low,translist
-    
+
+def getNewsS(a,i):
+    table = pd.read_csv("news/"+ a +'.csv')
+    table = table.sort_values(by=['日期'], ascending=False)
+    table = table.reset_index(drop=True)
+    return table.head(i)
+
+def getNews(a):
+    table = pd.read_csv("news/"+ a +'.csv')
+    table = table.sort_values(by=['日期'], ascending=False)
+    table = table.reset_index(drop=True)
+    return table
+
 #股票代碼
 def getPre(a):
     table = pd.read_csv("preStock/"+a+'.csv')

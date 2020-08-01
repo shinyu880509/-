@@ -1,0 +1,35 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>專題-股票分析</title>
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<link href="https://fonts.googleapis.com/css?family=Noto+Sans+TC" rel="stylesheet">
+<link href="{{ url_for('static', filename='css/main.css') }}" rel="stylesheet" type="text/css" />      
+</head>
+<body>
+    <div>
+    {% for i in range(n) %}
+    <input type="text" id="username{{acc[i][0]}}">
+        <button onclick="alter('{{acc[i][0]}}', 0)">更改帳號</button>
+        <button onclick="alter('{{acc[i][0]}}', 1)">更改信箱</button>
+        <button onclick="alter('{{acc[i][0]}}', 2)">更改密碼</button>
+        <button onclick="javascript:location.href='/deleteAcc/{{acc[i][0]}}'">刪除</button>
+        <a>{{acc[i][0]}}---{{acc[i][1]}}---{{acc[i][2]}}</a><br>
+    {% endfor %}
+    </div>
+
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>      
+<script src="{{ url_for('static', filename='scripts/main.js') }}"></script>    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.js"></script>
+<script type="text/javascript">
+function alter(u,t){
+    aaa = document.getElementById("username" + u);
+    window.location.href="/alterAcc/" + u + "/" + aaa.value + "/" + t;
+}
+
+</script>
+    
+</body>
+</html>

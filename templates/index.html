@@ -10,6 +10,7 @@
 <body>
     {% if current_user.is_authenticated %}
     <a>登入成功{{current_user.id}}</a>
+    <a href="/logout">登出</a>
     {% endif %}
 <!----------------------------------------------------------->
 <div id="wrapper">
@@ -282,7 +283,18 @@
     
     
     <!---------------------------新聞開始------------------------------->
-        <div class="sidebar2">新聞</div>
+        <div class="sidebar2">
+            <h2>新聞</h2>
+            <ul>
+            {% for i in range(n) %}
+                <li>
+                    <a href = "{{news['網址'][i]}}" target="_blank">{{news['標題'][i]}}</a>
+                    <h5>{{news['來源'][i]}}  {{news['日期'][i]}}</h5>
+                </li>
+            {% endfor %}
+            </ul>
+            <a href = "/news/{{stock}}">more...</a>
+        </div>
     <!---------------------------新聞結束------------------------------->
     
     
@@ -310,7 +322,7 @@
     var time = {{today[0]|safe}};
     var closetoday = {{today[1]|safe}};
     var transtoday = {{today[2]|safe}};
-    var typeCha = {{chartTy|safe}};
+
 
     $('#detail').empty();
     $('#detail').append("<ul id='detail'><li>開盤價:{{today[3][0]}}</li><li>最高價:{{today[3][1]}}</li><li>最低價:{{today[3][2]}}</li><li>收盤價:{{today[3][3]}}</li><li>總交易量:{{today[3][4]}}</li></ul>");

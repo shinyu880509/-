@@ -33,3 +33,21 @@ username = input("user:")
 password = input("password:")
 
 revise(password,username)
+
+
+#關注寫入
+def like(username,stockID):
+    conn = sqlite3.connect('stock.db')
+    cur = conn.cursor()
+    cur.execute("insert into attention(username,attention) values({}{});".format(username,stockID))
+    conn.commit()
+    conn.close()
+
+#關注移除
+def dislike(stockID):
+    conn = sqlite3.connect('stock.db')
+    cur = conn.cursor()
+    cur.execute("delete from attention where attention = {};".format(stockID))
+    conn.commit()
+    conn.close()
+

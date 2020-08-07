@@ -2,7 +2,7 @@
 <html lang="en">
     <head>
         <meta charset="UTF-8">
-        <title>忘記密碼</title>
+        <title>修改密碼</title>
         <link rel="stylesheet" href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
         <link href="https://fonts.googleapis.com/css?family=Noto+Sans+TC" rel="stylesheet">
         <link href="{{ url_for('static', filename='css/forget.css') }}" rel="stylesheet" type="text/css">   
@@ -12,30 +12,21 @@
         <div id="login_frame">
             <p id="image_logo"><img src="{{ url_for('static', filename='images/icon.png') }}" width="80" height="80"></p>
             <form method="post" action="register.js">
-            <p><label class="label_input">帳號名稱</label><input type="text" id="username" class="text_field" 
+            <p><label class="label_input">新密碼</label><input type="text" id="pw" class="text_field" 
                 {% with messages = get_flashed_messages() %}
                 {% if messages %}
                     {% for message in messages %}
-                        {% if message[0] == "使" %}
+                        {% if message[0] == "密" %}
                             value="{{message[1:]}}"
                         {% endif %}
                     {% endfor %}
                 {% endif %}
                 {% endwith %}></p>
-            <p><label class="label_input">E-mail</label><input type="text" id="email" class="text_field" 
-                {% with messages = get_flashed_messages() %}
-                {% if messages %}
-                    {% for message in messages %}
-                        {% if message[0] == "信" %}
-                            value="{{message[1:]}}"
-                        {% endif %}
-                    {% endfor %}
-                {% endif %}
-                {% endwith %}></p>
+            <p><label class="label_input">確認密碼</label><input type="text" id="npw" class="text_field" value=""></p>
+            <p><label class="label_input">驗證碼</label><input type="text" id="va" class="text_field" value=""></p>
                 <div id="login_control">
-                    <input type="button" id="btn_send" value="修改密碼" onclick="self.location.href='/revise'">
-                    <input type="button" id="btn_register" value="寄送驗證信" onclick=ee()>
-                    <input type="button" id="btn_back" value="返回"  onclick="self.location.href='/login'">
+                    <input type="button" id="btn_register" value="確認" onclick=revA()>
+                    <input type="button" id="btn_back" value="返回"  onclick="self.location.href='/forget'">
                     
                 </div>
             </form>
@@ -44,7 +35,6 @@
         <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>      
         <script src="{{ url_for('static', filename='scripts/main.js') }}"></script>    
         <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.js"></script>
-        
         {% with messages = get_flashed_messages() %}
         {% if messages %}
             {% for message in messages %}

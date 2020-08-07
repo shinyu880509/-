@@ -3,7 +3,7 @@ from flask_mail import Mail,Message
 import pandas as pd
 import csv
 import numpy as np
-import getData, catStock, getID
+import getData, catStock, getID, revise
 import click
 import datetime
 import sqlite3
@@ -28,23 +28,43 @@ app.config.update(
     MAIL_SERVER='smtp.gmail.com',
     MAIL_PORT=465,
     MAIL_USE_SSL=True,
-    MAIL_DEFAULT_SENDER=('hahaha', 'jjfj3750@gmail.com'),
+    MAIL_DEFAULT_SENDER=('admin', 'jjfj3750@gmail.com'),
     MAIL_MAX_EMAILS=10,
     MAIL_USERNAME='jjfj3750@gmail.com',
     MAIL_PASSWORD='<a1s2d3f4>'
 )
 mail = Mail(app)
 
+#寄驗證信
 @app.route("/message/<ema>/<acc>")
 def mesage(acc,ema):
-    msg_title = 'Hahahaha'
-    msg_recipients = [ema]
-    msg_body = '沒想到成功了欸\r\n系統時間：' + str(datetime.datetime.now())
-    msg = Message(msg_title,recipients=msg_recipients)
-    msg.body = msg_body
-    mail.send(msg)
-    #flash()
-    return redirect(url_for('forget'))
+    aa = revise.verification(acc, ema)
+    if aa == "1":
+        flash("訊帳號不存在")
+        flash("使" + acc)
+        flash("信" + ema)
+        return redirect(url_for('forget'))
+    else:
+        msg_title = '驗證信'
+        msg_recipients = [ema]
+        msg_body = '驗證碼:' + aa + '\r\n系統時間：' + str(datetime.datetime.now())
+        msg = Message(msg_title,recipients=msg_recipients)
+        msg.body = msg_body
+        mail.send(msg)
+        flash("訊驗證信已送出，請確認信箱")
+        return redirect(url_for('reviseB'))
+
+#驗證修改密碼
+@app.route("/revise/<va>/<pw>")
+def reviseA(pw,va):
+    aa = revise.revisePw(pw, va)
+    if aa == "0":
+        flash("訊驗證碼錯誤")
+        flash("密" + pw)
+        return redirect(url_for('reviseB'))
+    elif aa == "1":
+        flash("訊密碼變更成功")
+        return redirect(url_for('login'))
 
 @app.route("/")
 def home():
@@ -66,8 +86,8 @@ def userLogin(userId, userPasswd):
         login_user(user)
         return redirect(url_for('index'))
     else:
-        flash("1")
-        flash(userId)
+        flash("誤")
+        flash("帳" + userId)
         return redirect(url_for('login'))
 
 #登出
@@ -146,11 +166,19 @@ def registers(userId, userPasswd, userEmail):
         if err == 0:
             return redirect(url_for('login'))
         else:
+            flash("帳" + userId)
+            flash("信" + userPasswd)
+            flash("密" + userEmail)
+            flash("誤")
             return redirect(url_for('account'))
 
 @app.route("/forget")
 def forget():
     return render_template('forget.html')
+
+@app.route("/revise")
+def reviseB():
+    return render_template('revise.html')
 
 @app.cli.command("refresh")
 def refresh():

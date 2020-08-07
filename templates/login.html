@@ -18,8 +18,8 @@
             {% with messages = get_flashed_messages() %}
                 {% if messages %}
                     {% for message in messages %}
-                        {% if message != "1" %}
-                            value="{{message}}"
+                        {% if message == "帳" %}
+                            value="{{message[1:]}}"
                         {% endif %}
                     {% endfor %}
                 {% endif %}
@@ -31,15 +31,12 @@
             {% with messages = get_flashed_messages() %}
                 {% if messages %}
                     {% for message in messages %}
-                        {% if message == "1" %}
-                            <!--要加的東西放這裡-->
+                        {% if message == "誤" %}
                             <a>帳號或密碼錯誤</a>
-                            <!--要加的東西放這裡-->
                         {% endif %}
                     {% endfor %}
                 {% endif %}
             {% endwith %}
-            {% block body %}{% endblock %}
 
                 <div id="login_control">
                     <input type="button" id="btn_login" value="登入" onclick="login();"/>
@@ -61,5 +58,17 @@
         <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>      
         <script src="{{ url_for('static', filename='scripts/main.js') }}"></script>    
         <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.js"></script>
+
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            {% for message in messages %}
+                {% if message[0] == "訊" %}
+                    <script type="text/javascript">
+                        alert("{{message[1:]}}")
+                    </script>
+                {% endif %}
+            {% endfor %}
+        {% endif %}
+        {% endwith %}
 </body>
 </html>

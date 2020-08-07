@@ -13,10 +13,47 @@
         <div id="login_frame">
             <p id="image_logo"><img src="{{ url_for('static', filename='images/icon.png') }}" width="80" height="80"></p>
             <form method="post" action="register.js">
-            <p><label class="label_input">帳號</label><input type="text" id="username" class="text_field" value=""></p>
-            <p><label class="label_input">E-mail</label><input type="text" id="email" class="text_field" value=""></p>
-            <p><label class="label_input">密碼</label><input type="text" id="password" class="text_field" value=""></p>
+            <p><label class="label_input">帳號</label><input type="text" id="username" class="text_field" 
+                {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                    {% for message in messages %}
+                        {% if message[0] == "帳" %}
+                            value="{{message[1:]}}"
+                        {% endif %}
+                    {% endfor %}
+                {% endif %}
+                {% endwith %}></p>
+            <p><label class="label_input">E-mail</label><input type="text" id="email" class="text_field" 
+                {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                    {% for message in messages %}
+                        {% if message[0] == "密" %}
+                            value="{{message[1:]}}"
+                        {% endif %}
+                    {% endfor %}
+                {% endif %}
+                {% endwith %}></p>
+            <p><label class="label_input">密碼</label><input type="text" id="password" class="text_field" 
+                {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                    {% for message in messages %}
+                        {% if message[0] == "信" %}
+                            value="{{message[1:]}}"
+                        {% endif %}
+                    {% endfor %}
+                {% endif %}
+                {% endwith %}></p>
             <p><label class="label_input">確認密碼</label><input type="text" id="confirm" class="text_field" value=""></p>
+            <!--註冊失敗訊息-->
+            {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                {% for message in messages %}
+                    {% if message == "誤" %}
+                        <a>帳號名稱已被使用</a>
+                    {% endif %}
+                {% endfor %}
+            {% endif %}
+            {% endwith %}
                 <div id="login_control">
                     <input type="button" id="btn_register" value="註冊" onclick="register()">
                     <input type="button" id="btn_back" value="返回"  onclick="self.location.href='/login'">

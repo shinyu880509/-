@@ -171,11 +171,13 @@ div.sidebar1 .bd-toc-item .text ul li a:hover {
 /* -------------------------------content開始----------------------------------- */
 div.content{
     /* --border:1px black solid;-- */
-    background:#FFFFFF;
+    background:#ffffff;
     width: 69vw;
     height:190vw;
 	float: left; 
 	margin: 0;
+	overflow: auto;
+
 }
 
 div.title1 h2{
@@ -249,11 +251,12 @@ div.pic{
 /* -------------------------------新聞開始----------------------------------- */
 div.sidebar2{
     /* --border:1px black solid;-- */
-    background-color:#FFFFFF;
+    background-color:#fcfcfc;
     width: 17vw;
     height:90vw;
 	float: right;
 	margin: 0;
+	overflow: auto;
 }
 
 /* -------------------------------新聞結束----------------------------------- */

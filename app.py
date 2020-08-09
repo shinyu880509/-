@@ -131,7 +131,20 @@ def indexId(stId):
     dataFin = getData.getFin(stId, 0)
     dataPre = getData.getPre(stId)
     dataNews = getData.getNewsS(stId, n)
-    return render_template('index.html', stock = stId, name = name, re = data, today = datatoday, tec = dataTec, fin = dataFin, pre = dataPre, news = dataNews, n = n)  
+    dataFav = revise.getlike(current_user.id)
+    return render_template('index.html', stock = stId, name = name, re = data, today = datatoday, tec = dataTec, fin = dataFin, pre = dataPre, news = dataNews, n = n, reFav = dataFav)  
+
+@app.route("/newFav/<typeA>/<stId>/<fav>")
+def newFav(fav, typeA, stId):
+    revise.dislike(str(current_user.id))
+    if fav != "non":
+        revise.like(str(current_user.id), fav)
+    if typeA == "index":
+        return redirect(url_for('indexId', stId = stId))
+    elif typeA == "news":
+        return redirect(url_for('news', stId = stId))
+    elif typeA == "logout":
+        return redirect(url_for('logout'))
 
 @app.route("/news/<stId>")
 def news(stId):
@@ -139,7 +152,8 @@ def news(stId):
         return redirect(url_for('login'))
     name = getID.getName(stId)
     dataNews = getData.getNews(stId)
-    return render_template('news.html', stock = stId, name = name, news = dataNews, n = len(dataNews))  
+    dataFav = revise.getlike(current_user.id)
+    return render_template('news.html', stock = stId, name = name, news = dataNews, n = len(dataNews), reFav = dataFav)  
 
 @app.route("/account")
 def account():

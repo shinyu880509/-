@@ -83,15 +83,33 @@ for rows in c.fetchall():
 def like(username,stockID):
     conn = sqlite3.connect('stock.db')
     cur = conn.cursor()
-    cur.execute("insert into attention(username,attention) values({}{});".format(username,stockID))
+    cur.execute("insert into attention(username,attention) values('{}','{}');".format(username,stockID))
     conn.commit()
     conn.close()
+    return
 
 #關注移除
-def dislike(stockID):
+def dislike(username):
     conn = sqlite3.connect('stock.db')
     cur = conn.cursor()
-    cur.execute("delete from attention where attention = {};".format(stockID))
+    cur.execute("delete from attention where username = '{}';".format(username))
     conn.commit()
     conn.close()
+    return
+
+def getlike(username):
+    conn = sqlite3.connect('stock.db')
+    cur = conn.cursor()
+    cur.execute("select * from attention where username = '{}';".format(username))
+    try:
+        a = str(cur.fetchall()[0][1])
+        a = a.split("-")
+    except Exception:
+        conn.commit()
+        conn.close()
+        return []
+    conn.commit()
+    conn.close()
+    return a
+#print(getlike("10646021"))
 

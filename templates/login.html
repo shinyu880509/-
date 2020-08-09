@@ -18,7 +18,7 @@
             {% with messages = get_flashed_messages() %}
                 {% if messages %}
                     {% for message in messages %}
-                        {% if message == "帳" %}
+                        {% if message[0] == "帳" %}
                             value="{{message[1:]}}"
                         {% endif %}
                     {% endfor %}

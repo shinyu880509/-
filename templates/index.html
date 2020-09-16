@@ -85,46 +85,86 @@
                     </ul>
                     
                 </div>
+                <div class="img">
+                    <ul>
+                        <li>
+                            <button class="but2427" style="display: none;" onclick="newFav('2427')"><img src=" {{ url_for('static', filename='images/minus.png'  ) }}  "width="10" height="10" class="plus"></a></button>
+                        </li>
+                        <li>
+                            <button class="but2453" style="display: none;" onclick="newFav('2453')"><img src=" {{ url_for('static', filename='images/minus.png'  ) }}  "width="10" height="10" class="plus"></a></button>                        
+                        </li>
+                        <li>
+                            <button class="but2468" style="display: none;" onclick="newFav('2468')"><img src=" {{ url_for('static', filename='images/minus.png'  ) }}  "width="10" height="10" class="plus"></a></button>                        
+                        </li>
+                        <li>
+                            <button class="but2471" style="display: none;" onclick="newFav('2471')"><img src=" {{ url_for('static', filename='images/minus.png'  ) }}  "width="10" height="10" class="plus"></a></button>                        
+                        </li>
+                        <li>
+                            <button class="but2480" style="display: none;" onclick="newFav('2480')"><img src=" {{ url_for('static', filename='images/minus.png'  ) }}  "width="10" height="10" class="plus"></a></button>                        
+                        </li>
+                        <li>
+                            <button class="but3029" style="display: none;" onclick="newFav('3029')"><img src=" {{ url_for('static', filename='images/minus.png'  ) }}  "width="10" height="10" class="plus"></a></button>                        
+                        </li>
+                        <li>
+                            <button class="but3130" style="display: none;" onclick="newFav('3130')"><img src=" {{ url_for('static', filename='images/minus.png'  ) }}  "width="10" height="10" class="plus"></a></button>                        
+                        </li>
+                        <li>
+                            <button class="but4994" style="display: none;" onclick="newFav('4994')"><img src=" {{ url_for('static', filename='images/minus.png'  ) }}  "width="10" height="10" class="plus"></a></button>                        
+                        </li>
+                        <li>
+                            <button class="but5203" style="display: none;" onclick="newFav('5203')"><img src=" {{ url_for('static', filename='images/minus.png'  ) }}  "width="10" height="10" class="plus"></a></button>                        
+                        </li>
+                        <li>
+                            <button class="but6112" style="display: none;" onclick="newFav('6112')"><img src=" {{ url_for('static', filename='images/minus.png'  ) }}  "width="10" height="10" class="plus"></a></button>                        
+                        </li>
+                        <li>
+                            <button class="but6183" style="display: none;" onclick="newFav('6183')"><img src=" {{ url_for('static', filename='images/minus.png'  ) }}  "width="10" height="10" class="plus"></a></button>                        
+                        </li>
+                        <li>
+                            <button class="but6214" style="display: none;" onclick="newFav('6214')"><img src=" {{ url_for('static', filename='images/minus.png'  ) }}  "width="10" height="10" class="plus"></a></button>                        
+                        </li>
+                    </ul>    
+                </div>
                 <h4 class="otherstock">
                     所有代號
                 </h4>
                 <div class="text">
                     <ul>
                         <li>
-                            <a href="javascript:saveFav('2427')">2427三商電 </a>
+                            <a class="text2427" href="javascript:saveFav('2427')">2427三商電 </a>
                         </li>
                         <li>
-                            <a href="javascript:saveFav('2453')">2453凌群 </a>
+                            <a class="text2453" href="javascript:saveFav('2453')">2453凌群 </a>
                         </li>
                         <li>
-                            <a href="javascript:saveFav('2468')">2468華經 </a>
+                            <a class="text2468" href="javascript:saveFav('2468')">2468華經 </a>
                         </li>
                         <li>
-                            <a href="javascript:saveFav('2471')">2471資通</a>
+                            <a class="text2471" href="javascript:saveFav('2471')">2471資通</a>
                         </li>
                         <li>
-                            <a href="javascript:saveFav('2480')">2480敦陽</a>
+                            <a class="text2480" href="javascript:saveFav('2480')">2480敦陽</a>
                         </li>
                         <li>
-                            <a href="javascript:saveFav('3029')">3029零壹 </a>
+                            <a class="text3029" href="javascript:saveFav('3029')">3029零壹 </a>
                         </li>
                         <li>
-                            <a href="javascript:saveFav('3130')">3130一零四</a>
+                            <a class="text3130" href="javascript:saveFav('3130')">3130一零四</a>
                         </li>
                         <li>
-                            <a href="javascript:saveFav('4994')">4994傳奇 </a>
+                            <a class="text4994" href="javascript:saveFav('4994')">4994傳奇 </a>
                         </li>
                         <li>
-                            <a href="javascript:saveFav('5203')">5203訊連 </a>
+                            <a class="text5203" href="javascript:saveFav('5203')">5203訊連 </a>
                         </li>
                         <li>
-                            <a href="javascript:saveFav('6112')">6112聚碩</a>
+                            <a class="text6112" href="javascript:saveFav('6112')">6112聚碩</a>
                         </li>
                         <li>
-                            <a href="javascript:saveFav('6183')">6183關貿 </a>
+                            <a class="text6183" href="javascript:saveFav('6183')">6183關貿 </a>
                         </li>
                         <li>
-                            <a href="javascript:saveFav('6214')">6214精誠 </a>
+                            <a class="text6214" href="javascript:saveFav('6214')">6214精誠 </a>
                         </li>
                     </ul>
                 </div>
@@ -326,7 +366,13 @@
 
     fav.forEach(element => {
         var z = '.'+ element +'text'
+        var a = '.'+ 'but' +element
+        var b = '.'+ 'text' +element
+        var c = '.'+ 'button' +element
         $(z).toggle(); 
+        $(a).toggle(); 
+        $(b).toggle(); 
+        $(c).toggle(); 
     });
 
     function newFav(aa){

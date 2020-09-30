@@ -1,4 +1,5 @@
 from FinMind.Data import Load
+import requests
 import csv
 import pandas as pd
 import urllib.request
@@ -6,12 +7,20 @@ import json,requests
 #BeautifulSoup4 html5lib
 
 def catStock():
+    url = "https://api.finmindtrade.com/api/v3/data"
     dat = '2015-01-01'
     itStock = ['2427', '2453', '2468', '2471', '2480', '3029', '3130', '4994', '5203', '6112', '6183', '6214']
     for i in range(len(itStock)):
+        parameter = {
+            "dataset": "TaiwanStockPrice",
+            "stock_id": itStock[i],
+            "date": dat,
+            "end_date": "2020-09-29",
+        }
         stockID = itStock[i]
-        TaiwanStockInfo = Load.FinData(dataset = 'TaiwanStockInfo')
-        data = Load.FinData(dataset = 'TaiwanStockPrice',select = stockID,date = dat)
+        resp = requests.get(url, params=parameter)
+        data = resp.json()
+        data = pd.DataFrame(data["data"])
 
         data['high'] = data['max']
         data['low'] = data['min']
@@ -50,3 +59,4 @@ def catFin():
             data = l['data']
             writerCSV = pd.DataFrame(columns = head, data=data)
             writerCSV.to_csv('catFin/'+ str(itStock[a]) + str(b) + '.csv',encoding='utf-8', index = False)
+#catStock()

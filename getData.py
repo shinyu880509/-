@@ -1,6 +1,7 @@
 import pandas as pd
 import csv
 import numpy as np
+import datetime
 
 #股票代碼
 def getCsv(a):
@@ -37,9 +38,28 @@ def getNews(a):
     table = table.reset_index(drop=True)
     return table
 
+def getDay(a):
+    startday = a
+    day = []
+    d = 0
+    for i in range(30):
+        z = startday + datetime.timedelta(days=d)
+        day.append(str(z).replace("-", "/"))
+        if z.weekday() == 4:
+            d += 3
+        else:
+            d += 1
+        
+    return day
+'''zz = getDay(datetime.date.today())
+print(zz)'''
+
 #股票代碼
 def getPre(a):
     table = pd.read_csv("preStock/"+a+'.csv')
+    
+    
+
     date = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24', '25', '26', '27', '28', '29', '30']
     opena = np.array(table.open)
     openlist = opena.tolist()
@@ -265,7 +285,6 @@ def getRSI(a, long, dd):
         zrsi = (aHi/(aHi-aLo))*100
         rsi.append(round(zrsi,2))
     return rsi
-
 def getPreRSI(a, long):
     csv = getCsv(a)
     days = long
@@ -291,8 +310,73 @@ def getPreRSI(a, long):
         zrsi = (aHi/(aHi-aLo))*100
         rsi.append(round(zrsi,2))
     return rsi
-#print(getPreRSI('2453',30))
+#print(getPreRSI('2427',30))
 #print(getRSI('2453',30,30))
+
+def getRecommend(a, long):
+    pre = getPreRSI(a, long)
+    increase = []
+    decrease = []
+    no = []
+    re = ""
+    nd = []
+    nnd = []
+    rnd = ""
+    nc = []
+    nnc = []
+    rnc = ""
+    for i in range(len(pre)):
+        day = getDay(datetime.date.today())
+        if pre[i]>70:
+            decrease.append(str(pre[i]))
+            nd.append(i)
+            nnd.append(day[i])
+        elif pre[i]<30:
+            increase.append(str(pre[i]))
+            nc.append(i)
+            nnc.append(day[i])
+        else:
+            no.append(str(pre[i]))
+    
+    for i in range(len(nd)):
+        if i == 0:
+            rnd = str(nnd[i])
+        elif nd[i]-nd[i-1] > 3:
+            rnd += "、" + str(nnd[i])
+    for i in range(len(nc)):
+        if i == 0:
+            rnc = str(nnc[i])
+        elif nc[i]-nc[i-1] > 3:
+            rnc += "、" + str(nnc[i])
+
+    if len(no) > len(pre)-5:
+        re += "未來股價的漲跌幅幅度較小，若要考慮進場或出場可以再觀望一到二個星期"
+    elif len(no) <= len(pre)-5:
+        re += "未來股價的高低點陣動相對較大，建議近期如要交易可多加關注每日的股市資訊"
+
+    if len(decrease) > 0:
+        if len(decrease) > len(increase):
+            re += "，預計會於" + rnd + "的前後股價將可能開始回溫，持續下跌的機會較低"
+            if len(increase) > 0:
+                re += "，而" + rnc + "則可能為近期內價格成長的巔峰"
+        elif len(decrease) < len(increase):
+            re += "，在" + rnc + "附近的日子裡，將會出現近期內股價的高點，很難再有新的突破，而在" + rnd + "則可能是股價停指下跌的信號"
+        elif len(decrease) == len(increase):
+            re += "，由於漲跌幅的陣動很大，股價較不穩定，進出場的風險較高，於" + rnc + "附近會出現高點，" + rnd + "會出現低點"
+
+    if len(increase) > 0:
+        if len(increase) > len(decrease):
+            re += "，預測表示" + rnc + "前後股價將會來到高點，之後下跌的機會相較於上漲還要高"
+            if len(decrease) > 0:
+                re += "，而" + rnd + "則可能會是價格開始上漲的起點"
+        elif len(increase) < len(decrease):
+            re += "，在" + rnc + "附近的日子裡，將會出現近期內股價的低點，比起下跌更有上漲的機會，而在" + rnc + "則是這段時間內的股價巔峰"
+        elif len(decrease) == len(increase):
+            re += "，由於漲跌幅的陣動很大，股價較不穩定，進出場的風險較高，於" + rnc + "附近會出現高點，" + rnd + "會出現低點"
+
+    re += "，可從近期的成交價格與技術指標來決定將來的投資策略。"
+    return re
+#print(getRecommend("2427", 30))
 
 def getAll(a):
     kd = getKD(a)

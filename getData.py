@@ -26,6 +26,9 @@ def getCsv(a):
     low = low.tolist()
     return datelist,closelist,capacitylist,turnoverlist,changelist,high,low,translist
 
+def getToday():
+    return datetime.date.today()
+
 def getNewsS(a,i):
     table = pd.read_csv("news/"+ a +'.csv')
     table = table.sort_values(by=['日期'], ascending=False)
@@ -44,7 +47,7 @@ def getDay(a):
     d = 0
     for i in range(30):
         z = startday + datetime.timedelta(days=d)
-        day.append(str(z).replace("-", "/"))
+        day.append(str(z).replace("-", "-"))
         if z.weekday() == 4:
             d += 3
         else:
@@ -54,13 +57,29 @@ def getDay(a):
 '''zz = getDay(datetime.date.today())
 print(zz)'''
 
-#股票代碼
-def getPre(a):
-    table = pd.read_csv("preStock/"+a+'.csv')
-    
-    
+def getPreDate(today, ago):
+    d = 0
+    re = []
+    for i in range(ago):
+        today = datetime.date.today() - datetime.timedelta(days=d)
+        wee = today.weekday()
+        if wee == 0:
+            d+=3
+        elif wee == 6:
+            d+=2
+        else:
+            d+=1
+        today = datetime.date.today() - datetime.timedelta(days=d)
+        wee = today.weekday()
+        re.append(today)
+    return re
 
-    date = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24', '25', '26', '27', '28', '29', '30']
+#股票代碼
+def getPre(a, data, date):
+    table = pd.read_csv("preStock/"+ a + "/" + str(data) +'.csv')
+    date = getDay(date)
+    #print(date)
+    #date = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24', '25', '26', '27', '28', '29', '30']
     opena = np.array(table.open)
     openlist = opena.tolist()
     close = np.array(table.close)
@@ -72,6 +91,21 @@ def getPre(a):
     low = np.array(table.low)
     low = low.tolist()
     return openlist,closelist,high,low,translist,date
+
+def getPreByDay(a, date):
+    
+    preDataDate = getPreDate(getToday(), date)
+    print(type(preDataDate))
+    re = []
+    ree = []
+    for i in range(len(preDataDate)):
+        s = str(preDataDate[i]).replace("-", "_")
+        dat = getPre(a, s, preDataDate[i])
+        re.append(dat)
+        ree.append(getRecommend(a,dat, i, preDataDate[i]))
+    return re, ree
+#for i in range(10):
+#print(getPreByDay("2427", 5))
 
 def getTodayCsv(a):
     table = pd.read_csv("catStock/"+a+'today.csv')
@@ -195,7 +229,7 @@ def getMACD(a):
 def getPreMACD(a):
     csv = getCsv(a)
     clo = csv[1][-34:]
-    aa = getPre(a)
+    aa = getPre(a, 0)
     clo = clo + aa[1]
     dif = []
     macd = []
@@ -285,19 +319,22 @@ def getRSI(a, long, dd):
         zrsi = (aHi/(aHi-aLo))*100
         rsi.append(round(zrsi,2))
     return rsi
-def getPreRSI(a, long):
+def getPreRSI(a, date, ago):
     csv = getCsv(a)
-    days = long
-    clo = csv[1][-(days):]
-    aa = getPre(a)
-    clo = clo + aa[1]
+    days = 30
+    if ago == 0:
+        clo = csv[1][-(days):]
+    else:
+        clo = csv[1][-(days + ago):-ago]
+    aa = date[1]
+    clo = clo + aa
     change = []
     rsi = []
 
     for i in range(len(clo)-1):
         z = clo[i+1] - clo[i]
         change.append(z)
-    for i in range(len(aa[1])):
+    for i in range(len(aa)):
         hi = []
         lo = []
         for j in range(days):
@@ -313,8 +350,8 @@ def getPreRSI(a, long):
 #print(getPreRSI('2427',30))
 #print(getRSI('2453',30,30))
 
-def getRecommend(a, long):
-    pre = getPreRSI(a, long)
+def getRecommend(a, data, ago, date):
+    pre = getPreRSI(a, data, ago)
     increase = []
     decrease = []
     no = []
@@ -326,7 +363,7 @@ def getRecommend(a, long):
     nnc = []
     rnc = ""
     for i in range(len(pre)):
-        day = getDay(datetime.date.today())
+        day = getDay(date)
         if pre[i]>70:
             decrease.append(str(pre[i]))
             nd.append(i)
@@ -375,7 +412,7 @@ def getRecommend(a, long):
             re += "，由於漲跌幅的陣動很大，股價較不穩定，進出場的風險較高，於" + rnc + "附近會出現高點，" + rnd + "會出現低點"
 
     re += "，可從近期的成交價格與技術指標來決定將來的投資策略。"
-    return re
+    return re, pre
 #print(getRecommend("2427", 30))
 
 def getAll(a):
@@ -413,6 +450,15 @@ def getFin(sid,a):
         aa = []
         head.append(aa)
     return head, data
-#aa = getFin(2427,2)
-#print(aa[1])
-#print(len(aa[1]))
+'''aa = getFin(2427,0)
+print(aa[1][1])
+print(len(aa))'''
+
+def getAllFin(sid):
+    re = []
+    for i in range(8):
+        re.append( getFin(sid,i))
+    return re
+#aa = getAllFin("2427")
+
+print(len(getPreByDay("2427", 10)[1][0]))

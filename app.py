@@ -31,7 +31,7 @@ app.config.update(
     MAIL_DEFAULT_SENDER=('admin', 'jjfj3750@gmail.com'),
     MAIL_MAX_EMAILS=10,
     MAIL_USERNAME='jjfj3750@gmail.com',
-    MAIL_PASSWORD='<a1s2d3f4>'
+    MAIL_PASSWORD=''
 )
 mail = Mail(app)
 
@@ -128,8 +128,8 @@ def indexId(stId):
     data = getData.getData(stId)
     datatoday = getData.getTodayCsv(stId)
     dataTec = getData.getAll(stId)
-    dataFin = getData.getFin(stId, 0)
-    dataPre = getData.getPre(stId)
+    dataFin = getData.getAllFin(stId)
+    dataPre = getData.getPreByDay(stId, 10)
     dataNews = getData.getNewsS(stId, n)
     dataFav = revise.getlike(current_user.id)
     return render_template('index.html', stock = stId, name = name, re = data, today = datatoday, tec = dataTec, fin = dataFin, pre = dataPre, news = dataNews, n = n, reFav = dataFav)  
@@ -292,7 +292,7 @@ def predict(cType,stId):
     chart = getID.checkPre(cType)
     if err == 0:
         stockID = stId
-    dataPre = getData.getPre(stockID)
+    dataPre = getData.getPre(stockID, 0)
     print(dataPre)
     name = getID.getName(stockID)
     return render_template('predict.html', name = name, pre = dataPre, cType = chart, err = err, stock = stockID)     

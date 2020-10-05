@@ -172,7 +172,7 @@ div.sidebar1 .bd-toc-item .text ul li a:hover {
 div.content{
     /* --border:1px black solid;-- */
     background:#ffffff;
-    width: 69vw;
+    width: 70vw;
     height:190vw;
 	float: left; 
 	margin: 0;
@@ -195,13 +195,17 @@ div.clear{
 div.newsbar{
 	background-color: rgb(189, 199, 243);
 	width: 69vw;
-	height: 600px;
+	height: 640px;
 }
 
 div.newsbar h2{
     font-size:25px;
 	font-weight:450;
 	
+}
+
+#preTitle{
+	margin-top: -25px;
 }
 
 div.button{
@@ -247,13 +251,17 @@ div.pic{
 	height: 450px;
 	width: 69vw;
 }
+
+#recommend{
+	margin-top: 35px;
+}
 /* -------------------------------content結束----------------------------------- */
 
 /* -------------------------------新聞開始----------------------------------- */
 div.sidebar2{
     /* --border:1px black solid;-- */
     background-color:#fcfcfc;
-    width: 17vw;
+    width: 16vw;
     height:90vw;
 	float: right;
 	margin: 0;

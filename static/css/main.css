@@ -20,9 +20,11 @@ div.wrapper
 /* --------------------------header開始-------------------------------- */
 div.header
 {
-	background-color:	rgb(194, 202, 196);
+	background-color:	rgb(130, 202, 154);
+	opacity: 0.8;
 	width: 100vw;
-    height:8vw;
+	height:8vw;
+	position:relative;
 }
 
 div.title{
@@ -40,7 +42,7 @@ h1.title{
 	font-size:25px;
 	font-weight:500;
 	margin:0;
-	top:30px;
+	top:20px;
 }
 
 div.title a{
@@ -51,7 +53,7 @@ div.title a{
 
 img.avatar{
 	padding-left: 37.5vw;
-	margin-top:-30px;
+	margin-top:-40px;
 }
 
 
@@ -193,7 +195,7 @@ div.clear{
 }
 
 div.newsbar{
-	background-color: rgb(189, 199, 243);
+	background-color: rgb(153, 184, 163);
 	width: 69vw;
 	height: 640px;
 }

@@ -31,7 +31,7 @@ app.config.update(
     MAIL_DEFAULT_SENDER=('admin', 'jjfj3750@gmail.com'),
     MAIL_MAX_EMAILS=10,
     MAIL_USERNAME='jjfj3750@gmail.com',
-    MAIL_PASSWORD=''
+    MAIL_PASSWORD='<a1s2d3f4>'
 )
 mail = Mail(app)
 

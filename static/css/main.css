@@ -20,7 +20,7 @@ div.wrapper
 /* --------------------------header開始-------------------------------- */
 div.header
 {
-	background-color:	rgb(130, 202, 154);
+	background-color:#00AA00;
 	opacity: 0.8;
 	width: 100vw;
 	height:8vw;
@@ -39,12 +39,20 @@ h1.title{
 	color: #000000;
 	position: relative;
 	text-align: center;
+	vertical-align: middle;
 	font-size:25px;
 	font-weight:500;
 	margin:0;
 	top:20px;
+	padding-right: 100px;
+	padding-top: 20px;
 }
 
+div.login a{
+	clear: both;
+	position:relative;
+	float:left;
+}
 div.title a{
 	clear: both;
 	position: relative;
@@ -52,7 +60,7 @@ div.title a{
 }
 
 img.avatar{
-	padding-left: 37.5vw;
+	padding-left: 37vw;
 	margin-top:-40px;
 }
 
@@ -71,14 +79,14 @@ img.avatar{
 div.sidebar1{
 	/* --border:1px black solid;-- */
 	clear: both;
-    background-color: #FFFFFF;
-    width: 14vw;
+    background-color: #668800;
+    width: 13vw;
     height:90vw;
 	float:left;
 	margin: 0;
 }
 div.sidebar1 .bd-toc-item {
-	width:14vw;
+	width:13vw;
 	margin:0;
 	text-align: center;
 }
@@ -152,7 +160,7 @@ div.sidebar1 .bd-toc-item .img ul li{
 div.sidebar1 .bd-toc-item .text ul li a { 
 	clear: both;
 	float: left;
-	color:gray;
+	color:#FFF;
 	font-size: 14px;
 	font-weight: 300;
 	line-height:30px;
@@ -173,7 +181,7 @@ div.sidebar1 .bd-toc-item .text ul li a:hover {
 /* -------------------------------content開始----------------------------------- */
 div.content{
     /* --border:1px black solid;-- */
-    background:#ffffff;
+    background:#99FF33;
     width: 70vw;
     height:190vw;
 	float: left; 
@@ -262,13 +270,60 @@ div.pic{
 /* -------------------------------新聞開始----------------------------------- */
 div.sidebar2{
     /* --border:1px black solid;-- */
-    background-color:#fcfcfc;
-    width: 16vw;
+    background-color:#668800;
+    width: 17vw;
     height:90vw;
 	float: right;
 	margin: 0;
 	overflow: auto;
 }
+
+div.sidebar2 ul{ 
+	clear: both;
+	float: left;
+	color:gray;
+	font-size: 14px;
+	font-weight: 300;
+	line-height:30px;
+	text-decoration:none; /*隱藏超連結底線*/
+	list-style-type: none;
+	padding:0 0 0 0;
+	
+}
+div.sidebar2 ul li a{ 
+	clear: both;
+	float: left;
+	color:#fff;
+	font-size: 16px;
+	font-weight: 300;
+	line-height:30px;
+	text-decoration:none; /*隱藏超連結底線*/
+	list-style-type: none;
+}
+
+div.sidebar2 ul li a:hover{ 
+	clear: both;
+	float: left;
+	color:#0000FF;
+	font-size: 18px;
+	font-weight: 300;
+	line-height:30px;
+	text-decoration:none; /*隱藏超連結底線*/
+	list-style-type: none;
+}
+
+div.sidebar2 ul li h5{ 
+	clear: both;
+	float: left;
+	color:#000;
+	font-size: 10px;
+	font-weight: 300;
+	line-height:30px;
+	text-decoration:none; /*隱藏超連結底線*/
+	list-style-type: none;
+}
+
+
 
 /* -------------------------------新聞結束----------------------------------- */
 

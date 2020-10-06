@@ -9,10 +9,16 @@ s = sched.scheduler(time.time, time.sleep)
 
 def catStocktoday():
     itStock = ['2427', '2453', '2468', '2471', '2480', '3029', '3130', '4994', '5203', '6112', '6183', '6214']
-    realtime = twstock.realtime.get(itStock)
-
-    while realtime['success'] == False :
-        realtime = twstock.realtime.get(itStock)
+    global realtime
+    a = True
+    while a :
+        try:
+            realtime = twstock.realtime.get(itStock)
+            if realtime['success'] == True:
+                a = False
+        except:
+            pass
+            
 
     print(realtime)
 
@@ -27,13 +33,13 @@ def catStocktoday():
         stock = {**realtime[stockID]['info'],**realtime[stockID]['realtime']}
         columns = ['time','latest_trade_price','trade_volume','accumulate_trade_volume','open','high','low']
         df = pandas.DataFrame([stock], columns = columns, index = [0])
-        target_file = f'catStock/{date}-{stockID}.csv'
+        target_file = f'catToday/{date}-{stockID}.csv'
         if os.path.exists(target_file):
             if realtime[stockID]['realtime']['latest_trade_price'] != '-' and realtime[stockID]['realtime']['trade_volume'] != '-':
-                df.to_csv('catStock/' + date + '-' + stockID + '.csv', mode='a',header=False , index = False,encoding = 'utf_8_sig')
+                df.to_csv('catToday/' + date + '-' + stockID + '.csv', mode='a',header=False , index = False,encoding = 'utf_8_sig')
         else:
             if realtime[stockID]['realtime']['latest_trade_price'] != '-' and realtime[stockID]['realtime']['trade_volume'] != '-':
-                df.to_csv('catStock/' + date + '-' + stockID + '.csv' , index = False,encoding = 'utf_8_sig')
+                df.to_csv('catToday/' + date + '-' + stockID + '.csv' , index = False,encoding = 'utf_8_sig')
 
     start_time = datetime.datetime.strptime(str(now.date())+'09:30', '%Y-%m-%d%H:%M')
     end_time =  datetime.datetime.strptime(str(now.date())+'13:30', '%Y-%m-%d%H:%M')

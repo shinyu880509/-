@@ -34,22 +34,10 @@
                 {% endwith %}></p>
                 <div id="login_register">
                     <input type="button" id="btn_register" value="寄送驗證信" onclick=ee()>
-                </div>
-                <p><label class="label_input">驗證碼</label><input type="text" id="email" class="text_field" 
-                    {% with messages = get_flashed_messages() %}
-                    {% if messages %}
-                        {% for message in messages %}
-                            {% if message[0] == "信" %}
-                                value="{{message[1:]}}"
-                            {% endif %}
-                        {% endfor %}
-                    {% endif %}
-                    {% endwith %}></p>
-                <div id="login_control">
-                    <input type="button" id="btn_send" value="送出" onclick="self.location.href='/revise'">
                     <input type="button" id="btn_back" value="返回"  onclick="self.location.href='/login'">
-                    
                 </div>
+               
+           
             </form>
         </div>
         <script src="https://code.jquery.com/jquery-1.12.4.js"></script>

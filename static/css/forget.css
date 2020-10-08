@@ -82,8 +82,8 @@ form p > * {
     height: 28px;
     line-height: 28px;
     text-align: center;
-    color: white;
-    background-color:#2b303c;
+    color: #000;
+    background-color:#e1e1e1;
     border-radius: 6px;
     border: 0;
     float:center;
@@ -98,8 +98,8 @@ form p > * {
     height: 28px;
     line-height: 28px;
     text-align: center;
-    color: white;
-    background-color:#2b303c;
+    color: #000;
+    background-color:#e1e1e1;
     border-radius: 6px;
     border: 0;
     float: right;

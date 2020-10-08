@@ -214,13 +214,17 @@
     
     <!---------------------------content開始------------------------------->
     <div class="content">
+        <div class="news">
         <div class="title1"><h2>{{name}}</h2></div>
+        <ul>
         {% for i in range(n) %}
             <li>
                 <a href = "{{news['網址'][i]}}" target="_blank">{{news['標題'][i]}}</a>
                 <h5>{{news['來源'][i]}}  {{news['日期'][i]}}</h5>
             </li>
         {% endfor %}
+        </ul>
+    </div>
 
     <!---------------------------footer開始------------------------------->
         <div class="footer">

@@ -1,16 +1,18 @@
 body {
-    font-family: 'Noto Sans TC', sans-serif;
+    /* ----font-family: 'Noto Sans TC', sans-serif;--- */
 	margin:0;
-    background-image: url("./../images/back.jpg");
+    background-image: url("./../images/back2.png");
     background-size: 100%;
     background-repeat: no-repeat;
     width: 100vw;
     height: 100vh;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+
 }
 /* --------------------------框框------------------------------- */
 #login_frame {
     width: 500px;
-    height: 330px;
+    height: 390px;
     position: relative;
     left: 50%;
     top: 50%;
@@ -19,7 +21,12 @@ body {
     background-color: rgba(255,255,255,0.7);
     border-radius: 10px;
     text-align: center;
-    
+}
+h.sign{
+    color:#000;
+    font-size: 30px;
+    font-weight: 900;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 form p > * {
     display: inline-block;
@@ -35,11 +42,11 @@ form p > * {
     font-size: 14px;
     font-family: 宋體;
     width: 65px;
-    height: 28px;
+    height: 30px;
     line-height: 28px;
     text-align: center;
     color: white;
-    background-color:#000000;
+    background-color:#fff;
     border-top-left-radius: 5px;
     border-bottom-left-radius: 5px;
 }
@@ -54,16 +61,19 @@ form p > * {
 /* --------------------------登入------------------------------- */
 #btn_login {
     font-size: 14px;
-    font-family: 宋體;
-    width: 120px;
+   /* -- font-family: 宋體;--- */
+    width: 343px;
     height: 28px;
     line-height: 28px;
     text-align: center;
     color:#FFFFFF;
-    background-color:#000000;
-    border-radius: 6px;
+    background-color:#2b303c;
+    /* --border-radius: 6px;-- */
     border: 0;
+    position: fixed;
     float: center;
+    margin-top: 70px;
+    margin-left: -124px;
 }
 
 div.tx ul{
@@ -73,7 +83,7 @@ div.tx ul{
 /* --------------------------忘記密碼------------------------------- */
 #forget {
     font-size: 12px;
-    color:rgba(0,0,0,0.7);
+    color:#778485;
     text-decoration: none;
     position: relative;
     float:right;
@@ -82,9 +92,9 @@ div.tx ul{
 
 }
 #forget:hover {
-    color: blue;
+    color: #000;
     text-decoration: underline;
-    font-size: 15px;
+    /*-- font-size: 15px;字型放大我先刪掉喔-- */
 }
 
 
@@ -92,7 +102,7 @@ div.tx ul{
 #account{
     clear: both;
     font-size: 12px;
-    color:rgba(0,0,0,0.7);
+    color:#778485;
     text-decoration: none;
     position: relative;
     float: right;
@@ -100,9 +110,9 @@ div.tx ul{
     top: 5px;
     }
 #account:hover {
-    color: blue;
+    color: #000;
     text-decoration: underline;
-    font-size:15px;
+    /*-- font-size: 15px;字型放大我先刪掉喔-- */
 }
 #login_control {
 padding: 0 28px;

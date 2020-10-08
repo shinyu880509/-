@@ -1,7 +1,7 @@
 body {
-    font-family: 'Noto Sans TC', sans-serif;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 	margin:0;
-	background-image: url("./../images/back.jpg");
+	background-image: url("./../images/back2.png");
     background-size: 100%;
     background-repeat: no-repeat;
     width: 100vw;
@@ -10,7 +10,7 @@ body {
 /* -----------------------中間的框框--------------------------- */
 #login_frame {
     width: 500px;
-    height: 330px;
+    height: 390px;
     position: relative;
     left: 50%;
     top: 50%;
@@ -32,13 +32,12 @@ form p > * {
 /* ------------------------帳號 密碼 email 確認密碼欄位---------------------------- */
 .label_input {
     font-size: 14px;
-    font-family: 宋體;
     width: 65px;
     height: 28px;
     line-height: 28px;
     text-align: center;
-    color: white;
-    background-color:#000000;
+    color: #000;
+    background-color:#e1e1e1;
     border-top-left-radius: 5px;
     border-bottom-left-radius: 5px;
 }
@@ -55,32 +54,32 @@ form p > * {
 /* ------------------------註冊按鍵---------------------------- */
 #btn_register {
     font-size: 14px;
-    font-family: 宋體;
     width: 120px;
     height: 28px;
     line-height: 28px;
     text-align: center;
     color: white;
-    background-color: #000000;
+    background-color:#2b303c;
     border-radius: 6px;
     border: 0;
     float: center;
     margin-left: 120px;
+    margin-top: 30px;
 }
 
 /* ------------------------返回按鍵---------------------------- */
 #btn_back {
     font-size: 14px;
-    font-family: 宋體;
     width: 60px;
     height: 28px;
     line-height: 28px;
     text-align: center;
     color: white;
-    background-color: #000000;
+    background-color:#2b303c;
     border-radius: 6px;
     border: 0;
     float: right;
     margin-right: 80px;
+    margin-top: 30px;
 }
 

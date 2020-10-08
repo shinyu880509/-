@@ -11,8 +11,10 @@
     <body>
         <div id="login_frame">
             <p id="image_logo"><img src="{{ url_for('static', filename='images/icon.png') }}" width="80" height="80"></p>
+            <h class="forgot">忘記密碼？</h>
+            <p class="forgot_content">請輸入您的帳號及電子郵件，我們將會寄送驗證碼給您，好讓您修改您的密碼。</p>
             <form method="post" action="register.js">
-            <p><label class="label_input">帳號名稱</label><input type="text" id="username" class="text_field" 
+            <p><label class="label_input">帳號名稱</label><input type="text" id="username" class="text_field"
                 {% with messages = get_flashed_messages() %}
                 {% if messages %}
                     {% for message in messages %}
@@ -22,7 +24,7 @@
                     {% endfor %}
                 {% endif %}
                 {% endwith %}></p>
-            <p><label class="label_input">E-mail</label><input type="text" id="email" class="text_field" 
+            <p><label class="label_input">E-mail</label><input type="text" id="email" class="text_field"
                 {% with messages = get_flashed_messages() %}
                 {% if messages %}
                     {% for message in messages %}

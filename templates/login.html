@@ -11,10 +11,11 @@
     <body>
         <div id="login_frame">
             <p id="image_logo"><img src="{{ url_for('static', filename='images/icon.png') }}" width="80" height="80"></p>
+            <h class="sign">───── Sign in ─────</h>
             <form method="post" action="login.js">
 
             <!--登入失敗回傳帳號-->
-            <p><label class="label_input">帳號</label><input type="text" id="username" class="text_field"
+            <p><label class="label_input"><img src="static/images/username.png" width="28" height="28"></label><input type="text" id="username" class="text_field"  placeholder="Username"
             {% with messages = get_flashed_messages() %}
                 {% if messages %}
                     {% for message in messages %}
@@ -25,7 +26,7 @@
                 {% endif %}
             {% endwith %}></p>
 
-            <p><label class="label_input">密碼</label><input type="text" id="password" class="text_field"></p>
+            <p><label class="label_input" ><img src="static/images/lock.png" width="28" height="28"></label><input type="text" id="password" class="text_field" placeholder="Password"> </p>
 
             <!--登入失敗訊息-->
             {% with messages = get_flashed_messages() %}
@@ -39,7 +40,6 @@
             {% endwith %}
 
                 <div id="login_control">
-                    <input type="button" id="btn_login" value="登入" onclick="login();"/>
                     <div class="tx">
                         <ul>
                             <a id="forget" href="/forget">忘記密碼</a>
@@ -51,6 +51,8 @@
                             <a id="account" href="/manage">管理帳號</a>
                         </ul> 
                     </div>
+                    <input type="button" id="btn_login" value="Login" onclick="login();"/>
+
                 </div>
             </form>
         </div>

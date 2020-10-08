@@ -332,7 +332,10 @@
     
     <!---------------------------新聞開始------------------------------->
         <div class="sidebar2">
+            <div class="newstitle">
             <h2>新聞</h2>
+            </div>
+            <div class="newscontent">
             <ul>
             {% for i in range(n) %}
                 <li>
@@ -342,6 +345,7 @@
             {% endfor %}
             </ul>
             <a href = "javascript:saveFavNews('{{stock}}')">more...</a>
+            </div>
         </div>
     <!---------------------------新聞結束------------------------------->
     

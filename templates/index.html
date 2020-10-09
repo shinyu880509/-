@@ -221,7 +221,7 @@
             <div class="title1"><h2>{{name}}</h2></div>
     <!---------------------------第一塊圖表開始------------------------------->           
                 <div class="newsbar">
-                    <h2>圖表</h2>
+                    <h2>走勢圖</h2>
                     <div class="button">
                         <button type="button1" class="today" onclick="butCha(0)">
                             當日
@@ -260,10 +260,11 @@
                     
                     <div class="pic">
                         <canvas id="canvasPre"></canvas>
+                        <div>
+                            <h4 id="recommend">{{pre[1][0][0]}}</h4>
+                        </div>
                     </div>
-                    <div>
-                        <h4 id="recommend">{{pre[1][0][0]}}</h4>
-                    </div>
+                    
                 </div>                   
     <!---------------------------第二塊預測結束------------------------------->
 

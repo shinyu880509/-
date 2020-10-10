@@ -23,7 +23,7 @@ div.header
 	background-color:#FFFFFF;
 	opacity: 0.8;
 	width: 100vw;
-	height:7vw;
+	height:8vw;
 	position:relative;
 }
 
@@ -43,16 +43,12 @@ h1.title{
 	font-size:25px;
 	font-weight:500;
 	margin:0;
-	top:20px;
-	padding-right: 100px;
-	padding-top: 20px;
+	top:10px;
+	padding-right: 10px;
+	padding-top: -40px;
 }
 
-div.login a{
-	clear: both;
-	position:relative;
-	float:left;
-}
+
 div.title a{
 	clear: both;
 	position: relative;
@@ -205,7 +201,7 @@ div.clear{
 }
 
 div.newsbar{
-	border:1px black solid; 
+	
 	background-color: #f5f5f5;
 	width: 69vw;
 	height: 640px;

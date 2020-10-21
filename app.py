@@ -9,6 +9,7 @@ import datetime
 import sqlite3
 from flask_login import LoginManager, UserMixin, login_user, current_user, login_required, logout_user 
 
+from livereload import Server
 app = Flask(__name__)
 app.config["JSON_AS_ASCII"] = False
 a = 0
@@ -325,6 +326,8 @@ def request_loader(request):
     user.is_authenticated = a
     return user
 
-
 if __name__ == "__main__":
+    #live_server = Server(app.wsgi_app)
+    #live_server.watch("**/*.*")
+    #live_server.serve(open_url_delay=True)
     app.run(debug=True)

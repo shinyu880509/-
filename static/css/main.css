@@ -24,11 +24,18 @@ div.header
 	opacity: 0.8;
 	width: 100vw;
 	height:8vw;
-	position:relative;
+	position:fixed;
+}
+
+div.fakeHeader
+{
+	width: 100vw;
+	height:8vw;
+	
 }
 
 div.title{
-	position:relative;
+	
 	height: 7vw;
 	text-align: center;
 	vertical-align: middle;
@@ -51,7 +58,7 @@ h1.title{
 
 div.title a{
 	clear: both;
-	position: relative;
+	
 	float:left;
 }
 
@@ -74,8 +81,17 @@ img.avatar{
 /* -------------------------------左方欄開始----------------------------------- */
 div.sidebar1{
 	/* --border:1px black solid;-- */
+	position: fixed;
 	clear: both;
     background-color: #2b303c;
+    width: 13vw;
+    height:80vw;
+	float:left;
+	margin: 0;
+}
+div.fakeSidebar1{
+	/* --border:1px black solid;-- */
+	clear: both;
     width: 13vw;
     height:80vw;
 	float:left;
@@ -182,7 +198,7 @@ div.content{
     height:88vw;
 	float: left; 
 	margin: 0;
-	overflow: scroll;
+	/*overflow: auto;*/
 	
 }
 
@@ -272,7 +288,9 @@ div.pic{
 
 /* -------------------------------新聞開始----------------------------------- */
 div.sidebar2{
-    /* --border:1px black solid;-- */
+	/* --border:1px black solid;-- */
+	position: fixed;
+	right: -1vw;
 	background-color: aquamarine;
     width: 17vw;
     height:85vw;
@@ -369,7 +387,7 @@ div.footer{
     line-height:70px;
     width: 100vw;
     margin-top:3vh;
-    margin-left:auto;
+    margin-left:-13vw;
     margin-right:auto;
     text-align:center;
     color:#fff;

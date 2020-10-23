@@ -1,4 +1,4 @@
-from flask import Flask, request, render_template , redirect , url_for, flash
+from flask import Flask, request, render_template , redirect , url_for, flash, send_file
 from flask_mail import Mail,Message
 import pandas as pd
 import csv
@@ -240,7 +240,10 @@ def searchPre(cType):
         stockID = ID
     return redirect(url_for('predict', stId = stockID, cType = chart[0]))    
     
-
+#@app.route("/catStock/2427today.csv")
+#def haha():
+    #return send_file("catStock/2427today.csv")
+    
 #進入30日圖表 /chart/30days/2427
 #進入當日圖表 /chart/today/2427
 @app.route("/chart/<cType>/<stId>")

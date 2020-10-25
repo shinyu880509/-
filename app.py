@@ -240,9 +240,9 @@ def searchPre(cType):
         stockID = ID
     return redirect(url_for('predict', stId = stockID, cType = chart[0]))    
     
-#@app.route("/catStock/2427today.csv")
-#def haha():
-    #return send_file("catStock/2427today.csv")
+@app.route("/catStock/2427today.csv")
+def haha():
+    return send_file("catStock/2427today.csv")
     
 #進入30日圖表 /chart/30days/2427
 #進入當日圖表 /chart/today/2427
@@ -330,7 +330,7 @@ def request_loader(request):
     return user
 
 if __name__ == "__main__":
-    #live_server = Server(app.wsgi_app)
+    live_server = Server(app.wsgi_app)
     #live_server.watch("**/*.*")
-    #live_server.serve(open_url_delay=True)
-    app.run(debug=True)
+    live_server.serve(open_url_delay=True)
+    #app.run(debug=True)

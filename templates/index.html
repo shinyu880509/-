@@ -260,6 +260,32 @@
                         </ul>
                     <!--</div>-->
                     <div class="pic">
+                        <canvas id="canvasToday"></canvas>
+                    </div>
+                </div>           
+    <!---------------------------第一塊圖表結束------------------------------->  
+
+    <!---------------------------第一塊圖表開始------------------------------->           
+                <div class="newsbar">
+                    <h2>走勢圖</h2>
+                    <div class="button">
+                        <button type="button1" class="today" onclick="butCha(0)">
+                            當日
+                        </button>
+                        <button type="button1" class="today" onclick="butCha(1)">
+                            近三十日
+                        </button>
+                    </div>
+                    <!--<div class="navbar1">-->
+                        <ul id="detail">
+                            <li>開盤價:{{today[3][0]}}</li>
+                            <li>最高價:{{today[3][1]}}</li>
+                            <li>最低價:{{today[3][2]}}</li>
+                            <li>收盤價:{{today[3][3]}}</li>
+                            <li>總交易量:{{today[3][4]}}</li>
+                        </ul>
+                    <!--</div>-->
+                    <div class="pic">
                         <canvas id="canvasCha"></canvas>
                     </div>
                 </div>           
@@ -390,7 +416,7 @@
     dataFile = '2427today.csv';
     dataUrl = dataPath + dataFile;
     var ttt = [];
-    $.extend({
+    /*$.extend({
             csv: function (url, f) {
                 $.get(url, function (record) {
                     //按回車拆分  
@@ -431,8 +457,8 @@
     }
     var handler = setInterval(function () {
         funt();
-        if (chaNum == 0)
-            butCha(0);
+        //if (chaNum == 0)
+            //butCha(0);
     },5000);
     
 
@@ -445,7 +471,7 @@
         $(a).toggle(); 
         $(b).toggle(); 
         $(c).toggle(); 
-    });
+    });*/
 
     function newFav(aa){
         if (fav.indexOf(aa) == -1)
@@ -483,7 +509,7 @@
     function butCha(aa){
         chaNum = aa;
         var chartDay = {
-        labels: a, //顯示區間名稱
+        labels: time, //顯示區間名稱
         datasets: [{
             type: 'line',
             label: '收盤價', // tootip 出現的名稱
@@ -491,7 +517,7 @@
             backgroundColor: "#ea464d",
             borderColor: "#ea464d",
             borderWidth: 5,
-            data: b, // 資料
+            data: closetoday, // 資料
             fill: false, // 是否填滿色彩
         },{
             type: 'bar',
@@ -499,7 +525,7 @@
             backgroundColor: "#055ffa",
             borderColor: "#055ffa",
             borderWidth: 2,
-            data: c, // 資料
+            data: transtoday, // 資料
             fill: false, // 是否填滿色彩
             yAxisID: 'y-axis-1',
         }]
@@ -558,12 +584,11 @@
         if (aa == 1 && preDay < 9)
             preDay +=1;
         else if (aa == 1 && preDay >= 9)
-            alert("只有最近十天的記錄")
+            alert("只有最近十天的記錄");
         if (aa == 2 && preDay > 0)
             preDay -=1;
         else if  (aa == 2 && preDay == 0)
-            alert("此為最新資料")
-
+            alert("此為最新資料");
         preNum = preDay;
         if (preDay == 0){
             datePre = {{pre[0][0][5]|safe}};
@@ -658,6 +683,12 @@
                 yAxisID: 'y-axis-1',
             }]
         };
+        if (document.cookie.match(/pre=([^;]+)(;|$)/) != null && preReact == 0){
+            drawPre = new Chart(ctxPre,{data: chartDataPre,options: opNo});
+        }
+        if (preReact == 1)
+            drawPre.options = opAni;
+        preReact = 1
         drawPre.data = chartDataPre;
         drawPre.update();
     }
@@ -1074,22 +1105,30 @@
                 fill: false, // 是否填滿色彩
             }]
         };
+
+        if (document.cookie.match(/fin=([^;]+)(;|$)/) != null && finReact == 0){
+                drawFin = new Chart(ctxFin,{data: chartData1,options: opNo});
+        }
+        if (finReact == 1)
+            drawFin.options = opAni;
+        finReact = 1
+        
         if (aa == 0)
-            drawFin.config.data = chartData1;
+            drawFin.data = chartData1;
         else if (aa == 1)
-            drawFin.config.data = chartData2;
+            drawFin.data = chartData2;
         else if (aa == 2)
-            drawFin.config.data = chartData3;
+            drawFin.data = chartData3;
         else if (aa == 3)
-            drawFin.config.data = chartData4;
+            drawFin.data = chartData4;
         else if (aa == 4)
-            drawFin.config.data = chartData5;
+            drawFin.data = chartData5;
         else if (aa == 5)
-            drawFin.config.data = chartData6;
+            drawFin.data = chartData6;
         else if (aa == 6)
-            drawFin.config.data = chartData7;
+            drawFin.data = chartData7;
         else if (aa == 7)
-            drawFin.config.data = chartData8;
+            drawFin.data = chartData8;
         drawFin.update();
     }
 
@@ -1247,14 +1286,21 @@
                 yAxisID: 'y-axis-1',
             }]
         };
+        if (document.cookie.match(/tec=([^;]+)(;|$)/) != null && tecReact == 0){
+                drawTec = new Chart(ctxTec,{data: chartRsi,options: opNo});
+        }
+        if (tecReact == 1)
+            drawTec.options = opAni;
+        tecReact = 1
+
         if (aa == 0)
-            drawTec.config.data = chartRsi;
+            drawTec.data = chartRsi;
         else if (aa == 1)
-            drawTec.config.data = chartKd;
+            drawTec.data = chartKd;
         else if (aa == 2)
-            drawTec.config.data = chartMacd;
+            drawTec.data = chartMacd;
         else if (aa == 3)
-            drawTec.config.data = chartBias;
+            drawTec.data = chartBias;
         drawTec.update();
     }
 
@@ -1617,11 +1663,11 @@
     var drawFin = 0;
     var drawTec = 0;
     op = opAni;
-    if (document.cookie.match(/scrollTop=([^;]+)(;|$)/) == null)
-        drawCha = new Chart(ctxCha,{data: chartDay,options: opAni});
-        drawPre = new Chart(ctxPre,{data: chartDataPre,options: opAni});
-        drawFin = new Chart(ctxFin,{data: chartData1,options: opAni});
-        drawTec = new Chart(ctxTec,{data: chartRsi,options: opAni});
+    //if (document.cookie.match(/scrollTop=([^;]+)(;|$)/) == null)
+        //drawCha = new Chart(ctxCha,{data: chartDay,options: opAni});
+        //drawPre = new Chart(ctxPre,{data: chartDataPre,options: opAni});
+        //drawFin = new Chart(ctxFin,{data: chartData1,options: opAni});
+        //drawTec = new Chart(ctxTec,{data: chartRsi,options: opAni});
 
     window.onbeforeunload = function () {
         var scrollPos;
@@ -1642,10 +1688,11 @@
             var reChaNum = document.cookie.match(/cha=([^;]+)(;|$)/);
             butCha(reChaNum[1]);
             var rePreNum = document.cookie.match(/pre=([^;]+)(;|$)/);
-            preDay = rePreNum[1];
+            preDay = parseInt(rePreNum[1]);
             butPre(0);
             var reFinNum = document.cookie.match(/fin=([^;]+)(;|$)/);
             butFin(reFinNum[1]);
+            //alert(reFinNum[1]);
             var reTecNum = document.cookie.match(/tec=([^;]+)(;|$)/);
             butTec(reTecNum[1]);
             

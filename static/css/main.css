@@ -83,7 +83,7 @@ div.sidebar1{
 	/* --border:1px black solid;-- */
 	position: fixed;
 	clear: both;
-    background-color: #2b303c;
+    background-color: #444b5e;
     width: 13vw;
     height:80vw;
 	float:left;
@@ -172,7 +172,7 @@ div.sidebar1 .bd-toc-item .img ul li{
 div.sidebar1 .bd-toc-item .text ul li a { 
 	clear: both;
 	float: left;
-	color:#839293;
+	color:#a6aec0;
 	font-size: 14px;
 	font-weight: 300;
 	line-height:30px;

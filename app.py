@@ -16,7 +16,7 @@ a = 0
 app.secret_key = b'_5#y2L"F4Q8z\n\xec]/'
 
 #一頁新聞數量
-n = 15
+n = 3
 
 #登入管理
 login_manager = LoginManager()

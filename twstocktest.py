@@ -36,13 +36,14 @@ def catStocktoday():
         target_file = f'catToday/{date}-{stockID}.csv'
         if os.path.exists(target_file):
             if realtime[stockID]['realtime']['latest_trade_price'] != '-' and realtime[stockID]['realtime']['trade_volume'] != '-':
-                df.to_csv('catToday/' + date + '-' + stockID + '.csv', mode='a',header=False , index = False,encoding = 'utf_8_sig')
+                df.to_csv(target_file, mode='a',header=False , index = False,encoding = 'utf_8_sig')
+            
             df2 = pandas.read_csv(target_file)  
             dfDrop = df2.drop_duplicates() 
-            dfDrop.to_csv('catToday/' + date + '-' + stockID + '.csv', mode='w',header=False , index = False,encoding = 'utf_8_sig')  
+            dfDrop.to_csv(target_file, mode='w', columns = columns ,index = False,encoding = 'utf_8_sig')  
         else:
             if realtime[stockID]['realtime']['latest_trade_price'] != '-' and realtime[stockID]['realtime']['trade_volume'] != '-':
-                df.to_csv('catToday/' + date + '-' + stockID + '.csv' , index = False,encoding = 'utf_8_sig')
+                df.to_csv(target_file , index = False,encoding = 'utf_8_sig')
 
     start_time = datetime.datetime.strptime(str(now.date())+'09:30', '%Y-%m-%d%H:%M')
     end_time =  datetime.datetime.strptime(str(now.date())+'13:30', '%Y-%m-%d%H:%M')

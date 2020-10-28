@@ -2,6 +2,7 @@ import pandas as pd
 import csv
 import numpy as np
 import datetime
+import time
 
 #股票代碼
 def getCsv(a):
@@ -25,6 +26,40 @@ def getCsv(a):
     low = np.array(table.low)
     low = low.tolist()
     return datelist,closelist,capacitylist,turnoverlist,changelist,high,low,translist
+
+def getLive(a):
+    date = time.strftime('%Y%m%d')
+    try:
+        table = pd.read_csv("catToday/"+ date +"-"+ a +'.csv')
+        date = np.array(table.time)
+        datelist = date.tolist()
+        for i in range(len(date)):
+            aa = datelist[i].split(" ")
+            datelist[i] = aa[1]
+        price = np.array(table.latest_trade_price)
+        pricelist = price.tolist()
+        trans = np.array(table.trade_volume)
+        translist = trans.tolist()
+        high = np.array(table.high)
+        high = high.tolist()
+        low = np.array(table.low)
+        low = low.tolist()
+        op = np.array(table.open)
+        op = op.tolist()
+        aaa = []
+        aaa.append(op[len(op)-1])
+        aaa.append(high[len(high)-1])
+        aaa.append(low[len(low)-1])
+        aaa.append(pricelist[len(pricelist)-1])
+        aaa.append(translist[len(translist)-1])
+        aaa.append(datelist[len(datelist)-1])
+        print("aaa")
+        return datelist, pricelist, translist, aaa
+
+    except:
+        print("vvv")
+        return "error"
+    
 
 def getToday():
     return datetime.date.today()

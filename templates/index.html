@@ -239,38 +239,17 @@
     <!---------------------------content開始------------------------------->
         <div class="content">
             <div class="title1"><h2>{{name}}</h2></div>
-    <!---------------------------第一塊圖表開始------------------------------->           
-                <div class="newsbar">
-                    <h2>走勢圖</h2>
-                    <div class="button">
-                        <button type="button1" class="today" onclick="butCha(0)">
-                            當日
-                        </button>
-                        <button type="button1" class="today" onclick="butCha(1)">
-                            近三十日
-                        </button>
-                    </div>
-                    <!--<div class="navbar1">-->
-                        <ul id="detail">
-                            <li>開盤價:{{today[3][0]}}</li>
-                            <li>最高價:{{today[3][1]}}</li>
-                            <li>最低價:{{today[3][2]}}</li>
-                            <li>收盤價:{{today[3][3]}}</li>
-                            <li>總交易量:{{today[3][4]}}</li>
-                        </ul>
-                    <!--</div>-->
-                    <div class="pic">
-                        <canvas id="canvasToday"></canvas>
-                    </div>
-                </div>           
-    <!---------------------------第一塊圖表結束------------------------------->  
+    
 
     <!---------------------------第一塊圖表開始------------------------------->           
                 <div class="newsbar">
                     <h2>走勢圖</h2>
                     <div class="button">
                         <button type="button1" class="today" onclick="butCha(0)">
-                            當日
+                            昨日
+                        </button>
+                        <button type="button1" class="today" onclick="butCha(2)">
+                            即時
                         </button>
                         <button type="button1" class="today" onclick="butCha(1)">
                             近三十日
@@ -402,6 +381,10 @@
     var closetoday = {{today[1]|safe}};
     var transtoday = {{today[2]|safe}};
     var fav = {{reFav|safe}};
+
+    var datelive = {{live[0]|safe}};
+    var closelive= {{live[1]|safe}};
+    var translive = {{live[2]|safe}};
 
     var chaNum = 0;
     var preNum = 0;
@@ -553,6 +536,28 @@
                 yAxisID: 'y-axis-1',
             }]
         };
+        var chartLive = {
+            labels: datelive, //顯示區間名稱
+            datasets: [{
+                type: 'line',
+                label: '收盤價', // tootip 出現的名稱
+                lineTension: 0, // 曲線的彎度，設0 表示直線
+                backgroundColor: "#ea464d",
+                borderColor: "#ea464d",
+                borderWidth: 5,
+                data: closelive, // 資料
+                fill: false, // 是否填滿色彩
+            },{
+                type: 'bar',
+                label: '交易量', // tootip 出現的名稱
+                backgroundColor: "#055ffa",
+                borderColor: "#055ffa",
+                borderWidth: 2,
+                data: translive, // 資料
+                fill: false, // 是否填滿色彩
+                yAxisID: 'y-axis-1',
+            }]
+        };
 
         $('#detail').empty();
         if (aa == 1){
@@ -569,6 +574,15 @@
             }
             drawCha.data = chartDay;
         }
+        else if (aa == 2){
+            $('#detail').append("<li>開盤價:{{live[3][0]}}</li><li>最高價:{{live[3][1]}}</li><li>最低價:{{live[3][2]}}</li><li>最新一筆交易價格:{{live[3][3]}}</li><li>最新一筆交易量:{{live[3][4]}}</li><li>更新時間:{{live[3][5]}}</li>");
+            if (document.cookie.match(/cha=([^;]+)(;|$)/) != null && chaReact == 0){
+                drawCha = new Chart(ctxCha,{data: chartLive,options: opNo});
+            }
+            drawCha.data = chartLive;
+        }
+
+        
         if (chaReact == 1)
             drawCha.options = opAni;
             //drawCha = new Chart(ctxCha,{data: chartDay,options: op});
@@ -1308,6 +1322,31 @@
         ctxCha.remove(); // this is my <canvas> element
         
     }
+    
+
+    var chartLive = {
+        labels: datelive, //顯示區間名稱
+        datasets: [{
+            type: 'line',
+            label: '收盤價', // tootip 出現的名稱
+            lineTension: 0, // 曲線的彎度，設0 表示直線
+            backgroundColor: "#ea464d",
+            borderColor: "#ea464d",
+            borderWidth: 5,
+            data: closelive, // 資料
+            fill: false, // 是否填滿色彩
+        },{
+            type: 'bar',
+            label: '交易量', // tootip 出現的名稱
+            backgroundColor: "#055ffa",
+            borderColor: "#055ffa",
+            borderWidth: 2,
+            data: translive, // 資料
+            fill: false, // 是否填滿色彩
+            yAxisID: 'y-axis-1',
+        }]
+    };
+
     var chartDay = {
         labels: time, //顯示區間名稱
         datasets: [{

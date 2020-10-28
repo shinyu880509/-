@@ -128,12 +128,14 @@ def indexId(stId):
     name = getID.getName(stId)
     data = getData.getData(stId)
     datatoday = getData.getTodayCsv(stId)
+    datalive = getData.getLive(stId)
+    print(datalive)
     dataTec = getData.getAll(stId)
     dataFin = getData.getAllFin(stId)
     dataPre = getData.getPreByDay(stId, 10)
     dataNews = getData.getNewsS(stId, n)
     dataFav = revise.getlike(current_user.id)
-    return render_template('index.html', stock = stId, name = name, re = data, today = datatoday, tec = dataTec, fin = dataFin, pre = dataPre, news = dataNews, n = n, reFav = dataFav)  
+    return render_template('index.html', stock = stId, name = name, re = data, today = datatoday, tec = dataTec, fin = dataFin, pre = dataPre, news = dataNews, n = n, reFav = dataFav, live = datalive)  
 
 @app.route("/newFav/<typeA>/<stId>/<fav>")
 def newFav(fav, typeA, stId):
@@ -330,7 +332,7 @@ def request_loader(request):
     return user
 
 if __name__ == "__main__":
-    live_server = Server(app.wsgi_app)
-    #live_server.watch("**/*.*")
-    live_server.serve(open_url_delay=True)
-    #app.run(debug=True)
+    #live_server = Server(app.wsgi_app)
+    #live_server.watch("catToday/*.*")
+    #live_server.serve(open_url_delay=True)
+    app.run(debug=True)

@@ -38,9 +38,12 @@ def catStocktoday():
             if realtime[stockID]['realtime']['latest_trade_price'] != '-' and realtime[stockID]['realtime']['trade_volume'] != '-':
                 df.to_csv(target_file, mode='a',header=False , index = False,encoding = 'utf_8_sig')
             
-            df2 = pandas.read_csv(target_file)  
-            dfDrop = df2.drop_duplicates() 
-            dfDrop.to_csv(target_file, mode='w', columns = columns ,index = False,encoding = 'utf_8_sig')  
+            checkDF = pandas.read_csv(target_file, delimiter='\t', header = None)  
+            checkDF = checkDF.drop([0])
+            checkDF = checkDF.drop_duplicates() 
+            newDF = checkDF[0].str.split(',', 7, True)
+            newDF.columns = columns
+            newDF.to_csv(target_file, mode='w' ,index = False,encoding = 'utf_8_sig')  
         else:
             if realtime[stockID]['realtime']['latest_trade_price'] != '-' and realtime[stockID]['realtime']['trade_volume'] != '-':
                 df.to_csv(target_file , index = False,encoding = 'utf_8_sig')

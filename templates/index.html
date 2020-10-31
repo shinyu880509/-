@@ -16,13 +16,14 @@
                 <div class="login">
                     {% if current_user.is_authenticated %}
                     <a>登入成功{{current_user.id}}</a>
+                    <a href="javascript:saveFav('setting')">設定</a>
                     <a href="javascript:saveFav('logout')">登出</a>
                     {% endif %}
                 </div>
 
                 <div class="title">
                     <h1 class="title">資訊股分析網</h1>
-                    <a href="/"><img src="{{ url_for('static', filename='images/icon.png') }}"  width="80" height="80" class="avatar"></a>
+                    <a href="javascript:saveFav('{{stock}}')"><img src="{{ url_for('static', filename='images/icon.png') }}"  width="80" height="80" class="avatar"></a>
                 </div>     
     
                         <!---<div class="search">
@@ -216,7 +217,7 @@
         </div>
       
     <!---------------------------sidebar1結束------------------------------>
-    
+
     <!---------------------------新聞開始------------------------------->
     <div class="sidebar2">
         <div class="newstitle">
@@ -238,9 +239,9 @@
     
     <!---------------------------content開始------------------------------->
         <div class="content">
-            <div class="title1"><h2>{{name}}</h2></div>
-    
-
+            <div class="title1"><h2>{{name}}</h2></div> 
+    {% for i in range(5) %}
+    {% if ind[i]==0 %}
     <!---------------------------第一塊圖表開始------------------------------->           
                 <div class="newsbar">
                     <h2>走勢圖</h2>
@@ -269,7 +270,8 @@
                     </div>
                 </div>           
     <!---------------------------第一塊圖表結束------------------------------->      
-    
+
+    {% elif ind[i]==1 %}
     <!---------------------------第二塊預測開始------------------------------->
                 <div class="newsbar">
                     <h2>預測分析</h2>
@@ -293,6 +295,7 @@
                 </div>                   
     <!---------------------------第二塊預測結束------------------------------->
 
+    {% elif ind[i]==2 %}
     <!---------------------------第三塊財務分析開始------------------------------->
                 <div class="newsbar">
                     <h2>財務分析</h2>
@@ -329,6 +332,7 @@
                 </div>           
     <!---------------------------第三塊財務分析結束------------------------------->
 
+    {% elif ind[i]==3 %}
     <!---------------------------第四塊技術分析開始------------------------------->
                 <div class="newsbar">
                     <h2>技術分析</h2>
@@ -352,6 +356,27 @@
                     </div>
                 </div>                     
     <!---------------------------第四塊技術分析結束------------------------------->
+
+
+    {% elif ind[i]==4 %}
+    <!---------------------------第五塊圖表開始------------------------------->           
+                <div class="newsbar">
+                    <h2>討論區</h2>
+                    <div class="button">
+                        <button type="button1" class="today" onclick="butCha(0)">
+                            昨日
+                        </button>
+                        <button type="button1" class="today" onclick="butCha(2)">
+                            即時
+                        </button>
+                        <button type="button1" class="today" onclick="butCha(1)">
+                            近三十日
+                        </button>
+                    </div>
+                </div>           
+    <!---------------------------第五塊圖表結束------------------------------->     
+    {% endif %}
+    {% endfor %}
         <!---------------------------footer開始------------------------------->
         <div class="footer">
             &copyntubimd 109403組
@@ -443,7 +468,7 @@
         //if (chaNum == 0)
             //butCha(0);
     },5000);
-    
+    */
 
     fav.forEach(element => {
         var z = '.'+ element +'text'
@@ -454,7 +479,7 @@
         $(a).toggle(); 
         $(b).toggle(); 
         $(c).toggle(); 
-    });*/
+    });
 
     function newFav(aa){
         if (fav.indexOf(aa) == -1)
@@ -467,11 +492,15 @@
         if (fav.length == 0){
             if (aa == "logout")
                 window.location.href="/newFav/logout/" + aa + "/non";
+            else if (aa == "setting")
+                window.location.href="/newFav/setting/" + aa + "/non";
             else
                 window.location.href="/newFav/index/" + aa + "/non";
         }
         else if (aa == "logout")
             window.location.href="/newFav/logout/" + aa + "/" + fav.join("-");
+        else if (aa == "setting")
+            window.location.href="/newFav/setting/" + aa + "/" + fav.join("-");
         else
             window.location.href="/newFav/index/" + aa + "/" + fav.join("-");
     }

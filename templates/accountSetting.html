@@ -1,0 +1,323 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>專題-股票分析</title>
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<link href="https://fonts.googleapis.com/css?family=Noto+Sans+TC" rel="stylesheet">
+<link href="{{ url_for('static', filename='css/main.css') }}" rel="stylesheet" type="text/css" />      
+</head>
+<body>
+    
+<!----------------------------------------------------------->
+<div id="wrapper">
+    <!--------------------------header------------------------------->
+            <div class="header" >
+                <div class="login">
+                    {% if current_user.is_authenticated %}
+                    <a>登入成功{{current_user.id}}</a>
+                    <a href="javascript:saveFav('logout')">登出</a>
+                    {% endif %}
+                </div>
+
+                <div class="title">
+                    <h1 class="title">資訊股分析網</h1>
+                    <a href="/"><img src="{{ url_for('static', filename='images/icon.png') }}"  width="80" height="80" class="avatar"></a>
+                </div>     
+    
+                        <!---<div class="search">
+                            <ul>
+                                <img id="searchIcon" width="24px" src="https://s.yimg.com/cv/apiv2/twstock/icon-search.png"
+                                    srcset="https://s.yimg.com/cv/apiv2/twstock/icon-search@2x.png 2x, https://s.yimg.com/cv/apiv2/twstock/icon-search@3x.png 3x" />
+          我先隱藏搜尋               <input id="stock_id" type="text" name="stock_id" placeholder="搜尋台股代號/名稱" />
+                                    <img id="closeBtn" src="https://s.yimg.com/cv/apiv2/twstock/cancel.png"
+                                    srcset="https://s.yimg.com/cv/apiv2/twstock/cancel@2x.png 2x, https://s.yimg.com/cv/apiv2/twstock/cancel@3x.png 3x"
+                                    style="cursor: pointer; display: none" />
+                                    <button class="btn btn-primary my-2 my-sm-0" type="submit">搜尋</button>
+                            </ul>
+                        </div>  ----> 
+            </div>
+            <div class="fakeHeader" ></div>
+    <!---------------------------header結束------------------------------>
+        
+    <!---------------------------sidebar1---------- class="bd-toc-link" style="font-weight:bold; color: black; font-size:20px;"------------------->
+        <div class="sidebar1">
+            <div class="bd-toc-item">
+                <h3 class="title">
+                    資訊股代號
+                </h3>
+                <h4 class="myfavorite">
+                    我的最愛
+                </h4>
+                <div class="text">
+                    <ul>
+                        <li>
+                        <h class="2427text" style="display: none;"><a href="javascript:saveFav('2427')">2427三商電 </a></h>
+                        </li>
+                        <li>
+                        <h class="2453text"style="display: none;"><a href="javascript:saveFav('2453')">2453凌群 </a></h>
+                        </li>
+                        <li>
+                        <h class="2468text"style="display: none;"><a href="javascript:saveFav('2468')">2468華經 </a></h>
+                        </li>
+                        <li>
+                        <h class="2471text"style="display: none;"><a href="javascript:saveFav('2471')">2471資通 </a></h>
+                        </li>
+                        <li>
+                        <h class="2480text"style="display: none;"><a href="javascript:saveFav('2480')">2480敦陽 </a></h>
+                        </li>
+                        <li>
+                        <h class="3029text"style="display: none;"><a href="javascript:saveFav('3029')">3029零壹 </a></h>
+                        </li>    
+                        <li>
+                        <h class="3130text"style="display: none;"><a href="javascript:saveFav('3130')">3130一零四 </a></h>
+                        </li> 
+                        <li>
+                        <h class="4994text"style="display: none;"><a href="javascript:saveFav('4994')">4994傳奇 </a></h>
+                        </li>        
+                        <li>
+                        <h class="5203text"style="display: none;"><a href="javascript:saveFav('5203')">5203訊連 </a></h>
+                        </li>
+                        <li>
+                        <h class="6112text"style="display: none;"><a href="javascript:saveFav('6112')">6112聚碩 </a></h>
+                        </li>
+                        <li>
+                        <h class="6183text"style="display: none;"><a href="javascript:saveFav('6183')">6183關貿 </a></h>
+                        </li>
+                        <li>
+                        <h class="6214text"style="display: none;"><a href="javascript:saveFav('6214')">6214精誠 </a></h>
+                        </li>       
+                    </ul>
+                    
+                </div>
+                <div class="img">
+                    <ul>
+                        <li>
+                            <button class="but2427" style="display: none;" onclick="newFav('2427')"><img src=" {{ url_for('static', filename='images/minus.png'  ) }}  "width="10" height="10" class="plus"></a></button>
+                        </li>
+                        <li>
+                            <button class="but2453" style="display: none;" onclick="newFav('2453')"><img src=" {{ url_for('static', filename='images/minus.png'  ) }}  "width="10" height="10" class="plus"></a></button>                        
+                        </li>
+                        <li>
+                            <button class="but2468" style="display: none;" onclick="newFav('2468')"><img src=" {{ url_for('static', filename='images/minus.png'  ) }}  "width="10" height="10" class="plus"></a></button>                        
+                        </li>
+                        <li>
+                            <button class="but2471" style="display: none;" onclick="newFav('2471')"><img src=" {{ url_for('static', filename='images/minus.png'  ) }}  "width="10" height="10" class="plus"></a></button>                        
+                        </li>
+                        <li>
+                            <button class="but2480" style="display: none;" onclick="newFav('2480')"><img src=" {{ url_for('static', filename='images/minus.png'  ) }}  "width="10" height="10" class="plus"></a></button>                        
+                        </li>
+                        <li>
+                            <button class="but3029" style="display: none;" onclick="newFav('3029')"><img src=" {{ url_for('static', filename='images/minus.png'  ) }}  "width="10" height="10" class="plus"></a></button>                        
+                        </li>
+                        <li>
+                            <button class="but3130" style="display: none;" onclick="newFav('3130')"><img src=" {{ url_for('static', filename='images/minus.png'  ) }}  "width="10" height="10" class="plus"></a></button>                        
+                        </li>
+                        <li>
+                            <button class="but4994" style="display: none;" onclick="newFav('4994')"><img src=" {{ url_for('static', filename='images/minus.png'  ) }}  "width="10" height="10" class="plus"></a></button>                        
+                        </li>
+                        <li>
+                            <button class="but5203" style="display: none;" onclick="newFav('5203')"><img src=" {{ url_for('static', filename='images/minus.png'  ) }}  "width="10" height="10" class="plus"></a></button>                        
+                        </li>
+                        <li>
+                            <button class="but6112" style="display: none;" onclick="newFav('6112')"><img src=" {{ url_for('static', filename='images/minus.png'  ) }}  "width="10" height="10" class="plus"></a></button>                        
+                        </li>
+                        <li>
+                            <button class="but6183" style="display: none;" onclick="newFav('6183')"><img src=" {{ url_for('static', filename='images/minus.png'  ) }}  "width="10" height="10" class="plus"></a></button>                        
+                        </li>
+                        <li>
+                            <button class="but6214" style="display: none;" onclick="newFav('6214')"><img src=" {{ url_for('static', filename='images/minus.png'  ) }}  "width="10" height="10" class="plus"></a></button>                        
+                        </li>
+                    </ul>    
+                </div>
+                <h4 class="otherstock">
+                    所有代號
+                </h4>
+                <div class="text">
+                    <ul>
+                        <li>
+                            <a class="text2427" href="javascript:saveFav('2427')">2427三商電 </a>
+                        </li>
+                        <li>
+                            <a class="text2453" href="javascript:saveFav('2453')">2453凌群 </a>
+                        </li>
+                        <li>
+                            <a class="text2468" href="javascript:saveFav('2468')">2468華經 </a>
+                        </li>
+                        <li>
+                            <a class="text2471" href="javascript:saveFav('2471')">2471資通</a>
+                        </li>
+                        <li>
+                            <a class="text2480" href="javascript:saveFav('2480')">2480敦陽</a>
+                        </li>
+                        <li>
+                            <a class="text3029" href="javascript:saveFav('3029')">3029零壹 </a>
+                        </li>
+                        <li>
+                            <a class="text3130" href="javascript:saveFav('3130')">3130一零四</a>
+                        </li>
+                        <li>
+                            <a class="text4994" href="javascript:saveFav('4994')">4994傳奇 </a>
+                        </li>
+                        <li>
+                            <a class="text5203" href="javascript:saveFav('5203')">5203訊連 </a>
+                        </li>
+                        <li>
+                            <a class="text6112" href="javascript:saveFav('6112')">6112聚碩</a>
+                        </li>
+                        <li>
+                            <a class="text6183" href="javascript:saveFav('6183')">6183關貿 </a>
+                        </li>
+                        <li>
+                            <a class="text6214" href="javascript:saveFav('6214')">6214精誠 </a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="img">
+                    <ul>
+                        <li>
+                            <button class="button2427" onclick="newFav('2427')"><img src=" {{ url_for('static', filename='images/plus.png'  ) }}  "width="10" height="10" class="plus"></a></button>
+                        </li>
+                        <li>
+                            <button class="button2453" onclick="newFav('2453')"><img src=" {{ url_for('static', filename='images/plus.png'  ) }}  "width="10" height="10" class="plus"></a></button>                        
+                        </li>
+                        <li>
+                            <button class="button2468" onclick="newFav('2468')"><img src=" {{ url_for('static', filename='images/plus.png'  ) }}  "width="10" height="10" class="plus"></a></button>                        
+                        </li>
+                        <li>
+                            <button class="button2471" onclick="newFav('2471')"><img src=" {{ url_for('static', filename='images/plus.png'  ) }}  "width="10" height="10" class="plus"></a></button>                        
+                        </li>
+                        <li>
+                            <button class="button2480" onclick="newFav('2480')"><img src=" {{ url_for('static', filename='images/plus.png'  ) }}  "width="10" height="10" class="plus"></a></button>                        
+                        </li>
+                        <li>
+                            <button class="button3029" onclick="newFav('3029')"><img src=" {{ url_for('static', filename='images/plus.png'  ) }}  "width="10" height="10" class="plus"></a></button>                        
+                        </li>
+                        <li>
+                            <button class="button3130" onclick="newFav('3130')"><img src=" {{ url_for('static', filename='images/plus.png'  ) }}  "width="10" height="10" class="plus"></a></button>                        </li>
+                        <li>
+                            <button class="button4994" onclick="newFav('4994')"><img src=" {{ url_for('static', filename='images/plus.png'  ) }}  "width="10" height="10" class="plus"></a></button>                        
+                        </li>
+                        <li>
+                            <button class="button5203" onclick="newFav('5203')"><img src=" {{ url_for('static', filename='images/plus.png'  ) }}  "width="10" height="10" class="plus"></a></button>                        
+                        </li>
+                        <li>
+                            <button class="button6112" onclick="newFav('6112')"><img src=" {{ url_for('static', filename='images/plus.png'  ) }}  "width="10" height="10" class="plus"></a></button>                        
+                        </li>
+                        <li>
+                            <button class="button6183" onclick="newFav('6183')"><img src=" {{ url_for('static', filename='images/plus.png'  ) }}  "width="10" height="10" class="plus"></a></button>                        
+                        </li>
+                        <li>
+                            <button class="button6214" onclick="newFav('6214')"><img src=" {{ url_for('static', filename='images/plus.png'  ) }}  "width="10" height="10" class="plus"></a></button>                        
+                        </li>
+                    </ul>    
+                </div>
+            </div>
+        </div>
+      
+    <!---------------------------sidebar1結束------------------------------>
+        
+    
+    <!---------------------------content開始------------------------------->
+        <div class="content">
+            <div>
+                <h2>帳號</h2>
+                <h3>修改密碼</h3>
+                <h3>修改信箱</h3>
+            </div>
+            <div>
+                <h2>提醒設定</h2>
+                <h3>每日寄送關注股票之預測分析信件</h3>
+                <h3>關注股票至指定收盤價時寄送信件</h3>
+            </div>
+            <div>
+                <h2>更改顯示內容和順序</h2>
+                <h3 id="change0">走勢圖</h3> <button onclick="down(0)">往下</button>
+                <h3 id="change1">預測分析</h3> <button onclick="up(1)">往上</button><button onclick="down(1)">往下</button>
+                <h3 id="change2">財務分析</h3> <button onclick="up(2)">往上</button><button onclick="down(2)">往下</button>
+                <h3 id="change3">技術分析</h3> <button onclick="up(3)">往上</button><button onclick="down(3)">往下</button>
+                <h3 id="change4">討論區</h3> <button onclick="up(4)">往上</button>
+                <br>
+                <button onclick="savInd()">儲存</button><button onclick="reInd()">取消</button>
+            </div>
+
+        <!---------------------------footer開始------------------------------->
+        <div class="footer">
+            &copyntubimd 109403組
+        </div>
+        <!---------------------------footer結束-------------------------------> 
+    </div>
+    <!---------------------------content結束------------------------------->
+    </div>
+    <!------------------wrapper範圍------------------------>
+    <!---------------------------連結------------------------------->
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>      
+    <script src="{{ url_for('static', filename='scripts/main.js') }}"></script>    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.js"></script>
+    <script type="text/javascript">
+        var aa = ["走勢圖", "預測分析", "財務分析", "技術分析", "討論區"];
+        var b = {{ind}};
+        var aaa = {{ind}};
+        var id = ["change0", "change1", "change2", "change3", "change4"]
+        for(var i=0; i<5; i++){
+            c = document.getElementById(id[i]);
+            c.innerHTML = aa[b[i]];
+        }
+
+        function up(num){
+            var u = b[num];
+            var d = b[num-1];
+            b[num] = d;
+            b[num-1] = u;
+            refersh();
+        }
+
+        function down(num){
+            var u = b[num+1];
+            var d = b[num];
+            b[num+1] = d;
+            b[num] = u;
+            refersh();
+        }
+
+        function refersh(){
+            for(var i=0; i<5; i++){
+                c = document.getElementById(id[i]);
+                c.innerHTML = aa[b[i]];
+            }
+        }
+
+        function reInd(){
+            for(var i=0; i<5; i++){
+                c = document.getElementById(id[i]);
+                c.innerHTML = aa[aaa[i]];
+            }
+        }
+        
+        function savInd(){
+            var re = "";
+            for(var i=0; i<5; i++){
+                re += b[i];
+                if (i!=4)
+                    re+="-"
+            }
+            scrollPos = document.body.scrollTop;
+            window.location.href="/savInd/" + re;
+        }
+
+    window.onbeforeunload = function () {
+        var scrollPos;
+        scrollPos = document.body.scrollTop;
+
+    }
+
+    window.onload = function () {
+        if (document.cookie.match(/scrollTop=([^;]+)(;|$)/) != null) {
+            var arr = document.cookie.match(/scrollTop=([^;]+)(;|$)/); //cookies中不為空,則讀取滾動條位置
+            document.documentElement.scrollTop = parseInt(arr[1]);
+            document.body.scrollTop = parseInt(arr[1]);
+        }
+    }
+
+    </script>

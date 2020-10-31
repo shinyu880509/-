@@ -78,6 +78,39 @@ c.execute("select * from account")
 for rows in c.fetchall():
     print(rows)'''
 
+#新增順序
+'''conn = sqlite3.connect('stock.db')
+c =conn.cursor()
+c.execute("select * from indexStock")
+for rows in c.fetchall():
+    print(rows)
+    con = sqlite3.connect('stock.db')
+    cc = con.cursor()
+    con.execute("update indexStock set ind ='{}' where username = '{}';".format("0-1-2-3-4",rows[0]))
+    con.commit()
+    con.close()'''
+
+#取得順序
+def getIde(username):
+    conn = sqlite3.connect('stock.db')
+    cur = conn.cursor()
+    cur.execute("select * from indexStock where username = '{}';".format(username))
+    a = cur.fetchall()
+    conn.commit()
+    conn.close()
+    re = a[0][1].split("-")
+    re = list(map(int, re))
+    return re
+#print(getIde("10646021")[0])
+
+#更改順序
+def revIde(username, ind):
+    conn = sqlite3.connect('stock.db')
+    cur = conn.cursor()
+    cur.execute("update indexStock set ind ='{}' where username = '{}';".format(ind,username))
+    conn.commit()
+    conn.close()
+    return
 
 #關注寫入
 def like(username,stockID):
@@ -111,5 +144,5 @@ def getlike(username):
     conn.commit()
     conn.close()
     return a
-#print(getlike("10646021"))
+print(getlike("10646021"))
 

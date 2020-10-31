@@ -129,13 +129,13 @@ def indexId(stId):
     data = getData.getData(stId)
     datatoday = getData.getTodayCsv(stId)
     datalive = getData.getLive(stId)
-    print(datalive)
     dataTec = getData.getAll(stId)
     dataFin = getData.getAllFin(stId)
     dataPre = getData.getPreByDay(stId, 10)
     dataNews = getData.getNewsS(stId, n)
     dataFav = revise.getlike(current_user.id)
-    return render_template('index.html', stock = stId, name = name, re = data, today = datatoday, tec = dataTec, fin = dataFin, pre = dataPre, news = dataNews, n = n, reFav = dataFav, live = datalive)  
+    dataInd = revise.getIde(current_user.id)
+    return render_template('index.html', stock = stId, name = name, re = data, today = datatoday, tec = dataTec, fin = dataFin, pre = dataPre, news = dataNews, n = n, reFav = dataFav, live = datalive, ind = dataInd)  
 
 @app.route("/newFav/<typeA>/<stId>/<fav>")
 def newFav(fav, typeA, stId):
@@ -148,6 +148,8 @@ def newFav(fav, typeA, stId):
         return redirect(url_for('news', stId = stId))
     elif typeA == "logout":
         return redirect(url_for('logout'))
+    elif typeA == "setting":
+        return redirect(url_for('accountSetting'))
 
 @app.route("/news/<stId>")
 def news(stId):
@@ -157,6 +159,20 @@ def news(stId):
     dataNews = getData.getNews(stId)
     dataFav = revise.getlike(current_user.id)
     return render_template('news.html', stock = stId, name = name, news = dataNews, n = len(dataNews), reFav = dataFav)  
+
+#個人化設定
+@app.route("/setting")
+def accountSetting():
+    if current_user.is_authenticated == False:
+        return redirect(url_for('index'))
+    ind = revise.getIde(current_user.id)
+    return render_template('accountSetting.html', ind = ind) 
+
+#個人化設定儲存--順序
+@app.route("/savInd/<ind>")
+def savIndex(ind):
+    revise.revIde(current_user.id, ind)
+    return redirect(url_for('accountSetting'))
 
 @app.route("/account")
 def account():
@@ -181,6 +197,11 @@ def registers(userId, userPasswd, userEmail):
                 con.close()
     finally:
         if err == 0:
+            con = sqlite3.connect('stock.db')
+            cc = con.cursor()
+            cc.execute("insert into indexStock(username,ind) values('{}','{}');".format(userId,[0,1,2,3]))
+            con.commit()
+            con.close()
             return redirect(url_for('login'))
         else:
             flash("帳" + userId)

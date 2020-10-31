@@ -107,6 +107,10 @@ def deleteAcc(uid):
             cur = con.cursor()
             cur.execute("delete from account where username = '" + uid + "'")
             con.commit()
+        with sqlite3.connect("stock.db") as con:
+            cur = con.cursor()
+            cur.execute("delete from indexStock where username = '" + uid + "'")
+            con.commit()
     return
 
 def alterAcc(uid, n, ty):

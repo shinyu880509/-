@@ -135,7 +135,9 @@ def indexId(stId):
     dataNews = getData.getNewsS(stId, n)
     dataFav = revise.getlike(current_user.id)
     dataInd = revise.getIde(current_user.id)
-    return render_template('index.html', stock = stId, name = name, re = data, today = datatoday, tec = dataTec, fin = dataFin, pre = dataPre, news = dataNews, n = n, reFav = dataFav, live = datalive, ind = dataInd)  
+    dataArt = revise.getArtcile(stId)
+    lenArt = len(dataArt)
+    return render_template('index.html', stock = stId, name = name, re = data, today = datatoday, tec = dataTec, fin = dataFin, pre = dataPre, news = dataNews, n = n, reFav = dataFav, live = datalive, ind = dataInd, art = dataArt, lenArt = lenArt)  
 
 @app.route("/newFav/<typeA>/<stId>/<fav>")
 def newFav(fav, typeA, stId):

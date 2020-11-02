@@ -2,9 +2,16 @@ import sqlite3
 
 conn = sqlite3.connect('stock.db')
 c =conn.cursor()
-c.execute('''CREATE TABLE indexStock
-       (username  CHAR(50)  PRIMARY KEY     NOT NULL,
-        ind  INT(50)    NOT NULL);''')
+c.execute('''CREATE TABLE postArticle
+       (username  CHAR(50)  NOT NULL,
+        stockId  CHAR(50)    NOT NULL,
+        article  CHAR(50)    NOT NULL,
+        floor  CHAR(50)    NOT NULL,
+        aTitle  CHAR(50)    NOT NULL,
+        aText  CHAR(50)    NOT NULL,
+        aLike  CHAR(50)    NOT NULL,
+        aDislike  CHAR(50)    NOT NULL,
+        aTime  CHAR(50)    NOT NULL);''')
 #創建資料表
 """
 c.execute('''CREATE TABLE account
@@ -20,6 +27,10 @@ c.execute('''CREATE TABLE verification
       (username  CHAR(50)  PRIMARY KEY     NOT NULL,
        email      CHAR(50)     NOT NULL,
        verification CHAR(50));''')
+
+c.execute('''CREATE TABLE indexStock
+       (username  CHAR(50)  PRIMARY KEY     NOT NULL,
+        ind  INT(50)    NOT NULL);''')
 """
 conn.commit()
 conn.close()

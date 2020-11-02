@@ -144,5 +144,24 @@ def getlike(username):
     conn.commit()
     conn.close()
     return a
-print(getlike("10646021"))
+#print(getlike("10646021"))
 
+#新增順序
+'''conn = sqlite3.connect('stock.db')
+c =conn.cursor()
+c.execute("insert into postArticle(username,stockId,article,floor,aTitle,aText,aLike,aDislike,aTime) values('{}','{}','{}','{}','{}','{}','{}','{}','{}');".format("10646021","2427","03","0","test456789","test123","1","1","2020/11/3 2:33"))
+conn.commit()
+conn.close()'''
+
+def getArtcile(stid):
+    conn = sqlite3.connect('stock.db')
+    c =conn.cursor()
+    c.execute("select * from postArticle where stockId = '{}';".format(stid))
+    re = []
+    for rows in c.fetchall():
+        aa = []
+        for i in range(len(rows)):
+            aa.append(rows[i])
+        re.append(aa)
+    return re
+#print(getArtcile("2427"))

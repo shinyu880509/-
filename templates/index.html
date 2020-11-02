@@ -363,15 +363,48 @@
                 <div class="newsbar">
                     <h2>討論區</h2>
                     <div class="button">
-                        <button type="button1" class="today" onclick="butCha(0)">
-                            昨日
+                        <button type="button1" class="today" onclick="relist()">
+                            回列表
                         </button>
                         <button type="button1" class="today" onclick="butCha(2)">
-                            即時
+                            發文
                         </button>
-                        <button type="button1" class="today" onclick="butCha(1)">
-                            近三十日
-                        </button>
+                    </div>
+
+                    <div>
+                        <table id="outArt" bgcolor=white>
+                            <tr bgcolor=lightgray>
+                                <td width=60%>標題</td>
+                                <td>帳號</td>
+                                <td>人氣</td>
+                                <td>最新回覆</td>
+                            </tr>
+                        {% for i in range(lenArt) %}
+                            {% if i%2==0 %}
+                            <tr>
+                            {% else %}
+                            <tr bgcolor=lightgray>
+                            {% endif %}
+                                <td width=60%><a href="javascript:intoArt({{i}})">{{art[i][4]}}</a></td>
+                                <td>{{art[i][0]}}</td>
+                                <td>{{art[i][6]}}/{{art[i][7]}}</td>
+                                <td>{{art[i][8]}}</td>
+                            </tr>
+                        {% endfor %}
+                        </table> 
+                    </div>
+                    <div>
+                        <table id="inArt" bgcolor=white style="display: none;">
+                            <tr bgcolor=lightgray>
+                                <td id="Atitle"></td>
+                            </tr>
+                            <tr>
+                                <td id="Atext"></td>
+                            </tr>
+                            <tr>
+                                <td id="Arecom"></td>
+                            </tr>
+                        </table>
                     </div>
                 </div>           
     <!---------------------------第五塊圖表結束------------------------------->     
@@ -407,9 +440,15 @@
     var transtoday = {{today[2]|safe}};
     var fav = {{reFav|safe}};
 
+/*
     var datelive = {{live[0]|safe}};
     var closelive= {{live[1]|safe}};
-    var translive = {{live[2]|safe}};
+    var translive = {{live[2]|safe}};*/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    var datelive = [];
+    var closelive= [];
+    var translive = [];
+
+    var realArtData = {{art|safe}};
 
     var chaNum = 0;
     var preNum = 0;
@@ -469,6 +508,22 @@
             //butCha(0);
     },5000);
     */
+
+    
+
+    function relist(){
+        $('#outArt').toggle();
+        $('#inArt').toggle();
+    }
+
+    function intoArt(no){
+        $('#outArt').toggle();
+        $('#inArt').toggle();
+        $('#Atitle').empty();
+        $('#Atext').empty();
+        $('#Atitle').append(realArtData[no][4]);
+        $('#Atext').append(realArtData[no][5]);
+    }
 
     fav.forEach(element => {
         var z = '.'+ element +'text'

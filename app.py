@@ -162,6 +162,16 @@ def news(stId):
     dataFav = revise.getlike(current_user.id)
     return render_template('news.html', stock = stId, name = name, news = dataNews, n = len(dataNews), reFav = dataFav)  
 
+@app.route("/postArt/<stId>", methods=['GET', 'POST'])
+def postArt(stId):
+    if request.method == 'POST':
+        title = request.form.get('secTitle') + request.form.get('postTitle')
+        text = request.form.get('postText')
+        text = text.replace("\r\n", "<br>")
+        revise.postArtcile(current_user.id, stId, title, text)
+
+        return redirect(url_for('indexId', stId = stId))
+
 #個人化設定
 @app.route("/setting")
 def accountSetting():

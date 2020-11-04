@@ -1,5 +1,6 @@
 import sqlite3
 import random
+import datetime
 
 #驗證碼
 def generate_verification_code(len=6):
@@ -149,7 +150,7 @@ def getlike(username):
 #新增順序
 '''conn = sqlite3.connect('stock.db')
 c =conn.cursor()
-c.execute("insert into postArticle(username,stockId,article,floor,aTitle,aText,aLike,aDislike,aTime) values('{}','{}','{}','{}','{}','{}','{}','{}','{}');".format("10646021","2427","03","0","test456789","test123","1","1","2020/11/3 2:33"))
+c.execute("insert into postArticle(username,stockId,article,floor,aTitle,aText,aLike,aDislike,aTime) values('{}','{}','{}','{}','{}','{}','{}','{}','{}');".format("10646021","2427","03","0","test","test\r\n123133","1","1","2020/11/3 2:33"))
 conn.commit()
 conn.close()'''
 
@@ -165,3 +166,19 @@ def getArtcile(stid):
         re.append(aa)
     return re
 #print(getArtcile("2427"))
+
+def postArtcile(userid, stid, title, text):
+    time = datetime.datetime.today()
+
+    conn = sqlite3.connect('stock.db')
+    c =conn.cursor()
+    c.execute("select * from postArticle where stockId = '{}';".format(stid))
+    artList = c.fetchall()
+    artNum = int(artList[len(artList)-1][2])+1
+    conn.close
+
+    conn = sqlite3.connect('stock.db')
+    c =conn.cursor()
+    c.execute("insert into postArticle(username,stockId,article,floor,aTitle,aText,aLike,aDislike,aTime) values('{}','{}','{}','{}','{}','{}','{}','{}','{}');".format(userid, stid, artNum, "0", title, text,"0","0",time))
+    conn.commit()
+    conn.close()

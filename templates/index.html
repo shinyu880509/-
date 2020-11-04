@@ -366,7 +366,7 @@
                         <button type="button1" class="today" onclick="relist()">
                             回列表
                         </button>
-                        <button type="button1" class="today" onclick="butCha(2)">
+                        <button type="button1" class="today" onclick="toPost()">
                             發文
                         </button>
                     </div>
@@ -405,6 +405,21 @@
                                 <td id="Arecom"></td>
                             </tr>
                         </table>
+                    </div>
+                    <div id="postArt" style="display: none;">
+                        <form method='post' action="/postArt/{{stock}}"> 
+                            <select name="secTitle" style="font-size:15px;">
+                                <option value="0">請選擇一個類別</option>
+                                <option value="綜合討論">綜合討論</option>
+                                <option value="分享">分享</option>
+                                <option value="新聞">新聞</option>
+                            </select>
+                            <input name="postTitle" type="text" placeholder="請輸入標題" style="font-size:15px;width: 40vw;">
+                            <br>
+                            <textarea name="postText" required  placeholder="請輸入內文" style="font-size:15px;height: 20vw;width: 50vw;resize: none;"></textarea>
+                            <br>
+                            <button>發送</button>
+                        </form>
                     </div>
                 </div>           
     <!---------------------------第五塊圖表結束------------------------------->     
@@ -509,7 +524,10 @@
     },5000);
     */
 
-    
+    function toPost(){
+        $('#outArt').toggle();
+        $('#postArt').toggle();
+    }
 
     function relist(){
         $('#outArt').toggle();

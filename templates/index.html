@@ -363,16 +363,19 @@
                 <div class="newsbar">
                     <h2>討論區</h2>
                     <div class="button">
-                        <button type="button1" class="today" onclick="relist()">
+                        <button type="button1" class="today" onclick="relist(0)">
                             回列表
                         </button>
-                        <button type="button1" class="today" onclick="toPost()">
+                        <button id="postBut" type="button1" class="today" onclick="relist(1)">
                             發文
+                        </button>
+                        <button id="reBut" style="display: none;" type="button1" class="today" onclick="relist(2)">
+                            回覆
                         </button>
                     </div>
 
                     <div>
-                        <table id="outArt" bgcolor=white>
+                        <table id="outArt" bgcolor=white style="font-size:18px;">
                             <tr bgcolor=lightgray>
                                 <td width=60%>標題</td>
                                 <td>帳號</td>
@@ -387,14 +390,17 @@
                             {% endif %}
                                 <td width=60%><a href="javascript:intoArt({{i}})">{{art[i][4]}}</a></td>
                                 <td>{{art[i][0]}}</td>
-                                <td>{{art[i][6]}}/{{art[i][7]}}</td>
-                                <td>{{art[i][8]}}</td>
+                                <td id="outGd">{{art[i][6]}}/{{art[i][7]}}</td>
+                                <td>{{art[i][8][:19]}}</td>
                             </tr>
                         {% endfor %}
                         </table> 
                     </div>
                     <div>
-                        <table id="inArt" bgcolor=white style="display: none;">
+                        <form method="post" action="/postReArt/{{stock}}">
+                            <input name="artNum" id="artNum" style="display: none;">
+                        <table id="inArt" bgcolor=white style="display: none;font-size:18px;" width=60%>
+                            
                             <tr bgcolor=lightgray>
                                 <td id="Atitle"></td>
                             </tr>
@@ -402,21 +408,38 @@
                                 <td id="Atext"></td>
                             </tr>
                             <tr>
-                                <td id="Arecom"></td>
+                                <td><hr><button>good</button>&ensp;<a id="gd"></a>&ensp;&ensp;&ensp;<button>bad</button>&ensp;<a id="bd"></a>&ensp;&ensp;&ensp;<a id="uid"></a>&ensp;&ensp;&ensp;<a id="poTime">發文時間:</a></td>
                             </tr>
                         </table>
+                        </form>
                     </div>
                     <div id="postArt" style="display: none;">
                         <form method='post' action="/postArt/{{stock}}"> 
-                            <select name="secTitle" style="font-size:15px;">
+                            <select name="secTitle" style="font-size:18px;">
+                                <option value="0">請選擇一個類別</option>
+                                <option value="【綜合討論】">綜合討論</option>
+                                <option value="【分享】">分享</option>
+                                <option value="【心得】">心得</option>
+                                <option value="【新聞】">新聞</option>
+                            </select>
+                            <input name="postTitle" type="text" placeholder="請輸入標題" style="font-size:18px;width: 40vw;">
+                            <br>
+                            <textarea name="postText" required  placeholder="請輸入內文" style="font-size:18px;height: 20vw;width: 50vw;resize: none;"></textarea>
+                            <br>
+                            <button>發送</button>
+                        </form>
+                    </div>
+                    <div id="reArt" style="display: none;">
+                        <form method='post' action="/postArt/{{stock}}"> 
+                            <select name="secTitle" style="font-size:18px;">
                                 <option value="0">請選擇一個類別</option>
                                 <option value="綜合討論">綜合討論</option>
                                 <option value="分享">分享</option>
                                 <option value="新聞">新聞</option>
                             </select>
-                            <input name="postTitle" type="text" placeholder="請輸入標題" style="font-size:15px;width: 40vw;">
+                            <input name="postTitle" type="text" placeholder="請輸入標題" style="font-size:18px;width: 40vw;">
                             <br>
-                            <textarea name="postText" required  placeholder="請輸入內文" style="font-size:15px;height: 20vw;width: 50vw;resize: none;"></textarea>
+                            <textarea name="postText" required  placeholder="請輸入內文" style="font-size:18px;height: 20vw;width: 50vw;resize: none;"></textarea>
                             <br>
                             <button>發送</button>
                         </form>
@@ -523,24 +546,79 @@
             //butCha(0);
     },5000);
     */
-
-    function toPost(){
-        $('#outArt').toggle();
-        $('#postArt').toggle();
+    var reArtList = {{reArt|safe}}
+    var nowVew = 0;
+    function relist(a){
+        if (a==0 && nowVew == 1){
+            nowVew = 0;
+            $('#reBut').toggle();
+            $('#postBut').toggle();
+            $('#outArt').toggle();
+            $('#inArt').toggle();
+        }
+        else if (a==1 && nowVew == 0){
+            nowVew = 2;
+            $('#outArt').toggle();
+            $('#postArt').toggle();
+        }
+        else if (a==0 && nowVew == 2){
+            nowVew = 0;
+            $('#outArt').toggle();
+            $('#postArt').toggle();
+        } 
+        else if (a==2 && nowVew == 1){
+            nowVew = 3;
+            $('#inArt').toggle();
+            $('#reArt').toggle();
+        }
+        else if (a==0 && nowVew == 3){
+            nowVew = 0;
+            $('#reArt').toggle();
+            $('#reBut').toggle();
+            $('#postBut').toggle();
+            $('#outArt').toggle();
+        }
     }
 
-    function relist(){
-        $('#outArt').toggle();
-        $('#inArt').toggle();
-    }
+    var reArtNum=document.getElementById("artNum");
 
     function intoArt(no){
+        nowVew = 1;
+        
+        $('#reBut').toggle();
+        $('#postBut').toggle();
         $('#outArt').toggle();
         $('#inArt').toggle();
         $('#Atitle').empty();
         $('#Atext').empty();
+        $('#gd').empty();
+        $('#bd').empty();
+        $('#uid').empty();
+        $('#poTime').empty();
+        $('#inArt').empty();
+        $('#inArt').append('<tr bgcolor=lightgray><td id="Atitle"></td></tr><tr><td id="Atext"></td></tr><tr><td><hr><button type="button" onclick="gd(' + no + ')">good</button>&ensp;<a id="gd"></a>&ensp;&ensp;&ensp;<button type="button" onclick="bd(' + no + ')">bad</button>&ensp;<a id="bd"></a>&ensp;&ensp;&ensp;<a id="uid"></a>&ensp;&ensp;&ensp;<a id="poTime">發文時間:</a></td></tr>');
         $('#Atitle').append(realArtData[no][4]);
         $('#Atext').append(realArtData[no][5]);
+        $('#gd').append(realArtData[no][6]);
+        $('#bd').append(realArtData[no][7]);
+        $('#uid').append("id:"+realArtData[no][0]);
+        $('#poTime').append("發文時間:"+realArtData[no][8]);
+        
+        for(var i=0; i<reArtList.length; i++){
+            if (reArtList[i][2] == realArtData[no][2]){
+                eee = reArtList[i][5].slice(0, 19);
+                $('#inArt').append('<tr bgcolor=lightgray style="height: 2vw;" id="Arecom"><td>'+ reArtList[i][0] +'&ensp;'+ reArtList[i][4] +'&ensp;'+ eee +'</td></tr>');
+            }
+        }
+        $('#inArt').append('<tr bgcolor=lightgray style="height: 2vw;"><td id="postCom"><input name="inputCom" type="text" placeholder="留言..." style="font-size:18px;width: 35vw;">&ensp;<button style="font-size:16px;">發送</button></td></tr>');
+        reArtNum.value = realArtData[no][2];
+    }
+
+    function gd(no){
+        window.location.href="/saveGd/" + {{stock}} + "/" + no;
+    }
+    function bd(no){
+        window.location.href="/saveBd/" + {{stock}} + "/" + no;
     }
 
     fav.forEach(element => {

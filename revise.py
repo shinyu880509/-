@@ -154,6 +154,7 @@ c.execute("insert into postArticle(username,stockId,article,floor,aTitle,aText,a
 conn.commit()
 conn.close()'''
 
+#取得文章
 def getArtcile(stid):
     conn = sqlite3.connect('stock.db')
     c =conn.cursor()
@@ -162,23 +163,131 @@ def getArtcile(stid):
     for rows in c.fetchall():
         aa = []
         for i in range(len(rows)):
-            aa.append(rows[i])
+            if i == 6 or i == 7:
+                gd = rows[i].split("-")
+                if gd!=[""]:
+                    aa.append(len(gd))
+                else:
+                    aa.append("0")
+            else:
+                aa.append(rows[i])
         re.append(aa)
     return re
 #print(getArtcile("2427"))
 
+#發文
 def postArtcile(userid, stid, title, text):
     time = datetime.datetime.today()
-
+    artNum = 0
+    try:
+        conn = sqlite3.connect('stock.db')
+        c =conn.cursor()
+        c.execute("select * from postArticle where stockId = '{}';".format(stid))
+        artList = c.fetchall()
+        artNum = int(artList[len(artList)-1][2])+1
+        conn.close
+    except Exception:
+        artNum = 0
     conn = sqlite3.connect('stock.db')
     c =conn.cursor()
-    c.execute("select * from postArticle where stockId = '{}';".format(stid))
-    artList = c.fetchall()
-    artNum = int(artList[len(artList)-1][2])+1
-    conn.close
-
-    conn = sqlite3.connect('stock.db')
-    c =conn.cursor()
-    c.execute("insert into postArticle(username,stockId,article,floor,aTitle,aText,aLike,aDislike,aTime) values('{}','{}','{}','{}','{}','{}','{}','{}','{}');".format(userid, stid, artNum, "0", title, text,"0","0",time))
+    c.execute("insert into postArticle(username,stockId,article,floor,aTitle,aText,aLike,aDislike,aTime) values('{}','{}','{}','{}','{}','{}','{}','{}','{}');".format(userid, stid, artNum, "0", title, text,"","",time))
     conn.commit()
     conn.close()
+
+#回覆
+def postReArtcile(userid, stid, artNum, text):
+    time = datetime.datetime.today()
+    floor = 0
+    try:
+        conn = sqlite3.connect('stock.db')
+        c =conn.cursor()
+        c.execute("select * from replyArticle where stockId = '{}' and article = '{}';".format(stid, artNum))
+        artList = c.fetchall()
+        floor = int(artList[len(artList)-1][2])+1
+        conn.close
+    except Exception:
+        floor = 0
+
+    conn = sqlite3.connect('stock.db')
+    c =conn.cursor()
+    c.execute("insert into replyArticle(username,stockId,article,floor,aText,aTime) values('{}','{}','{}','{}','{}','{}');".format(userid, stid, artNum, floor, text, time))
+    conn.commit()
+    conn.close()
+    
+    conn = sqlite3.connect('stock.db')
+    c =conn.cursor()
+    c.execute("update postArticle set aTime ='{}' where stockId = '{}' and article = '{}';".format(time, stid, artNum))
+    conn.commit()
+    conn.close()
+    return
+
+#取得回覆
+def getReArtcile(stid):
+    conn = sqlite3.connect('stock.db')
+    c =conn.cursor()
+    c.execute("select * from replyArticle")
+    re = []
+    for rows in c.fetchall():
+        aa = []
+        for i in range(len(rows)):
+            aa.append(rows[i])
+        re.append(aa)
+    return re
+#print(getReArtcile("2427", "02"))
+
+def setGood(userid, stid, artNum):
+    good = ""
+    conn = sqlite3.connect('stock.db')
+    c =conn.cursor()
+    c.execute("select * from postArticle where stockId = '{}' and article = '{}';".format(stid, artNum))
+    a = c.fetchall()[0]
+    if a[6] == "":
+        good = userid
+    else:
+        che = a[6].split("-")
+        check = 0
+        for i in range(len(che)):
+            if che[i] == userid:
+                check = 1
+        if check == 0:
+            good = a[6] + "-" + userid
+        else:
+            good = a[6]
+    conn.close()
+
+    conn = sqlite3.connect('stock.db')
+    c =conn.cursor()
+    c.execute("update postArticle set aLike ='{}' where stockId = '{}' and article = '{}';".format(good, stid, artNum))
+    conn.commit()
+    conn.close()
+    return
+
+def setBad(userid, stid, artNum):
+    Bad = ""
+    conn = sqlite3.connect('stock.db')
+    c =conn.cursor()
+    c.execute("select * from postArticle where stockId = '{}' and article = '{}';".format(stid, artNum))
+    a = c.fetchall()[0]
+    if a[7] == "":
+        Bad = userid
+    else:
+        che = a[7].split("-")
+        check = 0
+        for i in range(len(che)):
+            if che[i] == userid:
+                check = 1
+        if check == 0:
+            Bad = a[7] + "-" + userid
+        else:
+            Bad = a[7]
+    print(Bad)
+    conn.close()
+
+    conn = sqlite3.connect('stock.db')
+    c =conn.cursor()
+    c.execute("update postArticle set aDislike ='{}' where stockId = '{}' and article = '{}';".format(Bad, stid, artNum))
+    conn.commit()
+    conn.close()
+    return
+#setGood("123456", "2427", "0")
+#print(getArtcile("2427"))

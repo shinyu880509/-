@@ -136,8 +136,9 @@ def indexId(stId):
     dataFav = revise.getlike(current_user.id)
     dataInd = revise.getIde(current_user.id)
     dataArt = revise.getArtcile(stId)
+    dataReArt = revise.getReArtcile(stId)
     lenArt = len(dataArt)
-    return render_template('index.html', stock = stId, name = name, re = data, today = datatoday, tec = dataTec, fin = dataFin, pre = dataPre, news = dataNews, n = n, reFav = dataFav, live = datalive, ind = dataInd, art = dataArt, lenArt = lenArt)  
+    return render_template('index.html', stock = stId, name = name, re = data, today = datatoday, tec = dataTec, fin = dataFin, pre = dataPre, news = dataNews, n = n, reFav = dataFav, live = datalive, ind = dataInd, art = dataArt, lenArt = lenArt, reArt = dataReArt)  
 
 @app.route("/newFav/<typeA>/<stId>/<fav>")
 def newFav(fav, typeA, stId):
@@ -162,6 +163,7 @@ def news(stId):
     dataFav = revise.getlike(current_user.id)
     return render_template('news.html', stock = stId, name = name, news = dataNews, n = len(dataNews), reFav = dataFav)  
 
+#發文
 @app.route("/postArt/<stId>", methods=['GET', 'POST'])
 def postArt(stId):
     if request.method == 'POST':
@@ -171,6 +173,26 @@ def postArt(stId):
         revise.postArtcile(current_user.id, stId, title, text)
 
         return redirect(url_for('indexId', stId = stId))
+
+#留言
+@app.route("/postReArt/<stId>", methods=['GET', 'POST'])
+def postReArt(stId):
+    if request.method == 'POST':
+        text = request.form.get('inputCom')
+        artNum = request.form.get('artNum')
+        revise.postReArtcile(current_user.id, stId, artNum, text)
+
+        return redirect(url_for('indexId', stId = stId))
+
+@app.route("/saveGd/<stId>/<artNum>")
+def saveGd(stId, artNum):
+    revise.setGood(current_user.id, stId, artNum)
+    return redirect(url_for('indexId', stId = stId))
+
+@app.route("/saveBd/<stId>/<artNum>")
+def saveBd(stId, artNum):
+    revise.setBad(current_user.id, stId, artNum)
+    return redirect(url_for('indexId', stId = stId))
 
 #個人化設定
 @app.route("/setting")

@@ -23,11 +23,54 @@ function register() {
         else{
             window.location.href="/registeCheck/" + username.value + "/" + pass.value + "/" + userEmail.value; /*------------跳回login-------------*/ 
     }
-    /*--------------註冊資料放進資料庫-------------*/  
+}
 
-                    /*柏恩不會寫*/
+function changePasswd() {
+    var oddPd = document.getElementById("oddPd");
+    var newPd = document.getElementById("newPd");
+    var checkPd = document.getElementById("checkPd");
+    if (oddPd.value == "") {
+            alert("請輸入舊密碼");
+        } 
+        else if (newPd.value  == "") {
+            alert("請輸入新密碼");
+        } 
+        else if (checkPd.value  == "") {
+            alert("請確認新密碼");
+        }
+        else if (newPd.value  != checkPd.value) {
+            alert("新密碼與確認新密碼不同");
+        }
+        else if (newPd.value  == oddPd.value) {
+            alert("新密碼與舊密碼相同");
+        }
+        else{
+            window.location.href="/changePasswd/" + oddPd.value + "/" + newPd.value; /*------------跳回login-------------*/ 
+    }
+}
 
-    /*-------------------------------------------*/ 
+function changeMail() {
+    var oddMail = document.getElementById("oddMail");
+    var newMail = document.getElementById("newMail");
+    var checkMail = document.getElementById("checkMail");
+    if (oddMail.value == "") {
+            alert("請輸入舊信箱");
+        } 
+        else if (newMail.value  == "") {
+            alert("請輸入新信箱");
+        } 
+        else if (checkMail.value  == "") {
+            alert("請確認新信箱");
+        }
+        else if (newMail.value  != checkMail.value) {
+            alert("新信箱與確認新信箱不同");
+        }
+        else if (newMail.value  == oddMail.value) {
+            alert("新信箱與舊信箱相同");
+        }
+        else{
+            window.location.href="/changeMail/" + oddMail.value + "/" + newMail.value; /*------------跳回login-------------*/ 
+    }
 }
 
 /*-------寄信-------*/

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>修改密碼</title>
+        <link rel="stylesheet" href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+        <link href="https://fonts.googleapis.com/css?family=Noto+Sans+TC" rel="stylesheet">
+        <link href="{{ url_for('static', filename='css/forget.css') }}" rel="stylesheet" type="text/css">   
+        <script type="text/javascript" src="static/scripts/register.js"></script>
+    </head>
+    <body>
+        <div id="login_frame">
+            <p id="image_logo"><img src="{{ url_for('static', filename='images/icon.png') }}" width="80" height="80"></p>
+            <h class="forgot">修改密碼</h>
+            <p class="forgot_content">請輸入您的舊密碼及新的密碼。</p>
+            <form method="post" action="register.js">
+            <p><label class="label_input" autocomplete="off">舊密碼</label><input type="text" id="oddPd" class="text_field"></p>
+            <p><label class="label_input" autocomplete="off">新密碼</label><input type="text" id="newPd" class="text_field"></p>
+            <p><label class="label_input" autocomplete="off">確認新密碼</label><input type="text" id="checkPd" class="text_field"></p>
+                <div id="login_register">
+                    <input type="button" id="btn_register" value="確認" onclick=changePasswd()>
+                    <input type="button" id="btn_back" value="返回"  onclick="self.location.href='/setting'">
+                </div>
+               
+           
+            </form>
+        </div>
+        <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>      
+        <script src="{{ url_for('static', filename='scripts/main.js') }}"></script>    
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.js"></script>
+        
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            {% for message in messages %}
+                {% if message[0] == "訊" %}
+                    <script type="text/javascript">
+                        alert("{{message[1:]}}")
+                    </script>
+                {% endif %}
+            {% endfor %}
+        {% endif %}
+        {% endwith %}
+        {% block body %}{% endblock %}
+</body>
+</html>

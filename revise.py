@@ -62,6 +62,57 @@ def revisePw(password,verification):
             return "1"
     return "0"
 
+#修改密碼
+def changePw(uid, odd, new):
+    conn = sqlite3.connect('stock.db')
+    cur = conn.cursor()
+    cur.execute("select * from account where username = '{}';".format(uid))
+    for rows in cur.fetchall():
+        if odd == rows[2]:
+            cur.execute("update account set password ='{}' where username = '{}';".format(new,uid))
+            conn.commit()
+            conn.close()
+            return "1"
+    return "0"
+
+#修改Mail
+def changeMail(uid, odd, new):
+    conn = sqlite3.connect('stock.db')
+    cur = conn.cursor()
+    cur.execute("select * from account where username = '{}';".format(uid))
+    for rows in cur.fetchall():
+        if odd == rows[1]:
+            cur.execute("update account set email ='{}' where username = '{}';".format(new,uid))
+            conn.commit()
+            conn.close()
+            return "1"
+    return "0"
+
+#每日送信
+def getDailyMail(uid):
+    conn = sqlite3.connect('stock.db')
+    cur = conn.cursor()
+    cur.execute("select * from setDaliyMail where username = '{}';".format(uid))
+    if cur.fetchall() == []:
+        return "0"
+    else:
+        return "1"
+def dailyMail(uid):
+    conn = sqlite3.connect('stock.db')
+    cur = conn.cursor()
+    cur.execute("insert into setDaliyMail(username) values('{}');".format(uid))
+    conn.commit()
+    conn.close()
+    return "0"
+def dailyMailDel(uid):
+    conn = sqlite3.connect('stock.db')
+    cur = conn.cursor()
+    cur.execute("delete from setDaliyMail where username = '{}';".format(uid))
+    conn.commit()
+    conn.close()
+    return "0"
+dailyMailDel("10646021")
+print(getDailyMail("10646021"))
 
 '''verification = input("verification:")
 password = input("password:")
@@ -80,7 +131,8 @@ for rows in c.fetchall():
     print(rows)'''
 
 #新增順序
-'''conn = sqlite3.connect('stock.db')
+'''
+conn = sqlite3.connect('stock.db')
 c =conn.cursor()
 c.execute("select * from indexStock")
 for rows in c.fetchall():
@@ -102,7 +154,7 @@ def getIde(username):
     re = a[0][1].split("-")
     re = list(map(int, re))
     return re
-#print(getIde("10646021")[0])
+#print(getIde("10646021"))
 
 #更改順序
 def revIde(username, ind):
@@ -172,6 +224,7 @@ def getArtcile(stid):
             else:
                 aa.append(rows[i])
         re.append(aa)
+    re.sort(key=lambda x:x[8], reverse=True)
     return re
 #print(getArtcile("2427"))
 
@@ -193,6 +246,17 @@ def postArtcile(userid, stid, title, text):
     c.execute("insert into postArticle(username,stockId,article,floor,aTitle,aText,aLike,aDislike,aTime) values('{}','{}','{}','{}','{}','{}','{}','{}','{}');".format(userid, stid, artNum, "0", title, text,"","",time))
     conn.commit()
     conn.close()
+    return
+
+#del發文
+def delArtcile(stid, art):
+    conn = sqlite3.connect('stock.db')
+    c =conn.cursor()
+    c.execute("delete from postArticle where stockId = '{}' and  article = '{}';".format(stid, art))
+    print(c.fetchall())
+    conn.commit()
+    conn.close()
+    return
 
 #回覆
 def postReArtcile(userid, stid, artNum, text):
@@ -268,9 +332,17 @@ def setBad(userid, stid, artNum):
     c =conn.cursor()
     c.execute("select * from postArticle where stockId = '{}' and article = '{}';".format(stid, artNum))
     a = c.fetchall()[0]
-    if a[7] == "":
+
+    checkG = 0
+    if a[6] != "":
+        cheG = a[6].split("-")
+        for i in range(len(cheG)):
+            if cheG[i] == userid:
+                checkG = 1
+
+    if a[7] == "" and checkG == 0:
         Bad = userid
-    else:
+    elif checkG == 0:
         che = a[7].split("-")
         check = 0
         for i in range(len(che)):
@@ -289,5 +361,5 @@ def setBad(userid, stid, artNum):
     conn.commit()
     conn.close()
     return
-#setGood("123456", "2427", "0")
+#setGood("10646021", "2427", "1")
 #print(getArtcile("2427"))

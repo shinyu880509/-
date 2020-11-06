@@ -2,14 +2,8 @@ import sqlite3
 
 conn = sqlite3.connect('stock.db')
 c =conn.cursor()
-c.execute('''drop table replyArticle''')
-c.execute('''CREATE TABLE replyArticle
-       (username  CHAR(50)  NOT NULL,
-        stockId  CHAR(50)    NOT NULL,
-        article  CHAR(50)    NOT NULL,
-        floor  CHAR(50)    NOT NULL,
-        aText  CHAR(50)    NOT NULL,
-        aTime  CHAR(50)    NOT NULL);''')
+c.execute('''CREATE TABLE setDaliyMail
+       (username  CHAR(50)  NOT NULL);''')
 #創建資料表
 """
 c.execute('''drop table replyArticle''')

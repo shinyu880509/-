@@ -16,7 +16,7 @@
                 <div class="login">
                     {% if current_user.is_authenticated %}
                     <a>登入成功{{current_user.id}}</a>
-                    <a href="javascript:saveFav('logout')">登出</a>
+                    <a href="/logout">登出</a>
                     {% endif %}
                 </div>
 
@@ -43,175 +43,7 @@
     <!---------------------------sidebar1---------- class="bd-toc-link" style="font-weight:bold; color: black; font-size:20px;"------------------->
         <div class="sidebar1">
             <div class="bd-toc-item">
-                <h3 class="title">
-                    資訊股代號
-                </h3>
-                <h4 class="myfavorite">
-                    我的最愛
-                </h4>
-                <div class="text">
-                    <ul>
-                        <li>
-                        <h class="2427text" style="display: none;"><a href="javascript:saveFav('2427')">2427三商電 </a></h>
-                        </li>
-                        <li>
-                        <h class="2453text"style="display: none;"><a href="javascript:saveFav('2453')">2453凌群 </a></h>
-                        </li>
-                        <li>
-                        <h class="2468text"style="display: none;"><a href="javascript:saveFav('2468')">2468華經 </a></h>
-                        </li>
-                        <li>
-                        <h class="2471text"style="display: none;"><a href="javascript:saveFav('2471')">2471資通 </a></h>
-                        </li>
-                        <li>
-                        <h class="2480text"style="display: none;"><a href="javascript:saveFav('2480')">2480敦陽 </a></h>
-                        </li>
-                        <li>
-                        <h class="3029text"style="display: none;"><a href="javascript:saveFav('3029')">3029零壹 </a></h>
-                        </li>    
-                        <li>
-                        <h class="3130text"style="display: none;"><a href="javascript:saveFav('3130')">3130一零四 </a></h>
-                        </li> 
-                        <li>
-                        <h class="4994text"style="display: none;"><a href="javascript:saveFav('4994')">4994傳奇 </a></h>
-                        </li>        
-                        <li>
-                        <h class="5203text"style="display: none;"><a href="javascript:saveFav('5203')">5203訊連 </a></h>
-                        </li>
-                        <li>
-                        <h class="6112text"style="display: none;"><a href="javascript:saveFav('6112')">6112聚碩 </a></h>
-                        </li>
-                        <li>
-                        <h class="6183text"style="display: none;"><a href="javascript:saveFav('6183')">6183關貿 </a></h>
-                        </li>
-                        <li>
-                        <h class="6214text"style="display: none;"><a href="javascript:saveFav('6214')">6214精誠 </a></h>
-                        </li>       
-                    </ul>
-                    
-                </div>
-                <div class="img">
-                    <ul>
-                        <li>
-                            <button class="but2427" style="display: none;" onclick="newFav('2427')"><img src=" {{ url_for('static', filename='images/minus.png'  ) }}  "width="10" height="10" class="plus"></a></button>
-                        </li>
-                        <li>
-                            <button class="but2453" style="display: none;" onclick="newFav('2453')"><img src=" {{ url_for('static', filename='images/minus.png'  ) }}  "width="10" height="10" class="plus"></a></button>                        
-                        </li>
-                        <li>
-                            <button class="but2468" style="display: none;" onclick="newFav('2468')"><img src=" {{ url_for('static', filename='images/minus.png'  ) }}  "width="10" height="10" class="plus"></a></button>                        
-                        </li>
-                        <li>
-                            <button class="but2471" style="display: none;" onclick="newFav('2471')"><img src=" {{ url_for('static', filename='images/minus.png'  ) }}  "width="10" height="10" class="plus"></a></button>                        
-                        </li>
-                        <li>
-                            <button class="but2480" style="display: none;" onclick="newFav('2480')"><img src=" {{ url_for('static', filename='images/minus.png'  ) }}  "width="10" height="10" class="plus"></a></button>                        
-                        </li>
-                        <li>
-                            <button class="but3029" style="display: none;" onclick="newFav('3029')"><img src=" {{ url_for('static', filename='images/minus.png'  ) }}  "width="10" height="10" class="plus"></a></button>                        
-                        </li>
-                        <li>
-                            <button class="but3130" style="display: none;" onclick="newFav('3130')"><img src=" {{ url_for('static', filename='images/minus.png'  ) }}  "width="10" height="10" class="plus"></a></button>                        
-                        </li>
-                        <li>
-                            <button class="but4994" style="display: none;" onclick="newFav('4994')"><img src=" {{ url_for('static', filename='images/minus.png'  ) }}  "width="10" height="10" class="plus"></a></button>                        
-                        </li>
-                        <li>
-                            <button class="but5203" style="display: none;" onclick="newFav('5203')"><img src=" {{ url_for('static', filename='images/minus.png'  ) }}  "width="10" height="10" class="plus"></a></button>                        
-                        </li>
-                        <li>
-                            <button class="but6112" style="display: none;" onclick="newFav('6112')"><img src=" {{ url_for('static', filename='images/minus.png'  ) }}  "width="10" height="10" class="plus"></a></button>                        
-                        </li>
-                        <li>
-                            <button class="but6183" style="display: none;" onclick="newFav('6183')"><img src=" {{ url_for('static', filename='images/minus.png'  ) }}  "width="10" height="10" class="plus"></a></button>                        
-                        </li>
-                        <li>
-                            <button class="but6214" style="display: none;" onclick="newFav('6214')"><img src=" {{ url_for('static', filename='images/minus.png'  ) }}  "width="10" height="10" class="plus"></a></button>                        
-                        </li>
-                    </ul>    
-                </div>
-                <h4 class="otherstock">
-                    所有代號
-                </h4>
-                <div class="text">
-                    <ul>
-                        <li>
-                            <a class="text2427" href="javascript:saveFav('2427')">2427三商電 </a>
-                        </li>
-                        <li>
-                            <a class="text2453" href="javascript:saveFav('2453')">2453凌群 </a>
-                        </li>
-                        <li>
-                            <a class="text2468" href="javascript:saveFav('2468')">2468華經 </a>
-                        </li>
-                        <li>
-                            <a class="text2471" href="javascript:saveFav('2471')">2471資通</a>
-                        </li>
-                        <li>
-                            <a class="text2480" href="javascript:saveFav('2480')">2480敦陽</a>
-                        </li>
-                        <li>
-                            <a class="text3029" href="javascript:saveFav('3029')">3029零壹 </a>
-                        </li>
-                        <li>
-                            <a class="text3130" href="javascript:saveFav('3130')">3130一零四</a>
-                        </li>
-                        <li>
-                            <a class="text4994" href="javascript:saveFav('4994')">4994傳奇 </a>
-                        </li>
-                        <li>
-                            <a class="text5203" href="javascript:saveFav('5203')">5203訊連 </a>
-                        </li>
-                        <li>
-                            <a class="text6112" href="javascript:saveFav('6112')">6112聚碩</a>
-                        </li>
-                        <li>
-                            <a class="text6183" href="javascript:saveFav('6183')">6183關貿 </a>
-                        </li>
-                        <li>
-                            <a class="text6214" href="javascript:saveFav('6214')">6214精誠 </a>
-                        </li>
-                    </ul>
-                </div>
-                <div class="img">
-                    <ul>
-                        <li>
-                            <button class="button2427" onclick="newFav('2427')"><img src=" {{ url_for('static', filename='images/plus.png'  ) }}  "width="10" height="10" class="plus"></a></button>
-                        </li>
-                        <li>
-                            <button class="button2453" onclick="newFav('2453')"><img src=" {{ url_for('static', filename='images/plus.png'  ) }}  "width="10" height="10" class="plus"></a></button>                        
-                        </li>
-                        <li>
-                            <button class="button2468" onclick="newFav('2468')"><img src=" {{ url_for('static', filename='images/plus.png'  ) }}  "width="10" height="10" class="plus"></a></button>                        
-                        </li>
-                        <li>
-                            <button class="button2471" onclick="newFav('2471')"><img src=" {{ url_for('static', filename='images/plus.png'  ) }}  "width="10" height="10" class="plus"></a></button>                        
-                        </li>
-                        <li>
-                            <button class="button2480" onclick="newFav('2480')"><img src=" {{ url_for('static', filename='images/plus.png'  ) }}  "width="10" height="10" class="plus"></a></button>                        
-                        </li>
-                        <li>
-                            <button class="button3029" onclick="newFav('3029')"><img src=" {{ url_for('static', filename='images/plus.png'  ) }}  "width="10" height="10" class="plus"></a></button>                        
-                        </li>
-                        <li>
-                            <button class="button3130" onclick="newFav('3130')"><img src=" {{ url_for('static', filename='images/plus.png'  ) }}  "width="10" height="10" class="plus"></a></button>                        </li>
-                        <li>
-                            <button class="button4994" onclick="newFav('4994')"><img src=" {{ url_for('static', filename='images/plus.png'  ) }}  "width="10" height="10" class="plus"></a></button>                        
-                        </li>
-                        <li>
-                            <button class="button5203" onclick="newFav('5203')"><img src=" {{ url_for('static', filename='images/plus.png'  ) }}  "width="10" height="10" class="plus"></a></button>                        
-                        </li>
-                        <li>
-                            <button class="button6112" onclick="newFav('6112')"><img src=" {{ url_for('static', filename='images/plus.png'  ) }}  "width="10" height="10" class="plus"></a></button>                        
-                        </li>
-                        <li>
-                            <button class="button6183" onclick="newFav('6183')"><img src=" {{ url_for('static', filename='images/plus.png'  ) }}  "width="10" height="10" class="plus"></a></button>                        
-                        </li>
-                        <li>
-                            <button class="button6214" onclick="newFav('6214')"><img src=" {{ url_for('static', filename='images/plus.png'  ) }}  "width="10" height="10" class="plus"></a></button>                        
-                        </li>
-                    </ul>    
-                </div>
+
             </div>
         </div>
       
@@ -222,13 +54,17 @@
         <div class="content">
             <div>
                 <h2>帳號</h2>
-                <h3>修改密碼</h3>
-                <h3>修改信箱</h3>
+                <h3 onclick="change(0)" style="cursor: pointer;">修改密碼</h3>
+                <h3 onclick="change(1)" style="cursor: pointer;">修改信箱</h3>
             </div>
             <div>
                 <h2>提醒設定</h2>
                 <h3>每日寄送關注股票之預測分析信件</h3>
-                <h3>關注股票至指定收盤價時寄送信件</h3>
+                {% if aa == "0" %}
+                <button onclick="self.location.href='/dailyMail/0'">同意</button>
+                {% elif aa == "1" %}
+                <button onclick="self.location.href='/dailyMail/1'">取消</button>
+                {% endif %}
             </div>
             <div>
                 <h2>更改顯示內容和順序</h2>
@@ -255,6 +91,18 @@
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>      
     <script src="{{ url_for('static', filename='scripts/main.js') }}"></script>    
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.js"></script>
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            {% for message in messages %}
+                {% if message[0] == "訊" %}
+                    <script type="text/javascript">
+                        alert("{{message[1:]}}")
+                    </script>
+                {% endif %}
+            {% endfor %}
+        {% endif %}
+        {% endwith %}
+        {% block body %}{% endblock %}
     <script type="text/javascript">
         var aa = ["走勢圖", "預測分析", "財務分析", "技術分析", "討論區"];
         var b = {{ind}};
@@ -320,4 +168,10 @@
         }
     }
 
+    function change(a){
+        if (a == 0)
+            window.location.href="/changePasswd";
+        else if (a == 1)
+            window.location.href="/changeMail";
+    }
     </script>

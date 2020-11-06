@@ -117,6 +117,44 @@ def alterAcc(a,n,t):
         flash("帳號名稱重複")
     return redirect(url_for('manage'))
 
+#修改密碼
+@app.route('/changePasswd')
+def changePasswd():
+    if current_user.is_authenticated == False:
+        return redirect(url_for('login'))
+    return render_template('changePasswd.html') 
+@app.route('/changePasswd/<oddPd>/<newPd>')
+def changePasswdDo(oddPd, newPd):
+    if current_user.is_authenticated == False:
+        return redirect(url_for('login'))
+    a = revise.changePw(current_user.id, oddPd, newPd)
+    print(type(a))
+    if a == "0":
+        flash("訊舊密碼錯誤，請再確認")
+        return redirect(url_for('changePasswd'))
+    elif a == "1":
+        flash("訊密碼修改成功")
+        return redirect(url_for('accountSetting'))
+
+#修改信箱
+@app.route('/changeMail')
+def changeMail():
+    if current_user.is_authenticated == False:
+        return redirect(url_for('login'))
+    return render_template('changeMail.html') 
+@app.route('/changeMail/<oddMail>/<newMail>')
+def changeMailDo(oddMail, newMail):
+    if current_user.is_authenticated == False:
+        return redirect(url_for('login'))
+    a = revise.changeMail(current_user.id, oddMail, newMail)
+    print(type(a))
+    if a == "0":
+        flash("訊舊信箱錯誤，請再確認")
+        return redirect(url_for('changeMail'))
+    elif a == "1":
+        flash("訊信箱修改成功")
+        return redirect(url_for('accountSetting'))
+
 @app.route("/index")
 def index():
     return redirect(url_for('indexId', stId = "2427"))
@@ -125,20 +163,24 @@ def index():
 def indexId(stId):
     if current_user.is_authenticated == False:
         return redirect(url_for('login'))
-    name = getID.getName(stId)
-    data = getData.getData(stId)
-    datatoday = getData.getTodayCsv(stId)
-    datalive = getData.getLive(stId)
-    dataTec = getData.getAll(stId)
-    dataFin = getData.getAllFin(stId)
-    dataPre = getData.getPreByDay(stId, 10)
-    dataNews = getData.getNewsS(stId, n)
+    aa = stId.split("-")
+    name = getID.getName(aa[0])
+    data = getData.getData(aa[0])
+    datatoday = getData.getTodayCsv(aa[0])
+    datalive = getData.getLive(aa[0])
+    dataTec = getData.getAll(aa[0])
+    dataFin = getData.getAllFin(aa[0])
+    dataPre = getData.getPreByDay(aa[0], 10)
+    dataNews = getData.getNewsS(aa[0], n)
     dataFav = revise.getlike(current_user.id)
     dataInd = revise.getIde(current_user.id)
-    dataArt = revise.getArtcile(stId)
-    dataReArt = revise.getReArtcile(stId)
+    dataArt = revise.getArtcile(aa[0])
+    dataReArt = revise.getReArtcile(aa[0])
     lenArt = len(dataArt)
-    return render_template('index.html', stock = stId, name = name, re = data, today = datatoday, tec = dataTec, fin = dataFin, pre = dataPre, news = dataNews, n = n, reFav = dataFav, live = datalive, ind = dataInd, art = dataArt, lenArt = lenArt, reArt = dataReArt)  
+    toArt = "0"
+    if len(aa) == 2:
+        toArt = aa[1]
+    return render_template('index.html', stock = aa[0], name = name, re = data, today = datatoday, tec = dataTec, fin = dataFin, pre = dataPre, news = dataNews, n = n, reFav = dataFav, live = datalive, ind = dataInd, art = dataArt, lenArt = lenArt, reArt = dataReArt, toArt = toArt)  
 
 @app.route("/newFav/<typeA>/<stId>/<fav>")
 def newFav(fav, typeA, stId):
@@ -171,8 +213,13 @@ def postArt(stId):
         text = request.form.get('postText')
         text = text.replace("\r\n", "<br>")
         revise.postArtcile(current_user.id, stId, title, text)
-
+        stId += "-1"
         return redirect(url_for('indexId', stId = stId))
+
+@app.route("/delart/<stId>/<art>")
+def delart(stId, art):
+    revise.delArtcile(stId,art)
+    return redirect(url_for('indexId', stId = stId))
 
 #留言
 @app.route("/postReArt/<stId>", methods=['GET', 'POST'])
@@ -181,11 +228,12 @@ def postReArt(stId):
         text = request.form.get('inputCom')
         artNum = request.form.get('artNum')
         revise.postReArtcile(current_user.id, stId, artNum, text)
-
+        stId += "-2"
         return redirect(url_for('indexId', stId = stId))
 
 @app.route("/saveGd/<stId>/<artNum>")
 def saveGd(stId, artNum):
+    print(stId, artNum)
     revise.setGood(current_user.id, stId, artNum)
     return redirect(url_for('indexId', stId = stId))
 
@@ -200,7 +248,8 @@ def accountSetting():
     if current_user.is_authenticated == False:
         return redirect(url_for('index'))
     ind = revise.getIde(current_user.id)
-    return render_template('accountSetting.html', ind = ind) 
+    aa = revise.getDailyMail(current_user.id)
+    return render_template('accountSetting.html', ind = ind, aa = aa) 
 
 #個人化設定儲存--順序
 @app.route("/savInd/<ind>")
@@ -208,6 +257,16 @@ def savIndex(ind):
     revise.revIde(current_user.id, ind)
     return redirect(url_for('accountSetting'))
 
+#個人化設定儲存--Mail
+@app.route("/dailyMail/<how>")
+def dailyMail(how):
+    if how == "1":
+        revise.dailyMailDel(current_user.id)
+    elif how == "0":
+        revise.dailyMail(current_user.id)
+    return redirect(url_for('accountSetting'))
+
+#註冊
 @app.route("/account")
 def account():
     return render_template('account.html')
@@ -233,7 +292,7 @@ def registers(userId, userPasswd, userEmail):
         if err == 0:
             con = sqlite3.connect('stock.db')
             cc = con.cursor()
-            cc.execute("insert into indexStock(username,ind) values('{}','{}');".format(userId,[0,1,2,3]))
+            cc.execute("insert into indexStock(username,ind) values('{}','{}');".format(userId,"0-1-2-3-4"))
             con.commit()
             con.close()
             return redirect(url_for('login'))

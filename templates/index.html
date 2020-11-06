@@ -249,9 +249,11 @@
                         <button type="button1" class="today" onclick="butCha(0)">
                             昨日
                         </button>
+                        {% if live[0] != "e" %}
                         <button type="button1" class="today" onclick="butCha(2)">
                             即時
                         </button>
+                        {% endif %}
                         <button type="button1" class="today" onclick="butCha(1)">
                             近三十日
                         </button>
@@ -361,7 +363,7 @@
     {% elif ind[i]==4 %}
     <!---------------------------第五塊圖表開始------------------------------->           
                 <div class="newsbar">
-                    <h2>討論區</h2>
+                    <h2 id="artcile">討論區</h2>
                     <div class="button">
                         <button type="button1" class="today" onclick="relist(0)">
                             回列表
@@ -369,8 +371,8 @@
                         <button id="postBut" type="button1" class="today" onclick="relist(1)">
                             發文
                         </button>
-                        <button id="reBut" style="display: none;" type="button1" class="today" onclick="relist(2)">
-                            回覆
+                        <button id="delBut" type="button1" class="today" onclick="delart()" style="display: none;">
+                            刪除文章
                         </button>
                     </div>
 
@@ -415,31 +417,16 @@
                     </div>
                     <div id="postArt" style="display: none;">
                         <form method='post' action="/postArt/{{stock}}"> 
-                            <select name="secTitle" style="font-size:18px;">
-                                <option value="0">請選擇一個類別</option>
+                            <select name="secTitle" style="font-size:18px;" required="required">
+                                <option value="" style="display: none;">請選擇一個類別</option>
                                 <option value="【綜合討論】">綜合討論</option>
                                 <option value="【分享】">分享</option>
                                 <option value="【心得】">心得</option>
                                 <option value="【新聞】">新聞</option>
                             </select>
-                            <input name="postTitle" type="text" placeholder="請輸入標題" style="font-size:18px;width: 40vw;">
+                            <input required="required" name="postTitle" type="text" placeholder="請輸入標題" autocomplete="off" style="font-size:18px;width: 40vw;">
                             <br>
-                            <textarea name="postText" required  placeholder="請輸入內文" style="font-size:18px;height: 20vw;width: 50vw;resize: none;"></textarea>
-                            <br>
-                            <button>發送</button>
-                        </form>
-                    </div>
-                    <div id="reArt" style="display: none;">
-                        <form method='post' action="/postArt/{{stock}}"> 
-                            <select name="secTitle" style="font-size:18px;">
-                                <option value="0">請選擇一個類別</option>
-                                <option value="綜合討論">綜合討論</option>
-                                <option value="分享">分享</option>
-                                <option value="新聞">新聞</option>
-                            </select>
-                            <input name="postTitle" type="text" placeholder="請輸入標題" style="font-size:18px;width: 40vw;">
-                            <br>
-                            <textarea name="postText" required  placeholder="請輸入內文" style="font-size:18px;height: 20vw;width: 50vw;resize: none;"></textarea>
+                            <textarea required="required" name="postText" required  placeholder="請輸入內文" autocomplete="off" style="font-size:18px;height: 20vw;width: 50vw;resize: none;"></textarea>
                             <br>
                             <button>發送</button>
                         </form>
@@ -478,13 +465,15 @@
     var transtoday = {{today[2]|safe}};
     var fav = {{reFav|safe}};
 
-/*
-    var datelive = {{live[0]|safe}};
-    var closelive= {{live[1]|safe}};
-    var translive = {{live[2]|safe}};*/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    {% if live[0] == "e" %}
     var datelive = [];
     var closelive= [];
     var translive = [];
+    {% else %}
+    var datelive = {{live[0]|safe}};
+    var closelive= {{live[1]|safe}};
+    var translive = {{live[2]|safe}};
+    {% endif %}
 
     var realArtData = {{art|safe}};
 
@@ -546,15 +535,23 @@
             //butCha(0);
     },5000);
     */
+    var num = 0;
+
+    function delart(){
+        window.location.href="/delart/{{stock}}/" + realArtData[num][2];
+    }
+
     var reArtList = {{reArt|safe}}
+    var del = 0;
     var nowVew = 0;
     function relist(a){
         if (a==0 && nowVew == 1){
             nowVew = 0;
-            $('#reBut').toggle();
             $('#postBut').toggle();
             $('#outArt').toggle();
             $('#inArt').toggle();
+            if (del == 1)
+                $('#delBut').toggle();
         }
         else if (a==1 && nowVew == 0){
             nowVew = 2;
@@ -566,26 +563,17 @@
             $('#outArt').toggle();
             $('#postArt').toggle();
         } 
-        else if (a==2 && nowVew == 1){
-            nowVew = 3;
-            $('#inArt').toggle();
-            $('#reArt').toggle();
-        }
-        else if (a==0 && nowVew == 3){
-            nowVew = 0;
-            $('#reArt').toggle();
-            $('#reBut').toggle();
-            $('#postBut').toggle();
-            $('#outArt').toggle();
-        }
     }
 
     var reArtNum=document.getElementById("artNum");
 
     function intoArt(no){
         nowVew = 1;
-        
-        $('#reBut').toggle();
+        num = no;
+        if ("{{current_user.id}}" == realArtData[no][0]){
+            $('#delBut').toggle();
+            del = 1;
+        }
         $('#postBut').toggle();
         $('#outArt').toggle();
         $('#inArt').toggle();
@@ -596,7 +584,7 @@
         $('#uid').empty();
         $('#poTime').empty();
         $('#inArt').empty();
-        $('#inArt').append('<tr bgcolor=lightgray><td id="Atitle"></td></tr><tr><td id="Atext"></td></tr><tr><td><hr><button type="button" onclick="gd(' + no + ')">good</button>&ensp;<a id="gd"></a>&ensp;&ensp;&ensp;<button type="button" onclick="bd(' + no + ')">bad</button>&ensp;<a id="bd"></a>&ensp;&ensp;&ensp;<a id="uid"></a>&ensp;&ensp;&ensp;<a id="poTime">發文時間:</a></td></tr>');
+        $('#inArt').append('<tr bgcolor=lightgray><td id="Atitle"></td></tr><tr><td id="Atext"></td></tr><tr><td><hr><button type="button" onclick="gd(' + realArtData[no][2] + ')">good</button>&ensp;<a id="gd"></a>&ensp;&ensp;&ensp;<button type="button" onclick="bd(' + no + ')">bad</button>&ensp;<a id="bd"></a>&ensp;&ensp;&ensp;<a id="uid"></a>&ensp;&ensp;&ensp;<a id="poTime">發文時間:</a></td></tr>');
         $('#Atitle').append(realArtData[no][4]);
         $('#Atext').append(realArtData[no][5]);
         $('#gd').append(realArtData[no][6]);
@@ -610,15 +598,15 @@
                 $('#inArt').append('<tr bgcolor=lightgray style="height: 2vw;" id="Arecom"><td>'+ reArtList[i][0] +'&ensp;'+ reArtList[i][4] +'&ensp;'+ eee +'</td></tr>');
             }
         }
-        $('#inArt').append('<tr bgcolor=lightgray style="height: 2vw;"><td id="postCom"><input name="inputCom" type="text" placeholder="留言..." style="font-size:18px;width: 35vw;">&ensp;<button style="font-size:16px;">發送</button></td></tr>');
+        $('#inArt').append('<tr bgcolor=lightgray style="height: 2vw;"><td id="postCom"><input name="inputCom" type="text" placeholder="留言..." autocomplete="off" style="font-size:18px;width: 35vw;">&ensp;<button style="font-size:16px;">發送</button></td></tr>');
         reArtNum.value = realArtData[no][2];
     }
 
     function gd(no){
-        window.location.href="/saveGd/" + {{stock}} + "/" + no;
+        window.location.href="/saveGd/{{stock}}/" + no;
     }
     function bd(no){
-        window.location.href="/saveBd/" + {{stock}} + "/" + no;
+        window.location.href="/saveBd/{{stock}}/" + no;
     }
 
     fav.forEach(element => {
@@ -1898,25 +1886,32 @@
         document.cookie = "tec=" + tecNum;
     }
 
-    window.onload = function () {
-        if (document.cookie.match(/scrollTop=([^;]+)(;|$)/) != null) {
-            var arr = document.cookie.match(/scrollTop=([^;]+)(;|$)/); //cookies中不為空,則讀取滾動條位置
-            document.documentElement.scrollTop = parseInt(arr[1]);
-            document.body.scrollTop = parseInt(arr[1]);
 
-            var reChaNum = document.cookie.match(/cha=([^;]+)(;|$)/);
-            butCha(reChaNum[1]);
-            var rePreNum = document.cookie.match(/pre=([^;]+)(;|$)/);
-            preDay = parseInt(rePreNum[1]);
-            butPre(0);
-            var reFinNum = document.cookie.match(/fin=([^;]+)(;|$)/);
-            butFin(reFinNum[1]);
-            //alert(reFinNum[1]);
-            var reTecNum = document.cookie.match(/tec=([^;]+)(;|$)/);
-            butTec(reTecNum[1]);
-            
-        }
+    if (document.cookie.match(/scrollTop=([^;]+)(;|$)/) != null) {
+        var arr = document.cookie.match(/scrollTop=([^;]+)(;|$)/); //cookies中不為空,則讀取滾動條位置
+        document.documentElement.scrollTop = parseInt(arr[1]);
+        document.body.scrollTop = parseInt(arr[1]);
+
+        var reChaNum = document.cookie.match(/cha=([^;]+)(;|$)/);
+        butCha(reChaNum[1]);
+        var rePreNum = document.cookie.match(/pre=([^;]+)(;|$)/);
+        preDay = parseInt(rePreNum[1]);
+        butPre(0);
+        var reFinNum = document.cookie.match(/fin=([^;]+)(;|$)/);
+        butFin(reFinNum[1]);
+        //alert(reFinNum[1]);
+        var reTecNum = document.cookie.match(/tec=([^;]+)(;|$)/);
+        butTec(reTecNum[1]);
+        {% if toArt == "2" %}
+        document.getElementById("artcile").scrollIntoView();
+        intoArt(0);
+        {% elif toArt == "1" %}
+        document.getElementById("artcile").scrollIntoView();
+        {% endif %}
+        
     }
+
+    
     </script>
     
 </body>

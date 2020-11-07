@@ -111,8 +111,8 @@ def dailyMailDel(uid):
     conn.commit()
     conn.close()
     return "0"
-dailyMailDel("10646021")
-print(getDailyMail("10646021"))
+#dailyMailDel("10646021")
+#print(getDailyMail("10646021"))
 
 '''verification = input("verification:")
 password = input("password:")
@@ -305,9 +305,17 @@ def setGood(userid, stid, artNum):
     c =conn.cursor()
     c.execute("select * from postArticle where stockId = '{}' and article = '{}';".format(stid, artNum))
     a = c.fetchall()[0]
-    if a[6] == "":
+
+    re = 0
+    checkG = 0
+    if a[7] != "":
+        cheG = a[7].split("-")
+        for i in range(len(cheG)):
+            if cheG[i] == userid:
+                checkG = 1
+    if a[6] == "" and checkG == 0:
         good = userid
-    else:
+    elif checkG == 0:
         che = a[6].split("-")
         check = 0
         for i in range(len(che)):
@@ -317,6 +325,10 @@ def setGood(userid, stid, artNum):
             good = a[6] + "-" + userid
         else:
             good = a[6]
+            re = 1
+    elif checkG == 1:
+            good = a[6]
+            re = 1
     conn.close()
 
     conn = sqlite3.connect('stock.db')
@@ -324,7 +336,7 @@ def setGood(userid, stid, artNum):
     c.execute("update postArticle set aLike ='{}' where stockId = '{}' and article = '{}';".format(good, stid, artNum))
     conn.commit()
     conn.close()
-    return
+    return re
 
 def setBad(userid, stid, artNum):
     Bad = ""
@@ -333,6 +345,7 @@ def setBad(userid, stid, artNum):
     c.execute("select * from postArticle where stockId = '{}' and article = '{}';".format(stid, artNum))
     a = c.fetchall()[0]
 
+    re = 0
     checkG = 0
     if a[6] != "":
         cheG = a[6].split("-")
@@ -352,7 +365,10 @@ def setBad(userid, stid, artNum):
             Bad = a[7] + "-" + userid
         else:
             Bad = a[7]
-    print(Bad)
+            re = 1
+    elif checkG == 1:
+        Bad = a[7]
+        re = 1
     conn.close()
 
     conn = sqlite3.connect('stock.db')
@@ -360,6 +376,6 @@ def setBad(userid, stid, artNum):
     c.execute("update postArticle set aDislike ='{}' where stockId = '{}' and article = '{}';".format(Bad, stid, artNum))
     conn.commit()
     conn.close()
-    return
-#setGood("10646021", "2427", "1")
+    return re
+#print(setGood("10646021", "2427", "3"))
 #print(getArtcile("2427"))

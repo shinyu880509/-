@@ -178,9 +178,13 @@ def indexId(stId):
     dataReArt = revise.getReArtcile(aa[0])
     lenArt = len(dataArt)
     toArt = "0"
+    inArt = "0"
     if len(aa) == 2:
         toArt = aa[1]
-    return render_template('index.html', stock = aa[0], name = name, re = data, today = datatoday, tec = dataTec, fin = dataFin, pre = dataPre, news = dataNews, n = n, reFav = dataFav, live = datalive, ind = dataInd, art = dataArt, lenArt = lenArt, reArt = dataReArt, toArt = toArt)  
+    elif len(aa) == 3:
+        toArt = aa[1]
+        inArt = aa[2]
+    return render_template('index.html', stock = aa[0], name = name, re = data, today = datatoday, tec = dataTec, fin = dataFin, pre = dataPre, news = dataNews, n = n, reFav = dataFav, live = datalive, ind = dataInd, art = dataArt, lenArt = lenArt, reArt = dataReArt, toArt = toArt, inArt = inArt)  
 
 @app.route("/newFav/<typeA>/<stId>/<fav>")
 def newFav(fav, typeA, stId):
@@ -231,15 +235,21 @@ def postReArt(stId):
         stId += "-2"
         return redirect(url_for('indexId', stId = stId))
 
-@app.route("/saveGd/<stId>/<artNum>")
-def saveGd(stId, artNum):
+@app.route("/saveGd/<stId>/<artNum>/<num>")
+def saveGd(stId, artNum, num):
     print(stId, artNum)
-    revise.setGood(current_user.id, stId, artNum)
+    a = revise.setGood(current_user.id, stId, artNum)
+    stId += "-3-" + num
+    if a == 1:
+        flash("訊這篇文章已經點過喜歡或不喜歡了")
     return redirect(url_for('indexId', stId = stId))
 
-@app.route("/saveBd/<stId>/<artNum>")
-def saveBd(stId, artNum):
-    revise.setBad(current_user.id, stId, artNum)
+@app.route("/saveBd/<stId>/<artNum>/<num>")
+def saveBd(stId, artNum, num):
+    a = revise.setBad(current_user.id, stId, artNum)
+    stId += "-3-" + num
+    if a == 1:
+        flash("訊這篇文章已經點過喜歡或不喜歡了")
     return redirect(url_for('indexId', stId = stId))
 
 #個人化設定

@@ -241,6 +241,17 @@ div.button{
   	color: white;
   }
 
+#back{
+	background-color: #d6d3c0;
+	text-align: center;
+	color: #A7A599;
+}
+
+.back2{
+	background-color: #f7f4e193;
+	color: #0000005d;
+}
+
 
 div.newsbar ul  {
 	

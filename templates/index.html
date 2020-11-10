@@ -16,7 +16,7 @@
                 <div class="login">
                     {% if current_user.is_authenticated %}
                     <div class="dropdown">
-                        <button class="dropbtn"><img src="/static/images/user.png"  width="25" height="25"><a>1999hys</a><img src="/static/images/down.png"  width="35" height="35"></button>
+                        <button class="dropbtn"><img src="/static/images/user.png"  width="25" height="25"><a>{{current_user.id}}</a><img src="/static/images/down.png"  width="35" height="35"></button>
                         <div class="dropdown-content">
                             <a href="javascript:saveFav('setting')">Setting</a>
                             <a href="javascript:saveFav('logout')">Log Out</a>

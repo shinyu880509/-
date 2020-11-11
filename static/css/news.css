@@ -1,0 +1,471 @@
+@charset "utf-8";
+/* CSS Document */
+@import url(http://fonts.googleapis.com/earlyaccess/notosanstc.css);
+@import url(http://fonts.googleapis.com/earlyaccess/cwtexfangsong.css);
+/* ---------------------body------------------------- */
+html, body{
+	font-family: 'Noto Sans TC', sans-serif;
+	background:#eeeff4;
+	width: 100vw;
+    height: 300vh;
+    margin-left:-8px ;
+}
+div.wrapper
+{
+	background:#FFFFFF;
+	margin: 0;
+    width: 100vw;
+    height:300vh;
+}
+/* --------------------------header開始-------------------------------- */
+div.header
+{
+   
+    background-color:#fdfdfd;
+	opacity: 0.8;
+	width: 85vw;
+	height:7vw;
+	margin-left: 13vw;
+	
+	
+
+}
+
+
+
+div.title{
+	
+	height: 7vw;
+	text-align: center;
+	vertical-align: middle;
+	margin: 0;
+	margin-top: -5vw;
+	
+}
+
+h1.title{
+	color: #000000;
+	position: relative;
+	text-align: left;
+	vertical-align: middle;
+	font-size:25px;
+	font-weight:500;
+	margin:0;
+	top:20px;
+	padding-left: 7vw;
+	
+}
+
+
+div.title a{
+	clear: both;
+	float:left;
+}
+
+img.avatar{
+	margin-top:-40px;
+}
+
+/*---------下拉式選單Dropdown Button---------*/
+.dropbtn {
+	color: #000;
+	padding: 16px;
+	font-size: 16px;
+	border: none;
+	background-color: rgb(250, 250, 250);
+	font-family:  'Noto Sans TC';
+	display: flex;          /* ★ */
+	align-items: center;    /* ★ */
+	margin-left:70vw;
+  }
+  
+  /* The container <div> - needed to position the dropdown content */
+  .dropdown {
+	position: relative;
+	display: inline-block;
+  }
+  
+  /* Dropdown Content (Hidden by Default) */
+  .dropdown-content {
+	display: none;
+	position: absolute;
+	background-color: #f1f1f1;
+	min-width: 160px;
+	box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+	z-index: 1;
+	margin-left:73vw;
+  }
+  
+  /* Links inside the dropdown */
+  .dropdown-content a {
+	color: black;
+	padding: 12px 16px;
+	text-decoration: none;
+	display: block;
+  }
+  
+  /* Change color of dropdown links on hover */
+  .dropdown-content a:hover {background-color: #ddd;}
+  
+  /* Show the dropdown menu on hover */
+  .dropdown:hover .dropdown-content {display: block;}
+
+/* ---------------------------header結束----------------------------- */
+
+									/* ------------------------搜尋位置調整---------------------
+									div.search ul{
+		我先隱藏搜尋 					 height: 50px;
+										margin-top:-45px;
+										margin-left:50vw;
+									}
+									---------------------搜尋位置調整結束---------------------- */
+
+/* -------------------------------左方欄開始----------------------------------- */
+div.sidebar1{
+	/* --border:1px black solid;-- */
+	
+	clear: both;
+    background-color: #444b5e;
+    width: 13vw;
+    height:440vw;
+	float:left;
+    margin-top: -12vw;
+    
+}
+
+div.sidebar1 .bd-toc-item {
+	width:13vw;
+	margin:0;
+	text-align: center;
+}
+
+div.sidebar1 .bd-toc-item .text{
+	float:left;
+	width:10vw;
+
+}
+div.sidebar1 .bd-toc-item .img{
+	float:right;
+	width:3vw;
+
+}
+
+div h3.title{
+	float: left;
+	font-size: 20px;
+	font-weight:500;
+	color: #FFFFFF;
+	width:13vw;
+}
+
+div h4.myfavorite{
+	float: left;
+	font-size: 17px;
+	font-weight:400;
+	color: #FFFFFF;
+	width:13vw;
+}
+div h4.otherstock{
+	float: left;
+	font-size: 17px;
+	font-weight:400;
+	color: #FFFFFF;
+	width:13vw;
+}
+
+div.sidebar1 .bd-toc-item .text ul {
+	clear: both;
+	float:left;
+	padding:0;
+	list-style:none;
+	text-decoration:none;
+}
+div.sidebar1 .bd-toc-item .img ul {
+	clear: both;
+	float:left;
+	padding:0;
+	list-style:none;
+	text-decoration:none;
+}
+
+div.sidebar1 .bd-toc-item .text ul li{
+	clear: both;
+	float:left;
+	padding:0;
+	list-style:none;
+	text-decoration:none;
+	line-height:20px;
+	margin-left: 10px;
+}
+div.sidebar1 .bd-toc-item .img ul li{
+	clear: both;
+	float:left;
+	padding:0;
+	text-decoration:none;
+	line-height:30px;
+}
+/*左方股票代碼字體樣式*/
+div.sidebar1 .bd-toc-item .text ul li a { 
+	clear: both;
+	float: left;
+	color:#a6aec0;
+	font-size: 14px;
+	font-weight: 300;
+	line-height:30px;
+	text-decoration:none; /*隱藏超連結底線*/
+}
+/*左方股票代碼字體樣式結束*/
+
+/*滑鼠滑入字體變色*/
+div.sidebar1 .bd-toc-item .text ul li a:hover { 
+	color: #FFFFFF;
+	font-size: 16px;
+}
+/*滑鼠滑入字體變色結束*/
+
+
+/* -------------------------------左方欄結束----------------------------------- */
+
+/* -------------------------------content開始----------------------------------- */
+div.content{
+	/* --border:1px black solid; -- */
+    background:#eef0f4;
+    width: 70vw;
+    height:265vw;
+	float: left; 
+	margin: 0;
+	/*overflow: auto;*/
+	
+}
+
+div.title1 h2{
+	font-size:24px;   /* -----------------股票名稱-------------------- */
+	font-weight:500;
+	color:#2f2f30a1;
+	margin-top: 5px;
+	padding-left: 10px;
+	
+	
+}
+
+
+
+div.clear{
+	clear:both;	
+}
+
+div.newsbar{
+	
+	background-color: #eef0f4;
+	width: 69vw;
+	height: 640px;
+	margin-left: 6px;
+	margin-right: 6px;
+	margin-top: -5px;
+}
+
+div.newsbar h2{
+    font-size:20px;
+	font-weight:400;
+	border: 2px solid #2f2f30a1;
+	border-radius: 10px;
+	width: 110px;
+	color: #2f2f30a1;
+	text-align: center;
+	margin-left: 25px;
+}
+
+#preTitle{
+	margin-top: -20px;
+}
+
+
+
+div.button{
+	margin-top:-10px;
+	margin-left:25px;
+	
+}
+
+#outArt{
+	width: 800px;
+	margin-left:45px;
+	margin-top: 10px;
+}
+
+.today{
+	background-color: white; 
+ 	 color: black; 
+  	border: 2px solid #909192a1;
+	padding-top: -30px;
+	font-size: 15px;
+}
+.today:hover {
+	background-color: #7ea5cca1;
+  	color: white;
+  }
+
+
+
+#back{
+	background-color: #b9babd;
+	text-align: center;
+	color: #ffffff;
+}
+
+.back2{
+	background-color: #c7cfcd4b;
+	color: #f838385d;
+}
+
+
+div.newsbar ul  {
+	
+	list-style:none;
+	margin-left:-25px;
+	margin-top:5px;
+} 
+div.newsbar ul li {
+	display:inline;
+	font-size:12.5px;
+	font-weight:250;
+	line-height: 20px;
+	margin-left: 15px;
+} 
+
+div.clear{
+    clear:both;
+}
+
+
+div.pic{
+	background-color:#ffffff;
+	height: 530px;
+	width: 69vw;
+}
+
+#recommend{
+	margin-top: 0px;
+	height: 80px;
+}
+
+/* -------------------------------content結束----------------------------------- */
+
+/* -------------------------------新聞開始----------------------------------- */
+div.sidebar2{
+	/* --border:1px black solid;-- */
+
+	right: -1vw;
+	background-color:#eef0f4;
+    width: 17vw;
+    height:260vw;
+	float: right;
+	margin: 0;
+	
+}
+div.newstitle{
+	background-color:#eef0f4;
+	height:55px;
+	width: 7vw;
+
+}
+
+div.newstitle h2{
+	text-align: center;
+	margin-top: 5px;
+	color: #2f2f30a1;
+}
+
+div.newscontent{
+	background-color: #eef0f4;
+	padding:10px;
+	border: 2px solid #909192a1;
+	border-radius: 10px;
+
+}
+
+div.sidebar2 ul{ 
+	clear: both;
+	float: left;
+	color:gray;
+	font-size: 14px;
+	font-weight: 300;
+	line-height:30px;
+	text-decoration:none; /*隱藏超連結底線*/
+	list-style-type: none;
+	padding:0 0 0 0;
+	
+}
+div.sidebar2 ul li a{ 
+	clear: both;
+	float: left;
+	color:#839293;
+	font-size: 16px;
+	font-weight: 300;
+	line-height:30px;
+	text-decoration:none; /*隱藏超連結底線*/
+	list-style-type: none;
+}
+
+div.sidebar2 ul li a:hover{ 
+	clear: both;
+	float: left;
+	color:#000;
+	font-size: 18px;
+	font-weight: 300;
+	line-height:30px;
+	text-decoration:none; /*隱藏超連結底線*/
+	list-style-type: none;
+}
+
+div.sidebar2 ul li h5{ 
+	clear: both;
+	float: left;
+	color:#000;
+	font-size: 10px;
+	font-weight: 300;
+	line-height:30px;
+	text-decoration:none; /*隱藏超連結底線*/
+	list-style-type: none;
+}
+/*------------------------------more點選之後的新聞版面------------------------------------------*/
+div.news{
+	background-color: #f5f5f5;
+}
+div.news ul li a{ 
+	clear: both;
+	color:#2b303c;
+	font-size: 16px;
+	font-weight: 450;
+	text-decoration:none; /*隱藏超連結底線*/
+	list-style-type: none;
+}
+div.news ul li a:hover{ 
+	clear: both;
+	color:#839293;
+	font-weight: 450;
+	text-decoration:none; /*隱藏超連結底線*/
+	list-style-type: none;
+}
+/*------------------------------more點選之後的新聞版面------------------------------------------*/
+
+
+/* -------------------------------新聞結束----------------------------------- */
+
+/* -------------------------------footer開始------------------------------------- */
+div.footer{
+    clear: both;
+    position: relative;
+    height:70px;
+    line-height:70px;
+    width: 100vw;
+    margin-top:3vh;
+    margin-left:-13vw;
+    margin-right:auto;
+    text-align:center;
+    color:#fff;
+    background:#003333;
+    letter-spacing:1px;
+
+}
+/* -------------------------------footer結束------------------------------------- */

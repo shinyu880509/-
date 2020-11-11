@@ -5,17 +5,25 @@
 <title>專題-股票分析</title>
 <link rel="stylesheet" href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <link href="https://fonts.googleapis.com/css?family=Noto+Sans+TC" rel="stylesheet">
-<link href="{{ url_for('static', filename='css/main.css') }}" rel="stylesheet" type="text/css" />      
+<link href="{{ url_for('static', filename='css/news.css') }}" rel="stylesheet" type="text/css" />      
 </head>
 <body>
-    {% if current_user.is_authenticated %}
-    <a>登入成功{{current_user.id}}</a>
-    <a href="javascript:saveFav('logout')">登出</a>
-    {% endif %}
+
 <!----------------------------------------------------------->
 <div id="wrapper">
     <!--------------------------header------------------------------->
             <div class="header" >
+                <div class="login">
+                    {% if current_user.is_authenticated %}
+                    <div class="dropdown">
+                        <button class="dropbtn"><img src="/static/images/user.png"  width="25" height="25"><a>{{current_user.id}}</a><img src="/static/images/down.png"  width="35" height="35"></button>
+                        <div class="dropdown-content">
+                            <a href="javascript:saveFav('setting')">Setting</a>
+                            <a href="javascript:saveFav('logout')">Log Out</a>
+                        </div>
+                      </div>
+                    {% endif %}
+                </div>
                 <div class="title">
                     <h1 class="title">資訊股分析網</h1>
                     <a href="/"><img src="{{ url_for('static', filename='images/icon.png') }}"  width="80" height="80" class="avatar"></a>
@@ -47,40 +55,40 @@
             <div class="text">
                 <ul>
                     <li>
-                    <h class="2427text" style="display: none;"><a href="javascript:saveFavNews('2427')">2427三商電 </a></h>
+                    <h class="2427text" style="display: none;"><a href="javascript:saveFav('2427')">2427三商電 </a></h>
                     </li>
                     <li>
-                    <h class="2453text"style="display: none;"><a href="javascript:saveFavNews('2453')">2453凌群 </a></h>
+                    <h class="2453text"style="display: none;"><a href="javascript:saveFav('2453')">2453凌群 </a></h>
                     </li>
                     <li>
-                    <h class="2468text"style="display: none;"><a href="javascript:saveFavNews('2468')">2468華經 </a></h>
+                    <h class="2468text"style="display: none;"><a href="javascript:saveFav('2468')">2468華經 </a></h>
                     </li>
                     <li>
-                    <h class="2471text"style="display: none;"><a href="javascript:saveFavNews('2471')">2471資通 </a></h>
+                    <h class="2471text"style="display: none;"><a href="javascript:saveFav('2471')">2471資通 </a></h>
                     </li>
                     <li>
-                    <h class="2480text"style="display: none;"><a href="javascript:saveFavNews('2480')">2480敦陽 </a></h>
+                    <h class="2480text"style="display: none;"><a href="javascript:saveFav('2480')">2480敦陽 </a></h>
                     </li>
                     <li>
-                    <h class="3029text"style="display: none;"><a href="javascript:saveFavNews('3029')">3029零壹 </a></h>
+                    <h class="3029text"style="display: none;"><a href="javascript:saveFav('3029')">3029零壹 </a></h>
                     </li>    
                     <li>
-                    <h class="3130text"style="display: none;"><a href="javascript:saveFavNews('3130')">3130一零四 </a></h>
+                    <h class="3130text"style="display: none;"><a href="javascript:saveFav('3130')">3130一零四 </a></h>
                     </li> 
                     <li>
-                    <h class="4994text"style="display: none;"><a href="javascript:saveFavNews('4994')">4994傳奇 </a></h>
+                    <h class="4994text"style="display: none;"><a href="javascript:saveFav('4994')">4994傳奇 </a></h>
                     </li>        
                     <li>
-                    <h class="5203text"style="display: none;"><a href="javascript:saveFavNews('5203')">5203訊連 </a></h>
+                    <h class="5203text"style="display: none;"><a href="javascript:saveFav('5203')">5203訊連 </a></h>
                     </li>
                     <li>
-                    <h class="6112text"style="display: none;"><a href="javascript:saveFavNews('6112')">6112聚碩 </a></h>
+                    <h class="6112text"style="display: none;"><a href="javascript:saveFav('6112')">6112聚碩 </a></h>
                     </li>
                     <li>
-                    <h class="6183text"style="display: none;"><a href="javascript:saveFavNews('6183')">6183關貿 </a></h>
+                    <h class="6183text"style="display: none;"><a href="javascript:saveFav('6183')">6183關貿 </a></h>
                     </li>
                     <li>
-                    <h class="6214text"style="display: none;"><a href="javascript:saveFavNews('6214')">6214精誠 </a></h>
+                    <h class="6214text"style="display: none;"><a href="javascript:saveFav('6214')">6214精誠 </a></h>
                     </li>       
                 </ul>
                 
@@ -131,40 +139,40 @@
             <div class="text">
                 <ul>
                     <li>
-                        <a class="text2427" href="javascript:saveFavNews('2427')">2427三商電 </a>
+                        <a class="text2427" href="javascript:saveFav('2427')">2427三商電 </a>
                     </li>
                     <li>
-                        <a class="text2453" href="javascript:saveFavNews('2453')">2453凌群 </a>
+                        <a class="text2453" href="javascript:saveFav('2453')">2453凌群 </a>
                     </li>
                     <li>
-                        <a class="text2468" href="javascript:saveFavNews('2468')">2468華經 </a>
+                        <a class="text2468" href="javascript:saveFav('2468')">2468華經 </a>
                     </li>
                     <li>
-                        <a class="text2471" href="javascript:saveFavNews('2471')">2471資通</a>
+                        <a class="text2471" href="javascript:saveFav('2471')">2471資通</a>
                     </li>
                     <li>
-                        <a class="text2480" href="javascript:saveFavNews('2480')">2480敦陽</a>
+                        <a class="text2480" href="javascript:saveFav('2480')">2480敦陽</a>
                     </li>
                     <li>
-                        <a class="text3029" href="javascript:saveFavNews('3029')">3029零壹 </a>
+                        <a class="text3029" href="javascript:saveFav('3029')">3029零壹 </a>
                     </li>
                     <li>
-                        <a class="text3130" href="javascript:saveFavNews('3130')">3130一零四</a>
+                        <a class="text3130" href="javascript:saveFav('3130')">3130一零四</a>
                     </li>
                     <li>
-                        <a class="text4994" href="javascript:saveFavNews('4994')">4994傳奇 </a>
+                        <a class="text4994" href="javascript:saveFav('4994')">4994傳奇 </a>
                     </li>
                     <li>
-                        <a class="text5203" href="javascript:saveFavNews('5203')">5203訊連 </a>
+                        <a class="text5203" href="javascript:saveFav('5203')">5203訊連 </a>
                     </li>
                     <li>
-                        <a class="text6112" href="javascript:saveFavNews('6112')">6112聚碩</a>
+                        <a class="text6112" href="javascript:saveFav('6112')">6112聚碩</a>
                     </li>
                     <li>
-                        <a class="text6183" href="javascript:saveFavNews('6183')">6183關貿 </a>
+                        <a class="text6183" href="javascript:saveFav('6183')">6183關貿 </a>
                     </li>
                     <li>
-                        <a class="text6214" href="javascript:saveFavNews('6214')">6214精誠 </a>
+                        <a class="text6214" href="javascript:saveFav('6214')">6214精誠 </a>
                     </li>
                 </ul>
             </div>

@@ -12,30 +12,21 @@
 <!----------------------------------------------------------->
 <div id="wrapper">
     <!--------------------------header------------------------------->
-            <div class="header" >
-                <div class="login">
-                    {% if current_user.is_authenticated %}
-                    <a>登入成功{{current_user.id}}</a>
-                    <a href="/logout">登出</a>
-                    {% endif %}
-                </div>
+                <div class="header" >
+                    <div class="login">
+                        {% if current_user.is_authenticated %}
+                        <div class="dropdown">
+                            <button class="dropbtn"><a href="javascript:history.back()" style="text-decoration:none;color:#000;font-size: 16px; margin-top: 2px;">back</a></button>
+                          </div>
+                        {% endif %}
+                    </div>
 
-                <div class="title">
-                    <h1 class="title">資訊股分析網</h1>
-                    <a href="/"><img src="{{ url_for('static', filename='images/icon.png') }}"  width="80" height="80" class="avatar"></a>
-                </div>     
+                    <div class="title">
+                        <h1 class="title">資訊股分析網</h1>
+                        <a href="javascript:saveFav('{{stock}}')"><img src="{{ url_for('static', filename='images/icon.png') }}"  width="47" height="47" class="avatar"></a>
+                    </div>  
     
-                        <!---<div class="search">
-                            <ul>
-                                <img id="searchIcon" width="24px" src="https://s.yimg.com/cv/apiv2/twstock/icon-search.png"
-                                    srcset="https://s.yimg.com/cv/apiv2/twstock/icon-search@2x.png 2x, https://s.yimg.com/cv/apiv2/twstock/icon-search@3x.png 3x" />
-          我先隱藏搜尋               <input id="stock_id" type="text" name="stock_id" placeholder="搜尋台股代號/名稱" />
-                                    <img id="closeBtn" src="https://s.yimg.com/cv/apiv2/twstock/cancel.png"
-                                    srcset="https://s.yimg.com/cv/apiv2/twstock/cancel@2x.png 2x, https://s.yimg.com/cv/apiv2/twstock/cancel@3x.png 3x"
-                                    style="cursor: pointer; display: none" />
-                                    <button class="btn btn-primary my-2 my-sm-0" type="submit">搜尋</button>
-                            </ul>
-                        </div>  ----> 
+                        
             </div>
             <div class="fakeHeader" ></div>
     <!---------------------------header結束------------------------------>

@@ -6,7 +6,7 @@
 html, body{
 	font-family: 'Noto Sans TC', sans-serif;
 	margin:0;
-	background:#eef4ef;
+	background:#f5f5f5;
 	width: 100vw;
 	height: 300vh;
 }
@@ -55,7 +55,7 @@ h1.title{
 
 
 div.title a{
-	/*--clear: both;--*/
+	clear: both;
 	float:left;
 	margin-top: -57px;
 	padding-left: 10px;
@@ -112,13 +112,6 @@ div.login{
 
 /* ---------------------------header結束----------------------------- */
 
-									/* ------------------------搜尋位置調整---------------------
-									div.search ul{
-		我先隱藏搜尋 					 height: 50px;
-										margin-top:-45px;
-										margin-left:50vw;
-									}
-									---------------------搜尋位置調整結束---------------------- */
 
 /* -------------------------------左方欄開始----------------------------------- */
 div.sidebar1{
@@ -431,6 +424,7 @@ div.sidebar2 ul li h5{
 /*------------------------------more點選之後的新聞版面------------------------------------------*/
 div.news{
 	background-color: #f5f5f5;
+	margin-top: -5px;
 }
 div.news ul li a{ 
 	clear: both;

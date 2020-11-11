@@ -5,7 +5,7 @@
 <title>專題-股票分析</title>
 <link rel="stylesheet" href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <link href="https://fonts.googleapis.com/css?family=Noto+Sans+TC" rel="stylesheet">
-<link href="{{ url_for('static', filename='css/news.css') }}" rel="stylesheet" type="text/css" />      
+<link href="{{ url_for('static', filename='css/main.css') }}" rel="stylesheet" type="text/css" />      
 </head>
 <body>
 
@@ -26,20 +26,8 @@
                 </div>
                 <div class="title">
                     <h1 class="title">資訊股分析網</h1>
-                    <a href="/"><img src="{{ url_for('static', filename='images/icon.png') }}"  width="80" height="80" class="avatar"></a>
-                </div>     
-    
-                        <!---<div class="search">
-                            <ul>
-                                <img id="searchIcon" width="24px" src="https://s.yimg.com/cv/apiv2/twstock/icon-search.png"
-                                    srcset="https://s.yimg.com/cv/apiv2/twstock/icon-search@2x.png 2x, https://s.yimg.com/cv/apiv2/twstock/icon-search@3x.png 3x" />
-          我先隱藏搜尋               <input id="stock_id" type="text" name="stock_id" placeholder="搜尋台股代號/名稱" />
-                                    <img id="closeBtn" src="https://s.yimg.com/cv/apiv2/twstock/cancel.png"
-                                    srcset="https://s.yimg.com/cv/apiv2/twstock/cancel@2x.png 2x, https://s.yimg.com/cv/apiv2/twstock/cancel@3x.png 3x"
-                                    style="cursor: pointer; display: none" />
-                                    <button class="btn btn-primary my-2 my-sm-0" type="submit">搜尋</button>
-                            </ul>
-                        </div>  ----> 
+                    <a href="javascript:saveFav('{{stock}}')"><img src="{{ url_for('static', filename='images/icon.png') }}"  width="47" height="47" class="avatar"></a>
+                </div>          
             </div>
     <!---------------------------header結束------------------------------>
         

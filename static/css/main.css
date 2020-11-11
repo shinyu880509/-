@@ -6,7 +6,7 @@
 html, body{
 	font-family: 'Noto Sans TC', sans-serif;
 	margin:0;
-	background:#eef0f4;	
+	background:#eef4ef;
 	width: 100vw;
 	height: 300vh;
 }
@@ -126,7 +126,7 @@ div.sidebar1{
 	clear: both;
     background-color: #444b5e;
     width: 13vw;
-    height:280vw;
+    height:273vw;
 	float:left;
 	margin: 0;
 	margin-top: -12vw;
@@ -240,8 +240,10 @@ div.content{
 div.title1 h2{
 	font-size:24px;   /* -----------------股票名稱-------------------- */
 	font-weight:500;
-	color: rgb(70, 26, 26);
-	padding: 15px;
+	color:#2f2f30a1;
+	margin-top: 5px;
+	padding-left: 10px;
+	
 	
 }
 
@@ -253,7 +255,7 @@ div.clear{
 
 div.newsbar{
 	
-	background-color: #f5f5f5;
+	background-color: #eef0f4;
 	width: 69vw;
 	height: 640px;
 	margin-left: 6px;
@@ -262,18 +264,32 @@ div.newsbar{
 }
 
 div.newsbar h2{
-    font-size:25px;
-	font-weight:450;
-	
+    font-size:20px;
+	font-weight:400;
+	border: 2px solid #2f2f30a1;
+	border-radius: 10px;
+	width: 110px;
+	color: #2f2f30a1;
+	text-align: center;
+	margin-left: 25px;
 }
 
 #preTitle{
-	margin-top: -25px;
+	margin-top: -20px;
 }
 
+
+
 div.button{
-	margin-top:-20px;
+	margin-top:-10px;
 	margin-left:25px;
+	
+}
+
+#outArt{
+	width: 800px;
+	margin-left:45px;
+	margin-top: 10px;
 }
 
 .today{
@@ -284,19 +300,21 @@ div.button{
 	font-size: 15px;
 }
 .today:hover {
-	background-color: #909192a1;
+	background-color: #7ea5cca1;
   	color: white;
   }
 
+
+
 #back{
-	background-color: #d6d3c0;
+	background-color: #b9babd;
 	text-align: center;
-	color: #A7A599;
+	color: #ffffff;
 }
 
 .back2{
-	background-color: #f7f4e193;
-	color: #0000005d;
+	background-color: #c7cfcd4b;
+	color: #f838385d;
 }
 
 
@@ -320,7 +338,7 @@ div.clear{
 
 
 div.pic{
-	background-color: rgba(255, 255, 255, 0.568);
+	background-color:#ffffff;
 	height: 530px;
 	width: 69vw;
 }
@@ -339,21 +357,29 @@ div.sidebar2{
 	right: -1vw;
 	background-color:#eef0f4;
     width: 17vw;
-    height:280vw;
+    height:260vw;
 	float: right;
 	margin: 0;
 	
 }
 div.newstitle{
-	background-color:#f5f5f5;
-	height:80px;
-	margin-top: -20px;
-	padding:3px 3px -3px 3px;
+	background-color:#eef0f4;
+	height:55px;
+	width: 7vw;
 
 }
+
+div.newstitle h2{
+	text-align: center;
+	margin-top: 5px;
+	color: #2f2f30a1;
+}
+
 div.newscontent{
-	background-color: #FFFFFF;
+	background-color: #eef0f4;
 	padding:10px;
+	border: 2px solid #909192a1;
+	border-radius: 10px;
 
 }
 

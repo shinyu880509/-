@@ -46,7 +46,7 @@ h1.title{
 	position: relative;
 	text-align: left;
 	vertical-align: middle;
-	font-size:23px;
+	font-size:26px;
 	font-weight:500;
 	margin:0;
 	padding-left: 60px;	
@@ -458,7 +458,7 @@ div.footer{
     margin-right:auto;
     text-align:center;
     color:#fff;
-    background:#003333;
+    background:#1e222b;
     letter-spacing:1px;
 
 }

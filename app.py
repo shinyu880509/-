@@ -80,7 +80,7 @@ def login():
 #登入
 @app.route("/userLogin/<userId>/<userPasswd>")
 def userLogin(userId, userPasswd):
-    a = getID.checkLoginAcc(userId, userPasswd)
+    a = accountSql.checkLoginAcc(userId, userPasswd)
     if a:
         user = User()
         user.id = userId
@@ -331,7 +331,7 @@ class User(UserMixin):
 
 @login_manager.user_loader
 def user_loader(uid):
-    a = getID.checkLoginAccID(uid)
+    a = accountSql.checkLoginAccID(uid)
     if a == False:
         return
     user = User()
@@ -341,7 +341,7 @@ def user_loader(uid):
 @login_manager.request_loader
 def request_loader(request):
     uid = request.form.get('username')
-    a = getID.checkLoginAccID(uid)
+    a = accountSql.checkLoginAccID(uid)
     if a == False:
         return
     user = User()
@@ -349,7 +349,7 @@ def request_loader(request):
 
     # DO NOT ever store passwords in plaintext and always compare password
     # hashes using constant-time comparison!
-    a = getID.checkLoginAcc(uid, request.form['password'])
+    a = accountSql.checkLoginAcc(uid, request.form['password'])
     user.is_authenticated = a
     return user
 

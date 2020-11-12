@@ -59,30 +59,6 @@ def checkPre(ty):
             c[1] = i
     return c
     
-#登入驗證
-def checkLoginAcc(uid, pwd):
-    conn = sqlite3.connect('stock.db')
-    c =conn.cursor()
-    c.execute("select * from account")
-    for rows in c.fetchall():
-        if uid == rows[0] and pwd == rows[2]:
-            print("登入成功")
-            return True
-
-    print("登入失敗")
-    return False
-
-def checkLoginAccID(uid):
-    conn = sqlite3.connect('stock.db')
-    c =conn.cursor()
-    c.execute("select * from account")
-    for rows in c.fetchall():
-        if uid == rows[0]:
-            print("帳號存在")
-            return True
-
-    print("帳號不存在")
-    return False
 
 #帳號管理
 def getAcc():

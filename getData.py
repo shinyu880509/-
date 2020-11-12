@@ -89,8 +89,6 @@ def getDay(a):
             d += 1
         
     return day
-'''zz = getDay(datetime.date.today())
-print(zz)'''
 
 def getPreDate(today, ago):
     d = 0
@@ -114,8 +112,6 @@ def getPre(a, data, date):
     #table = pd.read_csv("preStock/"+ a + "/" + str(data) +'.csv')######################################################
     table = pd.read_csv("preStock/"+ a + "/2020_10_05.csv")
     date = getDay(date)
-    #print(date)
-    #date = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24', '25', '26', '27', '28', '29', '30']
     opena = np.array(table.open)
     openlist = opena.tolist()
     close = np.array(table.close)
@@ -140,8 +136,6 @@ def getPreByDay(a, date):
         re.append(dat)
         ree.append(getRecommend(a,dat, i, preDataDate[i]))
     return re, ree
-#for i in range(10):
-#print(getPreByDay("2427", 5))
 
 def getTodayCsv(a):
     table = pd.read_csv("catStock/"+a+'today.csv')
@@ -218,29 +212,6 @@ def getKD(a):
         d.append(round(zd,2))
     return k[-30:],d[-30:]
 
-def getPreKD(a):
-    csv = getCsv(a)
-    clo = csv[1][-10:]
-    hi = csv[5][-19:]
-    lo = csv[6][-39:]
-    aa = getPre(a)
-    clo = clo + aa[1]
-    hi = hi + aa[2]
-    lo = lo + aa[3]
-    rsv = []
-    k = [50]
-    d = [50]
-    for i in range(len(clo)):
-        zr = (clo[i] - min(lo[i:10 + i]))/(max(hi[i:10 + i]) - min(lo[i:10 + i]))
-        zr *= 100
-        rsv.append(round(zr,2))
-
-        zk = (rsv[i]/3) + (k[i]/3*2)
-        k.append(round(zk,2))
-        zd = (k[i]/3) + (d[i]/3*2)
-        d.append(round(zd,2))
-    return k[-30:],d[-30:]
-
 #平均
 def ema(a,d):
     return sum(a)/d
@@ -249,24 +220,6 @@ def ema(a,d):
 def getMACD(a):
     csv = getCsv(a)
     clo = csv[1][-64:]
-    dif = []
-    macd = []
-
-    for i in range(39):
-        ema12 = ema(clo[14+i:26+i],12)
-        ema26 = ema(clo[i:26+i],26)
-        zdif = ema12-ema26
-        dif.append(round(zdif,2))
-        if i > 7:
-            zmacd = sum(dif[i-8:i+1])/9
-            macd.append(round(zmacd,2))
-    return dif[-30:],macd[-30:]
-
-def getPreMACD(a):
-    csv = getCsv(a)
-    clo = csv[1][-34:]
-    aa = getPre(a, 0)
-    clo = clo + aa[1]
     dif = []
     macd = []
 
@@ -303,34 +256,6 @@ def getBIAS(a, long, dd):
         '''
     return bias
 
-def getPreBIAS(a, long):
-    csv = getCsv(a)
-    days = [6,12,24,72]
-    clo = csv[1][-(days[long]-1):]
-    aa = getPre(a)
-    clo = clo + aa[1]
-    bias = []
-    re = []
-
-    for i in range(len(aa[1])):
-        ema30 = ema(clo[i:days[long]+i],days[long])
-        zbias = ((clo[days[long]-1+i]-ema30)/ema30)*100
-        bias.append(round(zbias,2))
-        z = []
-        if long == 3 and (bias[i] <= -11 or bias[i] >= 11):
-            z = [clo[days[long]-1+i],bias[i]]
-            re.append(z)
-        elif long == 2 and (bias[i] <= -7 or bias[i] >= 8):
-            z = [clo[days[long]-1+i],bias[i]]
-            re.append(z)
-        elif long == 1 and (bias[i] <= -4.5 or bias[i] >= 5):
-            z = [clo[days[long]-1+i],bias[i]]
-            re.append(z)
-        elif long == 0 and (bias[i] <= -3 or bias[i] >= 3.5):
-            z = [clo[days[long]-1+i],bias[i]]
-            re.append(z)
-    return bias,re
-
 #股票代碼,平均的天數,列出幾天
 def getRSI(a, long, dd):
     csv = getCsv(a)
@@ -355,6 +280,7 @@ def getRSI(a, long, dd):
         zrsi = (aHi/(aHi-aLo))*100
         rsi.append(round(zrsi,2))
     return rsi
+
 def getPreRSI(a, date, ago):
     csv = getCsv(a)
     days = 30
@@ -383,8 +309,6 @@ def getPreRSI(a, date, ago):
         zrsi = (aHi/(aHi-aLo))*100
         rsi.append(round(zrsi,2))
     return rsi
-#print(getPreRSI('2427',30))
-#print(getRSI('2453',30,30))
 
 def getRecommend(a, data, ago, date):
     pre = getPreRSI(a, data, ago)
@@ -449,16 +373,11 @@ def getRecommend(a, data, ago, date):
 
     re += "，可從近期的成交價格與技術指標來決定將來的投資策略。"
     return re, pre
-#print(getRecommend("2427", 30))
 
 def getAll(a):
     kd = getKD(a)
     ma = getMACD(a)
     return getRSI(a,30,30), kd[0], kd[1], ma[0], ma[1], getBIAS(a,2,30)
-#print(getBIAS('2427',2,30))
-#print(getRSI('2427',30,30))
-#print(getMACD('2427'))
-#print(getKD('2427'))
 
 #代碼
 def getFin(sid,a):
@@ -486,15 +405,9 @@ def getFin(sid,a):
         aa = []
         head.append(aa)
     return head, data
-'''aa = getFin(2427,0)
-print(aa[1][1])
-print(len(aa))'''
 
 def getAllFin(sid):
     re = []
     for i in range(8):
         re.append( getFin(sid,i))
     return re
-#aa = getAllFin("2427")
-
-print(len(getPreByDay("2427", 10)[1][0]))

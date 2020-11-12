@@ -3,7 +3,7 @@ from flask_mail import Mail,Message
 import pandas as pd
 import csv
 import numpy as np
-import getData, catStock, getID, revise
+import getData, catStock, getID, accountSql
 import click
 import datetime
 import sqlite3
@@ -39,7 +39,7 @@ mail = Mail(app)
 #寄驗證信
 @app.route("/message/<ema>/<acc>")
 def mesage(acc,ema):
-    aa = revise.verification(acc, ema)
+    aa = accountSql.verification(acc, ema)
     if aa == "1":
         flash("訊帳號不存在")
         flash("使" + acc)
@@ -58,7 +58,7 @@ def mesage(acc,ema):
 #驗證修改密碼
 @app.route("/revise/<va>/<pw>")
 def reviseA(pw,va):
-    aa = revise.revisePw(pw, va)
+    aa = accountSql.revisePw(pw, va)
     if aa == "0":
         flash("訊驗證碼錯誤")
         flash("密" + pw)
@@ -127,7 +127,7 @@ def changePasswd():
 def changePasswdDo(oddPd, newPd):
     if current_user.is_authenticated == False:
         return redirect(url_for('login'))
-    a = revise.changePw(current_user.id, oddPd, newPd)
+    a = accountSql.changePw(current_user.id, oddPd, newPd)
     print(type(a))
     if a == "0":
         flash("訊舊密碼錯誤，請再確認")
@@ -146,7 +146,7 @@ def changeMail():
 def changeMailDo(oddMail, newMail):
     if current_user.is_authenticated == False:
         return redirect(url_for('login'))
-    a = revise.changeMail(current_user.id, oddMail, newMail)
+    a = accountSql.changeMail(current_user.id, oddMail, newMail)
     print(type(a))
     if a == "0":
         flash("訊舊信箱錯誤，請再確認")
@@ -172,10 +172,10 @@ def indexId(stId):
     dataFin = getData.getAllFin(aa[0])
     dataPre = getData.getPreByDay(aa[0], 10)
     dataNews = getData.getNewsS(aa[0], n)
-    dataFav = revise.getlike(current_user.id)
-    dataInd = revise.getIde(current_user.id)
-    dataArt = revise.getArtcile(aa[0])
-    dataReArt = revise.getReArtcile(aa[0])
+    dataFav = accountSql.getlike(current_user.id)
+    dataInd = accountSql.getIde(current_user.id)
+    dataArt = accountSql.getArtcile(aa[0])
+    dataReArt = accountSql.getReArtcile(aa[0])
     lenArt = len(dataArt)
     toArt = "0"
     inArt = "0"
@@ -188,9 +188,9 @@ def indexId(stId):
 
 @app.route("/newFav/<typeA>/<stId>/<fav>")
 def newFav(fav, typeA, stId):
-    revise.dislike(str(current_user.id))
+    accountSql.dislike(str(current_user.id))
     if fav != "non":
-        revise.like(str(current_user.id), fav)
+        accountSql.like(str(current_user.id), fav)
     if typeA == "index":
         return redirect(url_for('indexId', stId = stId))
     elif typeA == "news":
@@ -206,7 +206,7 @@ def news(stId):
         return redirect(url_for('login'))
     name = getID.getName(stId)
     dataNews = getData.getNews(stId)
-    dataFav = revise.getlike(current_user.id)
+    dataFav = accountSql.getlike(current_user.id)
     return render_template('news.html', stock = stId, name = name, news = dataNews, n = len(dataNews), reFav = dataFav)  
 
 #發文
@@ -216,13 +216,13 @@ def postArt(stId):
         title = request.form.get('secTitle') + request.form.get('postTitle')
         text = request.form.get('postText')
         text = text.replace("\r\n", "<br>")
-        revise.postArtcile(current_user.id, stId, title, text)
+        accountSql.postArtcile(current_user.id, stId, title, text)
         stId += "-1"
         return redirect(url_for('indexId', stId = stId))
 
 @app.route("/delart/<stId>/<art>")
 def delart(stId, art):
-    revise.delArtcile(stId,art)
+    accountSql.delArtcile(stId,art)
     return redirect(url_for('indexId', stId = stId))
 
 #留言
@@ -231,14 +231,14 @@ def postReArt(stId):
     if request.method == 'POST':
         text = request.form.get('inputCom')
         artNum = request.form.get('artNum')
-        revise.postReArtcile(current_user.id, stId, artNum, text)
+        accountSql.postReArtcile(current_user.id, stId, artNum, text)
         stId += "-2"
         return redirect(url_for('indexId', stId = stId))
 
 @app.route("/saveGd/<stId>/<artNum>/<num>")
 def saveGd(stId, artNum, num):
     print(stId, artNum)
-    a = revise.setGood(current_user.id, stId, artNum)
+    a = accountSql.setGood(current_user.id, stId, artNum)
     stId += "-3-" + num
     if a == 1:
         flash("訊這篇文章已經點過喜歡或不喜歡了")
@@ -246,7 +246,7 @@ def saveGd(stId, artNum, num):
 
 @app.route("/saveBd/<stId>/<artNum>/<num>")
 def saveBd(stId, artNum, num):
-    a = revise.setBad(current_user.id, stId, artNum)
+    a = accountSql.setBad(current_user.id, stId, artNum)
     stId += "-3-" + num
     if a == 1:
         flash("訊這篇文章已經點過喜歡或不喜歡了")
@@ -257,23 +257,23 @@ def saveBd(stId, artNum, num):
 def accountSetting():
     if current_user.is_authenticated == False:
         return redirect(url_for('index'))
-    ind = revise.getIde(current_user.id)
-    aa = revise.getDailyMail(current_user.id)
+    ind = accountSql.getIde(current_user.id)
+    aa = accountSql.getDailyMail(current_user.id)
     return render_template('accountSetting.html', ind = ind, aa = aa) 
 
 #個人化設定儲存--順序
 @app.route("/savInd/<ind>")
 def savIndex(ind):
-    revise.revIde(current_user.id, ind)
+    accountSql.revIde(current_user.id, ind)
     return redirect(url_for('accountSetting'))
 
 #個人化設定儲存--Mail
 @app.route("/dailyMail/<how>")
 def dailyMail(how):
     if how == "1":
-        revise.dailyMailDel(current_user.id)
+        accountSql.dailyMailDel(current_user.id)
     elif how == "0":
-        revise.dailyMail(current_user.id)
+        accountSql.dailyMail(current_user.id)
     return redirect(url_for('accountSetting'))
 
 #註冊
@@ -324,108 +324,6 @@ def reviseB():
 @app.cli.command("refresh")
 def refresh():
     catStock.catStock()
-
-#查詢功能 + 重新導向
-@app.route("/chart/<cType>",methods=['POST'])
-def searchCha(cType):
-    global stockID
-    ID = str(request.values['stock_id'])
-    err = getID.check(ID)
-    chart = getID.checkCha(cType)
-    if err == 0:
-        stockID = ID
-    return redirect(url_for('chart', stId = stockID, cType = chart[0]))
-
-@app.route("/technical/<cType>",methods=['POST'])
-def searchTec(cType):
-    global stockID
-    ID = str(request.values['stock_id'])
-    err = getID.check(ID)
-    chart = getID.checkTec(cType)
-    if err == 0:
-        stockID = ID
-    return redirect(url_for('technical', stId = stockID, cType = chart[0]))
-
-@app.route("/financial/<cType>",methods=['POST'])
-def searchFin(cType):
-    global stockID
-    ID = str(request.values['stock_id'])
-    err = getID.check(ID)
-    chart = getID.checkFin(cType)
-    if err == 0:
-        stockID = ID
-    return redirect(url_for('financial', stId = stockID, cType = chart[0]))
-
-@app.route("/predict/<cType>",methods=['POST'])
-def searchPre(cType):
-    global stockID
-    ID = str(request.values['stock_id'])
-    err = getID.check(ID)
-    chart = getID.checkPre(cType)
-    if err == 0:
-        stockID = ID
-    return redirect(url_for('predict', stId = stockID, cType = chart[0]))    
-    
-@app.route("/catStock/2427today.csv")
-def haha():
-    return send_file("catStock/2427today.csv")
-    
-#進入30日圖表 /chart/30days/2427
-#進入當日圖表 /chart/today/2427
-@app.route("/chart/<cType>/<stId>")
-def chart(cType,stId):
-    global stockID
-    print(stId)
-    print(cType)
-    err = getID.check(stId)
-    chart = getID.checkCha(cType)
-    if err == 0:
-        stockID = stId
-    name = getID.getName(stockID)
-    data = getData.getData(stockID)
-    datatoday = getData.getTodayCsv(stockID)
-    return render_template('index.html', re = data, name = name, today = datatoday, cType = chart, err = err, stock = stockID) 
-
-#進入技術指標 /technical/rsi/2427 
-@app.route("/technical/<cType>/<stId>")
-def technical(cType,stId):
-    global stockID
-    print(stId)
-    err = getID.check(stId)
-    chart = getID.checkTec(cType)
-    if err == 0:
-        stockID = stId
-    dataTec = getData.getAll(stockID)
-    data = getData.getData(stockID)
-    name = getID.getName(stockID)
-    return render_template('technical.html', re = data, name = name, tec = dataTec, cType = chart, err = err, stock = stockID) 
-
-#進入技術指標 /financial/SymScore/2427 
-@app.route("/financial/<cType>/<stId>")
-def financial(cType,stId):
-    global stockID
-    print(stId)
-    err = getID.check(stId)
-    chart = getID.checkFin(cType)
-    if err == 0:
-        stockID = stId
-    dataFin = getData.getFin(stockID, chart[1])
-    name = getID.getName(stockID)
-    return render_template('financial.html', name = name, fin = dataFin, cType = chart, err = err, stock = stockID) 
-
-#進入技術指標 /predict/pre/2427 
-@app.route("/predict/<cType>/<stId>")
-def predict(cType,stId):
-    global stockID
-    print(stId)
-    err = getID.check(stId)
-    chart = getID.checkPre(cType)
-    if err == 0:
-        stockID = stId
-    dataPre = getData.getPre(stockID, 0)
-    print(dataPre)
-    name = getID.getName(stockID)
-    return render_template('predict.html', name = name, pre = dataPre, cType = chart, err = err, stock = stockID)     
 
 #設置登入系統
 class User(UserMixin):

@@ -62,7 +62,6 @@ for i in range(len(stockName)):
             else:
                 date = nDate[2].text
 
-            #n = n.find_element_by_class_name("JheGif nDgy9d")
             nHref = n.find_element_by_tag_name("a")
             aa = n.text.split("\n")
             print(aa[0])
@@ -74,7 +73,6 @@ for i in range(len(stockName)):
             finalSource.append(aa[0])
             finalDate.append(date)
             finalUrl.append(nHref.get_attribute('href'))
-            #print(f"{n.text} --- {source,nDate[2].text} --- {nHref.get_attribute('href')}\n")
         try:
             driver.find_element_by_xpath("//a[@id='pnnext']//span[2]").click()
             a += 1

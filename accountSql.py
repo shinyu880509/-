@@ -34,20 +34,6 @@ def verification(username,useremail):
             return a
     return "1"
 
-
-'''username = input("user:")
-useremail = input("email:")
-
-print(verification(username, useremail))
-
-conn = sqlite3.connect('stock.db')
-c =conn.cursor()
-c.execute("select * from verification")
-for rows in c.fetchall():
-    print(rows)
-print("\n")'''
-
-
 #修改密碼
 def revisePw(password,verification):
     conn = sqlite3.connect('stock.db')
@@ -111,37 +97,6 @@ def dailyMailDel(uid):
     conn.commit()
     conn.close()
     return "0"
-#dailyMailDel("10646021")
-#print(getDailyMail("10646021"))
-
-'''verification = input("verification:")
-password = input("password:")
-
-revisePw(password,verification)
-conn = sqlite3.connect('stock.db')
-c =conn.cursor()
-c.execute("select * from verification")
-for rows in c.fetchall():
-    print(rows)
-print("\n")
-conn = sqlite3.connect('stock.db')
-c =conn.cursor()
-c.execute("select * from account")
-for rows in c.fetchall():
-    print(rows)'''
-
-#新增順序
-'''
-conn = sqlite3.connect('stock.db')
-c =conn.cursor()
-c.execute("select * from indexStock")
-for rows in c.fetchall():
-    print(rows)
-    con = sqlite3.connect('stock.db')
-    cc = con.cursor()
-    con.execute("update indexStock set ind ='{}' where username = '{}';".format("0-1-2-3-4",rows[0]))
-    con.commit()
-    con.close()'''
 
 #取得順序
 def getIde(username):
@@ -154,7 +109,6 @@ def getIde(username):
     re = a[0][1].split("-")
     re = list(map(int, re))
     return re
-#print(getIde("10646021"))
 
 #更改順序
 def revIde(username, ind):
@@ -197,14 +151,6 @@ def getlike(username):
     conn.commit()
     conn.close()
     return a
-#print(getlike("10646021"))
-
-#新增順序
-'''conn = sqlite3.connect('stock.db')
-c =conn.cursor()
-c.execute("insert into postArticle(username,stockId,article,floor,aTitle,aText,aLike,aDislike,aTime) values('{}','{}','{}','{}','{}','{}','{}','{}','{}');".format("10646021","2427","03","0","test","test\r\n123133","1","1","2020/11/3 2:33"))
-conn.commit()
-conn.close()'''
 
 #取得文章
 def getArtcile(stid):
@@ -297,7 +243,6 @@ def getReArtcile(stid):
             aa.append(rows[i])
         re.append(aa)
     return re
-#print(getReArtcile("2427", "02"))
 
 def setGood(userid, stid, artNum):
     good = ""
@@ -377,5 +322,3 @@ def setBad(userid, stid, artNum):
     conn.commit()
     conn.close()
     return re
-#print(setGood("10646021", "2427", "3"))
-#print(getArtcile("2427"))

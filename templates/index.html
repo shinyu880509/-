@@ -482,51 +482,6 @@
     dataFile = '2427today.csv';
     dataUrl = dataPath + dataFile;
     var ttt = [];
-    /*$.extend({
-            csv: function (url, f) {
-                $.get(url, function (record) {
-                    //按回車拆分  
-                    record = record.split("\r\n");
-                    //第一行標題  
-                    var title = record[0].split(",");
-                    //刪除第一行  
-                    record.shift();
-                    var data = [];
-                    for (var i = 0; i < record.length-1; i++) {//最後一行爲空行也會被讀取 -1
-                        var t = record[i].split(",");
-                        for (var y = 0; y < t.length; y++) {
-                            if (!data[i]) data[i] = {};
-                            data[i][y] = String(t[y]);
-                        }
-                    }
-                    f.call(this, data);
-                    data = null;
-                });
-            }
-        })
-    var a = [];
-    var b = [];
-    var c = [];
-    function funt(){
-        $.csv(dataUrl, function (dat) {
-            //console.log(data[0][0]);
-            a = [];
-            b = [];
-            c = [];
-            for (var i = 0; i<dat.length; i++){
-                a.push(dat[dat.length-i-1][0]);
-                b.push(dat[dat.length-i-1][4]);
-                c.push(dat[dat.length-i-1][6]);
-            }
-            //alert(a);
-        })
-    }
-    var handler = setInterval(function () {
-        funt();
-        //if (chaNum == 0)
-            //butCha(0);
-    },5000);
-    */
     var num = 0;
 
     function delart(){
@@ -1862,11 +1817,6 @@
     var drawFin = 0;
     var drawTec = 0;
     op = opAni;
-    //if (document.cookie.match(/scrollTop=([^;]+)(;|$)/) == null)
-        //drawCha = new Chart(ctxCha,{data: chartDay,options: opAni});
-        //drawPre = new Chart(ctxPre,{data: chartDataPre,options: opAni});
-        //drawFin = new Chart(ctxFin,{data: chartData1,options: opAni});
-        //drawTec = new Chart(ctxTec,{data: chartRsi,options: opAni});
 
     window.onbeforeunload = function () {
         var scrollPos;
@@ -1891,7 +1841,6 @@
         butPre(0);
         var reFinNum = document.cookie.match(/fin=([^;]+)(;|$)/);
         butFin(reFinNum[1]);
-        //alert(reFinNum[1]);
         var reTecNum = document.cookie.match(/tec=([^;]+)(;|$)/);
         butTec(reTecNum[1]);
         {% if toArt == "2" %}

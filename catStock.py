@@ -14,8 +14,7 @@ def catStock():
         parameter = {
             "dataset": "TaiwanStockPrice",
             "stock_id": itStock[i],
-            "date": dat,
-            "end_date": "2020-09-29",
+            "date": dat
         }
         stockID = itStock[i]
         resp = requests.get(url, params=parameter)
@@ -59,4 +58,3 @@ def catFin():
             data = l['data']
             writerCSV = pd.DataFrame(columns = head, data=data)
             writerCSV.to_csv('catFin/'+ str(itStock[a]) + str(b) + '.csv',encoding='utf-8', index = False)
-#catStock()

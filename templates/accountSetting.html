@@ -5,7 +5,7 @@
 <title>專題-股票分析</title>
 <link rel="stylesheet" href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <link href="https://fonts.googleapis.com/css?family=Noto+Sans+TC" rel="stylesheet">
-<link href="{{ url_for('static', filename='css/main.css') }}" rel="stylesheet" type="text/css" />      
+<link href="{{ url_for('static', filename='css/setting.css') }}" rel="stylesheet" type="text/css" />      
 </head>
 <body>
     
@@ -32,41 +32,39 @@
     <!---------------------------header結束------------------------------>
         
     <!---------------------------sidebar1---------- class="bd-toc-link" style="font-weight:bold; color: black; font-size:20px;"------------------->
-        <div class="sidebar1">
-            <div class="bd-toc-item">
 
-            </div>
-        </div>
       
     <!---------------------------sidebar1結束------------------------------>
         
     
     <!---------------------------content開始------------------------------->
-        <div class="content">
-            <div>
-                <h2>帳號</h2>
-                <h3 onclick="change(0)" style="cursor: pointer;">修改密碼</h3>
-                <h3 onclick="change(1)" style="cursor: pointer;">修改信箱</h3>
-            </div>
-            <div>
-                <h2>提醒設定</h2>
-                <h3>每日寄送關注股票之預測分析信件</h3>
-                {% if aa == "0" %}
-                <button onclick="self.location.href='/dailyMail/0'">同意</button>
-                {% elif aa == "1" %}
-                <button onclick="self.location.href='/dailyMail/1'">取消</button>
-                {% endif %}
-            </div>
-            <div>
-                <h2>更改顯示內容和順序</h2>
-                <h3 id="change0">走勢圖</h3> <button onclick="down(0)">往下</button>
-                <h3 id="change1">預測分析</h3> <button onclick="up(1)">往上</button><button onclick="down(1)">往下</button>
-                <h3 id="change2">財務分析</h3> <button onclick="up(2)">往上</button><button onclick="down(2)">往下</button>
-                <h3 id="change3">技術分析</h3> <button onclick="up(3)">往上</button><button onclick="down(3)">往下</button>
-                <h3 id="change4">討論區</h3> <button onclick="up(4)">往上</button>
-                <br>
-                <button onclick="savInd()">儲存</button><button onclick="reInd()">取消</button>
-            </div>
+    <div class="content">
+        <div class="1" style="border-width:3px;border-style:double;border-color:#000000;padding:2px;">
+            <h2 style="text-align:center; color:#FFFFFF; background:black;">帳號</h2>
+            <h3 onclick="change(0)" style="cursor: pointer; text-align:center;">修改密碼</h3>
+            <h3 onclick="change(1)" style="cursor: pointer; text-align:center;">修改信箱</h3>
+        </div>
+
+        <div class="2" style="border-width:3px;border-style:double;border-color:#000000;padding:2px;">
+            <h2 style="text-align:center; color:#FFFFFF; background:black;">提醒設定</h2>
+            <h3 style="text-align:center;">每日寄送關注股票之預測分析信件</h3>
+            {% if aa == "0" %}
+            <button style="text-align:center;" onclick="self.location.href='/dailyMail/0'">同意</button>
+            {% elif aa == "1" %}
+            <button style="text-align:center;" onclick="self.location.href='/dailyMail/1'">取消</button>
+            {% endif %}
+        </div>
+        <div class="3"style="border-width:3px;border-style:double;border-color:#000000;padding:2px;">
+            <h2 style="text-align:center; color:#FFFFFF; background:black;">更改顯示內容和順序</h2>
+            <h3 style="text-align:center;" id="change0">走勢圖</h3> <button style="text-align:center;" onclick="down(0)">往下</button>
+            <h3 style="text-align:center;" id="change1">預測分析</h3> <button onclick="up(1)">往上</button><button style="text-align:center;" onclick="down(1)">往下</button>
+            <h3 style="text-align:center;" id="change2">財務分析</h3> <button onclick="up(2)">往上</button><button style="text-align:center;" onclick="down(2)">往下</button>
+            <h3 style="text-align:center;" id="change3">技術分析</h3> <button onclick="up(3)">往上</button><button style="text-align:center;" onclick="down(3)">往下</button>
+            <h3 style="text-align:center;" id="change4">討論區</h3> <button style="text-align:center;" onclick="up(4)">往上</button>
+            <br>
+            <button style="text-align:center;" onclick="savInd()">儲存</button><button style="text-align:center;" onclick="reInd()">取消</button>
+        </div>
+
 
         <!---------------------------footer開始------------------------------->
         <div class="footer">

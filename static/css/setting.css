@@ -1,0 +1,170 @@
+@charset "utf-8";
+/* CSS Document */
+@import url(http://fonts.googleapis.com/earlyaccess/notosanstc.css);
+@import url(http://fonts.googleapis.com/earlyaccess/cwtexfangsong.css);
+/* ---------------------body------------------------- */
+html, body{
+	font-family: 'Noto Sans TC', sans-serif;
+	margin:0;
+	background:#f5f5f5;
+	width: 100vw;
+	height: 300vh;
+}
+div.wrapper
+{
+	background:#FFFFFF;
+	margin: 0;
+    width: 100vw;
+    height:300vh;
+}
+/* --------------------------header開始-------------------------------- */
+div.header
+{
+	background-color:#fdfdfd;
+	opacity: 0.8;
+	width: 87vw;
+	height:67px;
+	margin-left: 13vw;
+}
+
+
+
+div.title{
+	height: 67px;
+	text-align: center;
+	vertical-align: middle;
+	margin: 0;
+	left: 13vw;
+	position: absolute;
+}
+
+h1.title{
+	color: #000000;
+	position: relative;
+	text-align: left;
+	vertical-align: middle;
+	font-size:26px;
+	font-weight:500;
+	margin:0;
+	padding-left: 60px;	
+	line-height: 67px;
+}
+
+
+div.title a{
+	clear: both;
+	float:left;
+	margin-top: -57px;
+	padding-left: 10px;
+}
+
+
+/*---------下拉式選單Dropdown Button---------*/
+div.login{
+	right: 0px;
+	position: absolute;
+}
+.dropbtn {
+	color: #000;
+	padding: 16px;
+	font-size: 16px;
+	border: none;
+	background-color: #fff;
+	font-family:  'Noto Sans TC';
+	display: flex;          
+	align-items: center;    
+  }
+  
+  /* The container <div> - needed to position the dropdown content */
+  .dropdown {
+	position: relative;
+	display: inline-block;
+  }
+  
+  /* Dropdown Content (Hidden by Default) */
+  .dropdown-content {
+	display: none;
+	position: absolute;
+	background-color: #1e222b;
+	min-width: 160px;
+	box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+	z-index: 1;
+  }
+  
+  /* Links inside the dropdown */
+  .dropdown-content a {
+	color:#a6aec0;
+	padding: 12px 16px;
+	text-decoration: none;
+	display: block;
+  }
+  
+  /* Change color of dropdown links on hover */
+  .dropdown-content a:hover {color: #fff;}
+  
+  /* Show the dropdown menu on hover */
+  .dropdown:hover .dropdown-content {display: block;}
+
+/* ---------------------------header結束----------------------------- */
+
+
+/* -------------------------------左方欄開始----------------------------------- */
+
+
+/* -------------------------------左方欄結束----------------------------------- */
+
+/* -------------------------------content開始----------------------------------- */
+div.content{
+	/* --border:1px black solid; -- */
+    background:#eef0f4;
+    width: 70vw;
+    height:265vw;
+	float: left; 
+	margin: 0;
+	/*overflow: auto;*/
+	
+}
+
+div.title1 h2{
+	font-size:24px;   /* -----------------股票名稱-------------------- */
+	font-weight:500;
+	color:#2f2f30a1;
+	margin-top: 5px;
+	padding-left: 10px;
+	
+	
+}
+
+
+
+div.clear{
+	clear:both;	
+}
+
+
+/* -------------------------------content結束----------------------------------- */
+
+/* -------------------------------新聞開始----------------------------------- */
+
+/*------------------------------more點選之後的新聞版面------------------------------------------*/
+
+
+/* -------------------------------新聞結束----------------------------------- */
+
+/* -------------------------------footer開始------------------------------------- */
+div.footer{
+    clear: both;
+    position: relative;
+    height:70px;
+    line-height:70px;
+    width: 100vw;
+    margin-top:3vh;
+    margin-left:-13vw;
+    margin-right:auto;
+    text-align:center;
+    color:#fff;
+    background:#1e222b;
+    letter-spacing:1px;
+
+}
+/* -------------------------------footer結束------------------------------------- */

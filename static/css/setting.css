@@ -6,9 +6,9 @@
 html, body{
 	font-family: 'Noto Sans TC', sans-serif;
 	margin:0;
-	background:#f5f5f5;
+	background:#fdfdfd;
 	width: 100vw;
-	height: 300vh;
+	height: 75vh;
 }
 div.wrapper
 {
@@ -69,7 +69,7 @@ div.login{
 	padding: 16px;
 	font-size: 16px;
 	border: none;
-	background-color: #fff;
+	background-color: #fdfdfd;
 	font-family:  'Noto Sans TC';
 	display: flex;          
 	align-items: center;    
@@ -107,20 +107,14 @@ div.login{
 
 /* ---------------------------header結束----------------------------- */
 
-
-/* -------------------------------左方欄開始----------------------------------- */
-
-
-/* -------------------------------左方欄結束----------------------------------- */
-
 /* -------------------------------content開始----------------------------------- */
 div.content{
 	/* --border:1px black solid; -- */
     background:#eef0f4;
     width: 70vw;
-    height:265vw;
+    height:68.5vw;
 	float: left; 
-	margin: 0;
+	margin-top: 67px;
 	/*overflow: auto;*/
 	
 }
@@ -141,15 +135,18 @@ div.clear{
 	clear:both;	
 }
 
-
+.button{
+	background-color: white; 
+ 	 color: black; 
+  	border: 2px solid #909192a1;
+	padding-top: -30px;
+	font-size: 15px;
+}
+.button:hover {
+	background-color: #7ea5cca1;
+  	color: white;
+  }
 /* -------------------------------content結束----------------------------------- */
-
-/* -------------------------------新聞開始----------------------------------- */
-
-/*------------------------------more點選之後的新聞版面------------------------------------------*/
-
-
-/* -------------------------------新聞結束----------------------------------- */
 
 /* -------------------------------footer開始------------------------------------- */
 div.footer{

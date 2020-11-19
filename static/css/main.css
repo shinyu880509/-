@@ -6,17 +6,16 @@
 html, body{
 	font-family: 'Noto Sans TC', sans-serif;
 	margin:0;
-	
 	background:#f5f5f5;
 	width: 100vw;
-	height: 300vh;
+	height: auto;
 }
 div.wrapper
 {
 	background:#FFFFFF;
 	margin: 0;
     width: 100vw;
-    height:300vh;
+    height:auto;
 }
 /* --------------------------header開始-------------------------------- */
 div.header
@@ -65,7 +64,7 @@ div.title a{
 img.avatar{
 }
 
-/*---------下拉式選單Dropdown Button---------*/
+/*---------右上角帳號下拉式選單---------*/
 div.login{
 	right: 0px;
 	position: absolute;
@@ -111,6 +110,7 @@ div.login{
   /* Show the dropdown menu on hover */
   .dropdown:hover .dropdown-content {display: block;}
 
+/*---------右上角帳號下拉式選單結束---------*/
 /* ---------------------------header結束----------------------------- */
 
 
@@ -121,7 +121,7 @@ div.sidebar1{
 	clear: both;
     background-color: #444b5e;
     width: 13vw;
-    height:270vw;
+    height:240vw;
 	float:left;
 	margin: 0;
 	margin-top: -67px;
@@ -225,7 +225,7 @@ div.content{
 	/* --border:1px black solid; -- */
     background:#eef0f4;
     width: 70vw;
-    height:265vw;
+    height:auto;
 	float: left; 
 	margin: 0;
 	/*overflow: auto;*/
@@ -352,7 +352,7 @@ div.sidebar2{
 	right: -1vw;
 	background-color:#eef0f4;
     width: 17vw;
-    height:260vw;
+    height:240vw;
 	float: right;
 	margin: 0;
 	

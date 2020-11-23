@@ -59,7 +59,7 @@ div.title a{
 }
 
 
-/*---------下拉式選單Dropdown Button---------*/
+/*---------右上角帳號下拉式選單---------*/
 div.login{
 	right: 0px;
 	position: absolute;
@@ -125,10 +125,7 @@ div.title1 h2{
 	color:#2f2f30a1;
 	margin-top: 5px;
 	padding-left: 10px;
-	
-	
 }
-
 
 
 div.clear{

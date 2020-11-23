@@ -61,14 +61,12 @@ form p > * {
 /* --------------------------登入------------------------------- */
 #btn_login {
     font-size: 14px;
-   /* -- font-family: 宋體;--- */
     width: 343px;
     height: 28px;
     line-height: 28px;
     text-align: center;
     color:#FFFFFF;
     background-color:#2b303c;
-    /* --border-radius: 6px;-- */
     border: 0;
     position: fixed;
     float: center;
@@ -94,9 +92,7 @@ div.tx ul{
 #forget:hover {
     color: #000;
     text-decoration: underline;
-    /*-- font-size: 15px;字型放大我先刪掉喔-- */
 }
-
 
 /* --------------------------註冊帳號------------------------------- */
 #account{
@@ -112,7 +108,6 @@ div.tx ul{
 #account:hover {
     color: #000;
     text-decoration: underline;
-    /*-- font-size: 15px;字型放大我先刪掉喔-- */
 }
 #login_control {
 padding: 0 28px;

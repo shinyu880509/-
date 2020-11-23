@@ -308,6 +308,28 @@ div.button{
 	color: #444b5e;
 }
 
+#postArt{
+
+	width: 69vw;
+	height: 640px;
+	margin-left: 50px;
+	margin-right: 6px;
+	margin-top: 10px;
+	color: black; 
+    padding-top: -30px;
+	font-size: 15px;
+	width: 800px;
+}
+
+#inArt{
+	margin-left: 50px;
+	margin-right: 6px;
+	margin-top: 10px;
+	background-color: #c7cfcd4b;
+	width: 800px;
+}
+
+
 
 div.newsbar ul  {
 	

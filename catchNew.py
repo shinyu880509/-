@@ -18,16 +18,23 @@ for i in range(len(stockName)):
     print(stockName[i])
     url=f"https://www.google.com/search?q={stockName[i]}+股市&tbm=nws&sxsrf=ALeKk00px9DH69ke8UmCgKCvdeoUjr8tUA:1595993782566&ei=tu4gX9SIIqiQr7wPiI-QmAw&start=0&sa=N&ved=0ahUKEwjUu-STxPHqAhUoyIsBHYgHBMM4PBDy0wMIZA&biw=1920&bih=937&dpr=1"
     driver.get(url)
-    a = 0
+    aa = 0
     while True:
-        news = driver.find_elements_by_xpath("//body[@id='gsr']/div[@id='main']/div[@id='cnt']/div[@class='mw']/div[@id='rcnt']/div[@class='col']/div[@id='center_col']/div[@id='res']/div[@id='search']/div/div[@id='rso']/div")
-        for n in news:
-            nDate = n.find_elements_by_tag_name("span")
-            source = nDate[0].text
-            rDate = nDate[2].text
-            date = rDate.split(' ')
+        news = driver.find_elements_by_xpath("//body/div[@id='main']/div[@id='cnt']/div[9]/div[1]/div[2]/div[1]/div[2]/div[2]/div[1]/div[1]/div")
+        newsdata = news[0].text
+        newsdata = newsdata.split("\n")
+        hh = news[0].find_element_by_tag_name("a")
+        h = hh.get_attribute('href')
+        for j in range(len(news)):
+            newsdata = news[j].text
+            newsdata = newsdata.split("\n")
+            hh = news[j].find_element_by_tag_name("a")
+            finalSource.append(newsdata[0])
+            finalTitle.append(newsdata[1])
+            finalUrl.append(hh.get_attribute('href'))
+            date = newsdata[3].split(' ')
             x = datetime.datetime.now()
-            if (len(date[0]) <= 3):
+            if (len(date) == 2):
                 if (date[1] == '小時前'):
                     if (x.hour-int(date[0]) > 0):
                         date = str(x.year) + '年' + str(x.month) + '月' + str(x.day) + '日'
@@ -60,38 +67,32 @@ for i in range(len(stockName)):
                     else:
                         date = str(x.year-1) + '年' + str(x.month-int(date[0])+12) + '月' + str(x.day) + '日'
             else:
-                date = nDate[2].text
-
-            nHref = n.find_element_by_tag_name("a")
-            aa = n.text.split("\n")
-            print(aa[0])
-            print(aa[1])
-            print(aa[2])
-            print(aa[3] + "\n")
-            
-            finalTitle.append(aa[1])
-            finalSource.append(aa[0])
+                date = newsdata[3]
             finalDate.append(date)
-            finalUrl.append(nHref.get_attribute('href'))
         try:
             driver.find_element_by_xpath("//a[@id='pnnext']//span[2]").click()
-            a += 1
-            time.sleep(1)
-            if a == 3:
+            aa += 1
+            time.sleep(100)
+            if aa == 3:
                 break
 
         except Exception as e:
             break
         
-
+    print(stockID[i])
     with open ('news/' + stockID[i] + '.csv', 'w', encoding='utf-8') as f:
         w = csv.writer(f)
         w.writerow(['標題', '來源', '日期', '網址'])
+        
         for t, s, d, u in zip(finalTitle, finalSource, finalDate, finalUrl):
             try:
                 w.writerow([t, s, d, u])
             except Exception  as e:
                 pass
+    finalTitle = []
+    finalSource = []
+    finalDate = []
+    finalUrl = []
 
 driver.close()
 

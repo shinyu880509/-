@@ -127,7 +127,6 @@ def getPre(a, data, date):
 def getPreByDay(a, date):
     
     preDataDate = getPreDate(getToday(), date)
-    print(type(preDataDate))
     re = []
     ree = []
     for i in range(len(preDataDate)):

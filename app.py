@@ -55,6 +55,38 @@ def mesage(acc,ema):
         flash("訊驗證信已送出，請確認信箱")
         return redirect(url_for('reviseB'))
 
+#寄關注信
+@app.route("/messagedaily/<stid>")
+def messagedaily(stid):
+    conn = sqlite3.connect('stock.db')
+    cur = conn.cursor()
+    cur.execute("select * from setDaliyMail")
+    for rows in cur.fetchall():
+        curr = conn.cursor()
+        curr.execute("select * from account where username = '{}';".format(rows[0]))
+        for ro in curr.fetchall():
+            ema = ro[1]
+            print(rows[0] + ro[1])
+            cu = conn.cursor()
+            cu.execute("select * from attention where username = '{}';".format(rows[0]))
+            intent = ""
+            for r in cu.fetchall():
+                stockid = r[1].split("-")
+                for i in stockid:
+                    a = getData.getPreByDay(i, 1)
+                    intent += i + "\r\n" + a[1][0][0] + "\r\n\r\n"
+            print(intent)
+
+            ti = datetime.datetime.now()
+            msg_title = str(ti.month) + '/' + str(ti.day) + '關注股票之預測分析'
+            msg_recipients = [ema]
+            msg_body = intent + '\r\n系統時間：' + str(datetime.datetime.now())
+            msg = Message(msg_title,recipients=msg_recipients)
+            msg.body = msg_body
+            mail.send(msg)
+
+    return redirect(url_for('indexId', stId = stid))
+
 #驗證修改密碼
 @app.route("/revise/<va>/<pw>")
 def reviseA(pw,va):
@@ -323,7 +355,12 @@ def reviseB():
 
 @app.cli.command("refresh")
 def refresh():
-    catStock.catStock()
+    catStock.catAll()
+
+@app.route("/refresh/<stid>")
+def refreshData(stid):
+    catStock.catAll()
+    return redirect(url_for('indexId', stId = stid))
 
 #設置登入系統
 class User(UserMixin):

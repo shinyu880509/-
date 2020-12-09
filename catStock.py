@@ -28,6 +28,19 @@ def catStock():
         stockDf = pd.DataFrame(data)
         stockDf.set_index('date', inplace = True)
         stockDf.to_csv('catStock/' + stockID + '.csv')
+        
+        csvfile = open('catStock/' + stockID +'.csv','r')
+        jsonfile = open('catStock/' + stockID +'.json','w')
+        namesss= pd.read_csv('catStock/' + stockID +'.csv')
+        fieldnames1=namesss.columns
+
+        aaaa=tuple(fieldnames1)
+        reader = csv.DictReader(csvfile,aaaa)
+        for row in reader:
+            json.dump(row,jsonfile)
+            jsonfile.write('\n')
+        jsonfile.close()
+        csvfile.close()
     return
 
 def catStocktoday():
@@ -37,18 +50,33 @@ def catStocktoday():
         url =f"https://tw.stock.yahoo.com/q/ts?s={stockID}&t=50"
         stocktoday = pd.read_html(url, encoding='big-5')[3]
         stocktoday.to_csv('catStock/' + stockID + 'today.csv', header = 0 , index = 0, encoding = 'utf_8_sig')
+
+        csvfile = open('catStock/' + stockID + 'today.csv','r', encoding = 'utf_8_sig')
+        jsonfile = open('catStock/' + stockID + 'today.json','w', encoding = 'utf_8_sig')
+        namesss= pd.read_csv('catStock/' + stockID + 'today.csv', encoding = 'utf_8_sig')
+        fieldnames1=namesss.columns
+
+        aaaa=tuple(fieldnames1)
+        reader = csv.DictReader(csvfile,aaaa)
+        for row in reader:
+            json.dump(row,jsonfile)
+            jsonfile.write('\n')
+        jsonfile.close()
+        csvfile.close()
     return
+catStocktoday()
+
 def catFin():
     itStock = ['2427', '2453', '2468', '2471', '2480', '3029', '3130', '4994', '5203', '6112', '6183', '6214']
     for a in range(len(itStock)):
-        fin = [f"https://www.above.tw/json/StocksFinance_sym_score?&sym={itStock[a]}&psize=10&p=1&show=YM_Date;CsMRevenue;CsMOM_pct;CsQOQ_pct;CsYOY_pct;AccsYOY_pct",
-        f"https://www.above.tw/json/StocksFinance_GrowthAnly?&sym={itStock[a]}&psize=10&p=1&show=Date;CsMRevenue;CsMOM_pct;CsYOY_pct;AccsYOY_pct",
-        f"https://www.above.tw/json/StocksFinance_Divpolicy?&sym={itStock[a]}&psize=10&p=1&show=Date;NetProfit;DistrNetProfit;CashDiv_Earn;TotalCashDivAmt;StkDiv_CapInc_Earn;StkDiv_LegalReserve_CapSurplus;TotalStkDivShare",
-        f"https://www.above.tw/json/StocksFinance_ProfitByQr?&sym={itStock[a]}&psize=10&p=1&show=Date;Revenue;GrossMarginPer;OpearatingMarginPer;PretaxProfitMargin;ProfitMargin",
-        f"https://www.above.tw/json/StocksFinance_Capstreq?&sym={itStock[a]}&psize=10&p=1&show=Date;ShareCap;CapSurplus;RetainedEarning",
-        f"https://www.above.tw/json/StocksFinance_Cashratio?&sym={itStock[a]}&psize=10&p=1&show=Date;CashFlowRatio;CashFlowAdequacyRatio;CashReinvestmentRatio",
-        f"https://www.above.tw/json/StocksFinance_SolvencyBySym?&sym={itStock[a]}&psize=10&p=1&show=Date;RatFlow;RatSpd",
-        f"https://www.above.tw/json/StocksFinance_Oper?&sym={itStock[a]}&psize=10&p=1&show=Date;AvgCollectionDays"]
+        fin = [f"https://www.above.tw/json/TProStkFinance/CsRevenueChart?sym={itStock[a]}",
+        f"https://www.above.tw/json/TProStkFinance/GrowupAbility?sym={itStock[a]}&s=YearQuarter:d",
+        f"https://www.above.tw/json/TProStkFinance/DividendOverview?sym={itStock[a]}&s=Year:d",
+        f"https://www.above.tw/json/TProStkFinance/ProfitBySym?sym={itStock[a]}&finance_type=YQ",
+        f"https://www.above.tw/json/TProStkFinance/Capstreq?sym={itStock[a]}",
+        f"https://www.above.tw/json/TProStkFinance/CashFlows?sym={itStock[a]}&s=YearQuarter:d",
+        f"https://www.above.tw/json/TProStkFinance/SolvencyBySym?sym={itStock[a]}&finance_type=YQ",
+        f"https://www.above.tw/json/TProStkFinance/Management?sym={itStock[a]}&s=YearQuarter:d"]
         #個股月營收 成長性分析 股利政策 獲利能力分析(季) 資本形成-股東權益(季) 現金分析(年) 償還能力分析(季) 經營能力分析(年)
         for b in range(len(fin)):
             url = fin[b]
@@ -56,5 +84,23 @@ def catFin():
             l = r.json()
             head = l['cheaders']
             data = l['data']
+
             writerCSV = pd.DataFrame(columns = head, data=data)
             writerCSV.to_csv('catFin/'+ str(itStock[a]) + str(b) + '.csv',encoding='utf-8', index = False)
+
+            csvfile = open('catFin/'+ str(itStock[a]) + str(b) + '.csv','r',encoding='utf-8')
+            jsonfile = open('catFin/'+ str(itStock[a]) + str(b) + '.json','w',encoding='utf-8')
+            namesss= pd.read_csv('catFin/'+ str(itStock[a]) + str(b) + '.csv',encoding='utf-8')
+            fieldnames1=namesss.columns
+            aaaa=tuple(fieldnames1)
+            reader = csv.DictReader(csvfile,aaaa)
+            for row in reader:
+                json.dump(row,jsonfile)
+                jsonfile.write('\n')
+            jsonfile.close()
+            csvfile.close()
+
+def catAll():
+    catFin()
+    catStock()
+    catStocktoday()

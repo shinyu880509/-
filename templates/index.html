@@ -19,6 +19,12 @@
                         <button class="dropbtn"><img src="/static/images/user.png"  width="25" height="25"><a>{{current_user.id}}</a><img src="/static/images/down.png"  width="35" height="35"></button>
                         <div class="dropdown-content">
                             <a href="javascript:saveFav('setting')">Setting</a>
+                            {% if current_user.id == "admin" %}
+                            <a href="/refresh/{{stock}}">更新數據</a>
+                            <a href="/index/{{stock}}">更新預測</a>
+                            <a href="/messagedaily/{{stock}}">寄關注信</a>
+                            <a href="/manage">管理帳號</a>
+                            {% endif %}
                             <a href="javascript:saveFav('logout')">Log Out</a>
                         </div>
                       </div>
@@ -519,7 +525,7 @@
     function intoArt(no){
         nowVew = 1;
         num = no;
-        if ("{{current_user.id}}" == realArtData[no][0]){
+        if ("{{current_user.id}}" == realArtData[no][0] || "{{current_user.id}}" == "admin"){
             $('#delBut').toggle();
             del = 1;
         }
@@ -533,13 +539,13 @@
         $('#uid').empty();
         $('#poTime').empty();
         $('#inArt').empty();
-        $('#inArt').append('<tr bgcolor=lightgray><td id="Atitle"></td></tr><tr><td id="Atext"></td></tr><tr><td><hr><button type="button" onclick="gd(' + realArtData[no][2] + ')">like</button>&ensp;<a id="gd"></a>&ensp;&ensp;&ensp;<button type="button" onclick="bd(' + realArtData[no][2] + ')">dislike</button>&ensp;<a id="bd"></a>&ensp;&ensp;&ensp;<a id="uid"></a>&ensp;&ensp;&ensp;<a id="poTime">發文時間:</a></td></tr>');
+        $('#inArt').append('<tr bgcolor=lightgray><td id="Atitle"></td></tr><tr><td id="Atext"></td></tr><tr><td><hr><button type="button" onclick="gd(' + realArtData[no][2] + ')">like</button>&ensp;<a id="gd"></a>&ensp;&ensp;&ensp;<button type="button" onclick="bd(' + realArtData[no][2] + ')">dislike</button>&ensp;<a id="bd"></a>&ensp;&ensp;&ensp;<a id="uid"></a>&ensp;&ensp;&ensp;<a id="poTime"></a></td></tr>');
         $('#Atitle').append(realArtData[no][4]);
         $('#Atext').append(realArtData[no][5]);
         $('#gd').append(realArtData[no][6]);
         $('#bd').append(realArtData[no][7]);
         $('#uid').append("id:"+realArtData[no][0]);
-        $('#poTime').append("發文時間:"+realArtData[no][8]);
+        $('#poTime').append("發文時間:"+realArtData[no][8].slice(0, 19));
         
         for(var i=0; i<reArtList.length; i++){
             if (reArtList[i][2] == realArtData[no][2]){
@@ -944,26 +950,6 @@
             fill: false, // 是否填滿色彩
             yAxisID: 'y-axis-1',
             lineTension: 0, // 曲線的彎度，設0 表示直線
-        },{
-            type: 'bar',
-            label: name1[4], // tootip 出現的名稱
-            backgroundColor: "#FFE66F",
-            borderColor: "#FFE66F",
-            borderWidth: 2,
-            data: data4, // 資料
-            fill: false, // 是否填滿色彩
-            yAxisID: 'y-axis-1',
-            lineTension: 0, // 曲線的彎度，設0 表示直線
-        },{
-            type: 'bar',
-            label: name1[5], // tootip 出現的名稱
-            backgroundColor: "#e0ebd8",
-            borderColor: "#e0ebd8",
-            borderWidth: 2,
-            data: data5, // 資料
-            fill: false, // 是否填滿色彩
-            yAxisID: 'y-axis-1',
-            lineTension: 0, // 曲線的彎度，設0 表示直線
         }]
         };
         var chartData2 = {
@@ -993,16 +979,6 @@
                 borderColor: "#FFAD86",
                 borderWidth: 2,
                 data: data3, // 資料
-                fill: false, // 是否填滿色彩
-                yAxisID: 'y-axis-1',
-                lineTension: 0, // 曲線的彎度，設0 表示直線
-            },{
-                type: 'bar',
-                label: name1[4], // tootip 出現的名稱
-                backgroundColor: "#FFE66F",
-                borderColor: "#FFE66F",
-                borderWidth: 2,
-                data: data4, // 資料
                 fill: false, // 是否填滿色彩
                 yAxisID: 'y-axis-1',
                 lineTension: 0, // 曲線的彎度，設0 表示直線
@@ -1036,46 +1012,6 @@
                 borderColor: "#FFAD86",
                 borderWidth: 2,
                 data: data3, // 資料
-                fill: false, // 是否填滿色彩
-                yAxisID: 'y-axis-1',
-                lineTension: 0, // 曲線的彎度，設0 表示直線
-            },{
-                type: 'bar',
-                label: name1[4], // tootip 出現的名稱
-                backgroundColor: "#FFE66F",
-                borderColor: "#FFE66F",
-                borderWidth: 2,
-                data: data4, // 資料
-                fill: false, // 是否填滿色彩
-                yAxisID: 'y-axis-1',
-                lineTension: 0, // 曲線的彎度，設0 表示直線
-            },{
-                type: 'bar',
-                label: name1[5], // tootip 出現的名稱
-                backgroundColor: "#e0ebd8",
-                borderColor: "#e0ebd8",
-                borderWidth: 2,
-                data: data5, // 資料
-                fill: false, // 是否填滿色彩
-                yAxisID: 'y-axis-1',
-                lineTension: 0, // 曲線的彎度，設0 表示直線
-            },{
-                type: 'bar',
-                label: name1[6], // tootip 出現的名稱
-                backgroundColor: "#CF9E9E",
-                borderColor: "#CF9E9E",
-                borderWidth: 2,
-                data: data6, // 資料
-                fill: false, // 是否填滿色彩
-                yAxisID: 'y-axis-1',
-                lineTension: 0, // 曲線的彎度，設0 表示直線
-            },{
-                type: 'bar',
-                label: name1[7], // tootip 出現的名稱
-                backgroundColor: "#D0D0D0",
-                borderColor: "#D0D0D0",
-                borderWidth: 2,
-                data: data7, // 資料
                 fill: false, // 是否填滿色彩
                 yAxisID: 'y-axis-1',
                 lineTension: 0, // 曲線的彎度，設0 表示直線

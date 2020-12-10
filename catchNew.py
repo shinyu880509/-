@@ -29,46 +29,47 @@ for i in range(len(stockName)):
             newsdata = news[j].text
             newsdata = newsdata.split("\n")
             hh = news[j].find_element_by_tag_name("a")
-            finalSource.append(newsdata[0])
-            finalTitle.append(newsdata[1])
-            finalUrl.append(hh.get_attribute('href'))
-            date = newsdata[3].split(' ')
-            x = datetime.datetime.now()
-            if (len(date) == 2):
-                if (date[1] == '小時前'):
-                    if (x.hour-int(date[0]) > 0):
+            if stockID[i] in newsdata[1] or stockName[i] in newsdata[1]:
+                finalSource.append(newsdata[0])
+                finalTitle.append(newsdata[1])
+                finalUrl.append(hh.get_attribute('href'))
+                date = newsdata[3].split(' ')
+                x = datetime.datetime.now()
+                if (len(date) == 2):
+                    if (date[1] == '小時前'):
+                        if (x.hour-int(date[0]) > 0):
+                            date = str(x.year) + '年' + str(x.month) + '月' + str(x.day) + '日'
+                        else:
+                            date = str(x.year) + '年' + str(x.month) + '月' + str(x.day-1) + '日'
+                    elif (date[1] == '分鐘前'):
+                        if ((x.hour*60) + (x.minute) - int(date[0]) > 0):
+                            date = str(x.year) + '年' + str(x.month) + '月' + str(x.day) + '日'
+                        else:
+                            date = str(x.year) + '年' + str(x.month) + '月' + str(x.day-1) + '日'
+                    elif (date[1] == '秒鐘前'):
                         date = str(x.year) + '年' + str(x.month) + '月' + str(x.day) + '日'
-                    else:
-                        date = str(x.year) + '年' + str(x.month) + '月' + str(x.day-1) + '日'
-                elif (date[1] == '分鐘前'):
-                    if ((x.hour*60) + (x.minute) - int(date[0]) > 0):
-                        date = str(x.year) + '年' + str(x.month) + '月' + str(x.day) + '日'
-                    else:
-                        date = str(x.year) + '年' + str(x.month) + '月' + str(x.day-1) + '日'
-                elif (date[1] == '秒鐘前'):
-                    date = str(x.year) + '年' + str(x.month) + '月' + str(x.day) + '日'
-                elif (date[1] == '天前'):
-                    if (x.day - int(date[0]) > 0):
-                        date = str(x.year) + '年' + str(x.month) + '月' + str(x.day- int(date[0])) + '日'
-                    elif (x.month-1 > 0):
-                        date = str(x.year) + '年' + str(x.month-1) + '月' + str(x.day- int(date[0]) + 30) + '日'
-                    else:
-                        date = str(x.year-1) + '年' + str(12) + '月' + str(x.day- int(date[0]) + 30) + '日'
-                elif (date[1] == '週前'):
-                    if (x.day - (int(date[0])*7) > 0):
-                        date = str(x.year) + '年' + str(x.month) + '月' + str(x.day- (int(date[0])*7)) + '日'
-                    elif (x.month-1 > 0):
-                        date = str(x.year) + '年' + str(x.month-1) + '月' + str(x.day- (int(date[0])*7) + 30) + '日'
-                    else:
-                        date = str(x.year-1) + '年' + str(12) + '月' + str(x.day- (int(date[0])*7) + 30) + '日'
-                elif (date[1] == '個月前'):
-                    if (x.month - int(date[0]) > 0):
-                        date = str(x.year) + '年' + str(x.month-int(date[0])) + '月' + str(x.day) + '日'
-                    else:
-                        date = str(x.year-1) + '年' + str(x.month-int(date[0])+12) + '月' + str(x.day) + '日'
-            else:
-                date = newsdata[3]
-            finalDate.append(date)
+                    elif (date[1] == '天前'):
+                        if (x.day - int(date[0]) > 0):
+                            date = str(x.year) + '年' + str(x.month) + '月' + str(x.day- int(date[0])) + '日'
+                        elif (x.month-1 > 0):
+                            date = str(x.year) + '年' + str(x.month-1) + '月' + str(x.day- int(date[0]) + 30) + '日'
+                        else:
+                            date = str(x.year-1) + '年' + str(12) + '月' + str(x.day- int(date[0]) + 30) + '日'
+                    elif (date[1] == '週前'):
+                        if (x.day - (int(date[0])*7) > 0):
+                            date = str(x.year) + '年' + str(x.month) + '月' + str(x.day- (int(date[0])*7)) + '日'
+                        elif (x.month-1 > 0):
+                            date = str(x.year) + '年' + str(x.month-1) + '月' + str(x.day- (int(date[0])*7) + 30) + '日'
+                        else:
+                            date = str(x.year-1) + '年' + str(12) + '月' + str(x.day- (int(date[0])*7) + 30) + '日'
+                    elif (date[1] == '個月前'):
+                        if (x.month - int(date[0]) > 0):
+                            date = str(x.year) + '年' + str(x.month-int(date[0])) + '月' + str(x.day) + '日'
+                        else:
+                            date = str(x.year-1) + '年' + str(x.month-int(date[0])+12) + '月' + str(x.day) + '日'
+                else:
+                    date = newsdata[3]
+                finalDate.append(date)
         try:
             driver.find_element_by_xpath("//a[@id='pnnext']//span[2]").click()
             aa += 1

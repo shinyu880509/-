@@ -1450,3 +1450,5 @@
 {"date": "2020-12-04", "stock_id": "2468", "Trading_Volume": "81522", "Trading_money": "1112346", "open": "13.6", "close": "13.65", "spread": "0.05", "Trading_turnover": "53.0", "high": "13.7", "low": "13.6"}
 {"date": "2020-12-07", "stock_id": "2468", "Trading_Volume": "83971", "Trading_money": "1144809", "open": "13.75", "close": "13.65", "spread": "0.0", "Trading_turnover": "44.0", "high": "13.8", "low": "13.6"}
 {"date": "2020-12-08", "stock_id": "2468", "Trading_Volume": "122000", "Trading_money": "1668650", "open": "13.75", "close": "13.75", "spread": "0.1", "Trading_turnover": "44.0", "high": "13.75", "low": "13.6"}
+{"date": "2020-12-09", "stock_id": "2468", "Trading_Volume": "106218", "Trading_money": "1457346", "open": "13.9", "close": "13.7", "spread": "-0.05", "Trading_turnover": "67.0", "high": "13.9", "low": "13.55"}
+{"date": "2020-12-10", "stock_id": "2468", "Trading_Volume": "66211", "Trading_money": "901735", "open": "13.6", "close": "13.55", "spread": "-0.15", "Trading_turnover": "52.0", "high": "13.8", "low": "13.55"}

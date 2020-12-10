@@ -64,7 +64,6 @@ def catStocktoday():
         jsonfile.close()
         csvfile.close()
     return
-catStocktoday()
 
 def catFin():
     itStock = ['2427', '2453', '2468', '2471', '2480', '3029', '3130', '4994', '5203', '6112', '6183', '6214']

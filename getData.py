@@ -109,8 +109,7 @@ def getPreDate(today, ago):
 
 #股票代碼
 def getPre(a, data, date):
-    #table = pd.read_csv("preStock/"+ a + "/" + str(data) +'.csv')######################################################
-    table = pd.read_csv("preStock/"+ a + "/2020_10_05.csv")
+    table = pd.read_csv("preStock/"+ a + "/" + str(data) +'.csv')
     date = getDay(date)
     opena = np.array(table.open)
     openlist = opena.tolist()
